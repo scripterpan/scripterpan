@@ -51,9 +51,6 @@ FESection:NewButton("FE Infinite Yield", "FE Admin Commands", function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
 
-FESection:NewButton("FE Baller", "Baller", function()
-    print("soon")
-end)
 
 --LOCAL PLAYER
 local Player = Window:NewTab("local Player")
@@ -202,5 +199,4 @@ end)
 MiscSection:NewButton("Zoom (Read info)", "zoom (like make you see something near)", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/GA0KFgYb"))()
 end)
-
 
