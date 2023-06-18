@@ -38,6 +38,10 @@ GameSection:NewButton("Doors ", "doors but shadow hub", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ShadowScripts4Roblox/PROTECTEDLUA/main/Scripts/DOORS/Loader52.lua'))()
 end)
 
+GameSection:NewButton("The Mimic ", "The Mimic but TTJY x Ruby hub", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ttjy9808/loadstringvanyxthemimicmainunobfnotbeta/main/README.md"))()
+end)
+
 
 --FE
 local FE = Window:NewTab("FE")  
@@ -199,4 +203,3 @@ end)
 MiscSection:NewButton("Zoom (Read info)", "zoom (like make you see something near)", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/GA0KFgYb"))()
 end)
-
