@@ -71,7 +71,7 @@ end);
 
 
 
-ss2:Slide("Speed", function ()
+Local Player:Slide("Speed", function ()
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
