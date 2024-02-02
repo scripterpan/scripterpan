@@ -9,8 +9,9 @@ local ss1 = win:Tab("DestroyGuiHere")
 local ss = win:Tab("MAIN")
 local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
+local Player = win:Tab("LocalPlayer")
 local cred = win:Tab("CREDITS")
-local Player = win:Tab("Localayer")
+
 
 ss1:Button("Destroy Gui",function()
 game.CoreGui["Library"]:Destroy()
@@ -66,6 +67,17 @@ pcall(function() local lighting = game:GetService("Lighting"); lighting.Ambient 
 end); 
     end) 
         end)
+
+
+
+
+ss2:Slide("Speed", function ()
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+
+
+
 
 
 
