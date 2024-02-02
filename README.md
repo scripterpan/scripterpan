@@ -10,10 +10,6 @@ local MainSection = Main:NewSection("Main(indev)")
 local Game = Window:NewTab("Game")
 local GameSection = Game:NewSection("Game")
 
-GameSection:NewButton("Blox fruits (halo hub)", "Halo Hub", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/HALOxHUB/HALOxHUBNOTTHEBESTSCRIPT/main/BLOXFRUIT.lua'))()
-end)
-
 GameSection:NewButton("bedwars (vape v4)", "vape v4", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
 end)
@@ -22,20 +18,8 @@ GameSection:NewButton("Piggy (TP tool)", "Tp tool but piggy", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/mBiYCGUR"))()
 end)
 
-GameSection:NewButton("mm2 (eclipse v1) ", "eclipse v1", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ethanoj1/EclipseMM2/master/Script", true))()
-end)
-
-GameSection:NewButton("Apeirophobia (shadow hub) ", "apiro but shadown hub", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ShadowScripts4Roblox/PROTECTEDLUA/main/Scripts/APEIROPHOBIA/1.0.%3Blua'))()
-end)
-
 GameSection:NewButton("The intruder ", "idk what name of this hub", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/FGjjwm6W"))()
-end)
-
-GameSection:NewButton("Doors ", "doors but shadow hub", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ShadowScripts4Roblox/PROTECTEDLUA/main/Scripts/DOORS/Loader52.lua'))()
 end)
 
 GameSection:NewButton("The Mimic ", "The Mimic but TTJY x Ruby hub", function()
@@ -60,11 +44,11 @@ end)
 local Player = Window:NewTab("local Player")
 local PlayerSection = Player:NewSection("local Player")
 
-PlayerSection:NewSlider("Walkspeed", "SPEED!!", 500, 16, function(s)
+PlayerSection:NewSlider("Walkspeed(read info)", "don't use if you are on mobile", 500, 16, function(s)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-PlayerSection:NewSlider("Jumppower", "JUMP HIGH!!", 350, 50, function(s)
+PlayerSection:NewSlider("Jumppower(read info)", "don't use if you are on mobile", 350, 50, function(s)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
@@ -108,10 +92,10 @@ end)
 local Other = Window:NewTab("Other")
 local OtherSection = Other:NewSection("Other")
 OtherSection:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.Q, function()
-	print("You just clicked the bind")
+    print("You just clicked the bind")
 end)
 OtherSection:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.Q, function()
-	Library:ToggleUI()
+    Library:ToggleUI()
 end)
 
 --Misc
@@ -192,14 +176,14 @@ MiscSection:NewButton("Fps checker", "Fps For who want to know", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/FPS-Counter'))()
 end)
 
-MiscSection:NewButton("Fly gui(For Mobile Only)", "Gui", function()
-    loadstring(game:HttpGet(('https://pastebin.com/raw/YvKv4AuY'),true))();
+MiscSection:NewButton("Fly gui(Support all device)", "Gui", function()
+    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\105\115\116\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\101\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")();
 end)
 
 MiscSection:NewButton("Esp", "Esp player", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/gwN6fn2v"))()
 end)
 
-MiscSection:NewButton("Zoom (Read info)", "zoom (like make you see something near)", function()
+MiscSection:NewButton("Zoom (Read info)", "zoom (like make you see something farther)", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/GA0KFgYb"))()
 end)
