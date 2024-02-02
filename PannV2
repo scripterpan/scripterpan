@@ -8,7 +8,7 @@ local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
 local ss1 = win:Tab("DestroyGuiHere")
 local ss = win:Tab("MAIN")
 local sss = win:Tab("Fe")
-local sss = win:Tab("MISC")
+local ssss = win:Tab("MISC")
 local cred = win:Tab("CREDITS")
 
 ss1:Button("Destroy Gui",function()
@@ -31,8 +31,23 @@ end
     
     distance = 5 
 
-ss:Button"Nothing here
- 
+
+
+
+ss:Button("Nothing here")
+
+
+
+
+
+
+sss:Button("Fe emote", function ()
+loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))() 
+end)
+
+
+
+
 
 cred:Button("Copy Discord Server",function()
 setclipboard("paste your discord link here")
