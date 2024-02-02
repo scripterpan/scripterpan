@@ -1,0 +1,41 @@
+local VLib = loadstring(game:HttpGet("https://pastebin.com/raw/Mb49kKTP"))()
+
+
+        MAINTTL = "Gay fr" 
+
+local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
+
+local ss1 = win:Tab("DestroyGuiHere")
+local ss = win:Tab("MAIN")
+local sss = win:Tab("Fe")
+local sss = win:Tab("MISC")
+local cred = win:Tab("CREDITS")
+
+ss1:Button("Destroy Gui",function()
+game.CoreGui["Library"]:Destroy()
+end)
+
+local Npc_Table = {}     
+for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+    if v:IsA("Model") and v:FindFirstChild("NPC") and v:FindFirstChild("AttackScript") and not table.find(Npc_Table,v.Name) then
+        table.insert(Npc_Table,v.Name)
+    end 
+end 
+
+    local tool_table = {}
+    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") then
+            table.insert(tool_table, v.Name)
+        end
+    end
+    
+    distance = 5 
+
+ss:Button"Nothing here
+ 
+
+cred:Button("Copy Discord Server",function()
+setclipboard("paste your discord link here")
+end) 
+
+cred:Label("MADE BY Pann")
