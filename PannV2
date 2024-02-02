@@ -8,6 +8,7 @@ local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
 local ss1 = win:Tab("DestroyGuiHere")
 local ss = win:Tab("MAIN")
 local sss = win:Tab("Fe")
+local ss2 = Win:Tab("Local Player")
 local ssss = win:Tab("MISC")
 local cred = win:Tab("CREDITS")
 
