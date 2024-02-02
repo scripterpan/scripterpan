@@ -45,7 +45,9 @@ sss:Button("Fe emote", function ()
 loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))() 
 end)
 
-
+sss:Button("Fe infinite yield", function ()
+   loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
 
 
 
