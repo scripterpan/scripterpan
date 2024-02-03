@@ -11,7 +11,7 @@ local ss1 = win:Tab("Universal Script")
 local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
 local Player = win:Tab("LocalPlayer")
-local Set = win:Tab("Setting")
+local set = win:Tab("Setting")
 local cred = win:Tab("CREDITS")
 
 
@@ -126,7 +126,7 @@ Player:Label("Soon")
 
 
 
-Set:Label("soon")
+set:Label("soon")
 
 
 
