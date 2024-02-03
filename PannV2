@@ -44,12 +44,20 @@ ss:Label("Nothing here")
 
 
 
-gg:Button("The Mimic", function ()
+gg:Button("The Mimic TTJY", function ()
     getgenv().Premium = false --set to true if you use premium
        getgenv().Addons = true
            loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Main/main/GameCheck.lua"))()
 end)
 
+gg:Button("The Mimic KTollT Pc", function ()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KTollT/KTollT/main/README.md'))()
+end)
+
+gg:Button("The Mimic KTollT Mobile", function ()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KTollT/NewGui/main/README.md'))()
+end)
+    
 gg:Button("Bedwars", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
 end)
@@ -87,9 +95,7 @@ end);
 
 
 
-Player:Slider("Speed", function ()
- game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 10
-end)
+Player:Label("Soon")
 
 
 
