@@ -106,7 +106,7 @@ ssss:Button("Esp Player", function ()
    loadstring(game:HttpGet("https://pastebin.com/raw/gwN6fn2v"))()
 end)
 
-ssss:Button("Zoom farther", funchion ()
+ssss:Button("Zoom farther", function ()
    loadstring(game:HttpGet("https://pastebin.com/raw/GA0KFgYb"))()
 end)
 
