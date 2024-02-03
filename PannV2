@@ -5,34 +5,12 @@ local VLib = loadstring(game:HttpGet("https://pastebin.com/raw/Mb49kKTP"))()
 
 local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
 
-local ss1 = win:Tab("DestroyGuiHere")
 local ss = win:Tab("MAIN")
 local gg = win:Tab("Game")
 local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
 local Player = win:Tab("LocalPlayer")
 local cred = win:Tab("CREDITS")
-
-
-ss1:Button("Destroy Gui",function()
-game.CoreGui["Library"]:Destroy()
-end)
-
-local Npc_Table = {}     
-for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
-    if v:IsA("Model") and v:FindFirstChild("NPC") and v:FindFirstChild("AttackScript") and not table.find(Npc_Table,v.Name) then
-        table.insert(Npc_Table,v.Name)
-    end 
-end 
-
-    local tool_table = {}
-    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") then
-            table.insert(tool_table, v.Name)
-        end
-    end
-    
-    distance = 5 
 
 
 
@@ -99,6 +77,26 @@ pcall(function() local lighting = game:GetService("Lighting"); lighting.Ambient 
 end); 
     end) 
         end)
+
+ssss:Button("Destroy Gui",function()
+game.CoreGui["Library"]:Destroy()
+end)
+
+local Npc_Table = {}     
+for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+    if v:IsA("Model") and v:FindFirstChild("NPC") and v:FindFirstChild("AttackScript") and not table.find(Npc_Table,v.Name) then
+        table.insert(Npc_Table,v.Name)
+    end 
+end 
+
+    local tool_table = {}
+    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") then
+            table.insert(tool_table, v.Name)
+        end
+    end
+    
+    distance = 5 
 
 
 
