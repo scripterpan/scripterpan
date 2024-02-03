@@ -28,7 +28,7 @@ ss:Label("Nothing here")
 gg:Label("Script Hub Different Game")
 
 
-gg:Button("The Mimic")
+gg:Label("The Mimic👇")
 
 
 gg:Button("The Mimic TTJY", function ()
@@ -46,7 +46,7 @@ gg:Button("The Mimic KTollT Mobile", function ()
 end)
 
 
-gg:Button("Bedwars")
+gg:Label("Bedwars👇")
 
 
 gg:Button("Bedwars vape v4", function ()
@@ -227,6 +227,9 @@ end)
 
 
 
+ssss:Label("Miscellaneous")
+
+
 
 ssss:Button("Esp Player", function ()
    loadstring(game:HttpGet("https://pastebin.com/raw/gwN6fn2v"))()
@@ -306,7 +309,7 @@ set:Label("Other settings (soon)")
 
 sta:Label("Game Script Status")
 
-sta:Label("The Mimic")
+sta:Label("The Mimic👇")
 
 sta:Label("The Mimic TTJY✅")
 
@@ -314,7 +317,7 @@ sta:Label("The Mimic KTollT Pc✅")
 
 sta:Label("The Mimic KTollT Mobile✅")
 
-sta:Label("Bedwars")
+sta:Label("Bedwars👇")
 
 sta:Label("Bedwars vape v4✅")
 
