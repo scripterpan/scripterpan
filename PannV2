@@ -12,6 +12,7 @@ local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
 local Player = win:Tab("LocalPlayer")
 local set = win:Tab("Setting")
+local sta = win:Tab("Status")
 local cred = win:Tab("CREDITS")
 
 
@@ -27,6 +28,8 @@ ss:Label("Nothing here")
 gg:Label("Script Hub Different Game")
 
 
+gg:Button("The Mimic")
+
 
 gg:Button("The Mimic TTJY", function ()
     getgenv().Premium = false --set to true if you use premium
@@ -41,8 +44,12 @@ end)
 gg:Button("The Mimic KTollT Mobile", function ()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/KTollT/NewGui/main/README.md'))()
 end)
-    
-gg:Button("Bedwars", function ()
+
+
+gg:Button("Bedwars")
+
+
+gg:Button("Bedwars vape v4", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
 end)
 
@@ -291,6 +298,25 @@ set:Label("Other settings (soon)")
 
 
 
+
+
+
+
+
+
+sta:Label("Game Script Status")
+
+sta:Label("The Mimic")
+
+sta:Label("The Mimic TTJY✅")
+
+sta:Label("The Mimic KTollT Pc✅")
+
+sta:Label("The Mimic KTollT Mobile✅")
+
+sta:Label("Bedwars")
+
+sta:Label("Bedwars vape v4✅")
 
 
 
