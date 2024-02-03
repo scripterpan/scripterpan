@@ -7,6 +7,7 @@ local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
 
 local ss1 = win:Tab("DestroyGuiHere")
 local ss = win:Tab("MAIN")
+local gg = win:Tab("Game")
 local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
 local Player = win:Tab("LocalPlayer")
@@ -37,6 +38,18 @@ end
 
 
 ss:Button("Nothing here")
+
+
+
+
+
+
+gg:Button("The Mimic", function ()
+    getgenv().Premium = false --set to true if you use premium
+       getgenv().Addons = true
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Main/main/GameCheck.lua"))()
+end)
+
 
 
 
