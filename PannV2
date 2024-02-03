@@ -44,6 +44,10 @@ ss:Label("Nothing here")
 
 
 
+gg:Label("Script Hub Different Game")
+
+
+
 gg:Button("The Mimic TTJY", function ()
     getgenv().Premium = false --set to true if you use premium
        getgenv().Addons = true
@@ -74,6 +78,10 @@ end)
 sss:Button("Fe infinite yield", function ()
    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
+
+sss:Button("Fe keyboard", function ()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+ end)
 
 
 
