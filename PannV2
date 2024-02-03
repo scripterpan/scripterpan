@@ -96,7 +96,17 @@ end);
     end) 
         end)
 
-ssss:Button("Destroy Gui",function()
+
+
+
+
+Player:Label("Soon")
+
+
+
+
+
+set:Button("Destroy Gui",function()
 game.CoreGui["Library"]:Destroy()
 end)
 
@@ -115,18 +125,6 @@ end
     end
     
     distance = 5
-
-
-
-
-
-Player:Label("Soon")
-
-
-
-
-
-set:Label("soon")
 
 
 
