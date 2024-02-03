@@ -50,6 +50,9 @@ gg:Button("The Mimic", function ()
            loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Main/main/GameCheck.lua"))()
 end)
 
+gg:Button("Bedwars", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+end)
 
 
 
