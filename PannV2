@@ -37,7 +37,7 @@ end
 
 
 
-ss:Button("Nothing here")
+ss:Label("Nothing here")
 
 
 
@@ -94,12 +94,5 @@ end)
 
 
 
-
-
-
-
-cred:Button("Copy Discord Server",function()
-setclipboard("paste your discord link here")
-end) 
 
 cred:Label("MADE BY Pann")
