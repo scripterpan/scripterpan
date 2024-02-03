@@ -6,7 +6,7 @@ local VLib = loadstring(game:HttpGet("https://pastebin.com/raw/Mb49kKTP"))()
 local win = VLib:Window("Pann Script Hub", Color3.fromRGB(196, 40, 28))
 
 local ss = win:Tab("MAIN")
-local gg = win:Tab("Game")
+local gg = win:Tab("Game Script")
 local ss1 = win:Tab("Universal Script")
 local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
