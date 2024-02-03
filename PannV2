@@ -88,9 +88,8 @@ end);
 
 
 Player:Slider("Speed", function ()
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 10
 end)
-
 
 
 
