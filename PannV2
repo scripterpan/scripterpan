@@ -278,7 +278,10 @@ end
 
 
 
-
+set:Button("Toggle Ui", function ()
+    NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.Q, function()
+        Library:ToggleUI()
+end)
 
 
 
