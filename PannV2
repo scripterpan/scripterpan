@@ -53,11 +53,6 @@ gg.Button("The Mimic Classic TTJY", function ()
 end)
 
 
-
-
-
-
-
 gg:Label("Bedwars👇")
 
 
