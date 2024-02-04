@@ -45,7 +45,6 @@ gg:Button("The Mimic KTollT Mobile", function ()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/KTollT/NewGui/main/README.md'))()
 end)
 
-
 gg.Label("The Mimic Classic👇")
 
 
