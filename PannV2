@@ -45,12 +45,7 @@ gg:Button("The Mimic KTollT Mobile", function ()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/KTollT/NewGui/main/README.md'))()
 end)
 
-gg.Label("The Mimic Classic👇")
 
-
-gg.Button("The Mimic Classic TTJY", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Script/main/TheMimicClassic.lua"))()
-end)
 
 
 gg:Label("Bedwars👇")
@@ -61,6 +56,13 @@ gg:Button("Bedwars vape v4", function ()
 end)
 
 
+
+gg.Label("The Mimic Classic👇")
+
+
+gg.Button("The Mimic Classic TTJY", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Script/main/TheMimicClassic.lua"))()
+end)
 
 
 
