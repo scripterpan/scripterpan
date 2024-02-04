@@ -57,15 +57,6 @@ end)
 
 
 
-gg.Label("The Mimic Classic👇")
-
-
-gg.Button("The Mimic Classic TTJY", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Script/main/TheMimicClassic.lua"))()
-end)
-
-
-
 ss1:Label("Support almost all game")
 
 
