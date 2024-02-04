@@ -57,7 +57,7 @@ end)
 
 
 
-ss1:Label("Support almost all game")
+ss1:Label("Support Almost All Games")
 
 
 ss1:Button("Fly Gui", function ()
