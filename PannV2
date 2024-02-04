@@ -46,6 +46,18 @@ gg:Button("The Mimic KTollT Mobile", function ()
 end)
 
 
+gg.Label("The Mimic Classic👇")
+
+gg.Button("The Mimic Classic TTJY", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Script/main/TheMimicClassic.lua"))()
+end)
+
+
+
+
+
+
+
 gg:Label("Bedwars👇")
 
 
@@ -302,6 +314,10 @@ sta:Label("The Mimic TTJY✅")
 sta:Label("The Mimic KTollT Pc✅")
 
 sta:Label("The Mimic KTollT Mobile✅")
+
+sta:Label("The Mimic Classic👇")
+
+sta:Label("The Mimic Classic TTJY✅")
 
 sta:Label("Bedwars👇")
 
