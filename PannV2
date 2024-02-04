@@ -47,21 +47,11 @@ end)
 
 
 
-
 gg:Label("Bedwars👇")
 
 
 gg:Button("Bedwars vape v4", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
-end)
-
-
-
-gg.Label("The Mimic Classic👇")
-
-
-gg.Button("The Mimic Classic TTJY", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Script/main/TheMimicClassic.lua"))()
 end)
 
 
