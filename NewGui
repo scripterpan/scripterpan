@@ -3,15 +3,15 @@ local window = DrRayLibrary:Load("Pann hub", "Default")
 
 
 
-local ss = DrRayLibrary:newTab("MAIN")
-local gg = DrRayLibrary:newTab("Game Script")
-local ss1 = DrRayLibrary:newTab("Universal Script")
-local sss = DrRayLibrary:newTab("Fe")
-local ssss = DrRayLibrary:newTab("MISC")
-local Player = DrRayLibrary:newTab("LocalPlayer")
-local set = DrRayLibrary:newTab("Setting")
-local sta = DrRayLibrary:newTab("Status")
-local cred = DrRayLibrary:newTab("CREDITS")
+local ss = DrRayLibrary:newTab("MAIN","ImageIdHere")
+local gg = DrRayLibrary:newTab("Game Script","ImageIdHere")
+local ss1 = DrRayLibrary:newTab("Universal Script","ImageIdHere")
+local sss = DrRayLibrary:newTab("Fe","ImageIdHere")
+local ssss = DrRayLibrary:newTab("MISC","ImageIdHere")
+local Player = DrRayLibrary:newTab("LocalPlayer","ImageIdHere")
+local set = DrRayLibrary:newTab("Setting","ImageIdHere")
+local sta = DrRayLibrary:newTab("Status","ImageIdHere")
+local cred = DrRayLibrary:newTab("CREDITS","ImageIdHere")
 
 
 
