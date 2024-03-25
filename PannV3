@@ -58,46 +58,46 @@ end)
 
 
 
-gg.Label("Doors👇")
+gg:Label("Doors👇")
 
 
-gg.Button("Lucky block", function ()
+gg:Button("Lucky block", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Lucky%20Block"))()
 end)
 
 
 
-gg.Button("Magic book", function ()
+gg:Button("Magic book", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Magic%20Book"))()
 end)
 
 
 
-gg.Button("Laser gun", function ()
+gg:Button("Laser gun", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Laser%20Gun.lua"))()
 end)
 
 
 
-gg.Button("Flamethrower", function ()
+gg:Button("Flamethrower", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Flamethrower"))()
 end)
 
 
 
-gg.Button("Zeus lighting", function ()
+gg:Button("Zeus lighting", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Zeus%20Lightning.lua"))()
 end)
 
 
 
-gg.Button("Gummy flashlight", function ()
+gg:Button("Gummy flashlight", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Gummy%20Flashlight.lua"))()
 end)
 
 
 
-gg.Button("MCDONALD", function ()
+gg:Button("MCDONALD", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/MCDonalds"))()
 end)
 
