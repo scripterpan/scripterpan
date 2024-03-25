@@ -12,7 +12,7 @@ local sss = win:Tab("Fe")
 local ssss = win:Tab("MISC")
 local Player = win:Tab("LocalPlayer")
 local set = win:Tab("Setting")
-local sta = win:Tab("Status")
+local upd = win:Tab("Update Log")
 local cred = win:Tab("CREDITS")
 
 
@@ -54,6 +54,58 @@ gg:Label("Bedwars👇")
 gg:Button("Bedwars vape v4", function ()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
 end)
+
+
+
+gg.Label("Doors👇")
+
+
+gg.Button("Lucky block", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Lucky%20Block"))()
+end)
+
+
+
+gg.Button("Magic book", funcion ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Magic%20Book"
+end)
+
+
+
+gg.Button("Laser gun", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Laser%20Gun.lua"))()
+end)
+
+
+
+gg.Button("Flamethrower", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Flamethrower"))()
+end)
+
+
+
+gg.Button("Zeus lighting", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Zeus%20Lightning.lua"))()
+end)
+
+
+
+gg.Button("Gummy flashlight", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Gummy%20Flashlight.lua"))()
+end)
+
+
+
+gg.Button("MCDONALD", function ()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/MCDonalds"))()
+end)
+
+
+
+
+
+
+
 
 
 
@@ -290,22 +342,14 @@ set:Label("Other settings (soon)")
 
 
 
+upd:Label("New Update is here!")
+
+upd:Label("[+]Added Doors!")
+
+upd:Label("[-]Removed Status!")
 
 
 
-sta:Label("Game Script Status")
-
-sta:Label("The Mimic👇")
-
-sta:Label("The Mimic TTJY✅")
-
-sta:Label("The Mimic KTollT Pc✅")
-
-sta:Label("The Mimic KTollT Mobile✅")
-
-sta:Label("Bedwars👇")
-
-sta:Label("Bedwars vape v4✅")
 
 
 
