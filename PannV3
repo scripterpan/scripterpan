@@ -67,7 +67,7 @@ end)
 
 
 gg.Button("Magic book", funcion ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Magic%20Book"
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Magic%20Book"))()
 end)
 
 
