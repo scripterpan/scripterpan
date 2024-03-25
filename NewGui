@@ -15,4 +15,8 @@ local cred = DrRayLibrary:newTab("CREDITS","ImageIdHere")
 
 
 
+ss.newButton("Test", function()
 
+print('hello world')
+
+end)
