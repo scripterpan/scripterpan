@@ -1,2 +1,18 @@
 local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
 local window = DrRayLibrary:Load("DrRay", "Default")
+
+
+
+local ss = DrRayLibrary:newTab("MAIN")
+local gg = DrRayLibrary:newTab("Game Script")
+local ss1 = DrRayLibrary:newTab("Universal Script")
+local sss = DrRayLibrary:newTab("Fe")
+local ssss = DrRayLibrary:newTab("MISC")
+local Player = DrRayLibrary:newTab("LocalPlayer")
+local set = DrRayLibrary:newTab("Setting")
+local sta = DrRayLibrary:newTab("Status")
+local cred = DrRayLibrary:newTab("CREDITS")
+
+
+
+
