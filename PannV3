@@ -61,46 +61,9 @@ end)
 gg:Label("Doors👇")
 
 
-gg:Button("Lucky block", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Lucky%20Block"))()
+gg:Button("MsHub", function ()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/mstudio45/MSDOORS/main/MSHUB_Loader.lua"),true))()
 end)
-
-
-
-gg:Button("Magic book", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Magic%20Book"))()
-end)
-
-
-
-gg:Button("Laser gun", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Laser%20Gun.lua"))()
-end)
-
-
-
-gg:Button("Flamethrower", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Flamethrower"))()
-end)
-
-
-
-gg:Button("Zeus lighting", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Zeus%20Lightning.lua"))()
-end)
-
-
-
-gg:Button("Gummy flashlight", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Gummy%20Flashlight.lua"))()
-end)
-
-
-
-gg:Button("MCDONALD", function ()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/MCDonalds"))()
-end)
-
 
 
 
@@ -345,9 +308,9 @@ set:Label("Other settings (soon)")
 
 upd:Label("New Update is here!")
 
-upd:Label("[+]Added Doors!")
+upd:Label("[+]Added MsHub to Doors!")
 
-upd:Label("[-]Removed Status!")
+upd:Label("[-]Removed some doors script!")
 
 
 
