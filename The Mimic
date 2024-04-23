@@ -1,0 +1,316 @@
+-- Load the DrRay library from the GitHub repository Library
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+
+-- Create a new window and set its title and theme
+local window = DrRayLibrary:Load("The Mimic", "Default")
+
+-- Create the first tab with an image ID
+local tab1 = DrRayLibrary.newTab("B2C1", "ImageIdHere")
+
+-- Add elements to the first tab
+tab1.newLabel("WIP!")
+tab1.newButton("Soon!", "Esp", function()
+    print('Soon')
+end)
+
+-- Create the second tab with a different image ID
+local tab2 = DrRayLibrary.newTab("B2C2", "ImageIdLogoHere")
+
+-- Add elements to the second tab
+tab2.newLabel("WIP!")
+tab2.newButton("Soon!", "Esp", function()
+    print('Hello!')
+end)
+
+
+-- Create the third tab with a different image ID
+local tab3 = DrRayLibrary.newTab("B2C3", "ImageIdLogoHere")
+
+-- Add elements to the third tab
+
+tab3.newLabel("GrinDemon")
+tab3.newButton("Esp GrinDemon", "Monster/Torch part", function()
+     -- loadstring
+     local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+     -- config
+     ESP.Players = false
+     ESP.Boxes = true
+     ESP.Names = true
+     ESP:Toggle(true)
+ 
+     -- object
+    ESP:AddObjectListener(Workspace.Section1.Maze, {
+        Name = "GrinDemon", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+        CustomName = "Monster", -- Name you want to be displayed
+        Color = Color3.fromRGB(255, 0, 0), -- Color
+        IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+    })
+    ESP.whatever = true
+end)
+
+tab3.newLabel("Dodomeki")
+tab3.newButton("Esp Dodomeki", "Monster/bell part", function()
+     -- loadstring
+     local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+     -- config
+     ESP.Players = false
+     ESP.Boxes = true
+     ESP.Names = true
+     ESP:Toggle(true)
+ 
+     -- object
+     ESP:AddObjectListener(Workspace.Section2.Monster, {
+        Name = "Dodomeki", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+        CustomName = "Monster", -- Name you want to be displayed
+        Color = Color3.fromRGB(255, 0, 0), -- Color
+        IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+     })
+     ESP.whatever = true
+end)
+
+tab3.newLabel("BoogeyMan")
+tab3.newButton("Esp BoogeyMan", "Monster/larves part", function()
+     -- loadstring
+     local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+     -- config
+     ESP.Players = false
+     ESP.Boxes = true
+     ESP.Names = true
+     ESP:Toggle(true)
+    
+     -- object
+     ESP:AddObjectListener(Workspace.Section4.Monster, {
+         Name = "BoogeymanAI", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+         CustomName = "Monster", -- Name you want to be displayed
+         Color = Color3.fromRGB(255, 0, 0), -- Color
+         IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+     })
+     ESP.whatever = true
+end)
+
+
+local tab4 = DrRayLibrary.newTab("TWT", "ImageIdLogoHere")
+
+tab4.newLabel("Meshes")
+tab4.newButton("Esp", "Not Working just use infinite yield in Misc tab and type partesp torso", function()
+     print('not working')
+end)
+
+tab4.newLabel("Sword part")
+tab4.newButton("Esp Tall Monster", "Monster/Sword part/The Witch Trials", function()
+          -- loadstring
+          local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+          -- config
+          ESP.Players = false
+          ESP.Boxes = true
+          ESP.Names = true
+          ESP:Toggle(true)
+    
+          -- object
+          ESP:AddObjectListener(Workspace.SamaAI.Outfit, {
+             Name = "Bone", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+             CustomName = "Monster", -- Name you want to be displayed
+             Color = Color3.fromRGB(255, 0, 0), -- Color
+             IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+          })
+          ESP.whatever = true
+end)
+
+tab4.newButton("Esp Crawl Guy", "Monster/Sword part/The Witch Trials", function()
+         -- loadstring
+         local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+         -- config
+         ESP.Players = false
+         ESP.Boxes = true
+         ESP.Names = true
+         ESP:Toggle(true)
+       
+         -- object
+         ESP:AddObjectListener(Workspace.CrawlAI.Outfit, {
+            Name = "Bone", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+            CustomName = "Monster", -- Name you want to be displayed
+            Color = Color3.fromRGB(255, 0, 0), -- Color
+            IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+         })
+         ESP.whatever = true
+end)
+
+tab4.newLabel("FutaoMote")
+tab4.newButton("Esp Futao", "Monster/Butterfly part/Spirit/The Witch Trials", function()
+         -- loadstring
+         local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+         -- config
+         ESP.Players = false
+         ESP.Boxes = true
+         ESP.Names = true
+         ESP:Toggle(true)
+        
+         -- object
+         ESP:AddObjectListener(Workspace.GameAI.Futao, {
+             Name = "Cube", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+             CustomName = "Monster/Spirit", -- Name you want to be displayed
+             Color = Color3.fromRGB(255, 0, 0), -- Color
+             IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+         })
+         ESP.whatever = true
+end)
+
+tab4.newButton("Esp Mote", "Monster/Butterfly part/corrupted/The Witch Trials", function()
+         -- loadstring
+         local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+         -- config
+         ESP.Players = false
+         ESP.Boxes = true
+         ESP.Names = true
+         ESP:Toggle(true)
+    
+         -- object
+         ESP:AddObjectListener(Workspace.GameAI.Futao, {
+             Name = "Cube", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+             CustomName = "Monster/Spirit", -- Name you want to be displayed
+             Color = Color3.fromRGB(255, 0, 0), -- Color
+             IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+         })
+         ESP.whatever = true
+end)
+
+local tab5 = DrRayLibrary.newTab("HT", "ImageIdLogoHere")
+
+tab5.newLabel("½ Monster")
+tab5.newButton("Esp ½ Monster", "Monster/Burn cursed part/Halloween Trials", function()
+         -- loadstring
+         local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+         -- config
+         ESP.Players = false
+         ESP.Boxes = true
+         ESP.Names = true
+         ESP:Toggle(true)
+    
+         -- object
+         ESP:AddObjectListener(Workspace.GameAI.AI, {
+             Name = "Body", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+             CustomName = "Monster", -- Name you want to be displayed
+             Color = Color3.fromRGB(255, 0, 0), -- Color
+             IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+         })
+         ESP.whatever = true
+end)
+
+tab5.newLabel("Ghost")
+tab5.newButton("Esp Ghost", "Monster/Hotel/Candle part/Halloween Trials", function()
+        -- loadstring
+        local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+        -- config
+        ESP.Players = false
+        ESP.Boxes = true
+        ESP.Names = true
+        ESP:Toggle(true)
+    
+        -- object
+        ESP:AddObjectListener(Workspace.GameAI.AI, {
+            Name = "BTorso", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+            CustomName = "Monster", -- Name you want to be displayed
+            Color = Color3.fromRGB(255, 0, 0), -- Color
+            IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+        })
+        ESP.whatever = true 
+end)
+
+tab5.newLabel("Kabocha")
+tab5.newButton("Esp Kabocha", "Monster/Farm/Pumpkin Part/Halloween Trials(Not working at all recommended use infinite yield in misc tab and type partesp hitbox)", function()
+          -- loadstring
+          local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ 
+          -- config
+          ESP.Players = false
+          ESP.Boxes = true
+          ESP.Names = true  
+          ESP:Toggle(true)
+        
+          -- object
+          ESP:AddObjectListener(Workspace.GameAI.AI, {
+              Name = "HitBox", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+              CustomName = "Monster", -- Name you want to be displayed
+              Color = Color3.fromRGB(255, 0, 0), -- Color
+              IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+          })
+          ESP.whatever = true
+end)
+
+local tab6 = DrRayLibrary.newTab("CT", "ImageIdLogoHere")
+
+tab6.newLabel("Only 1 Esp")
+tab6.newButton("Esp Krampus", "Monster/Christmas Trials", function()
+    
+end)
+
+local tab7 = DrRayLibrary.newTab("NC", "ImageIdLogoHere")
+
+tab7.newLabel("Ronnie The Clown🤡")
+tab7.newButtom("Esp Ronnie", "Monster/Music box part/Nightmare circus", function()
+    
+end)
+
+tab7.newLabel("Hide and Seek guy")
+tab7.newButtom("Esp Hide and Seek Guy", "Monster/Cards part/Nightmare Circus", function()
+     
+end)
+
+local tab8 = DrRayLibrary.newTab("Jigoku", "ImageIdLogoHere")
+
+tab8.newLabel("Chapter 1")
+tab8.newButton("Esp (Aka manto)", "Jigoku teleporter/if you press ESP and it not appear that mean there's no aka manto in your game", function()
+    
+end)
+
+tab8.newLabel("Jigoku")
+tab8.newButton("ESP Shinigami", "Monster/Jigoku", function()
+    
+end)
+
+
+
+
+
+
+
+
+-- Create the another tab with a different image ID
+local tab9 = DrRayLibrary.newTab("Misc", "ImageIdLogoHere")
+
+tab9.newLabel("In-Game Helper")
+tab9.newButton("Instance interact", "instance E", function()
+     game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+  fireproximityprompt(prompt)
+  end)
+end)
+
+tab9.newButton("Fullbright", "too bright!", function()
+     local Light = game:GetService("Lighting")
+
+     function dofullbright()
+     Light.Ambient = Color3.new(1, 1, 1)
+     Light.ColorShift_Bottom = Color3.new(1, 1, 1)
+     Light.ColorShift_Top = Color3.new(1, 1, 1)
+     end
+
+     dofullbright()
+
+     Light.LightingChanged:Connect(dofullbright)
+end)
+
+tab9.newButton("Infinite yield", "tap to execute!", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+
+
