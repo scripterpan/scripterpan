@@ -43,17 +43,10 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Maikd
 
 local Window = Library.CreateLib("The Mimic Esp", "DarkTheme")
 
-local Tab = Window:NewTab("TabName")
+local Tab = Window:NewTab("B2C1")
 
-local Section = Tab:NewSection("Section Name")
+local Section = Tab:NewSection("Soon")
 
 
-Section:NewLabel("LabelText")
+Section:NewLabel("Soon")
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
-    print("Clicked")
-end)
-
-Section:NewKeybind("DONOTCHANGE", "DONOTCHANGE", Enum.KeyCode.K, function()
-    Library:ToggleUI()
-end)
