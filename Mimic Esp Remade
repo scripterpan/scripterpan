@@ -50,3 +50,7 @@ local Section = Tab:NewSection("Soon")
 
 Section:NewLabel("Soon")
 
+local Tab1 = Window:NewTab("B2C2")
+
+local Section 1 = Tab:NewSection("Soon")
+
