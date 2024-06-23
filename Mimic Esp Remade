@@ -1,1 +1,59 @@
+-- Gui to Lua
+-- Version: 3.2
 
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+Frame.BackgroundTransparency = 0.500
+Frame.Position = UDim2.new(0.858712733, 0, 0.0237762257, 0)
+Frame.Size = UDim2.new(0.129513338, 0, 0.227972031, 0)
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.Size = UDim2.new(1, 0, 1, 0)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Pann Hub"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextScaled = true
+TextButton.TextSize = 50.000
+TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextStrokeTransparency = 0.000
+TextButton.TextWrapped = true
+TextButton.MouseButton1Down:Connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K" , false , game)
+end)
+
+UITextSizeConstraint.Parent = TextButton
+UITextSizeConstraint.MaxTextSize = 30
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Maikderninja/Maikderninja/main/Test.lua"))();
+
+local Window = Library.CreateLib("The Mimic Esp", "DarkTheme")
+
+local Tab = Window:NewTab("TabName")
+
+local Section = Tab:NewSection("Section Name")
+
+
+Section:NewLabel("LabelText")
+
+Section:NewButton("ButtonText", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewKeybind("DONOTCHANGE", "DONOTCHANGE", Enum.KeyCode.K, function()
+    Library:ToggleUI()
+end)
