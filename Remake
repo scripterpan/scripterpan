@@ -32,7 +32,7 @@ TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.TextStrokeTransparency = 0.000
 TextButton.TextWrapped = true
 TextButton.MouseButton1Down:Connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K" , false , game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "LeftControl" , false , game)
 end)
 
 UITextSizeConstraint.Parent = TextButton
