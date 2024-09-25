@@ -1,0 +1,266 @@
+local syn = getgenv().syn
+getgenv().syn = false
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "The Mimic All In ONE", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+
+local Tab = Window:MakeTab({
+	Name = "Helper",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Helper"
+})
+
+
+Tab:AddButton({
+	Name = "FullBright",
+	Callback = function()
+      		
+		      game.Lighting.FogEnd = 100000
+              game.Lighting.FogStart = 0
+              game.Lighting.ClockTime = 14
+              game.Lighting.Brightness = 10
+              game.Lighting.GlobalShadows = false
+         end  
+
+})
+
+
+Tab:AddButton({
+	Name = "Fast interact (Not recommended using in b2c1)",
+	Callback = function()
+      		game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+  fireproximityprompt(prompt)
+end)
+  	end    
+})
+
+
+
+-- Book 1
+
+-- Book 1 Chapter 1 
+local Tab2 = Window:MakeTab({
+	Name = "Book 1 Chapter 1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+
+})
+
+local Section = Tab2:AddSection({
+	Name = "Working In Process"
+
+})
+
+ Tab2:AddButton({
+	Name = "Esp Hiachi",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+
+
+
+-- Book 1 Chapter 2 
+
+local Tab3 = Window:MakeTab({
+	Name = "Book 1 Chapter 2",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+
+})
+
+local Section = Tab3:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+-- Book 1 Chapter 3
+
+local Tab4 = Window:MakeTab({
+	Name = "Book 1 Chapter 3",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab4:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+-- Book 1 Chapter 4 
+
+local Tab5 = Window:MakeTab({
+	Name = "Book 1 Chapter 4",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab5:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+
+-- Book 2
+
+-- Book 2 Chapter 1 
+
+local Tab6 = Window:MakeTab({
+	Name = "Book 2 Chapter 1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab6:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+-- Book 2 Chapter 2 
+
+local Tab6 = Window:MakeTab({
+	Name = "Book 2 Chapter 2",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab6:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+
+-- Book 2 Chapter 3
+
+local Tab7 = Window:MakeTab({
+	Name = "Book 2 Chapter 3",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab7:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+
+-- Book 2 Chapter 4 
+
+local Tab8 = Window:MakeTab({
+	Name = "Book 2 Chapter 4",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab8:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+-- Gamemode
+
+local Tab9 = Window:MakeTab({
+	Name = "Jigoku",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab9:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+local Tab10 = Window:MakeTab({
+	Name = "The Witch Trials",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab10:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+local Tab11 = Window:MakeTab({
+	Name = "Halloween Trials",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab11:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+local Tab12 = Window:MakeTab({
+	Name = "Christmas Trials",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab12:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+local Tab13  Window:MakeTab({
+	Name = "Nightmare Circus",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab13:AddSection({
+	Name = "Working In Process"
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+OrionLib:MakeNotification({
+	Name = "Notification!",
+	Content = "Create By Pann🔥",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+
+
+
+
+getgenv().syn = syn
