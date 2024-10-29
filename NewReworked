@@ -32,8 +32,8 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 
 local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
+    Title = "The Mimic ",
+    SubTitle = "By Pann",
     TabWidth = 160,
     Size = UDim2.fromOffset(480, 320),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
@@ -42,10 +42,20 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "For Test", Icon = "" }),
+    MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
+    B1C1 = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
+    B1C2 = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
+    B1C3 = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
+    B1C4 = Window:AddTab({ Title = "Book 1 Chapter 4", Icon = ""}),
     B2C1 = Window:AddTab({ Title = "Book 2 Chapter 1", Icon = ""}),
     B2C2 = Window:AddTab({ Title = "Book 2 Chapter 2", Icon = ""}),
     B2C3 = Window:AddTab({ Title = "Book 2 Chapter 3", Icon = ""}),
+    Spec = Window:AddTab({ Title = "Jigoku", Icon = ""}),
+    Lore = Window:AddTab({ Title = "The Witch Trials", Icon = ""}),
+    eve2 = Window:AddTab({ Title = "Halloween Trials", Icon = ""}),
+    eve2 = Window:AddTab({ Title = "Nightmare Circus", Icon = ""}),
+    eve3 = Window:AddTab({ Title = "Christmas Trials", Icon = ""}),
+    Cre = Window:AddTab({ Title = "Credit", Icon = ""}),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -53,47 +63,210 @@ local Options = Fluent.Options
 
 do
 
-Tabs.Main:AddButton({
-        Title = "Button",
-        Description = "Very important button",
+Tabs.MAIN:AddButton({
+        Title = "Players ESP",
+        Description = "Self Explained (Can't be toggle because im lazy to makeit)",
         Callback = function()
-            Window:Dialog({
-                Title = "Title",
-                Content = "This is a dialog",
-                Buttons = {
-                    {
-                        Title = "Confirm",
-                        Callback = function()
-                            print("Confirmed the dialog.")
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
-                    }
-                }
-            })
-        end
-    })
+            local FillColor = Color3.fromRGB(175,25,255)
+local DepthMode = "AlwaysOnTop"
+local FillTransparency = 0.5
+local OutlineColor = Color3.fromRGB(255,255,255)
+local OutlineTransparency = 0
+
+local CoreGui = game:FindService("CoreGui")
+local Players = game:FindService("Players")
+local lp = Players.LocalPlayer
+local connections = {}
+
+local Storage = Instance.new("Folder")
+Storage.Parent = CoreGui
+Storage.Name = "Highlight_Storage"
+
+local function Highlight(plr)
+    local Highlight = Instance.new("Highlight")
+    Highlight.Name = plr.Name
+    Highlight.FillColor = FillColor
+    Highlight.DepthMode = DepthMode
+    Highlight.FillTransparency = FillTransparency
+    Highlight.OutlineColor = OutlineColor
+    Highlight.OutlineTransparency = 0
+    Highlight.Parent = Storage
+    
+    local plrchar = plr.Character
+    if plrchar then
+        Highlight.Adornee = plrchar
+    end
+
+    connections[plr] = plr.CharacterAdded:Connect(function(char)
+        Highlight.Adornee = char
+    end)
 end
 
-local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false })
+Players.PlayerAdded:Connect(Highlight)
+for i,v in next, Players:GetPlayers() do
+    Highlight(v)
+end
+
+Players.PlayerRemoving:Connect(function(plr)
+    local plrname = plr.Name
+    if Storage[plrname] then
+        Storage[plrname]:Destroy()
+    end
+    if connections[plr] then
+        connections[plr]:Disconnect()
+    end
+  end)
+end
+})
+end
+
+
+
+
+
+-- Fullbright Toggle Function
+local function FullBright(enable)
+    local lighting = game:GetService("Lighting")
+    if enable then
+        lighting.Brightness = 2
+        lighting.ClockTime = 12
+        lighting.FogEnd = 1e10
+        lighting.GlobalShadows = false
+        lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+    else
+        lighting.Brightness = 1
+        lighting.ClockTime = 14
+        lighting.FogEnd = 1000
+        lighting.GlobalShadows = true
+        lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+    end
+end
+
+-- Fullbright Toggle in GUI
+local Toggle = Tabs.MAIN:AddToggle("FullBrightToggle", {Title = " FullBright", Default = false})
+
+Toggle:OnChanged(function()
+    local isFullBrightOn = Options.FullBrightToggle.Value
+    FullBright(isFullBrightOn)
+    print("Fullbright is now:", isFullBrightOn)
+end)
+
+-- Proximity Prompt Toggle Script
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection -- To store the connection
+
+-- Function to enable/disable Proximity Prompt interactions
+local function toggleProximityPrompt(enable)
+    if enable then
+        -- Connect to the event if enabled
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
+    elseif proximityConnection then
+        -- Disconnect the event if it was connected
+        proximityConnection:Disconnect()
+        proximityConnection = nil -- Reset the variable after disconnecting
+    end
+end
+
+-- Toggle for Proximity Prompt in the UI
+local ToggleProximity = Tabs.MAIN:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+
+-- Handle the toggle state change
+ToggleProximity:OnChanged(function()
+    local isProximityOn = ToggleProximity.Value
+    toggleProximityPrompt(isProximityOn)
+    print("Proximity Prompt is now:", isProximityOn and "Enabled" or "Disabled")
+end)
+
+
+local Toggle = Tabs.MAIN:AddToggle("MyToggle", {Title = "Toggle", Default = false })
 
     Toggle:OnChanged(function()
         print("Toggle changed:", Options.MyToggle.Value)
     end)
+Tabs.MAIN:AddParagraph({
+        Title = "Player",
+        Content = "Player Misc"
+    })
+    
+-- Player Speed Toggle and Slider
+local player = game.Players.LocalPlayer
+local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+local Toggle = Tabs.MAIN:AddToggle("SpeedToggle", {Title = "Toggle Speed", Default = false})
+
+Toggle:OnChanged(function()
+    local isSpeedOn = Options.SpeedToggle.Value
+    if isSpeedOn then
+        print("Speed toggle enabled")
+        -- Enable speed changes using the slider value
+        humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        humanoid.WalkSpeed = Options.SpeedSlider.Value -- Set speed to current slider value
+    else
+        print("Speed toggle disabled")
+        humanoid.WalkSpeed = 16 -- Reset to default WalkSpeed
+    end
+end)
+
+local Slider = Tabs.MAIN:AddSlider("SpeedSlider", {
+    Title = "Player Speed",
+    Description = "Adjust player speed",
+    Default = 16,  -- Roblox default WalkSpeed is 16
+    Min = 16,
+    Max = 100,
+    Rounding = 0,
+    Callback = function(Value)
+        print("Speed Slider was changed:", Value)
+        if Options.SpeedToggle.Value then
+            humanoid.WalkSpeed = Value -- Update speed in real-time when slider is adjusted
+        end
+    end
+})
+
+Slider:SetValue(16)
 
 
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
+-- Toggle for Jump Power
+local ToggleJump = Tabs.MAIN:AddToggle("JumpToggle", {Title = "Toggle Jump Power", Default = false })
 
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
+ToggleJump:OnChanged(function()
+    local jumpEnabled = Options.JumpToggle.Value
+    if jumpEnabled then
+        print("Jump Power Enabled")
+    else
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50 -- reset to default jump power
+        print("Jump Power Disabled")
+    end
+end)
 
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
-SaveManager:LoadAutoloadConfig()
+-- Jump Power Slider
+local SliderJump = Tabs.MAIN:AddSlider("JumpPowerSlider", {
+        Title = "Jump Power",
+        Description = "Adjust your jump power",
+        Default = 50,
+        Min = 1,  -- Default jump power
+        Max = 200, -- Maximum jump power
+        Rounding = 0,
+        Callback = function(Value)
+            if Options.JumpToggle.Value then
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+                print("Jump Power was changed:", Value)
+            end
+        end
+    })
+
+SliderJump:SetValue(50) -- Set default jump power
+
+
+-- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+   wait()
+   
+   Tabs.Cre:AddParagraph({
+        Title = "ChatGPT",
+        Content = "Toggle-able Fullbright, Toggle-able Instance Proximity Prompt, WalkSpeed, JumpPower"
+    })
+      
+      
+   
+   
