@@ -42,6 +42,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
+    
     MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
     B1C1 = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
     B1C2 = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
@@ -194,18 +195,36 @@ Tabs.MAIN:AddParagraph({
 local player = game.Players.LocalPlayer
 local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
 
+local function setWalkSpeed(speed)
+    if humanoid then
+        humanoid.WalkSpeed = speed
+    end
+end
+
+-- Function to handle character respawn
+local function onCharacterAdded(character)
+    humanoid = character:WaitForChild("Humanoid") -- Wait for Humanoid to ensure it's loaded
+    if Options.SpeedToggle.Value then
+        setWalkSpeed(Options.SpeedSlider.Value) -- Reapply speed from slider after respawn
+    else
+        setWalkSpeed(16) -- Reset to default WalkSpeed if toggle is off
+    end
+end
+
+-- Connect character respawn event
+player.CharacterAdded:Connect(onCharacterAdded)
+
+-- Speed Toggle and Slider
 local Toggle = Tabs.MAIN:AddToggle("SpeedToggle", {Title = "Toggle Speed", Default = false})
 
 Toggle:OnChanged(function()
     local isSpeedOn = Options.SpeedToggle.Value
     if isSpeedOn then
         print("Speed toggle enabled")
-        -- Enable speed changes using the slider value
-        humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-        humanoid.WalkSpeed = Options.SpeedSlider.Value -- Set speed to current slider value
+        setWalkSpeed(Options.SpeedSlider.Value) -- Set speed to current slider value
     else
         print("Speed toggle disabled")
-        humanoid.WalkSpeed = 16 -- Reset to default WalkSpeed
+        setWalkSpeed(16) -- Reset to default WalkSpeed
     end
 end)
 
@@ -219,12 +238,22 @@ local Slider = Tabs.MAIN:AddSlider("SpeedSlider", {
     Callback = function(Value)
         print("Speed Slider was changed:", Value)
         if Options.SpeedToggle.Value then
-            humanoid.WalkSpeed = Value -- Update speed in real-time when slider is adjusted
+            setWalkSpeed(Value) -- Update speed in real-time when slider is adjusted
         end
     end
 })
 
 Slider:SetValue(16)
+
+
+
+-- Apply speed when the player first loads in
+if player.Character then
+    onCharacterAdded(player.Character)
+else
+    player.CharacterAdded:Wait() -- Wait until character is loaded if it’s not there yet
+    onCharacterAdded(player.Character)
+end
 
 
 -- Toggle for Jump Power
@@ -259,8 +288,125 @@ local SliderJump = Tabs.MAIN:AddSlider("JumpPowerSlider", {
 SliderJump:SetValue(50) -- Set default jump power
 
 
--- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
-   wait()
+Tabs.B1C1:AddParagraph({
+         Title = "Part 1",
+         Content = "Part 1"
+    })
+
+Tabs.B1C1:AddButton({
+        Title = "Auto Win",
+        Description = "Self Explained",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3445.80493, 37.6461182, -1542.26685, -0.0656819865, -7.81556366e-08, 0.997840583, 7.02771246e-08, 1, 8.29507059e-08, -0.997840583, 7.55737375e-08, -0.0656819865)
+         end
+      })   
+        
+ Tabs.B1C1:AddParagraph({
+         Title = "Part 2",
+         Content = "Part 2"       
+        })
+        
+        
+              
+Tabs.B1C1:AddButton({
+        Title = "Auto Win",
+        Description = "Self Explained",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1261.78845, 199.540009, -2536.78955, 0.495596468, -2.43472673e-08, 0.868552923, 6.15256912e-09, 1, 2.45213343e-08, -0.868552923, -6.80885437e-09, 0.495596468)
+         end
+      })                 
+        
+  
+  
+  
+   Tabs.B1C2:AddParagraph({
+         Title = "Part 1",
+         Content = "Part 1"
+    })     
+        
+        
+   Tabs.B1C2:AddButton({
+        Title = "Auto Win",
+        Description = "Self Explained",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(65.1952972, 56.6845131, -1588.85229, -0.877218008, 0, 0.480092257, 0, 1, 0, -0.480092257, 0, -0.877218008)
+         end
+      })      
+        
+        
+      
+Tabs.B1C2:AddParagraph({
+         Title = "Part 2",
+         Content = "Part 2"       
+        })        
+        
+        
+        
+        
+        
+
+Tabs.B1C2:AddButton({   
+         Title = "Auto Win",
+        Description = "Self Explained",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(234.335876, 101.941422, -561.392883, 0.98569411, 2.45511398e-08, -0.168544099, -1.58307909e-08, 1, 5.3082978e-08, 0.168544099, -4.96553909e-08, 0.98569411)
+         end 
+      })           
+      
+      
+      
+      
+      
+      
+        
+        
+        
+        
+        
+        
+Tabs.B1C2:AddParagraph({
+         Title = "Part 3",
+         Content = "Part 3"       
+        })        
+        
+        
+        
+        
+        
+
+-- Create a notification function
+local function Notify(title, text, duration)
+    local StarterGui = game:GetService("StarterGui")
+    StarterGui:SetCore("SendNotification", {
+        Title = title;
+        Text = text;
+        Duration = duration;
+    })
+end
+
+Tabs.B1C2:AddButton({
+    Title = "Auto Win",
+    Description = "Self Explained",
+    Callback = function()
+        -- First teleport immediately
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(859.177307, 72.9999924, -355.12088, -0.0317773335, 0, -0.99949497, 0, 1, 0, 0.99949497, 0, -0.0317773335)
+
+        -- Show notification immediately
+        Notify("Auto Win", "Walk straight and wait for 3-5 seconds", 5)
+
+        -- Wait for 5 seconds before the second teleport
+        task.wait(5)
+
+        -- Second teleport after 5 seconds
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1046.68091, 77.1533279, -355.660278, -0.312641442, 6.93475777e-10, -0.949871182, 6.23868734e-10, 1, 5.24732702e-10, 0.949871182, -4.28541758e-10, -0.312641472)
+    end 
+})  
+      
+      
+
+
+
+
    
    Tabs.Cre:AddParagraph({
         Title = "ChatGPT",
@@ -269,4 +415,9 @@ SliderJump:SetValue(50) -- Set default jump power
       
       
    
-   
+   Tabs.Cre:AddParagraph({
+         Title = "Me",
+         Content = "Almost Everything, My discord is floppapan9287"
+    })
+    
+    
