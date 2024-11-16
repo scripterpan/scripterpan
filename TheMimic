@@ -240,6 +240,8 @@ Toggle:OnChanged(function()
 end)
 
 
+
+
 -- Initialize variables
 local speedEnabled = false
 local jumpEnabled = false
@@ -280,7 +282,7 @@ player.CharacterAdded:Connect(function(character)
 end)
 
 -- Toggle for Speed Control
-local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
+local SpeedToggle = Tabs.MAIN:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
 
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
@@ -305,7 +307,7 @@ SpeedToggle:OnChanged(function()
 end)
 
 -- Slider for Speed Adjustment
-local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
+local SpeedSlider = Tabs.MAIN:AddSlider("SpeedSlider", {
     Title = "Player Speed",
     Description = "Adjust your walk speed",
     Default = 16,
@@ -322,7 +324,7 @@ local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
 SpeedSlider:SetValue(16) -- Set initial value
 
 -- Toggle for Jump Power Control
-local JumpToggle = Tabs.MISC:AddToggle("JumpToggle", { Title = "Enable Jump Power", Default = false })
+local JumpToggle = Tabs.MAIN:AddToggle("JumpToggle", { Title = "Enable Jump Power", Default = false })
 
 JumpToggle:OnChanged(function()
     jumpEnabled = JumpToggle.Value
@@ -337,7 +339,7 @@ JumpToggle:OnChanged(function()
 end)
 
 -- Slider for Jump Power Adjustment
-local JumpPowerSlider = Tabs.MISC:AddSlider("JumpPowerSlider", {
+local JumpPowerSlider = Tabs.MAIN:AddSlider("JumpPowerSlider", {
     Title = "Jump Power",
     Description = "Adjust your jump power",
     Default = 50,
