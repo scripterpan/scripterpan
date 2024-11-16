@@ -45,7 +45,7 @@ local Tabs = {
     MISC = Window:AddTab({ Title = "Misc", Icon = "" }),
     MAIN = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
     VISUAL = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
-    ??? = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
+    Soon = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
     Cre = Window:AddTab({ Title = "Credit", Icon = ""}),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
