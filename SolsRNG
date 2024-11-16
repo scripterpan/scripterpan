@@ -260,7 +260,7 @@ SpeedSlider:SetValue(16)
 
 -- Speed Input
 local SpeedInput = Tabs.MISC:AddInput("SpeedInput", {
-    Title = "Set Speed (Use this if you can't swipe the slider)",
+    Title = "Set Speed",
     Placeholder = "Enter speed (1-20)",
     Numeric = true,
     Finished = true, -- Callback triggers when Enter is pressed
@@ -322,7 +322,7 @@ JumpSlider:SetValue(50)
 
 -- Jump Power Input
 local JumpInput = Tabs.MISC:AddInput("JumpInput", {
-    Title = "Set Jump Power (Use this if you can't swipe the slider)",
+    Title = "Set Jump Power",
     Placeholder = "Enter jump power (1-60)",
     Numeric = true,
     Finished = true,
