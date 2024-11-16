@@ -31,7 +31,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 
 local Window = Fluent:CreateWindow({
-    Title = "The Mimic ",
+    Title = "Sol's RNG ",
     SubTitle = "By Pann",
     TabWidth = 160,
     Size = UDim2.fromOffset(480, 320),
@@ -42,19 +42,10 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
 
-    MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
-    B1C1 = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
-    B1C2 = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
-    B1C3 = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
-    B1C4 = Window:AddTab({ Title = "Book 1 Chapter 4", Icon = ""}),
-    B2C1 = Window:AddTab({ Title = "Book 2 Chapter 1", Icon = ""}),
-    B2C2 = Window:AddTab({ Title = "Book 2 Chapter 2", Icon = ""}),
-    B2C3 = Window:AddTab({ Title = "Book 2 Chapter 3", Icon = ""}),
-    Spec = Window:AddTab({ Title = "Jigoku", Icon = ""}),
-    Lore = Window:AddTab({ Title = "The Witch Trials", Icon = ""}),
-    eve2 = Window:AddTab({ Title = "Halloween Trials", Icon = ""}),
-    eve2 = Window:AddTab({ Title = "Nightmare Circus", Icon = ""}),
-    eve3 = Window:AddTab({ Title = "Christmas Trials", Icon = ""}),
+    MISC = Window:AddTab({ Title = "Misc", Icon = "" }),
+    MAIN = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
+    VISUAL = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
+    ??? = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
     Cre = Window:AddTab({ Title = "Credit", Icon = ""}),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
@@ -63,7 +54,7 @@ local Options = Fluent.Options
 
 do
 
-Tabs.MAIN:AddButton({
+Tabs.MISC:AddButton({
     Title = "Players ESP",
     Description = "Self Explained (Can't be toggle because im lazy to makeit)",
     Callback = function()
@@ -141,7 +132,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.MAIN:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+local ToggleProximity = Tabs.MISC:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
@@ -177,7 +168,7 @@ local function disableFullbright()
 end
 
 -- Add toggle to the UI
-local Toggle = Tabs.MAIN:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+local Toggle = Tabs.MISC:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
 
 -- Handle toggle state changes
 Toggle:OnChanged(function()
@@ -198,7 +189,7 @@ end)
 
 
 
-Tabs.MAIN:AddSection("Player Misc")  
+Tabs.MISC:AddSection("Player Misc")  
 
 
 
@@ -238,7 +229,7 @@ local function monitorSpeed()
 end
 
 -- Toggle to enable/disable speed control
-local SpeedToggle = Tabs.MAIN:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
+local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
 
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
@@ -282,7 +273,7 @@ end)
    
    
 -- Toggle for Jump Power
-   local ToggleJump = Tabs.MAIN:AddToggle("JumpToggle", {Title = "Toggle Jump Power", Default = false })
+   local ToggleJump = Tabs.MISC:AddToggle("JumpToggle", {Title = "Toggle Jump Power", Default = false })
    
    ToggleJump:OnChanged(function()
    local jumpEnabled = Options.JumpToggle.Value
