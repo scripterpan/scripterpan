@@ -204,9 +204,10 @@ Tabs.MISC:AddSection("Player Misc")
 
 -- Player Speed Toggle and Slider
 
--- Variables
+-- Player Speed Toggle and Slider with Input
 local speedEnabled = false
-local desiredSpeed = 16 -- Default Roblox speed
+local desiredSpeed = 16 -- Default speed
+local defaultSpeed = 16 -- Default Roblox speed
 local player = game.Players.LocalPlayer
 
 -- Function to set player speed
@@ -216,7 +217,7 @@ local function setSpeed(speed)
     end
 end
 
--- Function to ensure speed persists
+-- Monitor speed to ensure it persists
 local function monitorSpeed()
     while speedEnabled do
         if player and player.Character and player.Character:FindFirstChild("Humanoid") then
@@ -228,24 +229,25 @@ local function monitorSpeed()
     end
 end
 
--- Toggle to enable/disable speed control
+-- Speed Toggle
 local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
-
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
-
     if speedEnabled then
         task.spawn(monitorSpeed)
+    else
+        -- Reset to default speed when toggle is off
+        setSpeed(defaultSpeed)
     end
 end)
 
--- Slider to adjust speed
+-- Speed Slider
 local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
     Title = "Player Speed",
     Description = "Adjust your walk speed",
     Default = 16,
     Min = 1,
-    Max = 20, -- Maximum speed set to 20
+    Max = 20,
     Rounding = 0,
     Callback = function(Value)
         desiredSpeed = Value
@@ -254,8 +256,25 @@ local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
         end
     end,
 })
+SpeedSlider:SetValue(16)
 
-SpeedSlider:SetValue(16) -- Set the initial slider value
+-- Speed Input
+local SpeedInput = Tabs.MISC:AddInput("SpeedInput", {
+    Title = "Set Speed",
+    Placeholder = "Enter speed (1-20)",
+    Numeric = true,
+    Finished = true, -- Callback triggers when Enter is pressed
+    Callback = function(Value)
+        local inputSpeed = tonumber(Value)
+        if inputSpeed and inputSpeed >= 1 and inputSpeed <= 20 then
+            desiredSpeed = inputSpeed
+            SpeedSlider:SetValue(inputSpeed)
+            if speedEnabled then
+                setSpeed(desiredSpeed)
+            end
+        end
+    end,
+})
 
 -- Monitor respawn to ensure speed persists
 player.CharacterAdded:Connect(function(character)
@@ -265,50 +284,55 @@ player.CharacterAdded:Connect(function(character)
     end
 end)
 
+-- Jump Power Toggle and Slider with Input
+local jumpEnabled = false
+local defaultJumpPower = 50 -- Default Roblox jump power
 
+-- Jump Power Toggle
+local JumpToggle = Tabs.MISC:AddToggle("JumpToggle", { Title = "Enable Jump Power", Default = false })
+JumpToggle:OnChanged(function()
+    jumpEnabled = JumpToggle.Value
+    if jumpEnabled then
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.JumpPower = defaultJumpPower
+        end
+    else
+        -- Reset to default jump power when toggle is off
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.JumpPower = defaultJumpPower
+        end
+    end
+end)
 
+-- Jump Power Slider
+local JumpSlider = Tabs.MISC:AddSlider("JumpPowerSlider", {
+    Title = "Jump Power",
+    Description = "Adjust your jump power",
+    Default = 50,
+    Min = 1,
+    Max = 60,
+    Rounding = 0,
+    Callback = function(Value)
+        if jumpEnabled and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.JumpPower = Value
+        end
+    end,
+})
+JumpSlider:SetValue(50)
 
-   
-   
-   
-   
--- Toggle for Jump Power
-   local ToggleJump = Tabs.MISC:AddToggle("JumpToggle", {Title = "Toggle Jump Power", Default = false })
-   
-   ToggleJump:OnChanged(function()
-   local jumpEnabled = Options.JumpToggle.Value
-   if not jumpEnabled then
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50 -- reset to default jump power
-   end
-   end)
-   
-   -- Jump Power Slider
-   local SliderJump = Tabs.MISC:AddSlider("JumpPowerSlider", {
-   Title = "Jump Power",
-   Description = "Adjust your jump power",
-   Default = 50,
-   Min = 1, -- Default jump power
-   Max = 60, -- Maximum jump power
-   Rounding = 0,
-   Callback = function(Value)
-   if Options.JumpToggle.Value then
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-   end
-   end
-   })
-   
-   SliderJump:SetValue(50) -- Set default jump power
-   
-   
-    
-           
-           
-           
-           
-   
-     
-  
-         
-       
-       
-       
+-- Jump Power Input
+local JumpInput = Tabs.MISC:AddInput("JumpInput", {
+    Title = "Set Jump Power",
+    Placeholder = "Enter jump power (1-60)",
+    Numeric = true,
+    Finished = true,
+    Callback = function(Value)
+        local inputJumpPower = tonumber(Value)
+        if inputJumpPower and inputJumpPower >= 1 and inputJumpPower <= 60 then
+            JumpSlider:SetValue(inputJumpPower)
+            if jumpEnabled and player.Character and player.Character:FindFirstChild("Humanoid") then
+                player.Character.Humanoid.JumpPower = inputJumpPower
+            end
+        end
+    end,
+})
