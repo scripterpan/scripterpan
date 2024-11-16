@@ -43,9 +43,9 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
 
     MISC = Window:AddTab({ Title = "Misc", Icon = "" }),
-    MAIN = Window:AddTab({ Title = "Book 1 Chapter 1", Icon = ""}),
-    VISUAL = Window:AddTab({ Title = "Book 1 Chapter 2", Icon = ""}),
-    Soon = Window:AddTab({ Title = "Book 1 Chapter 3", Icon = ""}),
+    MAIN = Window:AddTab({ Title = "Main", Icon = ""}),
+    VISUAL = Window:AddTab({ Title = "Visual", Icon = ""}),
+    SOON = Window:AddTab({ Title = "???", Icon = ""}),
     Cre = Window:AddTab({ Title = "Credit", Icon = ""}),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
@@ -240,7 +240,7 @@ SpeedToggle:OnChanged(function()
 end)
 
 -- Slider to adjust speed
-local SpeedSlider = Tabs.MAIN:AddSlider("SpeedSlider", {
+local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
     Title = "Player Speed",
     Description = "Adjust your walk speed",
     Default = 16,
@@ -283,7 +283,7 @@ end)
    end)
    
    -- Jump Power Slider
-   local SliderJump = Tabs.MAIN:AddSlider("JumpPowerSlider", {
+   local SliderJump = Tabs.MISC:AddSlider("JumpPowerSlider", {
    Title = "Jump Power",
    Description = "Adjust your jump power",
    Default = 50,
