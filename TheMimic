@@ -240,20 +240,13 @@ Toggle:OnChanged(function()
 end)
 
 
-
-
-
-
-
-
-
-
-
--- Player Speed Toggle and Slider
-
--- Variables
+-- Initialize variables
 local speedEnabled = false
+local jumpEnabled = false
 local desiredSpeed = 16 -- Default Roblox speed
+local defaultSpeed = 16
+local desiredJumpPower = 50 -- Default Roblox jump power
+local defaultJumpPower = 50
 local player = game.Players.LocalPlayer
 
 -- Function to set player speed
@@ -263,36 +256,61 @@ local function setSpeed(speed)
     end
 end
 
--- Function to ensure speed persists
-local function monitorSpeed()
-    while speedEnabled do
-        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-            if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
-                setSpeed(desiredSpeed)
-            end
-        end
-        task.wait(0.1)
+-- Function to set player jump power
+local function setJumpPower(jumpPower)
+    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.JumpPower = jumpPower
     end
 end
 
--- Toggle to enable/disable speed control
-local SpeedToggle = Tabs.MAIN:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
+-- Monitor respawn to ensure speed and jump power persist
+player.CharacterAdded:Connect(function(character)
+    -- Wait for the character to load
+    repeat task.wait() until character:FindFirstChild("Humanoid")
+
+    -- Reapply speed if the toggle is on
+    if speedEnabled then
+        setSpeed(desiredSpeed)
+    end
+
+    -- Reapply jump power if the toggle is on
+    if jumpEnabled then
+        setJumpPower(desiredJumpPower)
+    end
+end)
+
+-- Toggle for Speed Control
+local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
 
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
 
     if speedEnabled then
-        task.spawn(monitorSpeed)
+        -- Apply the current desired speed and start the monitoring loop
+        setSpeed(desiredSpeed)
+        task.spawn(function()
+            while speedEnabled do
+                if player.Character and player.Character:FindFirstChild("Humanoid") then
+                    if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                        setSpeed(desiredSpeed)
+                    end
+                end
+                task.wait(0.1)
+            end
+        end)
+    else
+        -- Reset to default speed when toggled off
+        setSpeed(defaultSpeed)
     end
 end)
 
--- Slider to adjust speed
-local SpeedSlider = Tabs.MAIN:AddSlider("SpeedSlider", {
+-- Slider for Speed Adjustment
+local SpeedSlider = Tabs.MISC:AddSlider("SpeedSlider", {
     Title = "Player Speed",
     Description = "Adjust your walk speed",
     Default = 16,
-    Min = 10,
-    Max = 120, -- Maximum speed set to 120
+    Min = 1,
+    Max = 120, -- Increased max speed to 120
     Rounding = 0,
     Callback = function(Value)
         desiredSpeed = Value
@@ -301,50 +319,48 @@ local SpeedSlider = Tabs.MAIN:AddSlider("SpeedSlider", {
         end
     end,
 })
+SpeedSlider:SetValue(16) -- Set initial value
 
-SpeedSlider:SetValue(16) -- Set the initial slider value
+-- Toggle for Jump Power Control
+local JumpToggle = Tabs.MISC:AddToggle("JumpToggle", { Title = "Enable Jump Power", Default = false })
 
--- Monitor respawn to ensure speed persists
-player.CharacterAdded:Connect(function(character)
-    if speedEnabled then
-        repeat task.wait() until character:FindFirstChild("Humanoid")
-        setSpeed(desiredSpeed)
+JumpToggle:OnChanged(function()
+    jumpEnabled = JumpToggle.Value
+
+    if jumpEnabled then
+        -- Apply the current desired jump power
+        setJumpPower(desiredJumpPower)
+    else
+        -- Reset to default jump power when toggled off
+        setJumpPower(defaultJumpPower)
     end
 end)
 
+-- Slider for Jump Power Adjustment
+local JumpPowerSlider = Tabs.MISC:AddSlider("JumpPowerSlider", {
+    Title = "Jump Power",
+    Description = "Adjust your jump power",
+    Default = 50,
+    Min = 1,
+    Max = 200, -- Increased max jump power to 200
+    Rounding = 0,
+    Callback = function(Value)
+        desiredJumpPower = Value
+        if jumpEnabled then
+            setJumpPower(desiredJumpPower)
+        end
+    end,
+})
+JumpPowerSlider:SetValue(50) -- Set initial value
 
 
 
-   
-   
-   
-   
--- Toggle for Jump Power
-   local ToggleJump = Tabs.MAIN:AddToggle("JumpToggle", {Title = "Toggle Jump Power", Default = false })
-   
-   ToggleJump:OnChanged(function()
-   local jumpEnabled = Options.JumpToggle.Value
-   if not jumpEnabled then
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50 -- reset to default jump power
-   end
-   end)
-   
-   -- Jump Power Slider
-   local SliderJump = Tabs.MAIN:AddSlider("JumpPowerSlider", {
-   Title = "Jump Power",
-   Description = "Adjust your jump power",
-   Default = 50,
-   Min = 1, -- Default jump power
-   Max = 200, -- Maximum jump power
-   Rounding = 0,
-   Callback = function(Value)
-   if Options.JumpToggle.Value then
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-   end
-   end
-   })
-   
-   SliderJump:SetValue(50) -- Set default jump power
+
+
+
+
+
+
    
    
    
