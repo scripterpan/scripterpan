@@ -132,7 +132,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.MISC:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+local ToggleProximity = Tabs.MISC:AddToggle("ProximityPromptToggle", {Title = "Instance ProximityPrompt", Default = false})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
@@ -168,7 +168,7 @@ local function disableFullbright()
 end
 
 -- Add toggle to the UI
-local Toggle = Tabs.MISC:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+local Toggle = Tabs.MISC:AddToggle("FullbrightToggle", { Title = "Fullbright", Default = false })
 
 -- Handle toggle state changes
 Toggle:OnChanged(function()
@@ -230,7 +230,7 @@ local function monitorSpeed()
 end
 
 -- Speed Toggle
-local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
+local SpeedToggle = Tabs.MISC:AddToggle("SpeedToggle", { Title = "Enable Player Speed", Default = false })
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
     if speedEnabled then
@@ -260,7 +260,7 @@ SpeedSlider:SetValue(16)
 
 -- Speed Input
 local SpeedInput = Tabs.MISC:AddInput("SpeedInput", {
-    Title = "Set Speed",
+    Title = "Set Speed (Use this if you can't swipe the slider)",
     Placeholder = "Enter speed (1-20)",
     Numeric = true,
     Finished = true, -- Callback triggers when Enter is pressed
@@ -322,7 +322,7 @@ JumpSlider:SetValue(50)
 
 -- Jump Power Input
 local JumpInput = Tabs.MISC:AddInput("JumpInput", {
-    Title = "Set Jump Power",
+    Title = "Set Jump Power (Use this if you can't swipe the slider)",
     Placeholder = "Enter jump power (1-60)",
     Numeric = true,
     Finished = true,
