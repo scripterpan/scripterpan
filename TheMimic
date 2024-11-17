@@ -468,6 +468,50 @@ JumpPowerSlider:SetValue(50) -- Set initial value
    })  
          
          
+         
+         
+         
+         
+         
+         
+   Tabs.B1C3:AddSection("Part 1")
+   
+   Tabs.B1C3:AddButton({
+       Title = "Auto Win",
+       Description = "Self Explained",
+       Callback = function()
+         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2411.87427, -15.7511759, 2285.42798, 0, 0, 1, 1, 0, 0, 0, 1, 0)
+         end
+   })  
+   
+   
+   
+   Tabs.B1C3:AddSection("Part 2")
+   
+   Tabs.B1C3:AddButton({
+       Title = "Auto Win",
+       Description = "Self Explained",
+       Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(242.771713, 34.3152275, 449.323639, 0, 0, 1, 1, 0, 0, 0, 1, 0)
+         end
+   })  
+   
+   
+   Tabs.B1C3:AddSection("Part 3")
+   
+   Tabs.B1C3:AddButton({
+       Title = "Auto Win",
+       Description = "Self Explained",
+       Callback = function()
+         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-658.346252, 649.0047, -1011.59955, 0.819662333, 0.0148425065, -0.572654724, 0.0166559014, 0.998624146, 0.0497233309, 0.572604775, -0.0502944216, 0.818287373)
+         end
+   })  
+   
+   
+   
+   
+   
+   
    
    
    
@@ -488,8 +532,7 @@ JumpPowerSlider:SetValue(50) -- Set initial value
        })
        
        
-       -- 65.1952972, 56.6845131, -1588.85229, -0.877218008, 0, 0.480092257, 0, 1, 0, -0.480092257, 0, -0.877218008
-       
+
        
       
    
