@@ -45,7 +45,7 @@ local Tabs = {
     MISC = Window:AddTab({ Title = "Misc", Icon = "" }),
     MAIN = Window:AddTab({ Title = "Main", Icon = ""}),
     VISUAL = Window:AddTab({ Title = "Visual", Icon = ""}),
-    SOON = Window:AddTab({ Title = "???", Icon = ""}),
+    HOOK = Window:AddTab({ Title = "Webhook", Icon = ""}),
     Cre = Window:AddTab({ Title = "Credit", Icon = ""}),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
