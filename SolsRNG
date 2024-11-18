@@ -369,7 +369,7 @@ end)
 
 -- Input to add your Discord ID
 local InputDiscordID = Tabs.HOOK:AddInput("DiscordIDInput", {
-    Title = "Discord ID",
+    Title = "Discord ID (Optional)",
     Default = "",
     Placeholder = "Enter your Discord ID",
     Numeric = true,
