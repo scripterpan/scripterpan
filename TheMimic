@@ -63,6 +63,8 @@ local Options = Fluent.Options
 
 do
 
+Tabs.MAIN:AddSection("Main")
+
 Tabs.MAIN:AddButton({
     Title = "Players ESP",
     Description = "Self Explained (Can't be toggle because im lazy to makeit)",
