@@ -346,10 +346,9 @@ local JumpInput = Tabs.MISC:AddInput("JumpInput", {
 Tabs.HOOK:AddSection("Webhook")
 
 local webhookUrl = ""
-local webhookTimer = 600 -- Default to 1 minute in seconds
+local webhookTimer = 7200 -- Default to 2 hours in seconds
 local webhookEnabled = false
 local discordId = "" -- To store the Discord ID to ping
-
 
 
 -- Input to change the webhook URL
@@ -387,8 +386,8 @@ end)
 -- Input to change the delay time
 local InputDelay = Tabs.HOOK:AddInput("DelayInput", {
     Title = "Interval (Seconds)",
-    Default = "7200",
-    Placeholder = "Enter interval in seconds",
+    Default = "600", -- 1 Minute
+    Placeholder = "Enter interval in second",
     Numeric = true,
     Finished = false,
     Callback = function(Value)
@@ -425,7 +424,7 @@ Toggle:OnChanged(function()
                             ["fields"] = {
                                 {
                                     ["name"] = "⏰ Time:",
-                                    ["value"] = os.date("!%a %b %d %X %Y", os.time() + 7 * 3600) -- GMT+7 timezone
+                                    ["value"] = os.date("!%a %b %d %X %Y", os.time() + 7 * 3600) .. " GMT +7" -- GMT+7 timezone
                                 }
                             }
                         }}
@@ -435,12 +434,12 @@ Toggle:OnChanged(function()
                     request({
                         Url = webhookUrl,
                         Method = "POST",
-                     repeat task.wait(0.25) until game:IsLoaded();
-              end})
-          end)
-     end)
-end
-
-
-
-
+                        Headers = { ["Content-Type"] = "application/json" },
+                        Body = jsonData
+                    })
+                end
+                task.wait(webhookTimer)
+            end
+        end)
+    end
+end)
