@@ -1,6 +1,109 @@
-repeat task.wait(0.1) until game:IsLoaded()
 local MarketplaceService = game:GetService("MarketplaceService")
 local success, gameInfo = pcall(MarketplaceService.GetProductInfo, MarketplaceService, game.PlaceId)
 local Pann = game.PlaceId
-if Pann == 9391468976 then
-  
+if Pann == 6296321810 then
+    local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+    local Object = workspace.GameAI.AI   -- Workspace
+
+    local Color = Color3.fromRGB(255, 0, 0)
+
+    RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+elseif Pann == 6301638949 then
+    local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2.realshizu   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[14]   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[11]   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[16]  -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[15]  -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[17]   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[13]   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2:GetChildren()[12]   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI2.Biwaki   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI.KurikoCeiling   -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.GameAI.KurikoFloor  -- Workspace
+
+local Color = Color3.fromRGB(255, 0, 0)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+
+
+
+
+-- b1c2
