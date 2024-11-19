@@ -1,0 +1,6 @@
+repeat task.wait(0.1) until game:IsLoaded()
+local MarketplaceService = game:GetService("MarketplaceService")
+local success, gameInfo = pcall(MarketplaceService.GetProductInfo, MarketplaceService, game.PlaceId)
+local Pann = game.PlaceId
+if Pann == 9391468976 then
+  
