@@ -396,8 +396,8 @@ JumpPowerSlider:SetValue(50) -- Set initial value
     Tabs.B1C1:AddSection("ESP")
 
     Tabs.B1C1:AddButton({
-           Title = "Auto Win",
-           Description = "Self Explained",
+           Title = "ESP Monster",
+           Description = "See Where's The Monster At",
            Callback = function()
                repeat task.wait(0.1) until game:IsLoaded()
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -505,10 +505,9 @@ local Color = Color3.fromRGB(255, 0, 0)
 
 RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
 
-                end
-                }
-            end
-         })
+
+        end
+    end}) 
      
 
 
