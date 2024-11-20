@@ -501,7 +501,6 @@ local Color = Color3.fromRGB(255, 0, 0)
 RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
 
 
-        end
     end}) 
      
 
