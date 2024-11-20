@@ -396,7 +396,7 @@ JumpPowerSlider:SetValue(50) -- Set initial value
     Tabs.B1C1:AddSection("ESP")
 
     Tabs.B1C1:AddButton({
-           Title = "ESP Monster",
+           Title = "Monsters ESP",
            Description = "See Where's The Monster At",
            Callback = function()
     local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
@@ -502,7 +502,48 @@ RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
 
 
     end}) 
-     
+
+
+Tabs.B1C1:AddButton({
+           Title = "Item ESP",
+           Description = "See Where's The Item At",
+           Callback = function()
+           
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.Givers.Key1
+
+local Color = Color3.fromRGB(0, 255, 255)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+    
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.Givers.Key2
+
+local Color = Color3.fromRGB(0, 255, 255)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+    
+
+
+
+
+
+local RaelHubFunction = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raelhub/Rael-hub-function/refs/heads/main/function/RaelHubFunctionV2/script.txt"))()
+
+local Object = workspace.Givers.Key3
+
+local Color = Color3.fromRGB(0, 255, 255)
+
+RaelHubFunction.CreateEspDistance(Object, Color, Object.Name, true)
+    
+
+
+end})
+
 
 
 
