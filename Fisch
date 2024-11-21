@@ -7,7 +7,7 @@ local ProtectPremium = true
 
 repeat task.wait(0.25) until game:IsLoaded();
 getgenv().Image = "rbxassetid://14670814118"; --put a asset id in here to make it work
-getgenv().ToggleUI = "E" -- This where you can Toggle the Fluent ui library
+getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
 
 task.spawn(function()
     if not getgenv().LoadedMobileUI == true then getgenv().LoadedMobileUI = true
@@ -76,11 +76,11 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Fisch | Space Hub",
-    SubTitle = "v1.6",
+    Title = "Fisch ",
+    SubTitle = "By Pann",
     TabWidth = 150,
     Size = UDim2.fromOffset(600, 400),
-    Acrylic = false,
+    Acrylic = true,
     Theme = "Darker",
     MinimizeKey = Enum.KeyCode.LeftControl
 })
@@ -98,6 +98,8 @@ local Tabs = {
 }
 
 local Options = Fluent.Options
+
+do
 
 local teleportSpots = {
     altar = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
