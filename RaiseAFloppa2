@@ -31,7 +31,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 
 local Window = Fluent:CreateWindow({
-    Title = "The Mimic ",
+    Title = "Raise A Floopa 2 ",
     SubTitle = "By Pann",
     TabWidth = 160,
     Size = UDim2.fromOffset(480, 320),
@@ -40,5 +40,7 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
-local Tabs = {
+local Tabs = { 
+      MAIN = Window:AddTab({ Title = "Main", Icon = "" })
+}
 
