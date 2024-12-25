@@ -1,37 +1,37 @@
-repeat task.wait(0.25) until game:IsLoaded();
-getgenv().Image = "rbxassetid://14670814118"; --put a asset id in here to make it work
+repeat task.wait(0.25) until game:IsLoaded()
+getgenv().Image = "rbxassetid://14670814118" --put a asset id in here to make it work
 getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
 
 task.spawn(function()
     if not getgenv().LoadedMobileUI == true then getgenv().LoadedMobileUI = true
-        local OpenUI = Instance.new("ScreenGui");
-        local ImageButton = Instance.new("ImageButton");
-        local UICorner = Instance.new("UICorner");
-        OpenUI.Name = "OpenUI";
-        OpenUI.Parent = game:GetService("CoreGui");
-        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-        ImageButton.Parent = OpenUI;
-        ImageButton.BackgroundColor3 = Color3.fromRGB(105,105,105);
+        local OpenUI = Instance.new("ScreenGui")
+        local ImageButton = Instance.new("ImageButton")
+        local UICorner = Instance.new("UICorner")
+        OpenUI.Name = "OpenUI"
+        OpenUI.Parent = game:GetService("CoreGui")
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ImageButton.Parent = OpenUI
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
         ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0.9,0,0.1,0);
-        ImageButton.Size = UDim2.new(0,50,0,50);
-        ImageButton.Image = getgenv().Image;
-        ImageButton.Draggable = true;
-        ImageButton.Transparency = 1;
-        UICorner.CornerRadius = UDim.new(0,200);
-        UICorner.Parent = ImageButton;
+        ImageButton.Position = UDim2.new(0.9, 0, 0.1, 0)
+        ImageButton.Size = UDim2.new(0, 50, 0, 50)
+        ImageButton.Image = getgenv().Image
+        ImageButton.Draggable = true
+        ImageButton.Transparency = 1
+        UICorner.CornerRadius = UDim.new(0, 200)
+        UICorner.Parent = ImageButton
         ImageButton.MouseButton1Click:Connect(function()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,getgenv().ToggleUI,false,game);
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
         end)
     end
 end)
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
-
 local Window = Fluent:CreateWindow({
-    Title = "Raise A Floopa 2 ",
+    Title = "Raise A Floppa 2 ",
     SubTitle = "By Pann",
     TabWidth = 160,
     Size = UDim2.fromOffset(480, 320),
@@ -41,6 +41,112 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = { 
-      MAIN = Window:AddTab({ Title = "Main", Icon = "" })
+      MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
+      Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
+      Misc = Window:AddTab({ Title = "Misc", Icon = ""})
 }
 
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Notification",
+        Content = "Script Is Loaded :3",
+        SubContent = "Meow!!!", -- Optional
+        Duration = 5 -- Set to nil to make the notification not disappear
+    })
+end
+
+Tabs.Auto:AddButton({
+    Title = "Active Meteorite Magnet",
+    Description = "Activate Meteorite Magnet",
+    Callback = function()
+        -- Function to check if the Meteorite Magnet exists in the Unlocks folder
+        local function hasMeteoriteMagnet()
+            local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
+            return meteoriteMagnet ~= nil  -- If the item is found, return true, else false
+        end
+
+        -- Check if the Meteorite Magnet is in the Unlocks folder
+        if hasMeteoriteMagnet() then
+            -- Run your script if the Meteorite Magnet is present in the game world
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172, 
+                0.00980880763, -1.16323498e-07, -0.999951899, 
+                -1.84243714e-08, 1, -1.16509824e-07, 
+                0.999951899, 1.95663077e-08, 0.00980880763)
+
+            wait(1)
+            keypress(0x45)  -- Press "E" key (0x45 is the key code for "E")
+
+            wait(2)
+
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289, 
+                0.202494681, 6.47286535e-09, -0.979283392, 
+                3.61657726e-08, 1, 1.40880996e-08, 
+                0.979283392, -3.82693059e-08, 0.202494681)
+        else
+            Fluent:Notify({
+                Title = "Purchased Required",
+                Content = "Players doesn't purchase meteorite magnet yet",
+                SubContent = "You need to purchase meteorite magnet to use it 😡", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        end
+    end
+})
+
+Tabs.Misc:AddButton({
+    Title = "Players ESP",
+    Description = "Self Explained (Can't be toggle because im lazy to makeit)",
+    Callback = function()
+        local FillColor = Color3.fromRGB(175,25,255)
+        local DepthMode = "AlwaysOnTop"
+        local FillTransparency = 0.5
+        local OutlineColor = Color3.fromRGB(255,255,255)
+        local OutlineTransparency = 0
+
+        local CoreGui = game:FindService("CoreGui")
+        local Players = game:FindService("Players")
+        local lp = Players.LocalPlayer
+        local connections = {}
+
+        local Storage = Instance.new("Folder")
+        Storage.Parent = CoreGui
+        Storage.Name = "Highlight_Storage"
+
+        local function Highlight(plr)
+            local Highlight = Instance.new("Highlight")
+            Highlight.Name = plr.Name
+            Highlight.FillColor = FillColor
+            Highlight.DepthMode = DepthMode
+            Highlight.FillTransparency = FillTransparency
+            Highlight.OutlineColor = OutlineColor
+            Highlight.OutlineTransparency = 0
+            Highlight.Parent = Storage
+
+            local plrchar = plr.Character
+            if plrchar then
+                Highlight.Adornee = plrchar
+            end
+
+            connections[plr] = plr.CharacterAdded:Connect(function(char)
+                Highlight.Adornee = char
+            end)
+        end
+
+        Players.PlayerAdded:Connect(Highlight)
+        for i,v in next, Players:GetPlayers() do
+            Highlight(v)
+        end
+
+        Players.PlayerRemoving:Connect(function(plr)
+            local plrname = plr.Name
+            if Storage[plrname] then
+                Storage[plrname]:Destroy()
+            end
+            if connections[plr] then
+                connections[plr]:Disconnect()
+            end
+        end)
+    end
+})
