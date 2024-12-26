@@ -57,14 +57,14 @@ do
     })
 end
 
--- Meteorite Magnet Toggle in the Auto tab
+
+-- Meteorite Magnet Button in the Auto tab
 local magnetCooldown = 0 -- Start with no cooldown
 local magnetActivated = false -- To track if the magnet is activated or not
 
-Tabs.Auto:AddToggle({
+Tabs.Auto:AddButton({
     Title = "Activate Meteorite Magnet",
     Description = "Activate Meteorite Magnet if purchased",
-    Default = false,
     Callback = function()
         -- Function to check if Meteorite Magnet has been purchased
         local function hasMeteoriteMagnet()
@@ -80,7 +80,7 @@ Tabs.Auto:AddToggle({
             0.999951899, 1.95663077e-08, 0.00980880763
         )
 
-        -- Function to teleport
+        -- Function to teleport and activate the magnet
         local function teleportToTargetAndActivateMagnet()
             -- Save the original position
             local player = game.Players.LocalPlayer
@@ -107,12 +107,6 @@ Tabs.Auto:AddToggle({
         if hasMeteoriteMagnet() then
             if not magnetActivated then
                 teleportToTargetAndActivateMagnet()
-            else
-                Fluent:Notify({
-                    Title = "Already Activated",
-                    Content = "The Meteorite Magnet is already activated.",
-                    Duration = 5
-                })
             end
         else
             Fluent:Notify({
@@ -126,34 +120,34 @@ Tabs.Auto:AddToggle({
 })
 
 
--- DJ El Gato Toggle in the Auto tab with cooldown reset after 500 seconds
-local cooldown = false  -- Variable to track cooldown state
 
-Tabs.Auto:AddToggle({
-    Title = "Activate DJ El Gato",
-    Description = "Toggle to activate DJ El Gato if purchased",
+
+-- Auto Activate DJ El Gato Toggle
+local elGatoEnabled = false
+local elGatoCooldown = 500 -- Set cooldown for 500 seconds
+local elGatoActivated = false -- To track if DJ El Gato has been activated
+
+-- Updated CFrame for DJ El Gato's position
+local targetElGatoCFrame = CFrame.new(
+    -82.4485168, 72.5479126, -42.0264435, 
+    1.257658e-05, 0.258770257, 0.965939045, 
+    1.66893005e-06, -0.965939164, 0.258770257, 
+    1.00000012, -1.66893005e-06, -1.28746033e-05
+)
+
+local ToggleElGato = Tabs.Misc:AddToggle({
+    Title = "Toggle DJ El Gato",
     Default = false,
     Callback = function()
+        elGatoEnabled = not elGatoEnabled -- Toggle El Gato on or off
+
         -- Function to check if DJ El Gato has been purchased
         local function hasDJElGato()
-            local djElGato = workspace.Unlocks:FindFirstChild("DJ El Gato")  -- Check if DJ El Gato exists in Unlocks
-            if djElGato then
-                return djElGato:FindFirstChild("El Gato") ~= nil -- Check if "El Gato" is a child of "DJ El Gato"
-            end
-            return false
+            return workspace.Unlocks:FindFirstChild("DJ El Gato") ~= nil -- Directly check if DJ El Gato exists in Unlocks
         end
 
-        -- Target CFrame (the location you want to teleport to)
-        local targetCFrame = CFrame.new(
-            -82.1784973, 76.0159607, -42.4872131, 
-            0.0907001048, 2.21604068e-08, 0.995878279, 
-            5.93437743e-09, 1, -2.27926016e-08, 
-            -0.995878279, 7.97720912e-09, 0.0907001048
-        )
-
-        -- Function to teleport
-        local function teleportToTargetAndBack()
-            -- Save the original position
+        -- Function to teleport and activate El Gato
+        local function teleportToTargetAndActivateElGato()
             local player = game.Players.LocalPlayer
             local character = player.Character or player.CharacterAdded:Wait()
             local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -162,75 +156,80 @@ Tabs.Auto:AddToggle({
             local originalCFrame = humanoidRootPart.CFrame
 
             -- Teleport to the target position
-            humanoidRootPart.CFrame = targetCFrame
-
+            humanoidRootPart.CFrame = targetElGatoCFrame
             wait(1)
 
-            keypress(0x45) -- Simulate pressing "E"
-            wait(2)
+            keypress(0x45) -- Simulate pressing "E" to activate DJ El Gato
+            elGatoActivated = true -- Set DJ El Gato as activated
+            elGatoCooldown = 500 -- Set cooldown for 500 seconds
 
-            -- Teleport back to the original position
+            -- Wait and then teleport back to the original position
+            wait(2)
             humanoidRootPart.CFrame = originalCFrame
         end
 
-        -- Main function to check and execute teleport if toggle is on
-        if Toggle.Value then
-            -- Only execute if DJ El Gato is purchased and cooldown is over
+        -- Main toggle function
+        if elGatoEnabled then
             if hasDJElGato() then
-                if not cooldown then
-                    teleportToTargetAndBack()
-
-                    -- Start cooldown for 500 seconds
-                    cooldown = true
-
-                    -- Cooldown timer
-                    wait(500)
-                    cooldown = false
+                if elGatoCooldown <= 0 then
+                    teleportToTargetAndActivateElGato()
                 end
+            else
+                Fluent:Notify({
+                    Title = "DJ El Gato Required",
+                    Content = "You need to purchase DJ El Gato to use it!",
+                    SubContent = "Please purchase DJ El Gato from the store to enable the feature.",
+                    Duration = 5
+                })
             end
         else
-            Fluent:Notify({
-                Title = "El Gato Required",
-                Content = "DJ El Gato or El Gato has not been purchased.",
-                SubContent = "You need to purchase DJ El Gato to use it!",
-                Duration = 5
-            })
+            -- If toggle is turned off, do nothing
+            elGatoActivated = false
         end
     end
 })
 
+-- Cooldown timer for DJ El Gato
+game:GetService("RunService").Heartbeat:Connect(function()
+    if elGatoCooldown > 0 then
+        elGatoCooldown = elGatoCooldown - 1 -- Reduce the cooldown over time
+    end
+end)
 
 
 
-local espEnabled = false -- Variable to track if ESP is enabled or not
-local highlightStorage = nil -- Folder to store highlights
 
-Tabs.Misc:AddToggle({
+
+
+
+
+-- Player ESP Toggle
+local espEnabled = false
+local highlightStorage = nil
+
+local ToggleESP = Tabs.Misc:AddToggle({
     Title = "Toggle Players ESP",
     Default = false,
     Callback = function()
         espEnabled = not espEnabled -- Toggle the ESP on or off
 
         if espEnabled then
-            -- Enable Player ESP
-            local FillColor = Color3.fromRGB(175, 25, 255)
+            local FillColor = Color3.fromRGB(0, 255, 0)  -- Green color for fill
             local DepthMode = "AlwaysOnTop"
             local FillTransparency = 0.5
-            local OutlineColor = Color3.fromRGB(255, 255, 255)
+            local OutlineColor = Color3.fromRGB(255, 255, 255)  -- White color for outline
             local OutlineTransparency = 0
 
             local CoreGui = game:FindService("CoreGui")
             local Players = game:FindService("Players")
             local connections = {}
 
-            -- Create the folder to store highlights
             if not highlightStorage then
                 highlightStorage = Instance.new("Folder")
                 highlightStorage.Parent = CoreGui
                 highlightStorage.Name = "Highlight_Storage"
             end
 
-            -- Function to highlight a player
             local function Highlight(plr)
                 local Highlight = Instance.new("Highlight")
                 Highlight.Name = plr.Name
@@ -251,15 +250,12 @@ Tabs.Misc:AddToggle({
                 end)
             end
 
-            -- Highlight players already in the game
             for _, plr in next, Players:GetPlayers() do
                 Highlight(plr)
             end
 
-            -- Connect to the event when a new player joins
             Players.PlayerAdded:Connect(Highlight)
 
-            -- Handle player removal
             Players.PlayerRemoving:Connect(function(plr)
                 local plrname = plr.Name
                 if highlightStorage[plrname] then
@@ -270,7 +266,6 @@ Tabs.Misc:AddToggle({
                 end
             end)
         else
-            -- Disable Player ESP by removing all highlights
             if highlightStorage then
                 highlightStorage:ClearAllChildren()
             end
