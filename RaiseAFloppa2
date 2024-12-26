@@ -69,27 +69,32 @@ Tabs.Auto:AddButton({
 
         -- Check if the Meteorite Magnet is in the Unlocks folder
         if hasMeteoriteMagnet() then
-            -- Run your script if the Meteorite Magnet is present in the game world
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172, 
+            -- Save the player's original position
+            local originalCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+            -- Teleport to Meteorite Magnet's location
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                -46.8612709, 153.73613, -41.5506172, 
                 0.00980880763, -1.16323498e-07, -0.999951899, 
                 -1.84243714e-08, 1, -1.16509824e-07, 
-                0.999951899, 1.95663077e-08, 0.00980880763)
+                0.999951899, 1.95663077e-08, 0.00980880763
+            )
 
             wait(1)
+
+            -- Simulate keypress for "E"
             keypress(0x45)  -- Press "E" key (0x45 is the key code for "E")
 
             wait(2)
 
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289, 
-                0.202494681, 6.47286535e-09, -0.979283392, 
-                3.61657726e-08, 1, 1.40880996e-08, 
-                0.979283392, -3.82693059e-08, 0.202494681)
+            -- Teleport back to the original position
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originalCFrame
         else
             Fluent:Notify({
-                Title = "Purchased Required",
-                Content = "Players doesn't purchase meteorite magnet yet",
-                SubContent = "You need to purchase meteorite magnet to use it 😡", -- Optional
-                Duration = 5 -- Set to nil to make the notification not disappear
+                Title = "Purchase Required",
+                Content = "Player hasn't purchased Meteorite Magnet yet.",
+                SubContent = "You need to purchase Meteorite Magnet to use this functionality 😡",
+                Duration = 5  -- Set to nil to make the notification not disappear
             })
         end
     end
