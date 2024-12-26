@@ -64,33 +64,33 @@ Tabs.Auto:AddButton({
     Description = "Activate Meteorite Magnet if purchased",
     Callback = function()
         local function hasMeteoriteMagnet()
-    local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
-    return meteoriteMagnet ~= nil
-end
+            local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
+            return meteoriteMagnet ~= nil
+        end
 
-if hasMeteoriteMagnet() then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172)
-    wait(1)
-    keypress(0x45)  -- Simulate pressing "E" (key code for "E")
-    wait(2)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289)
-    Fluent:Notify({
-        Title = "Notifications",
-        Content = "Stay in the house",
-        SubContent = "Please stay in the house or you will be explode 👽",
-        Duration = 5
-    })  -- Close the notify function here
-else
-    Fluent:Notify({
-        Title = "Purchased Required",
-        Content = "Players doesn't purchase meteorite magnet yet",
-        SubContent = "You need to purchase meteorite magnet to use it 😡",
-        Duration = 5
-    })
+        if hasMeteoriteMagnet() then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172)
+            wait(1)
+            keypress(0x45)  -- Simulate pressing "E" (key code for "E")
+            wait(2)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289)
+            Fluent:Notify({
+                Title = "Notifications",
+                Content = "Stay in the house",
+                SubContent = "Please stay in the house or you will be explode 👽",
+                Duration = 5
+            })
+        else
+            Fluent:Notify({
+                Title = "Purchased Required",
+                Content = "Players doesn't purchase meteorite magnet yet",
+                SubContent = "You need to purchase meteorite magnet to use it 😡",
+                Duration = 5
+            })
         end
     end
-   })
 })
+
 
 
 
