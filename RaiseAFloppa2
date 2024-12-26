@@ -233,7 +233,7 @@ end)
 
 
 local ToggleESP = Tabs.Misc:AddToggle("Players ESP", {
-    Title = "Toggle Players ESP",
+    Title = "Players ESP",
     Default = false,
 })
 
@@ -326,7 +326,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instance Proximity Prompt", Default = false})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
@@ -364,7 +364,7 @@ end
 
 
 -- Add toggle to the UI
-local Toggle = Tabs.Misc:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+local Toggle = Tabs.Misc:AddToggle("FullbrightToggle", { Title = "Fullbright", Default = false })
 
 -- Handle toggle state changes
 Toggle:OnChanged(function()
