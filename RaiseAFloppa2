@@ -58,65 +58,38 @@ do
 end
 
 
--- Meteorite Magnet Button in the Auto tab
-local magnetCooldown = 0 -- Start with no cooldown
-local magnetActivated = false -- To track if the magnet is activated or not
 
 Tabs.Auto:AddButton({
     Title = "Activate Meteorite Magnet",
     Description = "Activate Meteorite Magnet if purchased",
     Callback = function()
-        -- Function to check if Meteorite Magnet has been purchased
         local function hasMeteoriteMagnet()
-            local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet exists in Unlocks
-            return meteoriteMagnet ~= nil  -- If the item is found, return true, else false
-        end
+    local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
+    return meteoriteMagnet ~= nil
+end
 
-        -- Target CFrame (the location you want to teleport to)
-        local targetCFrame = CFrame.new(
-            -46.8612709, 153.73613, -41.5506172, 
-            0.00980880763, -1.16323498e-07, -0.999951899, 
-            -1.84243714e-08, 1, -1.16509824e-07, 
-            0.999951899, 1.95663077e-08, 0.00980880763
-        )
-
-        -- Function to teleport and activate the magnet
-        local function teleportToTargetAndActivateMagnet()
-            -- Save the original position
-            local player = game.Players.LocalPlayer
-            local character = player.Character or player.CharacterAdded:Wait()
-            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-            -- Save the original position
-            local originalCFrame = humanoidRootPart.CFrame
-
-            -- Teleport to the target position
-            humanoidRootPart.CFrame = targetCFrame
-
-            wait(1)
-
-            keypress(0x45) -- Simulate pressing "E"
-            magnetActivated = true -- Set magnet as activated
-
-            -- Wait and then teleport back to the original position
-            wait(2)
-            humanoidRootPart.CFrame = originalCFrame
-        end
-
-        -- Main function to check and execute teleport and activation
-        if hasMeteoriteMagnet() then
-            if not magnetActivated then
-                teleportToTargetAndActivateMagnet()
-            end
-        else
-            Fluent:Notify({
-                Title = "Meteorite Magnet Required",
-                Content = "Meteorite Magnet has not been purchased.",
-                SubContent = "You need to purchase Meteorite Magnet to use it!",
-                Duration = 5
-            })
+if hasMeteoriteMagnet() then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172)
+    wait(1)
+    keypress(0x45)  -- Simulate pressing "E" (key code for "E")
+    wait(2)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289)
+    Fluent:Notify({
+        Title = "Notifications",
+        Content = "Stay in the house",
+        SubContent = "Please stay in the house or you will be explode 👽",
+        Duration = 5
+    })  -- Close the notify function here
+else
+    Fluent:Notify({
+        Title = "Purchased Required",
+        Content = "Players doesn't purchase meteorite magnet yet",
+        SubContent = "You need to purchase meteorite magnet to use it 😡",
+        Duration = 5
+    })
         end
     end
+   })
 })
 
 
