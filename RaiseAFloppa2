@@ -96,74 +96,48 @@ Tabs.Auto:AddButton({
 
 
 
--- DJ El Gato Toggle
-local elGatoEnabled = false
-local elGatoCooldown = 500 -- Cooldown in seconds
-local lastActivated = 0
-local targetElGatoCFrame = CFrame.new(-82.4485168, 72.5479126, -42.0264435, 1.257658e-05, 0.258770257, 0.965939045, 1.66893005e-06, -0.965939164, 0.258770257, 1.00000012, -1.66893005e-06, -1.28746033e-05)
+Tabs.Auto:AddButton({
+    Title = "Activate DJ Gato Party",
+    Description = "Party Time 🎵",
+    Callback = function()
+    local function hasElgatoDJ()
+    local DJgato = workspace.Unlocks:FindFirstChild("DJ El Gato")
+    return DJgato ~= nil
+end
 
-local ToggleElGato = Tabs.Auto:AddToggle("Auto Activate DJ El Gato", {
-    Title = "Toggle DJ El Gato",
-    Default = false,
-})
+if hasElgatoDJ() then
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-ToggleElGato:OnChanged(function()
-    elGatoEnabled = ToggleElGato.Value -- Get the current toggle state
+    local targetCFrame = CFrame.new(-79.3476028, 73.4000092, -43.5470314, 0.556764364, 7.39641877e-08, 0.830670476, -7.88125618e-08, 1, -3.62167221e-08, -0.830670476, -4.53030893e-08, 0.556764364)
+    -- Save the original position
+    local originalCFrame = humanoidRootPart.CFrame
 
-    -- Function to check if DJ El Gato has been purchased
-    local function hasDJElGato()
-        local djElGato = workspace.Unlocks:FindFirstChild("DJ El Gato")
-        return djElGato and djElGato:FindFirstChild("El Gato") ~= nil
-    end
+    -- Teleport to the target position
+    humanoidRootPart.CFrame = targetCFrame
+    wait(1)
+    keypress(0x45)  -- Simulate pressing "E" (key code for "E")
+    wait(2)
+    -- Teleport back to the original position
+    humanoidRootPart.CFrame = originalCFrame
 
-    -- If the player has not purchased DJ El Gato, turn off the toggle automatically
-    if not hasDJElGato() then
-        ToggleElGato:SetValue(false)
-        Fluent:Notify({
-            Title = "DJ El Gato Required",
-            Content = "You need to purchase DJ El Gato to use it!",
-            Duration = 5
-        })
-        return
-    end
-
-    -- Handle the cooldown for DJ El Gato
-    if elGatoEnabled then
-        local currentTime = tick()
-        if currentTime - lastActivated >= elGatoCooldown then
-            lastActivated = currentTime
-
-            -- Function to teleport and activate El Gato
-            local function teleportToTargetAndActivateElGato()
-                local player = game.Players.LocalPlayer
-                local character = player.Character or player.CharacterAdded:Wait()
-                local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-                -- Save the original position
-                local originalCFrame = humanoidRootPart.CFrame
-
-                -- Teleport to the target position
-                humanoidRootPart.CFrame = targetElGatoCFrame
-                wait(1)
-
-                keypress(0x45) -- Simulate pressing "E"
-                wait(2)
-
-                -- Teleport back to the original position
-                humanoidRootPart.CFrame = originalCFrame
-            end
-
-            teleportToTargetAndActivateElGato()
-        else
-            Fluent:Notify({
-                Title = "Cooldown Active",
-                Content = "DJ El Gato is still on cooldown.",
-                Duration = 5
-            })
-            ToggleElGato:SetValue(false) -- Turn off the toggle if the cooldown is active
-        end
-    end
-end)
+    -- Notify the player
+    Fluent:Notify({
+        Title = "Notifications",
+        Content = "Party Time",
+        SubContent = "It's party time 🤑🤑",
+        Duration = 5
+    })
+else
+    Fluent:Notify({
+        Title = "Purchased Required",
+        Content = "Player hasn't purchased DJ El Gato yet",
+        SubContent = "You need to purchase DJ El Gato to use it 😡",
+        Duration = 5
+    })
+end
+    
 
 
 
