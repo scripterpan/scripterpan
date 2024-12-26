@@ -95,6 +95,72 @@ Tabs.Auto:AddButton({
     end
 })
 
+-- DJ El Gato Script in the Auto tab
+Tabs.Auto:AddButton({
+    Title = "Activate DJ El Gato",
+    Description = "Activate DJ El Gato if purchased",
+    Callback = function()
+        -- Function to check if DJ El Gato has been purchased
+        local function hasDJElGato()
+            local djElGato = workspace.Unlocks:FindFirstChild("DJ El Gato")  -- Check if DJ El Gato exists in Unlocks
+            if djElGato then
+                return djElGato:FindFirstChild("El Gato") ~= nil -- Check if "El Gato" is a child of "DJ El Gato"
+            end
+            return false
+        end
+
+        -- Target CFrame (the location you want to teleport to)
+        local targetCFrame = CFrame.new(
+            -82.1784973, 76.0159607, -42.4872131, 
+            0.0907001048, 2.21604068e-08, 0.995878279, 
+            5.93437743e-09, 1, -2.27926016e-08, 
+            -0.995878279, 7.97720912e-09, 0.0907001048
+        )
+
+        -- Function to teleport
+        local function teleportToTargetAndBack()
+            -- Save the original position
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+            -- Save the original position
+            local originalCFrame = humanoidRootPart.CFrame
+
+            -- Teleport to the target position
+            humanoidRootPart.CFrame = targetCFrame
+
+            wait(1)
+
+            keypress(0x45) -- Simulate pressing "E"
+            wait(2)
+
+            -- Teleport back to the original position
+            humanoidRootPart.CFrame = originalCFrame
+        end
+
+        -- Main function to check and execute teleport
+        if hasDJElGato() then
+            teleportToTargetAndBack()
+            Fluent:Notify({
+                Title = "Action Executed",
+                Content = "You have teleported and pressed 'E'.",
+                Duration = 5
+            })
+        else
+            Fluent:Notify({
+                Title = "El Gato Required",
+                Content = "DJ El Gato or El Gato has not been purchased.",
+                SubContent = "You need to purchase DJ El Gato to use it!",
+                Duration = 5
+            })
+        end
+    end
+})
+
+
+
+
 Tabs.Misc:AddButton({
     Title = "Players ESP",
     Description = "Self Explained (Can't be toggle because im lazy to makeit)",
