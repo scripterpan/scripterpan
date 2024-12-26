@@ -147,11 +147,7 @@ Tabs.Auto:AddButton({
         -- Main function to check and execute teleport
         if hasDJElGato() then
             teleportToTargetAndBack()
-            Fluent:Notify({
-                Title = "Action Executed",
-                Content = "You have teleported and pressed 'E'.",
-                Duration = 5
-            })
+            
         else
             Fluent:Notify({
                 Title = "El Gato Required",
