@@ -57,49 +57,73 @@ do
     })
 end
 
-Tabs.Auto:AddButton({
-    Title = "Active Meteorite Magnet",
-    Description = "Activate Meteorite Magnet",
+-- Meteorite Magnet Toggle in the Auto tab
+local magnetCooldown = 0 -- Start with no cooldown
+local magnetActivated = false -- To track if the magnet is activated or not
+
+Tabs.Auto:AddToggle({
+    Title = "Activate Meteorite Magnet",
+    Description = "Activate Meteorite Magnet if purchased",
+    Default = false,
     Callback = function()
-        -- Function to check if the Meteorite Magnet exists in the Unlocks folder
+        -- Function to check if Meteorite Magnet has been purchased
         local function hasMeteoriteMagnet()
-            local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
+            local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet exists in Unlocks
             return meteoriteMagnet ~= nil  -- If the item is found, return true, else false
         end
 
-        -- Check if the Meteorite Magnet is in the Unlocks folder
-        if hasMeteoriteMagnet() then
-            -- Save the player's original position
-            local originalCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        -- Target CFrame (the location you want to teleport to)
+        local targetCFrame = CFrame.new(
+            -46.8612709, 153.73613, -41.5506172, 
+            0.00980880763, -1.16323498e-07, -0.999951899, 
+            -1.84243714e-08, 1, -1.16509824e-07, 
+            0.999951899, 1.95663077e-08, 0.00980880763
+        )
 
-            -- Teleport to Meteorite Magnet's location
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                -46.8612709, 153.73613, -41.5506172, 
-                0.00980880763, -1.16323498e-07, -0.999951899, 
-                -1.84243714e-08, 1, -1.16509824e-07, 
-                0.999951899, 1.95663077e-08, 0.00980880763
-            )
+        -- Function to teleport
+        local function teleportToTargetAndActivateMagnet()
+            -- Save the original position
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+            -- Save the original position
+            local originalCFrame = humanoidRootPart.CFrame
+
+            -- Teleport to the target position
+            humanoidRootPart.CFrame = targetCFrame
 
             wait(1)
 
-            -- Simulate keypress for "E"
-            keypress(0x45)  -- Press "E" key (0x45 is the key code for "E")
+            keypress(0x45) -- Simulate pressing "E"
+            magnetActivated = true -- Set magnet as activated
 
+            -- Wait and then teleport back to the original position
             wait(2)
+            humanoidRootPart.CFrame = originalCFrame
+        end
 
-            -- Teleport back to the original position
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originalCFrame
+        -- Main function to check and execute teleport and activation
+        if hasMeteoriteMagnet() then
+            if not magnetActivated then
+                teleportToTargetAndActivateMagnet()
+            else
+                Fluent:Notify({
+                    Title = "Already Activated",
+                    Content = "The Meteorite Magnet is already activated.",
+                    Duration = 5
+                })
+            end
         else
             Fluent:Notify({
-                Title = "Purchase Required",
-                Content = "Player hasn't purchased Meteorite Magnet yet.",
-                SubContent = "You need to purchase Meteorite Magnet to use this functionality 😡",
-                Duration = 5  -- Set to nil to make the notification not disappear
+                Title = "Meteorite Magnet Required",
+                Content = "Meteorite Magnet has not been purchased.",
+                SubContent = "You need to purchase Meteorite Magnet to use it!",
+                Duration = 5
             })
         end
     end
 })
-
 
 
 -- DJ El Gato Toggle in the Auto tab with cooldown reset after 500 seconds
