@@ -95,49 +95,54 @@ Tabs.Auto:AddButton({
 
 
 
-
 Tabs.Auto:AddButton({
     Title = "Activate DJ Gato Party",
     Description = "Party Time 🎵",
     Callback = function()
-    local function hasElgatoDJ()
-    local DJgato = workspace.Unlocks:FindFirstChild("DJ El Gato")
-    return DJgato ~= nil
-end
+        local function hasElgatoDJ()
+            local DJgato = workspace.Unlocks:FindFirstChild("DJ El Gato")
+            return DJgato ~= nil
+        end
 
-if hasElgatoDJ() then
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        if hasElgatoDJ() then
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-    local targetCFrame = CFrame.new(-79.3476028, 73.4000092, -43.5470314, 0.556764364, 7.39641877e-08, 0.830670476, -7.88125618e-08, 1, -3.62167221e-08, -0.830670476, -4.53030893e-08, 0.556764364)
-    -- Save the original position
-    local originalCFrame = humanoidRootPart.CFrame
+            local targetCFrame = CFrame.new(-79.3476028, 73.4000092, -43.5470314, 0.556764364, 7.39641877e-08, 0.830670476, -7.88125618e-08, 1, -3.62167221e-08, -0.830670476, -4.53030893e-08, 0.556764364)
+            -- Save the original position
+            local originalCFrame = humanoidRootPart.CFrame
 
-    -- Teleport to the target position
-    humanoidRootPart.CFrame = targetCFrame
-    wait(1)
-    keypress(0x45)  -- Simulate pressing "E" (key code for "E")
-    wait(2)
-    -- Teleport back to the original position
-    humanoidRootPart.CFrame = originalCFrame
+            -- Teleport to the target position
+            humanoidRootPart.CFrame = targetCFrame
+            wait(1)
+            keypress(0x45)  -- Simulate pressing "E" (key code for "E"))
+            wait(2)
+            -- Teleport back to the original position
+            humanoidRootPart.CFrame = originalCFrame
 
-    -- Notify the player
-    Fluent:Notify({
-        Title = "Notifications",
-        Content = "Party Time",
-        SubContent = "It's party time 🤑🤑",
-        Duration = 5
-    })
-else
-    Fluent:Notify({
-        Title = "Purchased Required",
-        Content = "Player hasn't purchased DJ El Gato yet",
-        SubContent = "You need to purchase DJ El Gato to use it 😡",
-        Duration = 5
-    })
-end
-    
+            -- Notify the player
+            Fluent:Notify({
+                Title = "Notifications",
+                Content = "Party Time",
+                SubContent = "It's party time 🤑🤑",
+                Duration = 5
+            })
+        else
+            Fluent:Notify({
+                Title = "Purchased Required",
+                Content = "Player hasn't purchased DJ El Gato yet",
+                SubContent = "You need to purchase DJ El Gato to use it 😡",
+                Duration = 5
+            })
+        end
+    end
+})
+
+
+
+
+
 
 
 
