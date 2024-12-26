@@ -143,7 +143,7 @@ Tabs.Auto:AddButton({
 
 -- Teleport to Gold item and return to the original position when the toggle is on
 
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (From scratching post", Default = false })
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Toggle Gold Teleport", Default = false })
 
 Toggle:OnChanged(function()
     if Toggle.Value then
