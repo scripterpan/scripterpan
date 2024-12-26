@@ -122,156 +122,148 @@ Tabs.Auto:AddButton({
 
 
 
--- Auto Activate DJ El Gato Toggle
+
+-- DJ El Gato Toggle
 local elGatoEnabled = false
-local elGatoCooldown = 500 -- Set cooldown for 500 seconds
-local elGatoActivated = false -- To track if DJ El Gato has been activated
+local elGatoCooldown = 500 -- Cooldown in seconds
+local lastActivated = 0
+local targetElGatoCFrame = CFrame.new(-82.4485168, 72.5479126, -42.0264435, 1.257658e-05, 0.258770257, 0.965939045, 1.66893005e-06, -0.965939164, 0.258770257, 1.00000012, -1.66893005e-06, -1.28746033e-05)
 
--- Updated CFrame for DJ El Gato's position
-local targetElGatoCFrame = CFrame.new(
-    -82.4485168, 72.5479126, -42.0264435, 
-    1.257658e-05, 0.258770257, 0.965939045, 
-    1.66893005e-06, -0.965939164, 0.258770257, 
-    1.00000012, -1.66893005e-06, -1.28746033e-05
-)
-
-local ToggleElGato = Tabs.Misc:AddToggle({
+local ToggleElGato = Tabs.Main:AddToggle("Toggle DJ El Gato", {
     Title = "Toggle DJ El Gato",
     Default = false,
-    Callback = function()
-        elGatoEnabled = not elGatoEnabled -- Toggle El Gato on or off
-
-        -- Function to check if DJ El Gato has been purchased
-        local function hasDJElGato()
-            return workspace.Unlocks:FindFirstChild("DJ El Gato") ~= nil -- Directly check if DJ El Gato exists in Unlocks
-        end
-
-        -- Function to teleport and activate El Gato
-        local function teleportToTargetAndActivateElGato()
-            local player = game.Players.LocalPlayer
-            local character = player.Character or player.CharacterAdded:Wait()
-            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-            -- Save the original position
-            local originalCFrame = humanoidRootPart.CFrame
-
-            -- Teleport to the target position
-            humanoidRootPart.CFrame = targetElGatoCFrame
-            wait(1)
-
-            keypress(0x45) -- Simulate pressing "E" to activate DJ El Gato
-            elGatoActivated = true -- Set DJ El Gato as activated
-            elGatoCooldown = 500 -- Set cooldown for 500 seconds
-
-            -- Wait and then teleport back to the original position
-            wait(2)
-            humanoidRootPart.CFrame = originalCFrame
-        end
-
-        -- Main toggle function
-        if elGatoEnabled then
-            if hasDJElGato() then
-                if elGatoCooldown <= 0 then
-                    teleportToTargetAndActivateElGato()
-                end
-            else
-                Fluent:Notify({
-                    Title = "DJ El Gato Required",
-                    Content = "You need to purchase DJ El Gato to use it!",
-                    SubContent = "Please purchase DJ El Gato from the store to enable the feature.",
-                    Duration = 5
-                })
-            end
-        else
-            -- If toggle is turned off, do nothing
-            elGatoActivated = false
-        end
-    end
 })
 
--- Cooldown timer for DJ El Gato
-game:GetService("RunService").Heartbeat:Connect(function()
-    if elGatoCooldown > 0 then
-        elGatoCooldown = elGatoCooldown - 1 -- Reduce the cooldown over time
+ToggleElGato:OnChanged(function()
+    elGatoEnabled = ToggleElGato.Value -- Get the current toggle state
+
+    -- Function to check if DJ El Gato has been purchased
+    local function hasDJElGato()
+        local djElGato = workspace.Unlocks:FindFirstChild("DJ El Gato")
+        return djElGato and djElGato:FindFirstChild("El Gato") ~= nil
+    end
+
+    -- If the player has not purchased DJ El Gato, turn off the toggle automatically
+    if not hasDJElGato() then
+        ToggleElGato:SetValue(false)
+        Fluent:Notify({
+            Title = "DJ El Gato Required",
+            Content = "You need to purchase DJ El Gato to use it!",
+            Duration = 5
+        })
+        return
+    end
+
+    -- Handle the cooldown for DJ El Gato
+    if elGatoEnabled then
+        local currentTime = tick()
+        if currentTime - lastActivated >= elGatoCooldown then
+            lastActivated = currentTime
+
+            -- Function to teleport and activate El Gato
+            local function teleportToTargetAndActivateElGato()
+                local player = game.Players.LocalPlayer
+                local character = player.Character or player.CharacterAdded:Wait()
+                local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+                -- Save the original position
+                local originalCFrame = humanoidRootPart.CFrame
+
+                -- Teleport to the target position
+                humanoidRootPart.CFrame = targetElGatoCFrame
+                wait(1)
+
+                keypress(0x45) -- Simulate pressing "E"
+                wait(2)
+
+                -- Teleport back to the original position
+                humanoidRootPart.CFrame = originalCFrame
+            end
+
+            teleportToTargetAndActivateElGato()
+        else
+            Fluent:Notify({
+                Title = "Cooldown Active",
+                Content = "DJ El Gato is still on cooldown.",
+                Duration = 5
+            })
+            ToggleElGato:SetValue(false) -- Turn off the toggle if the cooldown is active
+        end
     end
 end)
 
 
 
 
-
-
-
-
--- Player ESP Toggle
-local espEnabled = false
-local highlightStorage = nil
-
-local ToggleESP = Tabs.Misc:AddToggle({
+local ToggleESP = Tabs.Main:AddToggle("Toggle Players ESP", {
     Title = "Toggle Players ESP",
     Default = false,
-    Callback = function()
-        espEnabled = not espEnabled -- Toggle the ESP on or off
+})
 
-        if espEnabled then
-            local FillColor = Color3.fromRGB(0, 255, 0)  -- Green color for fill
-            local DepthMode = "AlwaysOnTop"
-            local FillTransparency = 0.5
-            local OutlineColor = Color3.fromRGB(255, 255, 255)  -- White color for outline
-            local OutlineTransparency = 0
+ToggleESP:OnChanged(function()
+    local espEnabled = ToggleESP.Value -- Get the current toggle state
 
-            local CoreGui = game:FindService("CoreGui")
-            local Players = game:FindService("Players")
-            local connections = {}
+    if espEnabled then
+        local FillColor = Color3.fromRGB(0, 255, 0)  -- Green color for fill
+        local DepthMode = "AlwaysOnTop"
+        local FillTransparency = 0.5
+        local OutlineColor = Color3.fromRGB(255, 255, 255)  -- White color for outline
+        local OutlineTransparency = 0
 
-            if not highlightStorage then
-                highlightStorage = Instance.new("Folder")
-                highlightStorage.Parent = CoreGui
-                highlightStorage.Name = "Highlight_Storage"
+        local CoreGui = game:FindService("CoreGui")
+        local Players = game:FindService("Players")
+        local connections = {}
+
+        local highlightStorage = Instance.new("Folder")
+        highlightStorage.Parent = CoreGui
+        highlightStorage.Name = "Highlight_Storage"
+
+        local function Highlight(plr)
+            local Highlight = Instance.new("Highlight")
+            Highlight.Name = plr.Name
+            Highlight.FillColor = FillColor
+            Highlight.DepthMode = DepthMode
+            Highlight.FillTransparency = FillTransparency
+            Highlight.OutlineColor = OutlineColor
+            Highlight.OutlineTransparency = OutlineTransparency
+            Highlight.Parent = highlightStorage
+
+            local plrchar = plr.Character
+            if plrchar then
+                Highlight.Adornee = plrchar
             end
 
-            local function Highlight(plr)
-                local Highlight = Instance.new("Highlight")
-                Highlight.Name = plr.Name
-                Highlight.FillColor = FillColor
-                Highlight.DepthMode = DepthMode
-                Highlight.FillTransparency = FillTransparency
-                Highlight.OutlineColor = OutlineColor
-                Highlight.OutlineTransparency = OutlineTransparency
-                Highlight.Parent = highlightStorage
-
-                local plrchar = plr.Character
-                if plrchar then
-                    Highlight.Adornee = plrchar
-                end
-
-                connections[plr] = plr.CharacterAdded:Connect(function(char)
-                    Highlight.Adornee = char
-                end)
-            end
-
-            for _, plr in next, Players:GetPlayers() do
-                Highlight(plr)
-            end
-
-            Players.PlayerAdded:Connect(Highlight)
-
-            Players.PlayerRemoving:Connect(function(plr)
-                local plrname = plr.Name
-                if highlightStorage[plrname] then
-                    highlightStorage[plrname]:Destroy()
-                end
-                if connections[plr] then
-                    connections[plr]:Disconnect()
-                end
+            connections[plr] = plr.CharacterAdded:Connect(function(char)
+                Highlight.Adornee = char
             end)
-        else
-            if highlightStorage then
-                highlightStorage:ClearAllChildren()
+        end
+
+        for _, plr in next, Players:GetPlayers() do
+            Highlight(plr)
+        end
+
+        Players.PlayerAdded:Connect(Highlight)
+
+        Players.PlayerRemoving:Connect(function(plr)
+            local plrname = plr.Name
+            if highlightStorage[plrname] then
+                highlightStorage[plrname]:Destroy()
             end
+            if connections[plr] then
+                connections[plr]:Disconnect()
+            end
+        end)
+    else
+        -- Remove ESP when disabled
+        if highlightStorage then
+            highlightStorage:ClearAllChildren()
         end
     end
-})
+end)
+
+
+
+
 
 
 
