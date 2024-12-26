@@ -141,21 +141,10 @@ Tabs.Auto:AddButton({
 
 
 
--- Teleport to Gold item and return to the original position when the toggle is on
+-- Add the toggle to the Auto tab
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (From Scratching post)", Default = false })
 
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Toggle Gold Teleport", Default = false })
-
-Toggle:OnChanged(function()
-    if Toggle.Value then
-        -- Start teleporting when the toggle is on
-        while Toggle.Value do
-            teleportToItemAndBack()
-            wait(2) -- Adjust the delay as needed
-        end
-    end
-end)
-
--- Function to teleport to the Gold item and back to the original position
+-- Function to teleport to Gold item and return to the original position
 local function teleportToItemAndBack()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
@@ -163,6 +152,8 @@ local function teleportToItemAndBack()
     
     -- Get the position of the Gold item in the workspace
     local goldItem = workspace:FindFirstChild("Gold")
+    
+    -- Check if Gold item is found
     if goldItem then
         local originalCFrame = humanoidRootPart.CFrame
         
@@ -172,15 +163,44 @@ local function teleportToItemAndBack()
 
         -- Teleport back to the original position
         humanoidRootPart.CFrame = originalCFrame
-    else
-        -- Notify if Gold item is not found
+
+        -- Notify after picking up the Gold item
         Fluent:Notify({
-            Title = "Item Not Found",
-            Content = "Wait for Floppa to do a scratch thingy.",
+            Title = "Gold Picked",
+            Content = "You have picked up the Gold!🤑😱",
+            Duration = 5
+        })
+    else
+        -- If Gold item isn't found, notify immediately
+        Fluent:Notify({
+            Title = "Gold Not Found",
+            Content = "Gold not found😔. Wait for floppa to do a scratch thingy.",
             Duration = 5
         })
     end
 end
+
+-- When the toggle state changes
+Toggle:OnChanged(function(state)
+    -- If toggle is on, start teleportation and notifications
+    if state then
+        -- Initial notification immediately when toggled on
+        Fluent:Notify({
+            Title = "Gold Check",
+            Content = "Checking for Gold item...🤔",
+            Duration = 5
+        })
+        
+        -- Continuously check for the Gold item as long as the toggle is on
+        while Toggle.Value do
+            teleportToItemAndBack() -- Teleport to the Gold item and return
+            wait(5) -- Check for new Gold item every 5 seconds
+        end
+    else
+        -- If toggle is off, stop checking and do nothing
+        return
+    end
+end)
 
 
 
