@@ -129,7 +129,7 @@ local elGatoCooldown = 500 -- Cooldown in seconds
 local lastActivated = 0
 local targetElGatoCFrame = CFrame.new(-82.4485168, 72.5479126, -42.0264435, 1.257658e-05, 0.258770257, 0.965939045, 1.66893005e-06, -0.965939164, 0.258770257, 1.00000012, -1.66893005e-06, -1.28746033e-05)
 
-local ToggleElGato = Tabs.Main:AddToggle("Toggle DJ El Gato", {
+local ToggleElGato = Tabs.MAIN:AddToggle("Toggle DJ El Gato", {
     Title = "Toggle DJ El Gato",
     Default = false,
 })
