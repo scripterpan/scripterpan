@@ -75,9 +75,9 @@ Tabs.Auto:AddButton({
             wait(2)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289)
             Fluent:Notify({
-                Title = "Notifications",
+                Title = "Warning",
                 Content = "Stay in the house",
-                SubContent = "Please stay in the house or you will be explode 👽",
+                SubContent = "Please stay in the house or you will be explode 👽💥",
                 Duration = 5
             })
         else
@@ -142,7 +142,13 @@ Tabs.Auto:AddButton({
 
 
 -- Add the toggle to the Auto tab
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (From Scratching post)", Default = false })
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Toggle Gold Teleport", Default = false })
+
+-- Function to check if player has Scratching Post 2.0
+local function hasScratchingPost()
+    local scratchingPost = workspace.Unlocks:FindFirstChild("Scratching Post 2.0")
+    return scratchingPost ~= nil
+end
 
 -- Function to teleport to Gold item and return to the original position
 local function teleportToItemAndBack()
@@ -167,14 +173,14 @@ local function teleportToItemAndBack()
         -- Notify after picking up the Gold item
         Fluent:Notify({
             Title = "Gold Picked",
-            Content = "You have picked up the Gold!🤑😱",
+            Content = "You have picked up the Gold item! 🤑🤑",
             Duration = 5
         })
     else
         -- If Gold item isn't found, notify immediately
         Fluent:Notify({
             Title = "Gold Not Found",
-            Content = "Gold not found😔. Wait for floppa to do a scratch thingy.",
+            Content = "Gold not found 😔 Wait for floppa to do a scratch thingy",
             Duration = 5
         })
     end
@@ -184,17 +190,30 @@ end
 Toggle:OnChanged(function(state)
     -- If toggle is on, start teleportation and notifications
     if state then
-        -- Initial notification immediately when toggled on
-        Fluent:Notify({
-            Title = "Gold Check",
-            Content = "Checking for Gold item...🤔",
-            Duration = 5
-        })
-        
-        -- Continuously check for the Gold item as long as the toggle is on
-        while Toggle.Value do
-            teleportToItemAndBack() -- Teleport to the Gold item and return
-            wait(5) -- Check for new Gold item every 5 seconds
+        -- Check if player has Scratching Post 2.0
+        if hasScratchingPost() then
+            -- Initial notification immediately when toggled on
+            Fluent:Notify({
+                Title = "Gold Check",
+                Content = "Checking for Gold... 🤔",
+                Duration = 5
+            })
+            
+            -- Continuously check for the Gold item as long as the toggle is on
+            while Toggle.Value do
+                teleportToItemAndBack() -- Teleport to the Gold item and return
+                wait(5) -- Check for new Gold item every 5 seconds
+            end
+        else
+            -- Notify if Scratching Post 2.0 is not found
+            Fluent:Notify({
+                Title = "Missing Scratching Post 2.0",
+                Content = "You need Scratching Post 2.0 to use this 😡",
+                SubContent = "Buy it to use this 😡😡😡",
+                Duration = 5
+            })
+            -- Turn off the toggle if the player doesn't have Scratching Post 2.0
+            Toggle:SetValue(false)
         end
     else
         -- If toggle is off, stop checking and do nothing
