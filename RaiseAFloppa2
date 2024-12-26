@@ -100,10 +100,15 @@ Tabs.Auto:AddButton({
     end
 })
 
--- DJ El Gato Script in the Auto tab
-Tabs.Auto:AddButton({
+
+
+-- DJ El Gato Toggle in the Auto tab with cooldown reset after 500 seconds
+local cooldown = false  -- Variable to track cooldown state
+
+Tabs.Auto:AddToggle({
     Title = "Activate DJ El Gato",
-    Description = "Activate DJ El Gato if purchased",
+    Description = "Toggle to activate DJ El Gato if purchased",
+    Default = false,
     Callback = function()
         -- Function to check if DJ El Gato has been purchased
         local function hasDJElGato()
@@ -144,10 +149,21 @@ Tabs.Auto:AddButton({
             humanoidRootPart.CFrame = originalCFrame
         end
 
-        -- Main function to check and execute teleport
-        if hasDJElGato() then
-            teleportToTargetAndBack()
-            
+        -- Main function to check and execute teleport if toggle is on
+        if Toggle.Value then
+            -- Only execute if DJ El Gato is purchased and cooldown is over
+            if hasDJElGato() then
+                if not cooldown then
+                    teleportToTargetAndBack()
+
+                    -- Start cooldown for 500 seconds
+                    cooldown = true
+
+                    -- Cooldown timer
+                    wait(500)
+                    cooldown = false
+                end
+            end
         else
             Fluent:Notify({
                 Title = "El Gato Required",
