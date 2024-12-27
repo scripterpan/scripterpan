@@ -346,11 +346,11 @@ end)
 
 
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local ESPEnabled = false
 
 -- Create the ESP Box and Name Text
 local function createESP(player)
-    -- Ensure the player has a character and humanoid root part
     if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
         -- Create a new BillboardGui for player names
         local billboardGui = Instance.new("BillboardGui")
@@ -373,7 +373,7 @@ local function createESP(player)
 
         -- Create a box around the player
         local box = Instance.new("BoxHandleAdornment")
-        box.Size = Vector3.new(2, 5, 2)  -- Adjust size based on the player's character
+        box.Size = Vector3.new(2, 5, 2)
         box.Adornee = player.Character.HumanoidRootPart
         box.Color3 = Color3.fromRGB(0, 255, 0)  -- Green box color
         box.Transparency = 0.5
@@ -405,8 +405,8 @@ Toggle:OnChanged(function(state)
     toggleESP(state)
 end)
 
--- Continuous loop to update ESP
-while true do
+-- Use RunService to update ESP continuously without blocking other code
+RunService.Heartbeat:Connect(function()
     if ESPEnabled then
         -- Apply ESP to all players with a character
         for _, player in pairs(Players:GetPlayers()) do
@@ -435,9 +435,9 @@ while true do
             removeESP(player)
         end
     end
+end)
 
-    wait(1)  -- Update every second
-end
+-- You can still run other functions like Fullbright, Speed, etc. here without issues
 
 
 
