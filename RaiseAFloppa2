@@ -748,7 +748,7 @@ Tabs.Mul:AddButton({
     })
 
 
-local Input = Tabs.Main:AddInput("Input", {
+local Input = Tabs.Mul:AddInput("Input", {
     Title = "Multiplayer Server Code",
     Default = "",
     Placeholder = "Enter server code",
@@ -760,7 +760,7 @@ local Input = Tabs.Main:AddInput("Input", {
     end
 })
 
-Tabs.Main:AddButton({
+Tabs.Mul:AddButton({
     Title = "Join Server",
     Description = "Join multiplayer server using code (ask your friend for and enter the code)",
     Callback = function()
