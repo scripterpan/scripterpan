@@ -228,75 +228,96 @@ end)
 
 
 
+local Players = game:GetService("Players")
+local ESPEnabled = false
 
+-- Create the ESP Box and Name Text
+local function createESP(player)
+    -- Ensure the player has a character and humanoid root part
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        -- Create a new BillboardGui for player names
+        local billboardGui = Instance.new("BillboardGui")
+        billboardGui.Adornee = player.Character.HumanoidRootPart
+        billboardGui.Size = UDim2.new(0, 100, 0, 50)
+        billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+        billboardGui.Parent = player.Character
 
+        -- Add player name label
+        local nameLabel = Instance.new("TextLabel")
+        nameLabel.Text = player.Name
+        nameLabel.Size = UDim2.new(1, 0, 1, 0)
+        nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        nameLabel.BackgroundTransparency = 1
+        nameLabel.TextStrokeTransparency = 0.8
+        nameLabel.Font = Enum.Font.SourceSans
+        nameLabel.TextScaled = true
+        nameLabel.Parent = billboardGui
 
+        -- Create a box around the player
+        local box = Instance.new("BoxHandleAdornment")
+        box.Size = Vector3.new(2, 5, 2)  -- Adjust size based on the player's character
+        box.Adornee = player.Character.HumanoidRootPart
+        box.Color3 = Color3.fromRGB(0, 255, 0)  -- Green box color
+        box.Transparency = 0.5
+        box.ZIndex = 10
+        box.Parent = player.Character
+    end
+end
 
-local ToggleESP = Tabs.Misc:AddToggle("Players ESP", {
-    Title = "Players ESP",
-    Default = false,
-})
-
-ToggleESP:OnChanged(function()
-    local espEnabled = ToggleESP.Value -- Get the current toggle state
-
-    if espEnabled then
-        local FillColor = Color3.fromRGB(0, 255, 0)  -- Green color for fill
-        local DepthMode = "AlwaysOnTop"
-        local FillTransparency = 0.5
-        local OutlineColor = Color3.fromRGB(255, 255, 255)  -- White color for outline
-        local OutlineTransparency = 0
-
-        local CoreGui = game:FindService("CoreGui")
-        local Players = game:FindService("Players")
-        local connections = {}
-
-        local highlightStorage = Instance.new("Folder")
-        highlightStorage.Parent = CoreGui
-        highlightStorage.Name = "Highlight_Storage"
-
-        local function Highlight(plr)
-            local Highlight = Instance.new("Highlight")
-            Highlight.Name = plr.Name
-            Highlight.FillColor = FillColor
-            Highlight.DepthMode = DepthMode
-            Highlight.FillTransparency = FillTransparency
-            Highlight.OutlineColor = OutlineColor
-            Highlight.OutlineTransparency = OutlineTransparency
-            Highlight.Parent = highlightStorage
-
-            local plrchar = plr.Character
-            if plrchar then
-                Highlight.Adornee = plrchar
+-- Remove ESP for a player
+local function removeESP(player)
+    if player.Character then
+        for _, v in pairs(player.Character:GetChildren()) do
+            if v:IsA("BillboardGui") or v:IsA("BoxHandleAdornment") then
+                v:Destroy()
             end
-
-            connections[plr] = plr.CharacterAdded:Connect(function(char)
-                Highlight.Adornee = char
-            end)
-        end
-
-        for _, plr in next, Players:GetPlayers() do
-            Highlight(plr)
-        end
-
-        Players.PlayerAdded:Connect(Highlight)
-
-        Players.PlayerRemoving:Connect(function(plr)
-            local plrname = plr.Name
-            if highlightStorage[plrname] then
-                highlightStorage[plrname]:Destroy()
-            end
-            if connections[plr] then
-                connections[plr]:Disconnect()
-            end
-        end)
-    else
-        -- Remove ESP when disabled
-        if highlightStorage then
-            highlightStorage:ClearAllChildren()
         end
     end
+end
+
+-- Toggle ESP on and off
+local function toggleESP(state)
+    ESPEnabled = state
+
+    if ESPEnabled then
+        -- Apply ESP to all existing players
+        for _, player in pairs(Players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                createESP(player)
+            end
+        end
+    else
+        -- Remove ESP from all players
+        for _, player in pairs(Players:GetPlayers()) do
+            removeESP(player)
+        end
+    end
+end
+
+-- Adding toggle to the Misc tab
+local Toggle = Tabs.Misc:AddToggle("PlayerESP", {Title = "Player ESP", Default = false})
+
+Toggle:OnChanged(function(state)
+    toggleESP(state)
 end)
+
+-- Ensure ESP updates if new players spawn
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        if ESPEnabled then
+            createESP(player)
+        end
+    end)
+end)
+
+-- Clean up ESP for players who leave
+Players.PlayerRemoving:Connect(function(player)
+    removeESP(player)
+end)
+
+
+
+
 
 
 
