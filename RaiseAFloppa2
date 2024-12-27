@@ -114,90 +114,55 @@ end)
 
 
 
+Tabs.MAIN:AddButton({
+    Title = "Anti Cold/Hot",
+    Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
--- CFrame of Hot Chocolate and Lemonade seller
-local hotChocolateStandCFrame = CFrame.new(-5.96609402, 69.0936737, -109.085426, 0.692330241, -1.77327308e-08, 0.721580803, -1.25310926e-08, 1, 3.65979602e-08, -0.721580803, -3.43800721e-08, 0.692330241)
-local lemonadeStandCFrame = hotChocolateStandCFrame  -- Assuming the lemonade stand uses the same CFrame
+        local originalCFrame = humanoidRootPart.CFrame
 
--- Function to teleport to item and feed Floppa
-local function feedFloppa(moodlet)
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-    -- If Floppa is cold, feed Hot Chocolate
-    if moodlet == "Cold" then
-        -- Teleport to Hot Chocolate Stand
-        humanoidRootPart.CFrame = hotChocolateStandCFrame
-        task.wait(0.5)  -- Wait for a moment
-
-        -- Simulate pressing E to feed Floppa (adjust to actual feeding action)
-        keypress(0x45)  -- Simulate pressing "E"
-        task.wait(2)    -- Wait for 2 seconds (time taken for action)
-
-        -- Notify after feeding Floppa hot chocolate
-        Fluent:Notify({
-            Title = "🥶",
-            Content = "This is so sweet 💯💯",
-            SubContent = "Floppa is no longer cold now",
-            Duration = 5
-        })
-
-    -- If Floppa is hot, feed Lemonade
-    elseif moodlet == "Hot" then
-        -- Teleport to Lemonade Stand
-        humanoidRootPart.CFrame = lemonadeStandCFrame
-        task.wait(0.5)  -- Wait for a moment
-
-        -- Simulate pressing E to feed Floppa (adjust to actual feeding action)
-        keypress(0x45)  -- Simulate pressing "E"
-        task.wait(2)    -- Wait for 2 seconds (time taken for action)
-
-        -- Notify after feeding Floppa lemonade
-        Fluent:Notify({
-            Title = "Hell yeah",
-            Content = "This is so sour 🤑",
-            SubContent = "Floppa is no longer hot now",
-            Duration = 5
-        })
-
-    else
-        -- If no moodlet, do nothing or notify the player
-        Fluent:Notify({
-            Title = "Sigma Notifications",
-            Content = "Floppa is ok now",
-            SubContent = "No need to feed Floppa a lemonade/hot chocolate right now 💯",
-            Duration = 5
-        })
-    end
-end
-
--- Adding the toggle in the MAIN tab
-local Toggle = Tabs.MAIN:AddToggle("FeedFloppaToggle", {Title = "Anti hot and cold (Auto feed lemonade/hot chocolate)", Default = false})
-
-Toggle:OnChanged(function(state)
-    if state then
-        -- Check Floppa's moodlets
-        if workspace.Floppa.Moodlets:FindFirstChild("Cold") then
-            feedFloppa("Cold")
-        elseif workspace.Floppa.Moodlets:FindFirstChild("Hot") then
-            feedFloppa("Hot")
-        else
-            -- If no hot or cold moodlet is found
-            Fluent:Notify({
-                Title = "Those Who Know💀",
-                Content = "Floppa is ok",
-                SubContent = "No need to feed a lemonade/hot chocolate Floppa right now 💯",
-                Duration = 5
-            })
+        local function teleportBack()
+            humanoidRootPart.CFrame = originalCFrame
         end
+
+        local function teleportToFloppa()
+            local floppa = workspace:FindFirstChild("Floppa")
+
+            if floppa then
+                humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
+            end
+        end
+
+        humanoidRootPart.CFrame = CFrame.new(-5.52987146, 69.0936737, -108.875877, 0.307733119, 1.24310662e-09, 0.9514727, -2.64562194e-09, 1, -4.50839088e-10, -0.9514727, -2.37849895e-09, 0.307733119)
+
+        task.wait(0.4)
+
+        keypress(0x45)
+
+        task.wait(0.3)
+
+        teleportToFloppa()
+
+        task.wait(0.4)
+
+        keypress(0x45)
+
+        task.wait(0.2)
+
+        teleportBack()
+
+        -- Notification after teleporting back
+        Fluent:Notify({
+            Title = "Still Water 💀",
+            Content = "Floppa is no longer hot/cold 🗣️",
+            SubContent = "He's okay now buddy",
+            Duration = 5
+        })
     end
-end)
-
-
-
-
-
+})
 
 
 
