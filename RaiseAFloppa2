@@ -131,7 +131,6 @@ local function autoPetFloppa()
                 humanoidRootPart.CFrame = originalCFrame
 
                 -- Notify after petting
-                task.wait(25)
                 Fluent:Notify({
                     Title = "Floppa Mood",
                     Content = "Floppa is now happy 😱",
@@ -728,7 +727,7 @@ Tabs.Mul:AddButton({
         Callback = function()
             Window:Dialog({
                 Title = "Multiplayer server",
-                Content = "after you press confirm you have to wait for like 2-10 seconds",
+                Content = "after you press confirm you have to wait for like 2-20 seconds depends on your internet",
                 Buttons = {
                     {
                         Title = "Confirm",
@@ -762,7 +761,7 @@ local Input = Tabs.Mul:AddInput("Input", {
 
 Tabs.Mul:AddButton({
     Title = "Join Server",
-    Description = "Join multiplayer server using code (ask your friend for and enter the code)",
+    Description = "Join multiplayer server using code (ask your friend for code and enter the code)",
     Callback = function()
         if ServerCode and ServerCode ~= "" then
             -- Confirm joining the server
