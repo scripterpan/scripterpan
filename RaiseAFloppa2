@@ -117,7 +117,7 @@ end)
 
 Tabs.Main:AddButton({
     Title = "Anti Cold/Hot",
-    Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade",
+    Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade (please turn on instant proximity prompt)",
     Callback = function()
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
