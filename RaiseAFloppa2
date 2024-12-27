@@ -41,10 +41,11 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = { 
-      MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
+      Main = Window:AddTab({ Title = "Main", Icon = "" }),
       Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
       Misc = Window:AddTab({ Title = "Misc", Icon = ""}),
-      De = Window:AddTab({ Title = "Debug", Icon = ""})
+      De = Window:AddTab({ Title = "Debug", Icon = ""}),
+      Mul = Window:AddTab({ Title = "Multiplayer", Icon = ""})
 }
 
 local Options = Fluent.Options
@@ -61,7 +62,7 @@ end
 
 
 -- Toggle to auto-pet Floppa
-local Toggle = Tabs.MAIN:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50", Default = false })
+local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50", Default = false })
 
 -- Function to auto-pet Floppa
 local function autoPetFloppa()
@@ -114,7 +115,7 @@ end)
 
 
 
-Tabs.MAIN:AddButton({
+Tabs.Main:AddButton({
     Title = "Anti Cold/Hot",
     Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade",
     Callback = function()
@@ -366,7 +367,8 @@ local function createESP(player)
         nameLabel.BackgroundTransparency = 1
         nameLabel.TextStrokeTransparency = 0.8
         nameLabel.Font = Enum.Font.SourceSans
-        nameLabel.TextScaled = true
+        nameLabel.TextSize = 14  -- Smaller text size
+        nameLabel.TextScaled = false  -- Disable text scaling for custom size
         nameLabel.Parent = billboardGui
 
         -- Create a box around the player
@@ -394,20 +396,6 @@ end
 -- Toggle ESP on and off
 local function toggleESP(state)
     ESPEnabled = state
-
-    if ESPEnabled then
-        -- Apply ESP to all existing players
-        for _, player in pairs(Players:GetPlayers()) do
-            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                createESP(player)
-            end
-        end
-    else
-        -- Remove ESP from all players
-        for _, player in pairs(Players:GetPlayers()) do
-            removeESP(player)
-        end
-    end
 end
 
 -- Adding toggle to the Misc tab
@@ -417,19 +405,39 @@ Toggle:OnChanged(function(state)
     toggleESP(state)
 end)
 
--- Ensure ESP updates if new players spawn
-Players.PlayerAdded:Connect(function(player)
-    player.CharacterAdded:Connect(function()
-        if ESPEnabled then
-            createESP(player)
-        end
-    end)
-end)
+-- Continuous loop to update ESP
+while true do
+    if ESPEnabled then
+        -- Apply ESP to all players with a character
+        for _, player in pairs(Players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                -- Check if ESP already exists, if not, create it
+                local espExists = false
+                for _, v in pairs(player.Character:GetChildren()) do
+                    if v:IsA("BillboardGui") or v:IsA("BoxHandleAdornment") then
+                        espExists = true
+                        break
+                    end
+                end
 
--- Clean up ESP for players who leave
-Players.PlayerRemoving:Connect(function(player)
-    removeESP(player)
-end)
+                -- Create ESP if not already existing
+                if not espExists then
+                    createESP(player)
+                end
+            else
+                -- Remove ESP if the player does not have a character
+                removeESP(player)
+            end
+        end
+    else
+        -- Remove ESP from all players if ESP is disabled
+        for _, player in pairs(Players:GetPlayers()) do
+            removeESP(player)
+        end
+    end
+
+    wait(1)  -- Update every second
+end
 
 
 
