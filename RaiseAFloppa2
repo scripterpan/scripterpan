@@ -294,12 +294,7 @@ local function teleportToItemAndBack()
             Duration = 5
         })
     else
-        -- If Gold item isn't found, notify immediately
-        Fluent:Notify({
-            Title = "Gold Not Found",
-            Content = "Gold not found 😔 Wait for floppa to do a scratch thingy",
-            Duration = 5
-        })
+      -- Sigma   
     end
 end
 
