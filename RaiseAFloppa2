@@ -62,6 +62,45 @@ end
 
 
 
+Tabs.info:AddSection("Raise A Floppa 2 Q&A By Pann Hub")
+
+Tabs.info:AddParagraph({
+        Title = "what should i do if I can't climb a ladder in RAF2",
+        Content = "If you can't climb or walk through a small door, i recommend you to change avatar to get less accessories or use noclip in Misc Tab"
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Toggle to auto-pet Floppa
 local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50", Default = false })
 
@@ -468,7 +507,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instance Proximity Prompt", Default = false})
+local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instance Proximity Prompt", Default = true})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
