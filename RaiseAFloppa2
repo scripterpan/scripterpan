@@ -59,6 +59,153 @@ end
 
 
 
+-- Toggle to auto-pet Floppa
+local Toggle = Tabs.MAIN:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50", Default = false })
+
+-- Function to auto-pet Floppa
+local function autoPetFloppa()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- Get Floppa and its happiness level
+    local floppa = workspace:FindFirstChild("Floppa")
+    local happiness = floppa and floppa:FindFirstChild("Configuration") and floppa.Configuration:FindFirstChild("Happiness")
+
+    if floppa and happiness then
+        while Toggle.Value do
+            if happiness.Value < 50 then
+                local originalCFrame = humanoidRootPart.CFrame
+
+                -- Teleport to Floppa
+                humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
+                task.wait(0.5) -- Wait for stability (changed to 0.5)
+
+                -- Simulate pressing the "E" key to pet Floppa
+                keypress(0x45) -- E key code
+                task.wait(2) -- Wait after petting
+
+                -- Teleport back to the original position
+                humanoidRootPart.CFrame = originalCFrame
+
+                -- Notify after petting
+                Fluent:Notify({
+                    Title = "Floppa Mood",
+                    Content = "Floppa is now happy 😱",
+                    SubContent = "Happy Floppa 🧐",
+                    Duration = 5
+                })
+            end
+
+            -- Check every 0.1 seconds
+            task.wait(0.1)
+        end
+    end
+end
+
+-- Toggle callback
+Toggle:OnChanged(function(state)
+    if state then
+        task.spawn(autoPetFloppa) -- Start auto-petting in a separate thread
+    end
+end)
+
+
+
+
+
+-- CFrame of Hot Chocolate and Lemonade seller
+local hotChocolateStandCFrame = CFrame.new(-5.96609402, 69.0936737, -109.085426, 0.692330241, -1.77327308e-08, 0.721580803, -1.25310926e-08, 1, 3.65979602e-08, -0.721580803, -3.43800721e-08, 0.692330241)
+local lemonadeStandCFrame = hotChocolateStandCFrame  -- Assuming the lemonade stand uses the same CFrame
+
+-- Function to teleport to item and feed Floppa
+local function feedFloppa(moodlet)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- If Floppa is cold, feed Hot Chocolate
+    if moodlet == "Cold" then
+        -- Teleport to Hot Chocolate Stand
+        humanoidRootPart.CFrame = hotChocolateStandCFrame
+        task.wait(0.5)  -- Wait for a moment
+
+        -- Simulate pressing E to feed Floppa (adjust to actual feeding action)
+        keypress(0x45)  -- Simulate pressing "E"
+        task.wait(2)    -- Wait for 2 seconds (time taken for action)
+
+        -- Notify after feeding Floppa hot chocolate
+        Fluent:Notify({
+            Title = "🥶",
+            Content = "This is so sweet 💯💯",
+            SubContent = "Floppa is no longer cold now",
+            Duration = 5
+        })
+
+    -- If Floppa is hot, feed Lemonade
+    elseif moodlet == "Hot" then
+        -- Teleport to Lemonade Stand
+        humanoidRootPart.CFrame = lemonadeStandCFrame
+        task.wait(0.5)  -- Wait for a moment
+
+        -- Simulate pressing E to feed Floppa (adjust to actual feeding action)
+        keypress(0x45)  -- Simulate pressing "E"
+        task.wait(2)    -- Wait for 2 seconds (time taken for action)
+
+        -- Notify after feeding Floppa lemonade
+        Fluent:Notify({
+            Title = "Hell yeah",
+            Content = "This is so sour 🤑",
+            SubContent = "Floppa is no longer hot now",
+            Duration = 5
+        })
+
+    else
+        -- If no moodlet, do nothing or notify the player
+        Fluent:Notify({
+            Title = "Sigma Notifications",
+            Content = "Floppa is ok now",
+            SubContent = "No need to feed Floppa a lemonade/hot chocolate right now 💯",
+            Duration = 5
+        })
+    end
+end
+
+-- Adding the toggle in the MAIN tab
+local Toggle = MAIN:AddToggle("FeedFloppaToggle", {Title = "Anti hot and cold (Auto feed lemonade/hot chocolate)", Default = false})
+
+Toggle:OnChanged(function(state)
+    if state then
+        -- Check Floppa's moodlets
+        if workspace.Floppa.Moodlets:FindFirstChild("Cold") then
+            feedFloppa("Cold")
+        elseif workspace.Floppa.Moodlets:FindFirstChild("Hot") then
+            feedFloppa("Hot")
+        else
+            -- If no hot or cold moodlet is found
+            Fluent:Notify({
+                Title = "Those Who Know💀",
+                Content = "Floppa is ok",
+                SubContent = "No need to feed a lemonade/hot chocolate Floppa right now 💯",
+                Duration = 5
+            })
+        end
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Tabs.Auto:AddButton({
     Title = "Activate Meteorite Magnet",
     Description = "Activate Meteorite Magnet if purchased",
@@ -90,6 +237,9 @@ Tabs.Auto:AddButton({
         end
     end
 })
+
+
+
 
 
 
