@@ -718,3 +718,97 @@ local JumpPowerSlider = Tabs.Misc:AddSlider("JumpPowerSlider", {
 JumpPowerSlider:SetValue(50) -- Set initial value
 
 
+
+
+
+
+Tabs.Mul:AddButton({
+        Title = "Create Server",
+        Description = "Create a multiplayer server",
+        Callback = function()
+            Window:Dialog({
+                Title = "Multiplayer server",
+                Content = "after you press confirm you have to wait for like 2-10 seconds",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            game:GetService("ReplicatedStorage").Functions["Create Server"]:InvokeServer()
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            -- Nothing to do here
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+
+local Input = Tabs.Main:AddInput("Input", {
+    Title = "Multiplayer Server Code",
+    Default = "",
+    Placeholder = "Enter server code",
+    Numeric = false, -- Allows both letters and numbers
+    Finished = true, -- Callback only triggers after pressing enter
+    Callback = function(Value)
+        -- Store the entered server code
+        ServerCode = Value
+    end
+})
+
+Tabs.Main:AddButton({
+    Title = "Join Server",
+    Description = "Join multiplayer server using code (ask your friend for and enter the code)",
+    Callback = function()
+        if ServerCode and ServerCode ~= "" then
+            -- Confirm joining the server
+            Window:Dialog({
+                Title = "Join Server",
+                Content = "Do you want to join the server with code: " .. ServerCode .. "?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(
+                                game.PlaceId,
+                                ServerCode,
+                                game.Players.LocalPlayer
+                            )
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            -- User cancelled the operation
+                        end
+                    }
+                }
+            })
+        else
+            -- Show a dialog if no server code was entered
+            Window:Dialog({
+                Title = "Error",
+                Content = "Please enter a valid server code.",
+                Buttons = {
+                    {
+                        Title = "OK",
+                        Callback = function() end
+                    }
+                }
+            })
+        end
+    end
+})
+
+
+
+
+
+
+
+
+
