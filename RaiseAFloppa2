@@ -43,7 +43,8 @@ local Window = Fluent:CreateWindow({
 local Tabs = { 
       MAIN = Window:AddTab({ Title = "Main", Icon = "" }),
       Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
-      Misc = Window:AddTab({ Title = "Misc", Icon = ""})
+      Misc = Window:AddTab({ Title = "Misc", Icon = ""}),
+      De = Window:AddTab({ Title = "Debug", Icon = ""})
 }
 
 local Options = Fluent.Options
