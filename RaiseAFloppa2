@@ -172,7 +172,7 @@ local function feedFloppa(moodlet)
 end
 
 -- Adding the toggle in the MAIN tab
-local Toggle = MAIN:AddToggle("FeedFloppaToggle", {Title = "Anti hot and cold (Auto feed lemonade/hot chocolate)", Default = false})
+local Toggle = Tabs.MAIN:AddToggle("FeedFloppaToggle", {Title = "Anti hot and cold (Auto feed lemonade/hot chocolate)", Default = false})
 
 Toggle:OnChanged(function(state)
     if state then
