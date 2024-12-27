@@ -173,7 +173,7 @@ local function teleportToItemAndBack()
         -- Notify after picking up the Gold item
         Fluent:Notify({
             Title = "Gold Picked",
-            Content = "You have picked up the Gold item! 🤑🤑",
+            Content = "You have picked up the Gold! 🤑🤑",
             Duration = 5
         })
     else
