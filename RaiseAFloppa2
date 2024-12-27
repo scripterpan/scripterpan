@@ -92,8 +92,7 @@ local function autoPetFloppa()
                 humanoidRootPart.CFrame = originalCFrame
 
                 -- Notify after petting
-            elseif happiness.Value > 70 then
-              task.wait(25)
+                task.wait(25)
                 Fluent:Notify({
                     Title = "Floppa Mood",
                     Content = "Floppa is now happy 😱",
