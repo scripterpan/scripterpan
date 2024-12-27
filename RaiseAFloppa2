@@ -608,7 +608,7 @@ player.CharacterAdded:Connect(function(character)
 end)
 
 -- Toggle for Speed Control
-local SpeedToggle = Tabs.Misc:AddToggle("SpeedToggle", { Title = "Enable Speed Control", Default = false })
+local SpeedToggle = Tabs.Misc:AddToggle("SpeedToggle", { Title = "Player Speed Boost", Default = false })
 
 SpeedToggle:OnChanged(function()
     speedEnabled = SpeedToggle.Value
@@ -650,7 +650,7 @@ local SpeedSlider = Tabs.Misc:AddSlider("SpeedSlider", {
 SpeedSlider:SetValue(16) -- Set initial value
 
 -- Toggle for Jump Power Control
-local JumpToggle = Tabs.Misc:AddToggle("JumpToggle", { Title = "Enable Jump Power", Default = false })
+local JumpToggle = Tabs.Misc:AddToggle("JumpToggle", { Title = "Jump Boost", Default = false })
 
 JumpToggle:OnChanged(function()
     jumpEnabled = JumpToggle.Value
