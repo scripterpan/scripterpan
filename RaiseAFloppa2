@@ -41,6 +41,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = { 
+      info = Window:AddTab({ Title = "Information", Icon = ""}),
       Main = Window:AddTab({ Title = "Main", Icon = "" }),
       Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
       Misc = Window:AddTab({ Title = "Misc", Icon = ""}),
@@ -91,6 +92,7 @@ local function autoPetFloppa()
                 humanoidRootPart.CFrame = originalCFrame
 
                 -- Notify after petting
+                if happiness.Value > 70 then
                 Fluent:Notify({
                     Title = "Floppa Mood",
                     Content = "Floppa is now happy 😱",
