@@ -118,8 +118,8 @@ local function toggleESP(state)
     ESPEnabled = state
 end
 
--- Adding toggle to the Misc tab
-local Toggle = Tabs.ESP:AddToggle("PlayerESP", {Title = "Player ESP", Default = false})
+-- Adding toggle to the Esp tab
+local Toggle = Tabs.Esp:AddToggle("PlayerESP", {Title = "Player ESP", Default = false})
 
 Toggle:OnChanged(function(state)
     toggleESP(state)
