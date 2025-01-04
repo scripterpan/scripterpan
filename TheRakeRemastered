@@ -44,6 +44,7 @@ local Tabs = {
       info = Window:AddTab({ Title = "Information", Icon = ""}),
       Main = Window:AddTab({ Title = "Main", Icon = "" }),
       Pl = Window:AddTab({ Title = "Players", Icon = ""}),
+      Tp = Window:AddTab({ Title = "Teleport", Icon = ""}),
       Esp = Window:AddTab({ Title = "ESP", Icon = ""}),
       Misc = Window:AddTab({ Title = "Misc", Icon = ""})
   }
