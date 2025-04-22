@@ -400,7 +400,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.other:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+local ToggleProximity = Tabs.other:AddToggle("ProximityPromptToggle", {Title = "Instant Interact", Default = false})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
@@ -436,7 +436,7 @@ local function disableFullbright()
 end
 
 -- Add toggle to the UI
-local Toggle = Tabs.other:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+local Toggle = Tabs.other:AddToggle("FullbrightToggle", { Title = "Fullbright", Default = false })
 
 -- Handle toggle state changes
 Toggle:OnChanged(function()
