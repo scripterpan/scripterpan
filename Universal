@@ -371,3 +371,81 @@ end)
 Toggle:OnChanged(function()
     -- No additional functionality is needed here
 end)
+
+
+
+
+
+
+Tabs.other:AddSection("Misc")
+
+
+
+-- Proximity Prompt Toggle Script
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection -- To store the connection
+
+-- Function to enable/disable Proximity Prompt interactions
+local function toggleProximityPrompt(enable)
+    if enable then
+        -- Connect to the event if enabled
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
+    elseif proximityConnection then
+        -- Disconnect the event if it was connected
+        proximityConnection:Disconnect()
+        proximityConnection = nil -- Reset the variable after disconnecting
+    end
+end
+
+-- Toggle for Proximity Prompt in the UI
+local ToggleProximity = Tabs.other:AddToggle("ProximityPromptToggle", {Title = "Toggle Instance Proximity Prompt", Default = false})
+
+-- Handle the toggle state change
+ToggleProximity:OnChanged(function()
+    local isProximityOn = ToggleProximity.Value
+    toggleProximityPrompt(isProximityOn)
+end)
+
+
+-- Initialize variables
+local fullbrightEnabled = false
+local lighting = game:GetService("Lighting")
+local originalSettings = {
+    Brightness = lighting.Brightness,
+    ClockTime = lighting.ClockTime,
+    Ambient = lighting.Ambient,
+    OutdoorAmbient = lighting.OutdoorAmbient,
+}
+
+-- Function to enable Fullbright
+local function enableFullbright()
+    lighting.Brightness = 2
+    lighting.ClockTime = 14 -- Set to daytime
+    lighting.Ambient = Color3.new(1, 1, 1)
+    lighting.OutdoorAmbient = Color3.new(1, 1, 1)
+end
+
+-- Function to disable Fullbright
+local function disableFullbright()
+    lighting.Brightness = originalSettings.Brightness
+    lighting.ClockTime = originalSettings.ClockTime
+    lighting.Ambient = originalSettings.Ambient
+    lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
+end
+
+-- Add toggle to the UI
+local Toggle = Tabs.MAIN:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+
+-- Handle toggle state changes
+Toggle:OnChanged(function()
+    fullbrightEnabled = Toggle.Value
+    
+
+    if fullbrightEnabled then
+        enableFullbright()
+    else
+        disableFullbright()
+    end
+end)
