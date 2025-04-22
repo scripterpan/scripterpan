@@ -436,7 +436,7 @@ local function disableFullbright()
 end
 
 -- Add toggle to the UI
-local Toggle = Tabs.MAIN:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
+local Toggle = Tabs.other:AddToggle("FullbrightToggle", { Title = "Enable Fullbright", Default = false })
 
 -- Handle toggle state changes
 Toggle:OnChanged(function()
