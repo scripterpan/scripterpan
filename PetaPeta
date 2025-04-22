@@ -1,1 +1,114 @@
+repeat task.wait(0.25) until game:IsLoaded();
+getgenv().Image = "rbxassetid://14670814118"; --put a asset id in here to make it work
+getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
 
+task.spawn(function()
+    if not getgenv().LoadedMobileUI == true then getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui");
+        local ImageButton = Instance.new("ImageButton");
+        local UICorner = Instance.new("UICorner");
+        OpenUI.Name = "OpenUI";
+        OpenUI.Parent = game:GetService("CoreGui");
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+        ImageButton.Parent = OpenUI;
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105,105,105);
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0.9,0,0.1,0);
+        ImageButton.Size = UDim2.new(0,50,0,50);
+        ImageButton.Image = getgenv().Image;
+        ImageButton.Draggable = true;
+        ImageButton.Transparency = 1;
+        UICorner.CornerRadius = UDim.new(0,200);
+        UICorner.Parent = ImageButton;
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,getgenv().ToggleUI,false,game);
+        end)
+    end
+end)
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+
+local Window = Fluent:CreateWindow({
+    Title = "The Mimic ",
+    SubTitle = "By Pann",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(480, 320),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+local Tabs = {
+
+Main = Window:AddTab({ Title = "Main", Icon = "" }),
+
+}
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local rootPart = char:WaitForChild("HumanoidRootPart")
+local pickupRange = 15  -- Default pickup range value
+
+-- List of valid item name keywords
+local validNames = { "Coin", "Gem", "Orb" }
+
+-- Function to check if an item name is valid
+local function isValidItem(name)
+    for _, keyword in ipairs(validNames) do
+        if string.find(string.lower(name), string.lower(keyword)) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Toggle to enable/disable auto-loot
+local Toggle = Tabs.Main:AddToggle("MyToggle", {
+    Title = "Auto Loot",
+    Default = false
+})
+
+Toggle:OnChanged(function()
+    local isEnabled = Options.MyToggle.Value
+    -- Start/stop the loop based on toggle
+    if isEnabled then
+        task.spawn(function()
+            while Options.MyToggle.Value do
+                for _, prompt in pairs(workspace:GetDescendants()) do
+                    if prompt:IsA("ProximityPrompt") then
+                        local part = prompt.Parent
+                        if part:IsA("BasePart") and isValidItem(part.Name) then
+                            local distance = (part.Position - rootPart.Position).Magnitude
+                            if distance <= pickupRange then
+                                fireproximityprompt(prompt)
+                            end
+                        end
+                    end
+                end
+                task.wait(0.25)
+            end
+        end)
+    end
+end)
+
+Options.MyToggle:SetValue(false)  -- Default to OFF
+
+-- Slider to control pickup range
+local Slider = Tabs.Main:AddSlider("Slider", {
+    Title = "Pickup Range",
+    Description = "Adjust how close you need to be to auto-loot",
+    Default = 15,
+    Min = 5,
+    Max = 50,
+    Rounding = 1,
+    Callback = function(Value)
+        pickupRange = Value  -- Dynamically change the pickup range
+    end
+})
