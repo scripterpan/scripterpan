@@ -51,35 +51,29 @@ Misc = Window:AddTab({ Title = "Misc", Icon = "" })
 
 
 
-
-local player = game.Players.LocalPlayer
-local char = player.Character or player.CharacterAdded:Wait()
-local rootPart = char:WaitForChild("HumanoidRootPart")
-local pickupRange = 15  -- Default pickup range value
-
--- List of valid item name keywords
-local validNames = { "Coin", "Gem", "Orb" }
-
--- Function to check if an item name is valid
-local function isValidItem(name)
-    for _, keyword in ipairs(validNames) do
-        if string.find(string.lower(name), string.lower(keyword)) then
-            return true
-        end
-    end
-    return false
-end
-
--- Toggle to enable/disable auto-loot
-local Toggle = Tabs.Main:AddToggle("MyToggle", {
-    Title = "Auto Loot",
-    Default = false
-})
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false})
 
 Toggle:OnChanged(function()
-    local isEnabled = Options.MyToggle.Value
+    local player = game.Players.LocalPlayer
+    local char = player.Character or player.CharacterAdded:Wait()
+    local rootPart = char:WaitForChild("HumanoidRootPart")
+    local pickupRange = 15
+
+    -- List of valid item name keywords
+    local validNames = { "Coin", "Gem", "Orb" }
+
+    -- Function to check if an item name is valid
+    local function isValidItem(name)
+        for _, keyword in ipairs(validNames) do
+            if string.find(string.lower(name), string.lower(keyword)) then
+                return true
+            end
+        end
+        return false
+    end
+
     -- Start/stop the loop based on toggle
-    if isEnabled then
+    if Options.MyToggle.Value then
         task.spawn(function()
             while Options.MyToggle.Value do
                 for _, prompt in pairs(workspace:GetDescendants()) do
@@ -99,7 +93,7 @@ Toggle:OnChanged(function()
     end
 end)
 
-Options.MyToggle:SetValue(false)  -- Default to OFF
+Options.MyToggle:SetValue(false)
 
 -- Slider to control pickup range
 local Slider = Tabs.Main:AddSlider("Slider", {
