@@ -80,6 +80,17 @@ Tabs.uni:AddButton({
 
 
 Tabs.uni:AddButton({
+    Title = "Fly Gui",
+    Description = "Best Fly Script",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
+
+
+
+
+Tabs.uni:AddButton({
     Title = "Owl Hub",
     Description = "Support a lot of roblox FPS game like arsenal",
     Callback = function()
