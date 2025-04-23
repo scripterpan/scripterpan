@@ -215,7 +215,7 @@ Tabs.Main:AddButton({
 
 Tabs.Auto:AddButton({
     Title = "Activate Meteorite Magnet",
-    Description = "Activate Meteorite Magnet if purchased",
+    Description = "Activate Meteorite Magnet if purchased (look up)",
     Callback = function()
         local function hasMeteoriteMagnet()
             local meteoriteMagnet = workspace.Unlocks:FindFirstChild("Meteor Magnet")  -- Check if Meteor Magnet is in the Unlocks folder
