@@ -121,7 +121,7 @@ local function autoPetFloppa()
 
                 -- Teleport to Floppa
                 humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
-                task.wait(0.5) -- Wait for stability (changed to 0.5)
+                task.wait(2) -- Wait for stability (changed to 2)
 
                 -- Simulate pressing the "E" key to pet Floppa
                 keypress(0x45) -- E key code
