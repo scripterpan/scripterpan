@@ -102,7 +102,7 @@ Tabs.info:AddParagraph({
 
 
 -- Toggle to auto-pet Floppa
-local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50", Default = false })
+local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50 (a bit buggy for now)", Default = false })
 
 -- Function to auto-pet Floppa
 local function autoPetFloppa()
@@ -130,13 +130,7 @@ local function autoPetFloppa()
                 -- Teleport back to the original position
                 humanoidRootPart.CFrame = originalCFrame
 
-                -- Notify after petting
-                Fluent:Notify({
-                    Title = "Floppa Mood",
-                    Content = "Floppa is now happy 😱",
-                    SubContent = "Happy Floppa 🧐",
-                    Duration = 5
-                })
+                
             end
 
             -- Check every 0.1 seconds
