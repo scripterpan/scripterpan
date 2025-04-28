@@ -102,7 +102,7 @@ Tabs.info:AddParagraph({
 
 
 -- Toggle to auto-pet Floppa
-local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50 (a bit buggy for now)", Default = false })
+local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50 (floppa must stay still)", Default = false })
 
 -- Function to auto-pet Floppa
 local function autoPetFloppa()
@@ -125,6 +125,8 @@ local function autoPetFloppa()
 
                 -- Simulate pressing the "E" key to pet Floppa
                 keypress(0x45) -- E key code
+                keypress(0x45)
+                keypress(0x45)
                 task.wait(2) -- Wait after petting
 
                 -- Teleport back to the original position
@@ -151,7 +153,7 @@ end)
 
 Tabs.Main:AddButton({
     Title = "Anti Cold/Hot",
-    Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade (please turn on instant proximity prompt)",
+    Description = "This is not actual anti cold/hot its just feed the floppa hot chocolate/lemonade (please turn on instant interact)",
     Callback = function()
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
@@ -190,11 +192,7 @@ Tabs.Main:AddButton({
         teleportBack()
 
         -- Notification after teleporting back
-        Fluent:Notify({
-            Title = "Still Water 💀",
-            Content = "Floppa is no longer hot/cold 🗣️",
-            SubContent = "He's okay now buddy",
-            Duration = 5
+        --
         })
     end
 })
@@ -500,7 +498,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instance Proximity Prompt", Default = true})
+local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instance Interact", Default = true})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
