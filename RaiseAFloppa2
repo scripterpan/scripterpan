@@ -780,6 +780,15 @@ Tabs.Other:AddButton({
 
 
 
+Tabs.Other:AddButton({
+    Title = "Dex V4 Mobile",
+    Description = "Dark Dex V4 Mobile (No key) Credits to Yume Hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Artifacttx/YumeHub/refs/heads/main/Universal/DarkDex_Mobile", true))()
+    end
+})
+
+
 
 Tabs.Other:AddSection("Built-in Executor (Why did i even made this🥀)")
 
