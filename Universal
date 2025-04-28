@@ -99,6 +99,18 @@ Tabs.uni:AddButton({
 })
 
 
+
+Tabs.uni:AddButton({
+    Title = "Dex V4 Mobile",
+    Description = "Dark Dex V4 Mobile (No key) Credits to Yume Hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Artifacttx/YumeHub/refs/heads/main/Universal/DarkDex_Mobile", true))()
+    end
+})
+
+
+
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
