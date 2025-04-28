@@ -45,7 +45,6 @@ local Tabs = {
       Main = Window:AddTab({ Title = "Main", Icon = "" }),
       Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
       Misc = Window:AddTab({ Title = "Misc", Icon = ""}),
-      De = Window:AddTab({ Title = "Debug", Icon = ""}),
       Mul = Window:AddTab({ Title = "Multiplayer", Icon = ""}),
       Other = Window:AddTab({ Title = "Other", Icon = ""})
 }
@@ -122,13 +121,16 @@ local function autoPetFloppa()
 
                 -- Teleport to Floppa
                 humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
-                task.wait(2) -- Wait for stability (changed to 2)
+                task.wait(1.5) -- Wait for stability (changed to 1.5)
 
                 -- Simulate pressing the "E" key to pet Floppa
                 keypress(0x45) -- E key code
                 keypress(0x45)
                 keypress(0x45)
-                task.wait(2) -- Wait after petting
+                keypress(0x45)
+                keypress(0x45)
+                
+                task.wait(1.5) -- Wait after petting
 
                 -- Teleport back to the original position
                 humanoidRootPart.CFrame = originalCFrame
@@ -737,10 +739,46 @@ Tabs.Mul:AddButton({
 })
 
 
+Tabs.Mul:AddButton({
+    Title = "Rejoin",
+    Description = "Rejoin current server",
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+
+local function rejoin()
+    local player = Players.LocalPlayer
+    if player then
+        TeleportService:Teleport(game.PlaceId, player)
+    end
+end
+
+-- Rejoin when this script runs
+rejoin()
+    end
+})
 
 
 
 
 
+Tabs.Other:AddSection("Universal Script")
 
 
+
+Tabs.Other:AddButton({
+    Title = "Infinite yield",
+    Description = "Best fe command script",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source"))()
+    end
+})
+
+
+Tabs.Other:AddButton({
+    Title = "Fly Gui",
+    Description = "Best Fly Script",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
