@@ -71,8 +71,8 @@ Tabs.info:AddParagraph({
 
 
 Tabs.info:AddParagraph({
-        Title = "We have built-in script executor for raise floppa 2",
-        Content = "I don't know how to explain this, its so easy to understand tho, you can find it in \"other tab\" (idk why did i even made this 🥀)"
+        Title = "We have built-in script executor for Raise A Floppa 2",
+        Content = "I don't know how to explain this, its so easy to understand tho, you can find it in \"Other Tab\" (idk why did i even made this 🥀)"
     })
 
 
