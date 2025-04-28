@@ -228,12 +228,7 @@ Tabs.Auto:AddButton({
             keypress(0x45)  -- Simulate pressing "E" (key code for "E")
             wait(2)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.3300018, 73.4750061, -46.8682289)
-            Fluent:Notify({
-                Title = "Warning",
-                Content = "Stay in the house",
-                SubContent = "Please stay in the house or you will be explode 👽💥",
-                Duration = 5
-            })
+            -- nothing here
         else
             Fluent:Notify({
                 Title = "Purchased Required",
@@ -278,13 +273,7 @@ Tabs.Auto:AddButton({
             -- Teleport back to the original position
             humanoidRootPart.CFrame = originalCFrame
 
-            -- Notify the player
-            Fluent:Notify({
-                Title = "Notifications",
-                Content = "Party Time",
-                SubContent = "It's party time 🤑🤑",
-                Duration = 5
-            })
+            -- nothing
         else
             Fluent:Notify({
                 Title = "Purchased Required",
@@ -330,7 +319,7 @@ local function teleportToItemAndBack()
         -- Notify after picking up the Gold item
         Fluent:Notify({
             Title = "Gold Picked",
-            Content = "You have picked up the Gold! 🤑🤑",
+            Content = "You have picked up the Gold!",
             Duration = 5
         })
     else
@@ -347,7 +336,7 @@ Toggle:OnChanged(function(state)
             -- Initial notification immediately when toggled on
             Fluent:Notify({
                 Title = "Gold Check",
-                Content = "Checking for Gold... 🤔",
+                Content = "Checking for Gold... ",
                 Duration = 5
             })
             
@@ -360,8 +349,8 @@ Toggle:OnChanged(function(state)
             -- Notify if Scratching Post 2.0 is not found
             Fluent:Notify({
                 Title = "Missing Scratching Post 2.0",
-                Content = "You need Scratching Post 2.0 to use this 😡",
-                SubContent = "Buy it to use this 😡😡😡",
+                Content = "You need Scratching Post 2.0 to use this!",
+                SubContent = "Just buy to use this bru ✌️🥀",
                 Duration = 5
             })
             -- Turn off the toggle if the player doesn't have Scratching Post 2.0
