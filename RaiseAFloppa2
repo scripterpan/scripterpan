@@ -46,7 +46,8 @@ local Tabs = {
       Auto = Window:AddTab({ Title = "Automatic", Icon = ""}),
       Misc = Window:AddTab({ Title = "Misc", Icon = ""}),
       De = Window:AddTab({ Title = "Debug", Icon = ""}),
-      Mul = Window:AddTab({ Title = "Multiplayer", Icon = ""})
+      Mul = Window:AddTab({ Title = "Multiplayer", Icon = ""}),
+      Other = Window:AddTab({ Title = "Other", Icon = ""})
 }
 
 local Options = Fluent.Options
@@ -191,9 +192,8 @@ Tabs.Main:AddButton({
 
         teleportBack()
 
-        -- Notification after teleporting back
-        --
-        })
+        
+        
     end
 })
 
@@ -462,7 +462,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
-local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Noclip", Default = false})
+local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Noclip", Default = false})
 local noclipConnection
 local originalCollisions = {}
 
