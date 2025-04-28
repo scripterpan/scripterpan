@@ -70,6 +70,12 @@ Tabs.info:AddParagraph({
     })
 
 
+Tabs.info:AddParagraph({
+        Title = "We have built-in script executor for raise floppa 2",
+        Content = "I don't know how to explain this, its so easy to understand tho, you can find itin Other Tab (idk why did i even make thos LOL 🥀🫲🪫"
+    })
+
+
 
 
 
@@ -780,5 +786,69 @@ Tabs.Other:AddButton({
     Description = "Best Fly Script",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
+
+
+
+
+Tabs.Other:AddSection("Built-in Executor (Why did i even made this🥀)")
+
+local ExecutableScript = ""
+
+-- Create the Input
+local Input = Tabs.Other:AddInput("ScriptInput", {
+    Title = "Put your script here", -- Changed the title
+    Default = "",
+    Placeholder = "Paste your script here...",
+    Numeric = false,
+    Finished = false,
+    Callback = function(Value)
+        ExecutableScript = Value
+    end
+})
+
+Input:OnChanged(function()
+    ExecutableScript = Input.Value
+end)
+
+-- Execute Script Button
+Tabs.Other:AddButton({
+    Title = "Execute Script", -- Button title
+    Description = "Execute the script you input above.",
+    Callback = function()
+        Window:Dialog({
+            Title = "Execute Script?",
+            Content = "Do you really want to execute the script?",
+            Buttons = {
+                {
+                    Title = "Yes",
+                    Callback = function()
+                        local func, err = loadstring(ExecutableScript)
+                        if func then
+                            func()
+                        else
+                            warn("Failed to load script:", err)
+                        end
+                    end
+                },
+                {
+                    Title = "No",
+                    Callback = function()
+                        -- Cancelled, do nothing
+                    end
+                }
+            }
+        })
+    end
+})
+
+-- Clear Textbox Button
+Tabs.Other:AddButton({
+    Title = "Clear Textbox", -- Updated title
+    Description = "Clear the script input box.",
+    Callback = function()
+        Input:SetValue("") -- Clear the input box
+        ExecutableScript = "" -- Clear the stored script
     end
 })
