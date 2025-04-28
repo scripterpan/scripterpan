@@ -54,8 +54,8 @@ local Options = Fluent.Options
 do
     Fluent:Notify({
         Title = "Notification",
-        Content = "Script Is Loaded :3",
-        SubContent = "Meow!!!", -- Optional
+        Content = "Script Is Loaded!",
+        SubContent = "Ts Pmo sm rm fr vro icl sybau 🥀🪫🫲", -- Optional
         Duration = 5 -- Set to nil to make the notification not disappear
     })
 end
