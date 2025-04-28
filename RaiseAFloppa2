@@ -66,13 +66,13 @@ Tabs.info:AddSection("Raise A Floppa 2 Q&A By Pann Hub")
 
 Tabs.info:AddParagraph({
         Title = "what should i do if I can't climb a ladder in RAF2",
-        Content = "If you can't climb or walk through a small door, i recommend you to change avatar to get less accessories or use noclip in "Misc Tab" "
+        Content = "If you can't climb or walk through a small door, i recommend you to change avatar to get less accessories or use noclip in \"Misc Tab\" "
     })
 
 
 Tabs.info:AddParagraph({
         Title = "We have built-in script executor for raise floppa 2",
-        Content = "I don't know how to explain this, its so easy to understand tho, you can find it in "other Tab" (idk why did i even made this 🥀)"
+        Content = "I don't know how to explain this, its so easy to understand tho, you can find it in \"other tab\" (idk why did i even made this 🥀)"
     })
 
 
