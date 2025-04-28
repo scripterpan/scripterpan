@@ -48,7 +48,7 @@ Misc = Window:AddTab({ Title = "Misc", Icon = "" })
 }
 
 
-
+local Options = Fluent.Options
 
 
 local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false})
@@ -189,41 +189,81 @@ end)
 
 Tabs.Misc:AddSection("Player Misc")
 
--- Initialize variables
-local noclipEnabled = false
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
 
--- Function to toggle noclip
-local function toggleNoclip(state)
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Noclip", Default = false})
+local noclipConnection
+local originalCollisions = {}
 
-    if state then
-        game:GetService("RunService").Stepped:Connect(function()
-            if noclipEnabled then
-                for _, v in pairs(character:GetDescendants()) do
-                    if v:IsA("BasePart") and v.CanCollide then
-                        v.CanCollide = false
-                    end
-                end
-            end
-        end)
-    else
-        for _, v in pairs(character:GetDescendants()) do
-            if v:IsA("BasePart") then
-                v.CanCollide = true
+-- Save the character's current collision states
+local function saveOriginalCollisions()
+    originalCollisions = {}
+    if LocalPlayer.Character then
+        for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                originalCollisions[part] = part.CanCollide
             end
         end
     end
 end
 
--- Add toggle to the UI
-local Toggle = Tabs.Misc:AddToggle("NoclipToggle", { Title = "Noclip", Default = false })
+saveOriginalCollisions() -- << ADD THIS after defining the function!
 
--- Handle toggle state changes
+-- Apply noclip (force CanCollide false)
+local function startNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+    end
+
+    saveOriginalCollisions()
+
+    noclipConnection = RunService.Stepped:Connect(function()
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+-- Restore original collision
+local function stopNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+        noclipConnection = nil
+    end
+    for part, canCollide in pairs(originalCollisions) do
+        if part and part:IsA("BasePart") then
+            part.CanCollide = canCollide
+        end
+    end
+    originalCollisions = {}
+end
+
+-- When toggle is changed
 Toggle:OnChanged(function()
-    noclipEnabled = Toggle.Value
-    toggleNoclip(noclipEnabled)
+    if Toggle.Value then
+        startNoclip()
+    else
+        stopNoclip()
+    end
 end)
+
+-- Handle respawn
+LocalPlayer.CharacterAdded:Connect(function()
+    repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+    saveOriginalCollisions()
+
+    if Toggle.Value then
+        startNoclip()
+    end
+end)
+
+Toggle:SetValue(false)
 
 
 -- Initialize variables
@@ -309,34 +349,4 @@ local SpeedSlider = Tabs.Misc:AddSlider("SpeedSlider", {
 })
 SpeedSlider:SetValue(16) -- Set initial value
 
--- Toggle for Jump Power Control
-local JumpToggle = Tabs.Misc:AddToggle("JumpToggle", { Title = "Jump Boost", Default = false })
 
-JumpToggle:OnChanged(function()
-    jumpEnabled = JumpToggle.Value
-
-    if jumpEnabled then
-        -- Apply the current desired jump power
-        setJumpPower(desiredJumpPower)
-    else
-        -- Reset to default jump power when toggled off
-        setJumpPower(defaultJumpPower)
-    end
-end)
-
--- Slider for Jump Power Adjustment
-local JumpPowerSlider = Tabs.Misc:AddSlider("JumpPowerSlider", {
-    Title = "Jump Power",
-    Description = "Adjust your jump power",
-    Default = 50,
-    Min = 1,
-    Max = 200, -- Increased max jump power to 200
-    Rounding = 0,
-    Callback = function(Value)
-        desiredJumpPower = Value
-        if jumpEnabled then
-            setJumpPower(desiredJumpPower)
-        end
-    end,
-})
-JumpPowerSlider:SetValue(50) -- Set initial value
