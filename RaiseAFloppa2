@@ -726,6 +726,59 @@ local JumpPowerSlider = Tabs.Misc:AddSlider("JumpPowerSlider", {
 JumpPowerSlider:SetValue(50) -- Set initial value
 
 
+-- Gravity toggle
+local GravityToggle = Tabs.Misc:AddToggle("GravityToggle", {Title = "Change Gravity",Default = false,})
+
+GravityToggle:OnChanged(function()
+    if Options.GravityToggle.Value then
+        workspace.Gravity = Options.GravityValueSlider.Value
+    else
+        workspace.Gravity = 196.2 -- Reset to default gravity
+    end
+end)
+
+Options.GravityToggle:SetValue(false)
+
+-- Gravity slider
+local GravityValueSlider = Tabs.Misc:AddSlider("GravityValueSlider", {
+    Title = "Change Your Gravity Value",
+    Description = "Adjust gravity strength",
+    Default = 196.2,
+    Min = 0,
+    Max = 500,
+    Rounding = 1,
+    Callback = function(Value)
+        if Options.GravityToggle.Value then
+            workspace.Gravity = Value
+        end
+    end,
+})
+
+GravityValueSlider:OnChanged(function(Value)
+    if Options.GravityToggle.Value then
+        workspace.Gravity = Value
+    end
+end)
+
+GravityValueSlider:SetValue(196.2)
+
+-- Handle respawn
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(1) -- Wait a little to make sure character fully loads
+    if Options.GravityToggle.Value then
+        workspace.Gravity = Options.GravityValueSlider.Value
+    else
+        workspace.Gravity = 196.2
+    end
+end)
+
+
+
+
+
 
 
 
