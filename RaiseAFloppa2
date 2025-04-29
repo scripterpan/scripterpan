@@ -239,7 +239,7 @@ Tabs.Main:AddButton({
 
 Tabs.Main:AddButton({
     Title = "Activate DJ Gato Party",
-    Description = "Party Time 🎵",
+    Description = "Activate DJ Gato Party if purchased",
     Callback = function()
         local function hasElgatoDJ()
             local DJgato = workspace.Unlocks:FindFirstChild("DJ El Gato")
