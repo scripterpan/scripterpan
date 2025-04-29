@@ -109,55 +109,7 @@ Tabs.info:AddParagraph({
 
 
 
--- Toggle to auto-pet Floppa
-local Toggle = Tabs.Main:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50 (floppa must stay still)", Default = false })
 
--- Function to auto-pet Floppa
-local function autoPetFloppa()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-    -- Get Floppa and its happiness level
-    local floppa = workspace:FindFirstChild("Floppa")
-    local happiness = floppa and floppa:FindFirstChild("Configuration") and floppa.Configuration:FindFirstChild("Happiness")
-
-    if floppa and happiness then
-        while Toggle.Value do
-            if happiness.Value < 50 then
-                local originalCFrame = humanoidRootPart.CFrame
-
-                -- Teleport to Floppa
-                humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
-                task.wait(1.5) -- Wait for stability (changed to 1.5)
-
-                -- Simulate pressing the "E" key to pet Floppa
-                keypress(0x45) -- E key code
-                keypress(0x45)
-                keypress(0x45)
-                keypress(0x45)
-                keypress(0x45)
-                
-                task.wait(1.5) -- Wait after petting
-
-                -- Teleport back to the original position
-                humanoidRootPart.CFrame = originalCFrame
-
-                
-            end
-
-            -- Check every 0.1 seconds
-            task.wait(0.1)
-        end
-    end
-end
-
--- Toggle callback
-Toggle:OnChanged(function(state)
-    if state then
-        task.spawn(autoPetFloppa) -- Start auto-petting in a separate thread
-    end
-end)
 
 
 
@@ -215,7 +167,7 @@ Tabs.Main:AddButton({
 
 
 
-Tabs.Auto:AddButton({
+Tabs.Main:AddButton({
     Title = "Activate Meteorite Magnet",
     Description = "Activate Meteorite Magnet if purchased (look up)",
     Callback = function()
@@ -249,7 +201,7 @@ Tabs.Auto:AddButton({
 
 
 
-Tabs.Auto:AddButton({
+Tabs.Main:AddButton({
     Title = "Activate DJ Gato Party",
     Description = "Party Time 🎵",
     Callback = function()
@@ -286,6 +238,67 @@ Tabs.Auto:AddButton({
         end
     end
 })
+
+
+
+
+
+
+-- Toggle to auto-pet Floppa
+local Toggle = Tabs.Auto:AddToggle("AutoPetFloppa", { Title = "Auto-Pet Floppa if Happiness > 50 (floppa must stay still)", Default = false })
+
+-- Function to auto-pet Floppa
+local function autoPetFloppa()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- Get Floppa and its happiness level
+    local floppa = workspace:FindFirstChild("Floppa")
+    local happiness = floppa and floppa:FindFirstChild("Configuration") and floppa.Configuration:FindFirstChild("Happiness")
+
+    if floppa and happiness then
+        while Toggle.Value do
+            if happiness.Value < 50 then
+                local originalCFrame = humanoidRootPart.CFrame
+
+                -- Teleport to Floppa
+                humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
+                task.wait(1.5) -- Wait for stability (changed to 1.5)
+
+                -- Simulate pressing the "E" key to pet Floppa
+                keypress(0x45) -- E key code
+                keypress(0x45)
+                keypress(0x45)
+                keypress(0x45)
+                keypress(0x45)
+                
+                task.wait(1.5) -- Wait after petting
+
+                -- Teleport back to the original position
+                humanoidRootPart.CFrame = originalCFrame
+
+                
+            end
+
+            -- Check every 0.1 seconds
+            task.wait(0.1)
+        end
+    end
+end
+
+-- Toggle callback
+Toggle:OnChanged(function(state)
+    if state then
+        task.spawn(autoPetFloppa) -- Start auto-petting in a separate thread
+    end
+end)
+
+
+
+
+
+
 
 
 
@@ -363,6 +376,49 @@ Toggle:OnChanged(function(state)
         return
     end
 end)
+
+
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Milk", Default = false })
+
+Options.MyToggle:SetValue(false)
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local collecting = false
+
+Toggle:OnChanged(function()
+    if Options.MyToggle.Value then
+        collecting = true
+        task.spawn(function()
+            while collecting do
+                local milk = workspace:FindFirstChild("Milk Delivery")
+                if milk and milk:IsA("Model") and milk:FindFirstChildWhichIsA("ProximityPrompt", true) then
+                    local prompt = milk:FindFirstChildWhichIsA("ProximityPrompt", true)
+                    local milkPos = milk:GetPivot().Position
+
+                    local originalPos = hrp.Position
+                    hrp.CFrame = CFrame.new(milkPos + Vector3.new(0, 3, 0))
+                    task.wait(0.3)
+
+                    fireproximityprompt(prompt)
+                    task.wait(0.5)
+
+                    hrp.CFrame = CFrame.new(originalPos)
+                end
+                task.wait(1)
+            end
+        end)
+    else
+        collecting = false
+    end
+end)
+
+
+
 
 
 
