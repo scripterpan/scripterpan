@@ -371,7 +371,7 @@ Tabs.Tp:AddButton({
     Title = "House",
     Description = "Teleport To House",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.4003258, 73.4750061, -37.8793678, 1, 0, 0, 0, 1, 0, 0, 0, 1)
     end
 })
 
@@ -380,7 +380,7 @@ Tabs.Tp:AddButton({
     Title = "1st Basement",
     Description = "Teleport To 1st Basement",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-67.2391968, 55.4000168, -39.330204, 0.0412380993, 4.33183925e-16, -0.999149323, -9.00663685e-16, 1, 3.96379444e-16, 0.999149323, 8.83551608e-16, 0.0412380993)
     end
 })
 
@@ -390,7 +390,7 @@ Tabs.Tp:AddButton({
     Title = "2nd Basement",
     Description = "Teleport To 2nd Basement",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.9028969, 35.9000168, -38.1604042, 0.392780244, 1.67481833e-08, -0.919632375, -3.26389724e-08, 1, 4.27153291e-09, 0.919632375, 2.83380803e-08, 0.392780244)
     end
 })
 
@@ -400,17 +400,17 @@ Tabs.Tp:AddButton({
     Title = "1st Upper Floor",
     Description = "Teleport To 1st Upper Floor",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-62.7135963, 91.4000168, -30.2685719, -0.469526678, -2.73245995e-08, -0.882918298, -5.78674388e-08, 1, -1.74752851e-10, 0.882918298, 5.10101685e-08, -0.469526678)
     end
 })
 
 
 
 Tabs.Tp:AddButton({
-    Title = "2nd",
+    Title = "2nd Upper Floor",
     Description = "Teleport To 2nd Upper Floor",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.0160217, 110.500015, -36.4459419, 0.284452379, -7.96052557e-09, -0.958690166, -3.11641237e-08, 1, -1.75502315e-08, 0.958690166, 3.48689433e-08, 0.284452379)
     end
 })
 
@@ -420,7 +420,7 @@ Tabs.Tp:AddButton({
     Title = "Roof",
     Description = "Teleport To Roof",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-53.264492, 145.400024, -41.4740868, -0.371924132, -9.61286273e-10, -0.928263128, -8.72383388e-10, 1, -6.86040169e-10, 0.928263128, 5.54646495e-10, -0.371924132)
     end
 })
 
@@ -429,7 +429,7 @@ Tabs.Tp:AddButton({
     Title = "Market",
     Description = "Teleport To Market",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28.0548782, 70.1997757, -108.054405, 0.786984861, 1.86600291e-09, -0.616972327, 4.16374135e-08, 1, 5.61354447e-08, 0.616972327, -6.98668785e-08, 0.786984861)
     end
 })
 
@@ -438,7 +438,7 @@ Tabs.Tp:AddButton({
     Title = "Jinx's Cauldron",
     Description = "Teleport To Jinx's Cauldron",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-114.476074, 68.593689, -144.418213, -0.425411254, 3.78284035e-08, -0.90500015, 3.78207954e-09, 1, 4.00215008e-08, 0.90500015, 1.3602814e-08, -0.425411254)
     end
 })
 
@@ -447,7 +447,7 @@ Tabs.Tp:AddButton({
     Title = "Backroom",
     Description = "Teleport To Backroom (Almond Water)",
     Callback = function()
-        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248.705948, -1216.1001, -52.4668922, 0.747585952, -3.66916169e-08, -0.66416508, 2.22550529e-08, 1, -3.01943786e-08, 0.66416508, 7.79186315e-09, 0.747585952)
     end
 })
 
