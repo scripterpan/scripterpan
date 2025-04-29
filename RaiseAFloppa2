@@ -367,12 +367,89 @@ end)
 
 
 
+Tabs.Tp:AddButton({
+    Title = "House",
+    Description = "Teleport To House",
+    Callback = function()
+        
+    end
+})
+
+
+Tabs.Tp:AddButton({
+    Title = "1st Basement",
+    Description = "Teleport To 1st Basement",
+    Callback = function()
+        
+    end
+})
 
 
 
+Tabs.Tp:AddButton({
+    Title = "2nd Basement",
+    Description = "Teleport To 2nd Basement",
+    Callback = function()
+        
+    end
+})
 
 
 
+Tabs.Tp:AddButton({
+    Title = "1st Upper Floor",
+    Description = "Teleport To 1st Upper Floor",
+    Callback = function()
+        
+    end
+})
+
+
+
+Tabs.Tp:AddButton({
+    Title = "2nd",
+    Description = "Teleport To 2nd Upper Floor",
+    Callback = function()
+        
+    end
+})
+
+
+
+Tabs.Tp:AddButton({
+    Title = "Roof",
+    Description = "Teleport To Roof",
+    Callback = function()
+        
+    end
+})
+
+
+Tabs.Tp:AddButton({
+    Title = "Market",
+    Description = "Teleport To Market",
+    Callback = function()
+        
+    end
+})
+
+
+Tabs.Tp:AddButton({
+    Title = "Jinx's Cauldron",
+    Description = "Teleport To Jinx's Cauldron",
+    Callback = function()
+        
+    end
+})
+
+
+Tabs.Tp:AddButton({
+    Title = "Backroom",
+    Description = "Teleport To Backroom (Almond Water)",
+    Callback = function()
+        
+    end
+})
 
 
 
