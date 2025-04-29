@@ -6,8 +6,8 @@
 - Blox Fruit (Im stupid AF)
 - The Rake Remastered (Im stupid AF + Good Anti Cheat)
 
-## Trying to make, update
-- PetaPeta
-- The mimic
+## Trying to make, update the script
+- PETAPETA
+- The Mimic
 - Raise A Floppa 2
 - Universal
