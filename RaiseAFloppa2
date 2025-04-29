@@ -105,7 +105,43 @@ Tabs.info:AddParagraph({
 
 
 
+Tabs.Main:AddButton({
+    Title = "Collect Milk",
+    Description = "Collect The Milk That Milk Man Delivered",
+    Callback = function()
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
+        -- Access the "Crate" under "Milk Delivery" folder in workspace
+        local milkCrate = workspace:FindFirstChild("Milk Delivery") and workspace["Milk Delivery"]:FindFirstChild("Crate")
+        
+        if milkCrate then
+            -- Check if the milk crate has a ProximityPrompt
+            local prompt = milkCrate:FindFirstChildWhichIsA("ProximityPrompt", true)
+            if prompt then
+                -- Save original position
+                local originalCFrame = humanoidRootPart.CFrame
+
+                -- Teleport to the milk crate
+                humanoidRootPart.CFrame = milkCrate.CFrame + Vector3.new(0, 3, 0)
+
+                -- Wait briefly for teleport to complete
+                task.wait(0.5)
+
+                -- Trigger proximity prompt
+                fireproximityprompt(prompt)
+
+                -- Wait to ensure collection registers
+                task.wait(0.5)
+
+                -- Teleport back to original position
+                humanoidRootPart.CFrame = originalCFrame
+            end
+        end
+    end
+})
 
 
 
@@ -378,44 +414,7 @@ Toggle:OnChanged(function(state)
 end)
 
 
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Milk", Default = false })
 
-Options.MyToggle:SetValue(false)
-
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local hrp = character:WaitForChild("HumanoidRootPart")
-
-local collecting = false
-
-Toggle:OnChanged(function()
-    if Options.MyToggle.Value then
-        collecting = true
-        task.spawn(function()
-            while collecting do
-                local milk = workspace:FindFirstChild("Milk Delivery")
-                if milk and milk:IsA("Model") and milk:FindFirstChildWhichIsA("ProximityPrompt", true) then
-                    local prompt = milk:FindFirstChildWhichIsA("ProximityPrompt", true)
-                    local milkPos = milk:GetPivot().Position
-
-                    local originalPos = hrp.Position
-                    hrp.CFrame = CFrame.new(milkPos + Vector3.new(0, 3, 0))
-                    task.wait(0.3)
-
-                    fireproximityprompt(prompt)
-                    task.wait(0.5)
-
-                    hrp.CFrame = CFrame.new(originalPos)
-                end
-                task.wait(1)
-            end
-        end)
-    else
-        collecting = false
-    end
-end)
 
 
 
