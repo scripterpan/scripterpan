@@ -42,7 +42,12 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
 
-Main = Window:AddTab({ Title = "Main", Icon = "" }),
+lv1 = Window:AddTab({ Title = "Level 1", Icon = "" }),
+lv2 = Window:AddTab({ Title = "Level 2", Icon = "" }),
+lv3 = Window:AddTab({ Title = "Level 3", Icon = "" }),
+lv4 = Window:AddTab({ Title = "Level 4", Icon = "" }),
+lv5 = Window:AddTab({ Title = "Level 5", Icon = "" }),
+lv6 = Window:AddTab({ Title = "Level 6", Icon = "" }),
 Misc = Window:AddTab({ Title = "Misc", Icon = "" })
 
 }
@@ -51,62 +56,7 @@ Misc = Window:AddTab({ Title = "Misc", Icon = "" })
 local Options = Fluent.Options
 
 
-local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false})
 
-Toggle:OnChanged(function()
-    local player = game.Players.LocalPlayer
-    local char = player.Character or player.CharacterAdded:Wait()
-    local rootPart = char:WaitForChild("HumanoidRootPart")
-    local pickupRange = 15
-
-    -- List of valid item name keywords
-    local validNames = { "Coin", "Gem", "Orb" }
-
-    -- Function to check if an item name is valid
-    local function isValidItem(name)
-        for _, keyword in ipairs(validNames) do
-            if string.find(string.lower(name), string.lower(keyword)) then
-                return true
-            end
-        end
-        return false
-    end
-
-    -- Start/stop the loop based on toggle
-    if Options.MyToggle.Value then
-        task.spawn(function()
-            while Options.MyToggle.Value do
-                for _, prompt in pairs(workspace:GetDescendants()) do
-                    if prompt:IsA("ProximityPrompt") then
-                        local part = prompt.Parent
-                        if part:IsA("BasePart") and isValidItem(part.Name) then
-                            local distance = (part.Position - rootPart.Position).Magnitude
-                            if distance <= pickupRange then
-                                fireproximityprompt(prompt)
-                            end
-                        end
-                    end
-                end
-                task.wait(0.25)
-            end
-        end)
-    end
-end)
-
-Options.MyToggle:SetValue(false)
-
--- Slider to control pickup range
-local Slider = Tabs.Main:AddSlider("Slider", {
-    Title = "Pickup Range",
-    Description = "Adjust how close you need to be to auto-loot",
-    Default = 15,
-    Min = 5,
-    Max = 50,
-    Rounding = 1,
-    Callback = function(Value)
-        pickupRange = Value  -- Dynamically change the pickup range
-    end
-})
 
 
 
@@ -193,7 +143,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
-local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Noclip", Default = false})
+local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Noclip", Default = false})
 local noclipConnection
 local originalCollisions = {}
 
