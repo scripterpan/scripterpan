@@ -85,7 +85,7 @@ local function toggleProximityPrompt(enable)
 end
 
 -- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instant Interact", Default = false})
+local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instant Interact", Default = true})
 
 -- Handle the toggle state change
 ToggleProximity:OnChanged(function()
