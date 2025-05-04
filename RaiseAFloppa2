@@ -339,7 +339,7 @@ end)
 
 
 -- Add the toggle to the Auto tab
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (From Scratching Post 2.0)", Default = false })
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (Cannot Collect From Divine Cat Statue)", Default = false })
 
 -- Function to check if player has Scratching Post 2.0
 local function hasScratchingPost()
