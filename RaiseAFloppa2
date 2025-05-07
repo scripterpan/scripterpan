@@ -480,6 +480,19 @@ Tabs.Tp:AddButton({
 })
 
 
+
+Tabs.Tp:AddButton({
+    Title = "Patio",
+    Description = "Teleport To Patio",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+    end
+})
+
+
+
+
+
 Tabs.Tp:AddButton({
     Title = "Market",
     Description = "Teleport To Market",
