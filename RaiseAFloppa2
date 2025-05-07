@@ -417,6 +417,43 @@ end)
 
 
 
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Seeds", Default = false})
+
+Toggle:OnChanged(function()
+    if Options.MyToggle.Value then
+        task.spawn(collectSeeds) -- Run in parallel so player isn’t frozen
+    end
+end)
+
+Options.MyToggle:SetValue(false)
+
+function collectSeeds()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:WaitForChild("HumanoidRootPart")
+
+    while Options.MyToggle.Value do
+        local seeds = workspace.Seeds:GetChildren()
+
+        for _, seed in ipairs(seeds) do
+            local prompt = seed:FindFirstChildOfClass("ProximityPrompt")
+            if prompt then
+                local originalPos = hrp.CFrame -- Save position right before teleport
+                hrp.CFrame = seed.CFrame + Vector3.new(0, 3, 0)
+                task.wait(0.2)
+                fireproximityprompt(prompt)
+                task.wait(0.2)
+                hrp.CFrame = originalPos -- Return instantly
+            end
+        end
+
+        task.wait(0.2)
+    end
+end
+
+
+
+
 
 
 
