@@ -485,7 +485,7 @@ Tabs.Tp:AddButton({
     Title = "Patio",
     Description = "Teleport To Patio",
     Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-63.1400528, 91.4000092, -90.8524628, 0.986670196, 8.35140401e-09, 0.162732586, -1.94483754e-08, 1, 6.6598389e-08, -0.162732586, -6.88755293e-08, 0.986670196)
     end
 })
 
