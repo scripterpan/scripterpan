@@ -334,18 +334,8 @@ end)
 
 
 
-
-
-
-
 -- Add the toggle to the Auto tab
 local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Gold (Cannot Collect From Divine Cat Statue)", Default = false })
-
--- Function to check if player has Scratching Post 2.0
-local function hasScratchingPost()
-    local scratchingPost = workspace.Unlocks:FindFirstChild("Scratching Post 2.0")
-    return scratchingPost ~= nil
-end
 
 -- Function to teleport to Gold item and return to the original position
 local function teleportToItemAndBack()
@@ -362,56 +352,30 @@ local function teleportToItemAndBack()
         
         -- Teleport to the Gold item's position
         humanoidRootPart.CFrame = goldItem.CFrame
-        wait(1) -- Wait a moment at the Gold location
+        task.wait(0.2) -- Wait for 0.2 seconds at the Gold location
 
         -- Teleport back to the original position
         humanoidRootPart.CFrame = originalCFrame
-
-        -- Notify after picking up the Gold item
-        Fluent:Notify({
-            Title = "Gold Picked",
-            Content = "You have picked up the Gold!",
-            Duration = 5
-        })
     else
-      -- Sigma   
+        -- No gold item found, do nothing
     end
 end
 
 -- When the toggle state changes
 Toggle:OnChanged(function(state)
-    -- If toggle is on, start teleportation and notifications
+    -- If toggle is on, start teleportation and collection
     if state then
-        -- Check if player has Scratching Post 2.0
-        if hasScratchingPost() then
-            -- Initial notification immediately when toggled on
-            Fluent:Notify({
-                Title = "Gold Check",
-                Content = "Checking for Gold... ",
-                Duration = 5
-            })
-            
-            -- Continuously check for the Gold item as long as the toggle is on
-            while Toggle.Value do
-                teleportToItemAndBack() -- Teleport to the Gold item and return
-                wait(5) -- Check for new Gold item every 5 seconds
-            end
-        else
-            -- Notify if Scratching Post 2.0 is not found
-            Fluent:Notify({
-                Title = "Missing Scratching Post 2.0",
-                Content = "You need Scratching Post 2.0 to use this!",
-                SubContent = "Just buy to use this bru ✌️🥀",
-                Duration = 5
-            })
-            -- Turn off the toggle if the player doesn't have Scratching Post 2.0
-            Toggle:SetValue(false)
+        -- Continuously check for the Gold item as long as the toggle is on
+        while Toggle.Value do
+            teleportToItemAndBack() -- Teleport to the Gold item and return
+            task.wait(1) -- Check for new Gold item every 1 second
         end
-    else
-        -- If toggle is off, stop checking and do nothing
-        return
     end
 end)
+
+
+
+
 
 
 
