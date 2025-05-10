@@ -381,7 +381,7 @@ end)
 
 
 
-local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Seeds", Default = false})
+local Toggle = Tabs.Auto:AddToggle("MyToggle", {Title = "Auto Collect Seeds (A Bit Buggy)", Default = false})
 
 Toggle:OnChanged(function()
     if Options.MyToggle.Value then
