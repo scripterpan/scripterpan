@@ -1,0 +1,713 @@
+repeat task.wait(0.25) until game:IsLoaded();
+getgenv().Image = "rbxassetid://118507736312114"; --put a asset id in here to make it work
+getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
+
+task.spawn(function()
+    if not getgenv().LoadedMobileUI == true then getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui");
+        local ImageButton = Instance.new("ImageButton");
+        local UICorner = Instance.new("UICorner");
+        OpenUI.Name = "OpenUI";
+        OpenUI.Parent = game:GetService("CoreGui");
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+        ImageButton.Parent = OpenUI;
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105,105,105);
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0.9,0,0.1,0);
+        ImageButton.Size = UDim2.new(0,50,0,50);
+        ImageButton.Image = getgenv().Image;
+        ImageButton.Draggable = true;
+        ImageButton.Transparency = 1;
+        UICorner.CornerRadius = UDim.new(0,200);
+        UICorner.Parent = ImageButton;
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,getgenv().ToggleUI,false,game);
+        end)
+    end
+end)
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+
+local Window = Fluent:CreateWindow({
+    Title = "The Mimic ",
+    SubTitle = "By Pann",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(480, 320),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+local Tabs = {
+
+lv1 = Window:AddTab({ Title = "Level 1", Icon = "" }),
+lv2 = Window:AddTab({ Title = "Level 2", Icon = "" }),
+lv3 = Window:AddTab({ Title = "Level 3", Icon = "" }),
+lv4 = Window:AddTab({ Title = "Level 4", Icon = "" }),
+lv5 = Window:AddTab({ Title = "Level 5", Icon = "" }),
+lv6 = Window:AddTab({ Title = "Level 6", Icon = "" }),
+Misc = Window:AddTab({ Title = "Misc", Icon = "" })
+
+}
+
+
+local Options = Fluent.Options
+
+
+
+
+
+
+Tabs.Misc:AddSection("Game Misc)
+
+Tabs.Misc:AddButton({
+    Title = "Notify And ESP",
+    Description = "Not by me, credits to GarganSpoits on YouTub",
+    Callback = function()
+        local function addHighlightWithDelay(model)
+
+    wait(0.5)
+
+    local newHighlight = Instance.new("Highlight")
+
+    newHighlight.FillColor = Color3.fromRGB(128, 0, 128) -- you can change fill color
+
+    newHighlight.Parent = model
+
+    
+
+    local function showSpawnNotification()
+
+        local player = game.Players.LocalPlayer
+
+        local screenGui = Instance.new("ScreenGui")
+
+        screenGui.Parent = player:WaitForChild("PlayerGui")
+
+    
+
+        local textLabel = Instance.new("TextLabel")
+
+        textLabel.Text = "PETAPETA spawned"
+
+        textLabel.TextColor3 = Color3.new(1, 1, 1) -- White color
+
+        textLabel.BackgroundTransparency = 1
+
+        textLabel.Size = UDim2.new(0.3, 0, 0.1, 0)
+
+        textLabel.Position = UDim2.new(0.35, 0, 0.9, 0)
+
+        textLabel.Font = Enum.Font.SourceSans
+
+        textLabel.TextScaled = true
+
+        textLabel.Parent = screenGui
+
+    
+
+        wait(5)
+
+        local tweenService = game:GetService("TweenService")
+
+        local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+        local tween = tweenService:Create(textLabel, tweenInfo, {TextTransparency = 1})
+
+        tween:Play()
+
+    
+
+        tween.Completed:Connect(function()
+
+            screenGui:Destroy()
+
+        end)
+
+    end
+
+    
+
+    model.AncestryChanged:Connect(function(_, parent)
+
+        if not parent then -- If model is destroyed
+
+            local player = game.Players.LocalPlayer
+
+            local screenGui = Instance.new("ScreenGui")
+
+            screenGui.Parent = player:WaitForChild("PlayerGui")
+
+        
+
+            local textLabel = Instance.new("TextLabel")
+
+            textLabel.Text = "PETAPETA despawned"
+
+            textLabel.TextColor3 = Color3.new(1, 1, 1) -- White color
+
+            textLabel.BackgroundTransparency = 1
+
+            textLabel.Size = UDim2.new(0.3, 0, 0.1, 0)
+
+            textLabel.Position = UDim2.new(0.35, 0, 0.9, 0)
+
+            textLabel.Font = Enum.Font.SourceSans
+
+            textLabel.TextScaled = true
+
+            textLabel.Parent = screenGui
+
+        
+
+            wait(5)
+
+            local tweenService = game:GetService("TweenService")
+
+            local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+            local tween = tweenService:Create(textLabel, tweenInfo, {TextTransparency = 1})
+
+            tween:Play()
+
+        
+
+            tween.Completed:Connect(function()
+
+                screenGui:Destroy()
+
+            end)
+
+        end
+
+    end)
+
+
+
+    showSpawnNotification()
+
+end
+
+
+
+local function checkAndAddHighlight()
+
+    local clientFolder = game.Workspace:FindFirstChild("Client")
+
+    if clientFolder then
+
+        local enemyFolder = clientFolder:FindFirstChild("Enemy")
+
+        if enemyFolder then
+
+            local clientEnemyPart = enemyFolder:FindFirstChild("ClientEnemy")
+
+            if clientEnemyPart and clientEnemyPart:IsA("Part") then
+
+                local enemyModel = clientEnemyPart:FindFirstChild("EnemyModel")
+
+                if enemyModel and enemyModel:IsA("Model") then
+
+                    addHighlightWithDelay(enemyModel)
+
+                end
+
+                
+
+                clientEnemyPart.ChildAdded:Connect(function(model)
+
+                    if model:IsA("Model") and model.Name == "EnemyModel" then
+
+                        addHighlightWithDelay(model)
+
+                    end
+
+                end)
+
+            end
+
+            
+
+            enemyFolder.ChildAdded:Connect(function(part)
+
+                if part:IsA("Part") and part.Name == "ClientEnemy" then
+
+                    part.ChildAdded:Connect(function(model)
+
+                        if model:IsA("Model") and model.Name == "EnemyModel" then
+
+                            addHighlightWithDelay(model)
+
+                        end
+
+                    end)
+
+
+
+                    if part:FindFirstChild("EnemyModel") then
+
+                        local existingModel = part:FindFirstChild("EnemyModel")
+
+                        if existingModel:IsA("Model") then
+
+                            addHighlightWithDelay(existingModel)
+
+                        end
+
+                    end
+
+                end
+
+            end)
+
+        end
+
+        
+
+        clientFolder.ChildAdded:Connect(function(subChild)
+
+            if subChild:IsA("Folder") and subChild.Name == "Enemy" then
+
+                subChild.ChildAdded:Connect(function(part)
+
+                    if part:IsA("Part") and part.Name == "ClientEnemy" then
+
+                        part.ChildAdded:Connect(function(model)
+
+                            if model:IsA("Model") and model.Name == "EnemyModel" then
+
+                                addHighlightWithDelay(model)
+
+                            end
+
+                        end)
+
+
+
+                        if part:FindFirstChild("EnemyModel") then
+
+                            local existingModel = part:FindFirstChild("EnemyModel")
+
+                            if existingModel:IsA("Model") then
+
+                                addHighlightWithDelay(existingModel)
+
+                            end
+
+                        end
+
+                    end
+
+                end)
+
+            end
+
+        end)
+
+    end
+
+end
+
+
+
+local function displayScriptExecutedNotification()
+
+    local player = game.Players.LocalPlayer
+
+    local screenGui = Instance.new("ScreenGui")
+
+    screenGui.Parent = player:WaitForChild("PlayerGui")
+
+
+
+    local textLabel = Instance.new("TextLabel")
+
+    textLabel.Text = "Script executed!"
+
+    textLabel.TextColor3 = Color3.new(1, 1, 1) -- White color
+
+    textLabel.BackgroundTransparency = 1
+
+    textLabel.Size = UDim2.new(0.3, 0, 0.1, 0)
+
+    textLabel.Position = UDim2.new(0.35, 0, 0.9, 0)
+
+    textLabel.Font = Enum.Font.SourceSans
+
+    textLabel.TextScaled = true
+
+    textLabel.Parent = screenGui
+
+
+
+    local sound = Instance.new("Sound")
+
+    sound.SoundId = "rbxassetid://9064294662"
+
+    sound.Parent = player:WaitForChild("PlayerGui")
+
+    sound:Play()
+
+
+
+    wait(5)
+
+    local tweenService = game:GetService("TweenService")
+
+    local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+    local tween = tweenService:Create(textLabel, tweenInfo, {TextTransparency = 1})
+
+    tween:Play()
+
+
+
+    tween.Completed:Connect(function()
+
+        screenGui:Destroy()
+
+    end)
+
+end
+
+
+
+checkAndAddHighlight()
+
+displayScriptExecutedNotification()
+
+
+
+game.Workspace.ChildAdded:Connect(function(child)
+
+    if child:IsA("Folder") and child.Name == "Client" then
+
+        child.ChildAdded:Connect(function(subChild)
+
+            if subChild:IsA("Folder") and subChild.Name == "Enemy" then
+
+                subChild.ChildAdded:Connect(function(part)
+
+                    if part:IsA("Part") and part.Name == "ClientEnemy" then
+
+                        part.ChildAdded:Connect(function(model)
+
+                            if model:IsA("Model") and model.Name == "EnemyModel" then
+
+                                addHighlightWithDelay(model)
+
+                            end
+
+                        end)
+
+
+
+                        if part:FindFirstChild("EnemyModel") then
+
+                            local existingModel = part:FindFirstChild("EnemyModel")
+
+                            if existingModel:IsA("Model") then
+
+                                addHighlightWithDelay(existingModel)
+
+                            end
+
+                        end
+
+                    end
+
+                end)
+
+   
+
+                if subChild:FindFirstChild("ClientEnemy") then
+
+                    local existingPart = subChild:FindFirstChild("ClientEnemy")
+
+                    if existingPart:IsA("Part") then
+
+                        existingPart.ChildAdded:Connect(function(model)
+
+                            if model:IsA("Model") and model.Name == "EnemyModel" then
+
+                                addHighlightWithDelay(model)
+
+                            end
+
+                        end)
+
+
+
+                        if existingPart:FindFirstChild("EnemyModel") then
+
+                            local existingModel = existingPart:FindFirstChild("EnemyModel")
+
+                            if existingModel:IsA("Model") then
+
+                                addHighlightWithDelay(existingModel)
+
+                            end
+
+                        end
+
+                    end
+
+                end
+
+            end
+
+        end)
+
+    end
+
+end)
+    end
+})
+
+
+
+
+
+
+
+Tabs.Misc:AddSection("Misc")
+
+
+
+
+-- Proximity Prompt Toggle Script
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection -- To store the connection
+
+-- Function to enable/disable Proximity Prompt interactions
+local function toggleProximityPrompt(enable)
+    if enable then
+        -- Connect to the event if enabled
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
+    elseif proximityConnection then
+        -- Disconnect the event if it was connected
+        proximityConnection:Disconnect()
+        proximityConnection = nil -- Reset the variable after disconnecting
+    end
+end
+
+-- Toggle for Proximity Prompt in the UI
+local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instant Interact", Default = true})
+
+-- Handle the toggle state change
+ToggleProximity:OnChanged(function()
+    local isProximityOn = ToggleProximity.Value
+    toggleProximityPrompt(isProximityOn)
+end)
+
+
+-- Initialize variables
+local fullbrightEnabled = false
+local lighting = game:GetService("Lighting")
+local originalSettings = {
+    Brightness = lighting.Brightness,
+    ClockTime = lighting.ClockTime,
+    Ambient = lighting.Ambient,
+    OutdoorAmbient = lighting.OutdoorAmbient,
+}
+
+-- Function to enable Fullbright
+local function enableFullbright()
+    lighting.Brightness = 2
+    lighting.ClockTime = 14 -- Set to daytime
+    lighting.Ambient = Color3.new(1, 1, 1)
+    lighting.OutdoorAmbient = Color3.new(1, 1, 1)
+end
+
+-- Function to disable Fullbright
+local function disableFullbright()
+    lighting.Brightness = originalSettings.Brightness
+    lighting.ClockTime = originalSettings.ClockTime
+    lighting.Ambient = originalSettings.Ambient
+    lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
+end
+
+-- Add toggle to the UI
+local Toggle = Tabs.Misc:AddToggle("FullbrightToggle", { Title = "Fullbright", Default = false })
+
+-- Handle toggle state changes
+Toggle:OnChanged(function()
+    fullbrightEnabled = Toggle.Value
+    
+
+    if fullbrightEnabled then
+        enableFullbright()
+    else
+        disableFullbright()
+    end
+end)
+
+
+
+Tabs.Misc:AddSection("Player Misc")
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Noclip", Default = false})
+local noclipConnection
+local originalCollisions = {}
+
+-- Save the character's current collision states
+local function saveOriginalCollisions()
+    originalCollisions = {}
+    if LocalPlayer.Character then
+        for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                originalCollisions[part] = part.CanCollide
+            end
+        end
+    end
+end
+
+saveOriginalCollisions() -- << ADD THIS after defining the function!
+
+-- Apply noclip (force CanCollide false)
+local function startNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+    end
+
+    saveOriginalCollisions()
+
+    noclipConnection = RunService.Stepped:Connect(function()
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+-- Restore original collision
+local function stopNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+        noclipConnection = nil
+    end
+    for part, canCollide in pairs(originalCollisions) do
+        if part and part:IsA("BasePart") then
+            part.CanCollide = canCollide
+        end
+    end
+    originalCollisions = {}
+end
+
+-- When toggle is changed
+Toggle:OnChanged(function()
+    if Toggle.Value then
+        startNoclip()
+    else
+        stopNoclip()
+    end
+end)
+
+-- Handle respawn
+LocalPlayer.CharacterAdded:Connect(function()
+    repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+    saveOriginalCollisions()
+
+    if Toggle.Value then
+        startNoclip()
+    end
+end)
+
+Toggle:SetValue(false)
+
+
+-- Initialize variables
+local speedEnabled = false
+local jumpEnabled = false
+local desiredSpeed = 16 -- Default Roblox speed
+local defaultSpeed = 16
+local desiredJumpPower = 50 -- Default Roblox jump power
+local defaultJumpPower = 50
+local player = game.Players.LocalPlayer
+
+-- Function to set player speed
+local function setSpeed(speed)
+    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.WalkSpeed = speed
+    end
+end
+
+-- Function to set player jump power
+local function setJumpPower(jumpPower)
+    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.JumpPower = jumpPower
+    end
+end
+
+
+
+-- Monitor respawn to ensure speed and jump power persist
+player.CharacterAdded:Connect(function(character)
+    -- Wait for the character to load
+    repeat task.wait() until character:FindFirstChild("Humanoid")
+
+    -- Reapply speed if the toggle is on
+    if speedEnabled then
+        setSpeed(desiredSpeed)
+    end
+
+    -- Reapply jump power if the toggle is on
+    if jumpEnabled then
+        setJumpPower(desiredJumpPower)
+    end
+end)
+
+-- Toggle for Speed Control
+local SpeedToggle = Tabs.Misc:AddToggle("SpeedToggle", { Title = "Player Speed Boost", Default = false })
+
+SpeedToggle:OnChanged(function()
+    speedEnabled = SpeedToggle.Value
+
+    if speedEnabled then
+        -- Apply the current desired speed and start the monitoring loop
+        setSpeed(desiredSpeed)
+        task.spawn(function()
+            while speedEnabled do
+                if player.Character and player.Character:FindFirstChild("Humanoid") then
+                    if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                        setSpeed(desiredSpeed)
+                    end
+                end
+                task.wait(0.1)
+            end
+        end)
+    else
+-- Reset to default speed when toggled off
+        setSpeed(defaultSpeed)
+    end
+end)
+
+-- Slider for Speed Adjustment
+local SpeedSlider = Tabs.Misc:AddSlider("SpeedSlider", {
+    Title = "Player Speed",
+    Description = "Adjust your walk speed",
+    Default = 16,
+    Min = 1,
+    Max = 120, -- Increased max speed to 120
+    Rounding = 0,
+    Callback = function(Value)
+        desiredSpeed = Value
+        if speedEnabled then
+            setSpeed(desiredSpeed)
+        end
+    end,
+})
+SpeedSlider:SetValue(16) -- Set initial value
+
+
