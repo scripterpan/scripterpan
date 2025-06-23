@@ -1,6 +1,6 @@
-# All Supported game sources!! :D
+## Welcome to Pann Hub :DDD
 
-# Status
+### Status
 - 🟩 = Working fine!
 - 🟨 = Updating/Improving (May have some bugs
 - 🟥 = Discontinued (Detectable/Might not work)
