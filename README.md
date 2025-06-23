@@ -2,9 +2,9 @@
 
 ## discontinued script
 - Fisch (Too many error)
-- Sol's RNG (Don't know how to make auto walk + lazy af)
-- Blox Fruit (Im stupid AF)
-- The Rake Remastered (Im stupid AF + Good Anti Cheat)
+- Sol's RNG (Don't know how to make auto walk + lazy af + the game is dead now)
+- Blox Fruit (Im stupid af)
+- The Rake Remastered (Im stupid af + Good Anti Cheat)
 - The Mimic (Strongest Anti-Cheat using roblox byfron)
 
 ## Trying to make, update the script
