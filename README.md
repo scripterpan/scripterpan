@@ -21,9 +21,9 @@
 
 
 
-## Loader
+### Loader
 
 You can use our loader to use the script :P
 
 ```lua
-print("test")```
+print("test")
