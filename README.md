@@ -28,7 +28,13 @@ The list of the executor that (maybe) support the script :
 - Codex : https://codex.lol/
 - Arceus X : https://spdmteam.com/
 - Delta : https://deltaexploits.gg/android_dl
+- Trigon : https://trigonevo.com/android/
 - 
+
+
+### Executor that (maybe) support the script # Status
+
+
 
 #### This script is intended for use in controlled environments and may violate Roblox's Terms of Service. Use at your own risk!!
 
