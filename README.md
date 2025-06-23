@@ -23,16 +23,28 @@
 
 ## More supported game soon!
 
-### Supported Executor
+### Executor that (maybe) support the script, status
+- 🟩 = Fully Supported!
+- 🟨 = Maybe Support 🤔
+- 🟥 = Not Supported 😔 
+- 🟦 = idk, i haven't test it yet (Might support)🥀💔
+- 🔐 = Key System!
+- ❌🔐 = No Key system!
+
+### Supported Executor (Mobile, PC)
 The list of the executor that (maybe) support the script :
-- Codex : https://codex.lol/
-- Arceus X : https://spdmteam.com/
-- Delta : https://deltaexploits.gg/android_dl
-- Trigon : https://trigonevo.com/android/
-- 
+- Codex (Mobile) : https://codex.lol/
+- Arceus X (Mobile) : https://spdmteam.com/
+- Delta (Mobile) : https://deltaexploits.gg/android_dl
+- Trigon (Mobile) : https://trigonevo.com/android/
+- Vocalno (PC) : https://volcano.best/
+- KRNL (Mobile) : https://krnl.cat/
+- Vega X (Mobile) : https://vegax.gg/
+- Cryptic (Mobile) : https://getcryptic.net/
 
+## Wanted to see what executor is working/online right now? 
+Visit https://weao.xyz/ now!
 
-### Executor that (maybe) support the script # Status
 
 
 
