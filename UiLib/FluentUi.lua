@@ -1,4 +1,3 @@
-- Fluent ui Template
 repeat task.wait(0.25) until game:IsLoaded();
 getgenv().Image = "rbxassetid://118507736312114"; --put a asset id in here to make it work
 getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
