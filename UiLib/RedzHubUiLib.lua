@@ -1,7 +1,7 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
-  Title = "redz Hub : Blox Fruits",
+  Title = "redz Hub : GUI Library",
   SubTitle = "by redz9999",
   SaveFolder = "testando | redz lib v5.lua"
 })
