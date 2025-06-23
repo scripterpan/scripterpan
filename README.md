@@ -33,17 +33,17 @@
 
 ### Supported Executor (Mobile, PC)
 The list of the executor that (maybe) support the script :
-- Codex (Mobile) : https://codex.lol/
-- Arceus X (Mobile) : https://spdmteam.com/
-- Delta (Mobile) : https://deltaexploits.gg/android_dl
-- Trigon (Mobile) : https://trigonevo.com/android/
-- Vocalno (PC) : https://volcano.best/
-- KRNL (Mobile) : https://krnl.cat/
-- Vega X (Mobile) : https://vegax.gg/
-- Cryptic (Mobile) : https://getcryptic.net/
+- Codex (Mobile) 🟩🔐 : https://codex.lol/
+- Arceus X (Mobile) 🟦🔐 : https://spdmteam.com/
+- Delta (Mobile) 🟦🔐 : https://deltaexploits.gg/android_dl
+- Trigon (Mobile) 🟦🔐 : https://trigonevo.com/android/
+- Vocalno (PC) 🟦🔐 : https://volcano.best/
+- KRNL (Mobile) 🟦🔐 : https://krnl.cat/
+- Vega X (Mobile) 🟦🔐 : https://vegax.gg/
+- Cryptic (Mobile) 🟦🔐 : https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
-##### Visit https://weao.xyz/ now!
+#### Visit https://weao.xyz/ now!
 
 
 
