@@ -1,3 +1,4 @@
+-- Thanks to x2zu for ts bro (i haven't edit all of them)
 repeat task.wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 if not game:IsLoaded() then
     game.Loaded:Wait()
