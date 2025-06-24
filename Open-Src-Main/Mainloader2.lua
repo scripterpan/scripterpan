@@ -22,10 +22,6 @@ local games = {
     [4372130] = 'https://raw.githubusercontent.com/x2zu/loader/main/ObfSource/BloxFruits.lua', -- Blox Fruits
     [35860275] = 'https://raw.githubusercontent.com/x2zu/loader/refs/heads/main/ObfSource/OneTouch.lua', -- One Touch
     [34063840] = 'https://raw.githubusercontent.com/x2zu/loader/refs/heads/main/ObfSource/AnimeRising.lua', -- Anime Rising (Maintance)
-    [5096106] = 'https://raw.githubusercontent.com/x2zu/loader/main/ObfSource/AnimeRails.lua', -- Anime Rails
-    [35815907] = 'https://raw.githubusercontent.com/x2zu/loader/refs/heads/main/ObfSource/StealABrainrot.lua', -- Steal A Brainrot
-    [12836673] = 'https://raw.githubusercontent.com/x2zu/loader/refs/heads/main/ObfSource/BladeBall.lua', -- Blade Ball
-    [6042520] = 'https://raw.githubusercontent.com/x2zu/loader/refs/heads/main/ObfSource/99Nights.lua', -- 99 Nights
 }
 
 if games[creator] then
