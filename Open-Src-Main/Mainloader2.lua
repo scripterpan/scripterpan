@@ -7,7 +7,7 @@ end
 local StarterGui = game:GetService("StarterGui")
 
 StarterGui:SetCore("SendNotification", {
-    Title = "Loader";
+    Title = "Pann Loader";
     Text = "Supported game!";
     Duration = 5;
 })
@@ -30,7 +30,7 @@ local games = {
 
 if games[creator] then
     StarterGui:SetCore("SendNotification", {
-        Title = "Loader";
+        Title = "Pann Loader";
         Text = "Loading,  Please wait..";
         Duration = 5;
     })
@@ -38,7 +38,7 @@ if games[creator] then
     loadstring(game:HttpGet(games[creator]))()
 else
     StarterGui:SetCore("SendNotification", {
-        Title = "Loader";
+        Title = "Pann Loader";
         Text = "Unsupported game.";
         Duration = 5;
     })
