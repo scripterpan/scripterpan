@@ -237,7 +237,7 @@ local Options = Fluent.Options
     Input:OnChanged(function()
         print("Input updated:", Input.Value)
     end)
-end
+
 
 
 -- Addons:
