@@ -7,7 +7,7 @@ local StarterGui = game:GetService("StarterGui")
 
 StarterGui:SetCore("SendNotification", {
     Title = "Pann Loader";
-    Text = "Supported game!";
+    Text = "Checking if this game support or not!";
     Duration = 5;
 })
 
@@ -22,10 +22,14 @@ local games = {
     [33541525] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/7DTL.lua', -- 7 Days To Live
 }
 
+
+task.wait(1.5)
+
+
 if games[creator] then
     StarterGui:SetCore("SendNotification", {
         Title = "Pann Loader";
-        Text = "Loading,  Please wait..";
+        Text = "Supported, Loading, Please wait..";
         Duration = 5;
     })
 
