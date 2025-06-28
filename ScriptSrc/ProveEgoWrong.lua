@@ -86,8 +86,7 @@ end)
 
 
 
--- CFrame positions to teleport to
--- Get all target parts dynamically
+-- === TELEPORT TARGETS SETUP ===
 local teleportTargets = {
     workspace.Map.Tycoons["jauy4528N's Tycoon"].Tables["Table 13"],
     workspace.Map.Tycoons["jauy4528N's Tycoon"].Tables["Table 13_2"],
@@ -102,10 +101,10 @@ local teleportTargets = {
 local teleporting = false
 local teleportDelay = 1
 
--- Add delay slider
-local TeleportDelaySlider = Tabs.Main:AddSlider("TeleportDelay", {
+-- === SLIDER: Teleport Delay ===
+Tabs.Main:AddSlider("TeleportDelay", {
     Title = "Teleport Delay (s)",
-    Description = "Delay between random teleports",
+    Description = "Delay between each random teleport",
     Default = 1,
     Min = 0.1,
     Max = 5,
@@ -115,24 +114,42 @@ local TeleportDelaySlider = Tabs.Main:AddSlider("TeleportDelay", {
     end
 })
 
--- Add toggle to start teleporting
+-- === TOGGLE: Enable Auto Teleport ===
 Tabs.Main:AddToggle("AutoTeleport", {
     Title = "Random Table Teleport",
-    Description = "Teleport to a random table dynamically",
+    Description = "Teleport to a random table every few seconds",
     Default = false
 }):OnChanged(function(value)
     teleporting = value
     if teleporting then
         task.spawn(function()
             while teleporting do
-                local char = game.Players.LocalPlayer.Character
-                if char and char:FindFirstChild("HumanoidRootPart") then
+                local player = game.Players.LocalPlayer
+                local char = player.Character or player.CharacterAdded:Wait()
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+
+                if hrp then
                     local randomTable = teleportTargets[math.random(1, #teleportTargets)]
-                    if randomTable and randomTable:IsA("BasePart") then
-                        char:MoveTo(randomTable.Position)
-                        char.HumanoidRootPart.CFrame = randomTable.CFrame
+                    if randomTable then
+                        -- make sure the player is movable
+                        hrp.Anchored = false
+
+                        if char:FindFirstChildOfClass("Humanoid") then
+                            char:FindFirstChildOfClass("Humanoid").Sit = false
+                        end
+
+                        -- teleport depending on object type
+                        if randomTable:IsA("Model") then
+                            local part = randomTable.PrimaryPart or randomTable:FindFirstChildWhichIsA("BasePart")
+                            if part then
+                                hrp.CFrame = part.CFrame
+                            end
+                        elseif randomTable:IsA("BasePart") then
+                            hrp.CFrame = randomTable.CFrame
+                        end
                     end
                 end
+
                 task.wait(teleportDelay)
             end
         end)
