@@ -20,6 +20,7 @@
 - 7 Days To Live 🟦
 - Survive Job Application 🟩
 - Universal 🟨
+- Own Blue Lock And Prove Ego Wrong 🟦
 
 ## More supported game soon!
 
