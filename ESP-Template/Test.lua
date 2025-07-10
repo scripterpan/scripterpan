@@ -22,7 +22,7 @@ return function(targetModel, color)
         gui.Name = "ESP_NameGui"
         gui.Adornee = model:FindFirstChild("HumanoidRootPart") or model:FindFirstChildWhichIsA("BasePart")
         gui.Size = UDim2.new(0, 60, 0, 20) -- Text Size
-        gui.StudsOffset = Vector3.new(0, 2.5, 0)
+        gui.StudsOffset = Vector3.new(0, 0, 0)
         gui.AlwaysOnTop = true
         gui.Parent = model
 
