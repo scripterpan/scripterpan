@@ -46,6 +46,7 @@ local settings = {}
 if isfile("PannHubNl/Settings.json") then
     settings = HttpService:JSONDecode(readfile("PannHubNl/Settings.json"))
 else
+    settings = {CollectCoins = false, FB = false, AutoWin = false}
     makefolder("PannHubNl")
     writefile("PannHubNl/Settings.json", HttpService:JSONEncode(settings))
 end
@@ -140,7 +141,7 @@ Tabs.Main:AddButton({
 })
 
 Tabs.Main:AddButton({
-    Title = "All-In-One (Collect notes and TP to Door)",
+    Title = "Auto Win (Collect notes and TP to Door)",
     Callback = function()
         for i = 1, 3 do
             CollectNotes()
@@ -154,12 +155,12 @@ Tabs.Main:AddButton({
 })
 
 
-local allInOneRunning = false
+local AutoWin = false
 Tabs.Main:AddToggle("AutoAllInOne", {
-    Title = "All-In-One (Toggle)",
-    Default = false
+    Title = "Full Auto Win (Toggle)",
+    Default = settings.AutoWin
 }):OnChanged(function(val)
-    allInOneRunning = val
+    settings.AutoWin = val
     if val then
         task.spawn(function()
             while allInOneRunning and task.wait(0.4) do
@@ -176,14 +177,14 @@ end)
 -- Settings Toggles
 Tabs.Settings:AddToggle("CoinToggle", {
     Title = "Collect Coins",
-    Default = false
+    Default = settings.CollectCoins
 }):OnChanged(function(val)
     settings.CollectCoins = val
 end)
 
 Tabs.Settings:AddToggle("FullBright", {
     Title = "Full Bright",
-    Default = false
+    Default = settings.FB
 }):OnChanged(function(val)
     settings.FB = val
     game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
