@@ -16,7 +16,7 @@ return function(targetModel, color)
 
     task.spawn(function()
         while task.wait(1) do
-            if targetModel and targetModel:FindFirstChild("HumanoidRootPart") then
+            if targetModel then -- Works for anything: Parts, Models, Folders
                 attachHighlight(targetModel, color)
             end
         end
