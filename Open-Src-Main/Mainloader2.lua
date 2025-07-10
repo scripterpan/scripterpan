@@ -27,7 +27,7 @@ local games = {
 
 
 
-task.wait(5.5)
+task.wait(3.5)
 
 
 if games[creator] then
