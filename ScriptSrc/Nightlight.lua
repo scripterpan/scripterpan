@@ -155,7 +155,7 @@ Tabs.Main:AddButton({
 })
 
 
-local AutoWin = false
+
 Tabs.Main:AddToggle("AutoAllInOne", {
     Title = "Full Auto Win (Toggle)",
     Default = settings.AutoWin
@@ -163,7 +163,7 @@ Tabs.Main:AddToggle("AutoAllInOne", {
     settings.AutoWin = val
     if val then
         task.spawn(function()
-            while allInOneRunning and task.wait(0.4) do
+            while settings.AutoWin and task.wait(0.4) do
                 CollectNotes()
                 if settings.CollectCoins then
                     CollectCoins()
