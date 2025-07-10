@@ -14,9 +14,9 @@ local Window = WindUI:CreateWindow({
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
-    
-    },
-  Window:EditOpenButton({
+})
+
+Window:EditOpenButton({
     Title = "Open Example UI",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
@@ -28,7 +28,58 @@ local Window = WindUI:CreateWindow({
     OnlyMobile = false,
     Enabled = true,
     Draggable = true,
+
+})   
+
+
+local Script = Window:Universal({
+    Title = "Universal Scriot",
+    Icon = "bird",
+    Locked = false,
 })
 
-    
+local Player = Window:Player({
+    Title = "Player",
+    Icon = "bird",
+    Locked = false,
+    })
+
+local Aim = Window:Aimbot({
+    Title = "Aimbot",
+    Icon = "bird",
+    Locked = false,
 })
+
+local ESP = Window:ESP({
+    Title = "ESP",
+    Icon = "bird",
+    Locked = false,
+})
+
+local Other = Window:Other({
+    Title = "Other",
+    Icon = "bird",
+    Locked = false,
+})
+
+
+local Dialog = Window:Dialog({
+    Icon = "bird",
+    Title = "yes",
+    Content = "Content Text",
+    Buttons = {
+        {
+            Title = "Confirm",
+            Callback = function()
+                print("Confirmed!")
+            end,
+        },
+        {
+            Title = "Cancel",
+            Callback = function()
+                print("Cancelled!")
+            end,
+        },
+    },
+})
+
