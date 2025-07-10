@@ -224,8 +224,8 @@ task.spawn(function()
                 createHighlight("Midnight", midnight)
             end
             
-            local midnight = workspace:FindFirstChild("Eyesight")
-            if midnight and midnight:FindFirstChild("Humanoid") and eyesight:FindFirstChild("HumanoidRootPart") then
+            local eyesight = workspace:FindFirstChild("Eyesight")
+            if eyesight and eyesight:FindFirstChild("Humanoid") and eyesight:FindFirstChild("HumanoidRootPart") then
                 createHighlight("Eyesight", eyesight)
             end
         else
