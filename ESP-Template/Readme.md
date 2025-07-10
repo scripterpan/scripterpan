@@ -235,11 +235,34 @@ end
 - `GetChildren()` gets all coin parts inside that folder to highlight each.
 
 
+---
 
+## 🪙 Special Case: ESP for Coins (Nested Parts)
 
+Sometimes objects like Coins are inside **models**, e.g.:
+
+workspace.House.Coins.Coin_10
+
+If you do this:
+
+espLib(workspace.House.Coins, Color3.fromRGB(255, 255, 0))
+
+Nothing will show, because `workspace.House.Coins` is a folder and it has models inside.
+
+✅ Correct Usage:
+
+for _, coinModel in pairs(workspace.House.Coins:GetChildren()) do
+    local coinPart = coinModel:FindFirstChildWhichIsA("BasePart")
+    if coinPart then
+        espLib(coinPart, Color3.fromRGB(255, 255, 0))
+    end
+end
+
+This will ESP all the visible coin parts inside the models.
 
 
 ---
+
 
 ## ✅ Example Full Script (Multiple Target)
 
