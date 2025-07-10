@@ -163,7 +163,7 @@ Tabs.Main:AddToggle("AutoAllInOne", {
     settings.AutoWin = val
     if val then
         task.spawn(function()
-            while settings.AutoWin and task.wait(0.4) do
+            while settings.AutoWin and task.wait(0.25) do
                 CollectNotes()
                 
                 Exit()
