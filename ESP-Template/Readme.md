@@ -25,38 +25,13 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 ---
 
 ### 2. Use the ESP Function 
-#### There's like a multiple target version and single target version for this
-
-## ❗IMPORTANT❗ 
-Put this below the loadstring first ❗❗Single Target Only❗❗
-
-```lua
-local target = workspace:WaitForChild("Example")  -- Change to the model you want to highlight
-local color = Color3.fromRGB(255, 0, 0) -- Your highlights color
-```
-
----
-
-#### Activate The ESP (Single Target)
-
-```lua
-espLib(target, color)
-```
-
----
-
-#### Activate The ESP (Multiple Target)
 
 
 ```lua
 espLib(workspace.Beta, Color3.fromRGB(255, 0, 0)) -- Red highlight for monster/ghost
 espLib(workspace.Midnight, Color3.fromRGB(255, 0, 0)) -- Another red ESP
-espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an item
 ```
 
----
-
-#### Full Script Example Of Both Single And Multiple At The End
 ---
 
 ## 🎨 ESP Colors
@@ -274,17 +249,6 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
 espLib(workspace:WaitForChild("Midnight"), Color3.fromRGB(255, 0, 0))
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
-```
-
-## ✅ Example Full Script (Single Target)
-
-```lua
-local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
-
-local target = workspace:WaitForChild("Example")  -- Change to the model you want to highlight
-local color = Color3.fromRGB(255, 0, 0)
-
-espLib(target, color)
 ```
 
 ---
