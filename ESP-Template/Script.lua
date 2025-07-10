@@ -1,24 +1,31 @@
-return function(targetModel, color)
-    local function attachHighlight(model, color)
-        if model:FindFirstChild("ESP_Highlight") then
-            model.ESP_Highlight:Destroy()
-        end
+--// ESP Template Script
 
-        local h = Instance.new("Highlight")
-        h.Name = "ESP_Highlight"
-        h.FillColor = color or Color3.fromRGB(255, 0, 0)
-        h.OutlineColor = Color3.fromRGB(255, 255, 255)
-        h.FillTransparency = 0.5
-        h.OutlineTransparency = 0
-        h.Adornee = model
-        h.Parent = model
+local function createESP(target, color)
+    if not target then return end
+
+    local function addHighlight(obj)
+        if not obj:FindFirstChildOfClass("Highlight") then
+            local hl = Instance.new("Highlight")
+            hl.Name = "ESP_Highlight"
+            hl.FillColor = color or Color3.fromRGB(255, 0, 0)
+            hl.OutlineTransparency = 1
+            hl.FillTransparency = 0.3
+            hl.Parent = obj
+        end
     end
 
+    addHighlight(target)
+
+    -- Keep refreshing in case the object respawns
     task.spawn(function()
         while task.wait(1) do
-            if targetModel and targetModel:FindFirstChild("HumanoidRootPart") then
-                attachHighlight(targetModel, color)
+            if target and target.Parent then
+                addHighlight(target)
             end
         end
     end)
+end
+
+return function(target, color)
+    createESP(target, color)
 end
