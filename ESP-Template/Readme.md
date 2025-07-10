@@ -38,7 +38,7 @@ espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an ite
 
 espLib(target, color)
 -- Like below
-espLib(Beta, 255,0,0)
+-- espLib(Beta, 255, 0, 0)
 
 ```
 
@@ -252,7 +252,7 @@ GetChildren() gets all coin parts inside that folder to highlight each.
 
 ---
 
-## ✅ Example Full Script
+## ✅ Example Full Script (Multiple Target)
 
 ```lua
 local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
@@ -260,9 +260,15 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
 espLib(workspace:WaitForChild("Midnight"), Color3.fromRGB(255, 0, 0))
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
+```
+
+## ✅ Example Full Script (Single Target)
+
+```lua
+local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+
 
 espLib(target, color)
-```
 
 ---
 
