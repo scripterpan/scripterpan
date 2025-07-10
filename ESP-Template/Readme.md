@@ -285,4 +285,5 @@ Use it, modify it, improve it — just don’t resell it.
 
 Made with ❤️ by Pann
 Check out my full hub or GUI projects:  
-👉 [My Profile](https://github.com/scripterpan) \n👉 Discord : floppapan9287
+👉 [My Profile](https://github.com/scripterpan)
+👉 Discord : floppapan9287
