@@ -165,9 +165,7 @@ Tabs.Main:AddToggle("AutoAllInOne", {
         task.spawn(function()
             while settings.AutoWin and task.wait(0.4) do
                 CollectNotes()
-                if settings.CollectCoins then
-                    CollectCoins()
-                end
+                
                 Exit()
             end
         end)
