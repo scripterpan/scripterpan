@@ -163,14 +163,14 @@ Then grab the index number from the output and apply ESP to it.
 
 ---
 
-📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
+# 📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
 
-GetChildren()
+## GetChildren()
 
 What it does:
 Returns an array (table) of all immediate child instances of a Roblox Instance (like a Folder, Model, or Workspace).
 
-Example:
+## Example:
 
 ```lua
 local children = workspace.SomeFolder:GetChildren()
@@ -181,20 +181,20 @@ end
 
 This prints the names of all direct children inside SomeFolder.
 
-Important:
+## Important:
 GetChildren() only returns children that are one level down — it does not return grandchildren or deeper descendants.
 
 
 
 ---
 
-FindFirstChild(name)
+## FindFirstChild(name)
 
-What it does:
+## What it does:
 Looks for the first child of the instance with the specified name.
 If found, it returns the child instance; otherwise, it returns nil.
 
-Example:
+## Example:
 
 ```lua
 local part = workspace.SomeModel:FindFirstChild("HumanoidRootPart")
@@ -206,24 +206,24 @@ end
 ```
 
 
-Why use it:
+## Why use it:
 It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on nil.
 
 
 
 ---
 
-When to Use Which?
+## When to Use Which?
 
-Use GetChildren() when you want to loop through all immediate children and do something with each.
+## Use GetChildren() when you want to loop through all immediate children and do something with each.
 
-Use FindFirstChild(name) when you want to access a specific child by name but aren’t sure if it exists.
+## Use FindFirstChild(name) when you want to access a specific child by name but aren’t sure if it exists.
 
 
 
 ---
 
-Example in ESP Context
+## Example in ESP Context
 
 Suppose you want to highlight all parts inside a folder named "Coins":
 
@@ -238,16 +238,11 @@ end
 ```
 
 
-Here:
+## Here:
 
 FindFirstChild("Coins") safely checks if "Coins" folder exists.
 
 GetChildren() gets all coin parts inside that folder to highlight each.
-
-
-
----
-
 
 
 
@@ -290,5 +285,4 @@ Use it, modify it, improve it — just don’t resell it.
 
 Made with ❤️ by Pann
 Check out my full hub or GUI projects:  
-👉 [My Profile](https://github.com/scripterpan)
-👉 Discord : floppapan9287
+👉 [My Profile](https://github.com/scripterpan) \n👉 Discord : floppapan9287
