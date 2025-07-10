@@ -153,7 +153,7 @@ Then grab the index number from the output and apply ESP to it.
 
 ---
 
-# 📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
+## 📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
 
 ## GetChildren()
 
