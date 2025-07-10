@@ -28,12 +28,14 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 #### There's like a multiple target version and single target version for this
 
 ## ❗IMPORTANT❗ 
-Put this below the loadstring first
+Put this below the loadstring first ❗❗Single Target Only❗❗
 
 ```lua
 local target = workspace:WaitForChild("Example")  -- Change to the model you want to highlight
 local color = Color3.fromRGB(255, 0, 0) -- Your highlights color
 ```
+
+---
 
 #### Activate The ESP (Single Target)
 
@@ -41,6 +43,7 @@ local color = Color3.fromRGB(255, 0, 0) -- Your highlights color
 espLib(target, color)
 ```
 
+---
 
 #### Activate The ESP (Multiple Target)
 
@@ -51,7 +54,7 @@ espLib(workspace.Midnight, Color3.fromRGB(255, 0, 0)) -- Another red ESP
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an item
 ```
 
-
+---
 
 #### Full Script Example Of Both Single And Multiple At The End
 ---
