@@ -212,7 +212,7 @@ end
 
 
 ### Why use it:
-It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on *nil*.
+It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on **nil**.
 
 
 
@@ -321,7 +321,7 @@ end
   - `loadstring`
   - `game:HttpGet`
 - No special parts needed (no Humanoid, no RootPart)
-- *15% Scripting Experience*
+- **15% Scripting Experience**
 
 ---
 
