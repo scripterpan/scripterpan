@@ -21,6 +21,7 @@
 - Survive Job Application 🟩
 - Universal 🟨
 - Own Blue Lock And Prove Ego Wrong 🟦
+- Nightlight (Horror) 🟩
 
 ## More supported game soon!
 
