@@ -2,7 +2,9 @@
 
 Check out [Example](https://github.com/scripterpan/scripterpan/blob/main/ESP-Template/Example.lua) for the esp example!
 
-### Copy this script to use it! (if you're lazy to go to example lol) Also check out the tutorial below!  P.S doesn't work for player
+### Copy this script to use it! (if you're lazy to go to example lol) 
+### Also check out the tutorial below! 
+### P.S doesn't work for player
 
 
 
