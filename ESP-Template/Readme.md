@@ -28,8 +28,23 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 
 
 ```lua
+-- Normal ESP
 espLib(workspace.Beta, Color3.fromRGB(255, 0, 0)) -- Red highlight for monster/ghost
 espLib(workspace.Midnight, Color3.fromRGB(255, 0, 0)) -- Another red ESP
+
+-- Loop ESP for all "Item Name" (i use match because i was making this in nightlight lol)
+for _, match in pairs(workspace.Matches:GetChildren()) do
+    espLib(match, Color3.fromRGB(255, 255, 0))
+end
+
+
+-- ESP "Item" Inside The Model
+for _, coinModel in pairs(workspace.House.Coins:GetChildren()) do
+    local coinPart = coinModel:FindFirstChildWhichIsA("BasePart")
+    if coinPart then
+        espLib(coinPart, Color3.fromRGB(255, 255, 0))
+    end
+end
 ```
 
 ---
@@ -153,14 +168,14 @@ Then grab the index number from the output and apply ESP to it.
 
 ---
 
-## 📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
+## 📚 Understanding `GetChildren()` and `FindFirstChild()` in Roblox Lua
 
-## GetChildren()
+### GetChildren()
 
-What it does:
-Returns an array (table) of all immediate child instances of a Roblox Instance (like a Folder, Model, or Workspace).
+### What it does:
+Returns an array (table) of all `immediate` child instances of a Roblox Instance (like a Folder, Model, or Workspace).
 
-## Example:
+### Example:
 
 ```lua
 local children = workspace.SomeFolder:GetChildren()
@@ -178,13 +193,13 @@ GetChildren() only returns children that are one level down — it does not retu
 
 ---
 
-## FindFirstChild(name)
+### FindFirstChild(name)
 
-## What it does:
-Looks for the first child of the instance with the specified name.
+### What it does:
+Looks for the `first` child of the instance with the specified name.
 If found, it returns the child instance; otherwise, it returns nil.
 
-## Example:
+### Example:
 
 ```lua
 local part = workspace.SomeModel:FindFirstChild("HumanoidRootPart")
@@ -196,14 +211,14 @@ end
 ```
 
 
-## Why use it:
-It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on nil.
+### Why use it:
+It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on *nil*.
 
 
 
 ---
 
-## When to Use Which?
+### When to Use Which?
 
 - Use `GetChildren()` when you want to loop through all immediate children and do something with each.
 
@@ -241,11 +256,15 @@ end
 
 Sometimes objects like Coins are inside **models**, e.g.:
 
+```lua
 workspace.House.Coins.Coin_10
+```
 
 If you do this:
 
+```lua
 espLib(workspace.House.Coins, Color3.fromRGB(255, 255, 0))
+```
 
 Nothing will show, because `workspace.House.Coins` is a folder and it has models inside.
 
@@ -274,6 +293,24 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
 espLib(workspace:WaitForChild("Midnight"), Color3.fromRGB(255, 0, 0))
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
+
+-- Loop ESP for all notes
+for _, note in pairs(workspace.Notes:GetChildren()) do
+    espLib(note, Color3.fromRGB(255, 255, 0))
+end
+
+-- Loop ESP for all matches
+for _, match in pairs(workspace.Matches:GetChildren()) do
+    espLib(match, Color3.fromRGB(255, 255, 0))
+end
+
+-- ESP all coins inside models
+for _, coinModel in pairs(workspace.House.Coins:GetChildren()) do
+    local coinPart = coinModel:FindFirstChildWhichIsA("BasePart")
+    if coinPart then
+        espLib(coinPart, Color3.fromRGB(255, 255, 0))
+    end
+end
 ```
 
 ---
@@ -284,6 +321,7 @@ espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
   - `loadstring`
   - `game:HttpGet`
 - No special parts needed (no Humanoid, no RootPart)
+- *15% Scripting Experience*
 
 ---
 
