@@ -1,4 +1,7 @@
 -- Example
+-- This one is the old example it might work or not 
+-- You can lpok for the new example in readme.md
+
 
 local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
 
