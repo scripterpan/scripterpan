@@ -46,7 +46,7 @@ local settings = {}
 if isfile("PannHubNl/Settings.json") then
     settings = HttpService:JSONDecode(readfile("PannHubNl/Settings.json"))
 else
-    settings = { Animation1 = true, CollectCoins = false, FB = false }
+    settings = { CollectCoins = false, FB = true }
     makefolder("PannHubNl")
     writefile("PannHubNl/Settings.json", HttpService:JSONEncode(settings))
 end
@@ -158,12 +158,12 @@ Tabs.Main:AddButton({
 local allInOneRunning = false
 Tabs.Main:AddToggle("AutoAllInOne", {
     Title = "All-In-One (Toggle)",
-    Default = false
+    Default = true
 }):OnChanged(function(val)
     allInOneRunning = val
     if val then
         task.spawn(function()
-            while allInOneRunning and task.wait(0.45) do
+            while allInOneRunning and task.wait(0.4) do
                 CollectNotes()
                 if settings.CollectCoins then
                     CollectCoins()
