@@ -5,7 +5,7 @@ This is a simple ESP (highlight) script you can load into Roblox scripts to high
 -- How to use
 
 
-local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/esp.lua"))()
+local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
 
 local target = workspace:WaitForChild("Beta")  -- Change to the model you want to highlight
 local color = Color3.fromRGB(255, 0, 0)        -- Change to your preferred color
