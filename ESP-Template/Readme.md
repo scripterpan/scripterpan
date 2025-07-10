@@ -251,12 +251,14 @@ Nothing will show, because `workspace.House.Coins` is a folder and it has models
 
 ✅ Correct Usage:
 
+```lua
 for _, coinModel in pairs(workspace.House.Coins:GetChildren()) do
     local coinPart = coinModel:FindFirstChildWhichIsA("BasePart")
     if coinPart then
         espLib(coinPart, Color3.fromRGB(255, 255, 0))
     end
 end
+```
 
 This will ESP all the visible coin parts inside the models.
 
@@ -264,7 +266,7 @@ This will ESP all the visible coin parts inside the models.
 ---
 
 
-## ✅ Example Full Script (Multiple Target)
+## ✅ Example Full Script
 
 ```lua
 local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
