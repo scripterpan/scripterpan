@@ -1,6 +1,6 @@
 --ESP Module for Roblox
 
-This is a simple ESP (highlight) script you can load into Roblox scripts to highlight any model with a glowing outline.
+--This is a simple ESP (highlight) script you can load into Roblox scripts to highlight any model with a glowing outline.
 
 -- How to use
 
