@@ -157,7 +157,7 @@ Tabs.Main:AddButton({
 local allInOneRunning = false
 Tabs.Main:AddToggle("AutoAllInOne", {
     Title = "All-In-One (Toggle)",
-    Default = true
+    Default = false
 }):OnChanged(function(val)
     allInOneRunning = val
     if val then
