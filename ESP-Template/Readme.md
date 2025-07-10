@@ -1,3 +1,3 @@
-# Welcome to My Roblox ESP Repo!
+# Welcome to My Roblox ESP Template!
 
-Check out my [Awesome Website](https://example.com) for more cool scripts!
+Check out [Example](https://github.com/scripterpan/scripterpan/blob/main/ESP-Template/Example.lua) for tutorials!
