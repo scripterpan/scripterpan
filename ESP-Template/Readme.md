@@ -195,6 +195,8 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
 espLib(workspace:WaitForChild("Midnight"), Color3.fromRGB(255, 0, 0))
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
+
+espLib(target, color)
 ```
 
 ---
