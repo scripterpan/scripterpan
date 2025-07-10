@@ -190,6 +190,64 @@ Tabs.Settings:AddToggle("FullBright", {
     game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
 end)
 
+
+-- Monster ESP (Highlight for Beta & Midnight with auto-respawn support)
+local monsterESPEnabled = false
+local highlights = {}
+
+local function createHighlight(name, model)
+    if highlights[name] then
+        highlights[name]:Destroy()
+        highlights[name] = nil
+    end
+    if model then
+        local h = Instance.new("Highlight")
+        h.Name = name .. "_Highlight"
+        h.FillColor = Color3.fromRGB(255, 0, 0) -- 🔴 Red glow for monsters
+        h.OutlineColor = Color3.fromRGB(255, 255, 255)
+        h.FillTransparency = 0.5
+        h.OutlineTransparency = 0
+        h.Adornee = model
+        h.Parent = game:GetService("CoreGui")
+        highlights[name] = h
+    end
+end
+
+task.spawn(function()
+    while task.wait(0.5) do
+        if monsterESPEnabled then
+            local beta = workspace:FindFirstChild("Beta")
+            if beta and beta:FindFirstChild("Humanoid") and beta:FindFirstChild("HumanoidRootPart") then
+                createHighlight("Beta", beta)
+            end
+
+            local midnight = workspace:FindFirstChild("Midnight")
+            if midnight and midnight:FindFirstChild("Humanoid") and midnight:FindFirstChild("HumanoidRootPart") then
+                createHighlight("Midnight", midnight)
+            end
+            
+            local midnight = workspace:FindFirstChild("Eyesight")
+            if midnight and midnight:FindFirstChild("Humanoid") and eyesight:FindFirstChild("HumanoidRootPart") then
+                createHighlight("Eyesight", eyesight)
+            end
+        else
+            for _, h in pairs(highlights) do
+                h:Destroy()
+            end
+            highlights = {}
+        end
+    end
+end)
+
+Tabs.Settings:AddToggle("MonsterESP", {
+    Title = "Monster ESP",
+    Default = false
+}):OnChanged(function(val)
+    monsterESPEnabled = val
+end)
+
+
+
 -- Save settings on leave
 game.Players.PlayerRemoving:Connect(function(p)
     if p == lp then
