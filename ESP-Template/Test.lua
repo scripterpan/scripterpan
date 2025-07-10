@@ -1,6 +1,5 @@
 return function(targetModel, color)
     local function attachHighlightAndName(model, color)
-        -- Clean up old ESP components
         if model:FindFirstChild("ESP_Highlight") then
             model.ESP_Highlight:Destroy()
         end
@@ -18,12 +17,12 @@ return function(targetModel, color)
         h.Adornee = model
         h.Parent = model
 
-        -- Billboard Name Tag
+        -- Billboard Name Tag (smaller)
         local gui = Instance.new("BillboardGui")
         gui.Name = "ESP_NameGui"
         gui.Adornee = model:FindFirstChild("HumanoidRootPart") or model:FindFirstChildWhichIsA("BasePart")
-        gui.Size = UDim2.new(0, 100, 0, 40)
-        gui.StudsOffset = Vector3.new(0, 3, 0)
+        gui.Size = UDim2.new(0, 60, 0, 20) -- Text Size
+        gui.StudsOffset = Vector3.new(0, 2.5, 0)
         gui.AlwaysOnTop = true
         gui.Parent = model
 
@@ -34,7 +33,7 @@ return function(targetModel, color)
         label.TextColor3 = color or Color3.fromRGB(255, 0, 0)
         label.TextStrokeTransparency = 0.5
         label.TextScaled = true
-        label.Font = Enum.Font.GothamBold
+        label.Font = Enum.Font.GothamSemibold
         label.Parent = gui
     end
 
