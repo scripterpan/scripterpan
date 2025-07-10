@@ -1,26 +1,4 @@
-## Welcome to Pann's Roblox ESP Template!
-
-Check out [Example](https://github.com/scripterpan/scripterpan/blob/main/ESP-Template/Example.lua) for the esp example!
-
-### Copy this script to use it! (if you're lazy to go to example lol) 
-### Also check out the tutorial below! 
-### P.S doesn't work for player
-
-
-
-```lua
-local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
-
-local target = workspace:WaitForChild("Beta")  -- Change to the model you want to highlight
-local color = Color3.fromRGB(255, 0, 0)        -- Change to your preferred color
-
-espLib(target, color)  -- Activates ESP on the target
-```
-
-
-# TEST
-
-# 🔦 Roblox ESP Highlight Script
+# 🔦 Roblox ESP Highlight Script By Pann
 
 A simple, flexible ESP (Extra Sensory Perception) library for Roblox that adds glow effects to any object using Roblox's built-in `Highlight`.
 
@@ -59,6 +37,9 @@ espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an ite
 ```lua
 
 espLib(target, color)
+-- Like below
+-- espLib(Beta, 255,0,0)
+
 ```
 
 ---
@@ -179,6 +160,94 @@ end
 Then grab the index number from the output and apply ESP to it.
 
 ---
+
+---
+
+📚 Understanding GetChildren() and FindFirstChild() in Roblox Lua
+
+GetChildren()
+
+What it does:
+Returns an array (table) of all immediate child instances of a Roblox Instance (like a Folder, Model, or Workspace).
+
+Example:
+
+```lua
+local children = workspace.SomeFolder:GetChildren()
+for i, child in ipairs(children) do
+    print(child.Name)
+end
+```
+
+This prints the names of all direct children inside SomeFolder.
+
+Important:
+GetChildren() only returns children that are one level down — it does not return grandchildren or deeper descendants.
+
+
+
+---
+
+FindFirstChild(name)
+
+What it does:
+Looks for the first child of the instance with the specified name.
+If found, it returns the child instance; otherwise, it returns nil.
+
+Example:
+
+```lua
+local part = workspace.SomeModel:FindFirstChild("HumanoidRootPart")
+if part then
+    print("Found HumanoidRootPart!")
+else
+    print("HumanoidRootPart not found.")
+end
+```
+
+
+Why use it:
+It’s a safe way to check if a child exists before trying to use it. This prevents errors when accessing properties or methods on nil.
+
+
+
+---
+
+When to Use Which?
+
+Use GetChildren() when you want to loop through all immediate children and do something with each.
+
+Use FindFirstChild(name) when you want to access a specific child by name but aren’t sure if it exists.
+
+
+
+---
+
+Example in ESP Context
+
+Suppose you want to highlight all parts inside a folder named "Coins":
+
+
+```lua
+local coinsFolder = workspace:FindFirstChild("Coins")
+if coinsFolder then
+    for _, coin in pairs(coinsFolder:GetChildren()) do
+        espLib(coin, Color3.fromRGB(255, 255, 0)) -- highlight coin with yellow
+    end
+end
+```
+
+
+Here:
+
+FindFirstChild("Coins") safely checks if "Coins" folder exists.
+
+GetChildren() gets all coin parts inside that folder to highlight each.
+
+
+
+---
+
 
 
 
