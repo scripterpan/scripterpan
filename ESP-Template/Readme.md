@@ -49,9 +49,16 @@ local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/script
 ### 2. Use the ESP Function
 
 ```lua
-espLib(workspace.Beta, Color3.fromRGB(255, 0, 0)) -- Red highlight for "Beta" monster
+espLib(workspace.Beta, Color3.fromRGB(255, 0, 0)) -- Red highlight for monster/ghost
 espLib(workspace.Midnight, Color3.fromRGB(255, 0, 0)) -- Another red ESP
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an item
+```
+
+# Activate The ESP
+
+```lua
+
+espLib(target, color)
 ```
 
 ---
