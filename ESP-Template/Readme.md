@@ -126,6 +126,67 @@ end
 
 ---
 
+## 🔢 ESP Using Indexes from `GetChildren()`
+
+If you know the exact position of the model or part in `workspace`,  
+you can grab it directly using:
+
+```lua
+local target = workspace:GetChildren()[54]
+espLib(target, Color3.fromRGB(255, 0, 0))
+```
+
+This is helpful when:
+
+- The object has no name
+- The name is shared with other items
+- You’re just testing or exploring with DEX or print logs
+
+> 🔁 You can also ESP a range of them like this:
+
+```lua
+for i = 50, 60 do
+    local obj = workspace:GetChildren()[i]
+    if obj then
+        espLib(obj, Color3.fromRGB(255, 0, 0))
+    end
+end
+```
+
+---
+
+> ⚠️ **Note:** Be careful with this method — object positions in `:GetChildren()` can change between server loads or updates.  
+If possible, prefer using names or folders instead:
+
+```lua
+for _, monster in pairs(workspace.Monsters:GetChildren()) do
+    espLib(monster, Color3.fromRGB(255, 0, 0))
+end
+```
+
+---
+
+## 🔍 How to Find the Index?
+
+Use a script like this to print all children with their indexes:
+
+```lua
+for i, v in pairs(workspace:GetChildren()) do
+    print(i, v.Name)
+end
+```
+
+Then grab the index number from the output and apply ESP to it.
+
+---
+
+
+
+
+
+
+---
+
 ## ✅ Example Full Script
 
 ```lua
@@ -159,3 +220,4 @@ Use it, modify it, improve it — just don’t resell it.
 Made with ❤️ by Pann
 Check out my full hub or GUI projects:  
 👉 [My Profile](https://github.com/scripterpan)
+👉 Discord : floppapan9287
