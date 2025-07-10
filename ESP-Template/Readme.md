@@ -230,9 +230,9 @@ It’s a safe way to check if a child exists before trying to use it. This preve
 
 ## When to Use Which?
 
-## Use GetChildren() when you want to loop through all immediate children and do something with each.
+- Use GetChildren() when you want to loop through all immediate children and do something with each.
 
-## Use FindFirstChild(name) when you want to access a specific child by name but aren’t sure if it exists.
+- Use FindFirstChild(name) when you want to access a specific child by name but aren’t sure if it exists.
 
 
 
@@ -255,9 +255,9 @@ end
 
 ## Here:
 
-FindFirstChild("Coins") safely checks if "Coins" folder exists.
+- FindFirstChild("Coins") safely checks if "Coins" folder exists.
 
-GetChildren() gets all coin parts inside that folder to highlight each.
+- GetChildren() gets all coin parts inside that folder to highlight each.
 
 
 
