@@ -37,9 +37,6 @@ espLib(workspace.Item, Color3.fromRGB(0, 255, 255)) -- Cyan highlight for an ite
 ```lua
 
 espLib(target, color)
--- Like below
--- espLib(Beta, 255, 0, 0)
-
 ```
 
 #### Full Script Example Of Both Single And Multiple At The End
