@@ -1,8 +1,9 @@
-# Welcome to My Roblox ESP Template!
+# Welcome to Pann's Roblox ESP Template!
 
 Check out [Example](https://github.com/scripterpan/scripterpan/blob/main/ESP-Template/Example.lua) for the esp example!
 
-### Copy this script to use it! (if you're lazy to go to example lol) Also check out the tutorial!
+### Copy this script to use it! (if you're lazy to go to example lol) Also check out the tutorial! (not work for player)
+
 
 
 ```lua
