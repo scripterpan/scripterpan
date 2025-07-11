@@ -1,9 +1,17 @@
-return function(targetModel, color)
+local espLib = {}
+local activeESP = {}
+
+function espLib.Apply(targetModel, color)
     local function attachHighlight(model, color)
+        -- Cleanup old ESP if exists
         if model:FindFirstChild("ESP_Highlight") then
             model.ESP_Highlight:Destroy()
         end
+        if model:FindFirstChild("ESP_NameGui") then
+            model.ESP_NameGui:Destroy()
+        end
 
+        -- Highlight
         local h = Instance.new("Highlight")
         h.Name = "ESP_Highlight"
         h.FillColor = color or Color3.fromRGB(255, 0, 0)
@@ -13,11 +21,11 @@ return function(targetModel, color)
         h.Adornee = model
         h.Parent = model
 
-        -- ShowName = True
+        -- Billboard Name
         local gui = Instance.new("BillboardGui")
         gui.Name = "ESP_NameGui"
         gui.Adornee = model:FindFirstChild("HumanoidRootPart") or model:FindFirstChildWhichIsA("BasePart")
-        gui.Size = UDim2.new(0, 50, 0, 20) -- Text Size
+        gui.Size = UDim2.new(0, 50, 0, 20)
         gui.StudsOffset = Vector3.new(0, 0, 0)
         gui.AlwaysOnTop = true
         gui.Parent = model
@@ -31,13 +39,32 @@ return function(targetModel, color)
         label.TextScaled = true
         label.Font = Enum.Font.GothamSemibold
         label.Parent = gui
+
+        -- Track it
+        table.insert(activeESP, model)
     end
 
     task.spawn(function()
         while task.wait(1) do
-            if targetModel then -- Works for anything: Parts, Models, Folders
+            if targetModel then
                 attachHighlight(targetModel, color)
             end
         end
     end)
+end
+
+function espLib:ClearAll()
+    for _, model in ipairs(activeESP) do
+        if model and model:FindFirstChild("ESP_Highlight") then
+            model.ESP_Highlight:Destroy()
+        end
+        if model and model:FindFirstChild("ESP_NameGui") then
+            model.ESP_NameGui:Destroy()
+        end
+    end
+    activeESP = {}
+end
+
+return function(model, color)
+    espLib.Apply(model, color)
 end
