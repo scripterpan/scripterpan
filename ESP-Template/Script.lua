@@ -3,7 +3,7 @@ local activeESP = {}
 
 function espLib.Apply(targetModel, color)
     local function attachHighlight(model, color)
-        -- Cleanup old ESP if exists
+        -- Cleanup old ESP
         if model:FindFirstChild("ESP_Highlight") then
             model.ESP_Highlight:Destroy()
         end
@@ -40,7 +40,7 @@ function espLib.Apply(targetModel, color)
         label.Font = Enum.Font.GothamSemibold
         label.Parent = gui
 
-        -- Track it
+        -- Track
         table.insert(activeESP, model)
     end
 
@@ -65,6 +65,4 @@ function espLib:ClearAll()
     activeESP = {}
 end
 
-return function(model, color)
-    espLib.Apply(model, color)
-end
+return espLib
