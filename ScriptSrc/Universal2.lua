@@ -34,7 +34,7 @@ Window:EditOpenButton({
 
 local Uni = Window:Tab({
     Title = "Universal Script",
-    Icon = "bird",
+    Icon = "scroll-text",
     Locked = false,
 
 
@@ -44,26 +44,26 @@ local Uni = Window:Tab({
 
 local Player = Window:Tab({
     Title = "Player",
-    Icon = "bird",
+    Icon = "users",
     Locked = false,
 })
 
 local Aim = Window:Tab({
     Title = "Aimbot",
-    Icon = "bird",
+    Icon = "crosshair",
     Locked = false,
 })
 
 local ESP = Window:Tab({
     Title = "ESP",
-    Icon = "bird",
+    Icon = "eye",
     Locked = false,
 })
 
 
 local Other = Window:Tab({
     Title = "Other",
-    Icon = "bird",
+    Icon = "badge-plus",
     Locked = false,
 })
 
@@ -116,6 +116,7 @@ local Button = Uni:Button({
  
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+local espConnections = {} -- store connections for cleanup
 local selectedColor = Color3.fromRGB(255, 255, 0) -- Default: Yellow
 
 local Dropdown = ESP:Dropdown({
@@ -137,6 +138,8 @@ local Dropdown = ESP:Dropdown({
 })
 
 
+
+
 local Toggle = ESP:Toggle({
     Title = "Player ESP",
     Desc = "Yea",
@@ -144,7 +147,10 @@ local Toggle = ESP:Toggle({
     Type = "Toggle",
     Default = false,
     Callback = function(state)
+        -- Helper: Apply ESP to a character model
         local function applyESP(model)
+            if not model then return end
+
             if model:FindFirstChild("ESP_Highlight") then model.ESP_Highlight:Destroy() end
             if model:FindFirstChild("ESP_NameTag") then model.ESP_NameTag:Destroy() end
 
@@ -176,32 +182,57 @@ local Toggle = ESP:Toggle({
             nameTag.Parent = model
         end
 
+        -- Remove ESP from character
+        local function removeESP(model)
+            if not model then return end
+            if model:FindFirstChild("ESP_Highlight") then model.ESP_Highlight:Destroy() end
+            if model:FindFirstChild("ESP_NameTag") then model.ESP_NameTag:Destroy() end
+        end
+
+        -- Apply to all current players
         local function updateAll()
             for _, plr in ipairs(Players:GetPlayers()) do
-                if plr ~= LocalPlayer and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+                if plr ~= LocalPlayer and plr.Character then
                     if state then
                         applyESP(plr.Character)
                     else
-                        if plr.Character:FindFirstChild("ESP_Highlight") then plr.Character.ESP_Highlight:Destroy() end
-                        if plr.Character:FindFirstChild("ESP_NameTag") then plr.Character.ESP_NameTag:Destroy() end
+                        removeESP(plr.Character)
                     end
                 end
             end
         end
 
+        -- Disconnect previous connections if toggled off
+        for _, conn in ipairs(espConnections) do
+            conn:Disconnect()
+        end
+        table.clear(espConnections)
+
         updateAll()
 
-        -- Auto apply on spawn
         if state then
+            -- Connect to future spawns for existing players
             for _, plr in ipairs(Players:GetPlayers()) do
                 if plr ~= LocalPlayer then
-                    plr.CharacterAdded:Connect(function(char)
+                    local conn = plr.CharacterAdded:Connect(function(char)
                         task.wait(1)
                         applyESP(char)
                     end)
+                    table.insert(espConnections, conn)
                 end
             end
+
+            -- Connect to new players
+            local conn = Players.PlayerAdded:Connect(function(plr)
+                if plr ~= LocalPlayer then
+                    local spawnConn = plr.CharacterAdded:Connect(function(char)
+                        task.wait(1)
+                        applyESP(char)
+                    end)
+                    table.insert(espConnections, spawnConn)
+                end
+            end)
+            table.insert(espConnections, conn)
         end
     end
 })
-
