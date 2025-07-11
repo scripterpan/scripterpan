@@ -46,9 +46,9 @@ The list of the executor that (maybe) support the script :
   - [**Codex** 🟩🔐](https://codex.lol/)
   - [**KRNL** 🟩🔐 ](https://krnl.cat)
   - [**Arceus X** 🟦🔐] (https://spdmteam.com/)
-  - [**Delta** 🟦🔐](https://deltaexploits.gg/android_dl
-  - [**Trigon** 🟦🔐]https://trigonevo.com/android/
-  - [**Vega X** 🟦🔐]https://vegax.gg/
+  - [**Delta** 🟦🔐](https://deltaexploits.gg/android_dl)
+  - [**Trigon** 🟦🔐]()
+  - [**Vega X** 🟦🔐]()
   - [**Cryptic** 🟦🔐]https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
