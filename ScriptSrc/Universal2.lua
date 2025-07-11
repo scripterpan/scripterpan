@@ -230,7 +230,6 @@ end
 -- Reapply on respawn
 player.CharacterAdded:Connect(function()
     repeat task.wait() until player.Character:FindFirstChild("Humanoid")
-
     if speedEnabled then setSpeed(desiredSpeed) end
     if jumpEnabled then setJumpPower(desiredJumpPower) end
     if gravityEnabled then setGravity(desiredGravity) end
@@ -279,8 +278,8 @@ SpeedSlider = Player:Slider({
     },
     Callback = function(val)
         desiredSpeed = val
-        if SpeedInput and SpeedInput.SetText then
-            SpeedInput:SetText(tostring(val))
+        if SpeedInput and SpeedInput.SetValue then
+            SpeedInput:SetValue(tostring(val))
         end
         if speedEnabled then
             setSpeed(desiredSpeed)
@@ -291,7 +290,7 @@ SpeedSlider = Player:Slider({
 -- SPEED INPUT
 SpeedInput = Player:Input({
     Title = "Set Walk Speed",
-    Desc = "Type your speed value here \nif you're lazy to do the slider (1–500)",
+    Desc = "Type your speed value here\nif you're lazy to use the slider (1–500)",
     Placeholder = tostring(defaultSpeed),
     InputIcon = "chevrons-up",
     Type = "Input",
@@ -348,8 +347,8 @@ JumpSlider = Player:Slider({
     },
     Callback = function(val)
         desiredJumpPower = val
-        if JumpInput and JumpInput.SetText then
-            JumpInput:SetText(tostring(val))
+        if JumpInput and JumpInput.SetValue then
+            JumpInput:SetValue(tostring(val))
         end
         if jumpEnabled then
             setJumpPower(desiredJumpPower)
@@ -360,7 +359,7 @@ JumpSlider = Player:Slider({
 -- JUMP INPUT
 JumpInput = Player:Input({
     Title = "Set Jump Power",
-    Desc = "Type jumppower here \nif you're lazy to do the slider (1–500)",
+    Desc = "Type jump power value\nif you're lazy to use the slider (1–500)",
     Placeholder = tostring(defaultJumpPower),
     InputIcon = "person-standing",
     Type = "Input",
@@ -382,7 +381,7 @@ JumpInput = Player:Input({
 -- GRAVITY TOGGLE
 local GravityToggle = Player:Toggle({
     Title = "Change Gravity",
-    Desc = "Change your gravity",
+    Desc = "Enable gravity override",
     Icon = "clock-arrow-down",
     Type = "Toggle",
     Default = false,
@@ -415,8 +414,8 @@ GravitySlider = Player:Slider({
     },
     Callback = function(val)
         desiredGravity = val
-        if GravityInput and GravityInput.SetText then
-            GravityInput:SetText(tostring(val))
+        if GravityInput and GravityInput.SetValue then
+            GravityInput:SetValue(tostring(val))
         end
         if gravityEnabled then
             setGravity(desiredGravity)
@@ -427,7 +426,7 @@ GravitySlider = Player:Slider({
 -- GRAVITY INPUT
 GravityInput = Player:Input({
     Title = "Set Gravity",
-    Desc = "Type Gravity Value Here \nif you're lazy to do the slider (0–500)",
+    Desc = "Type gravity value\nif you're lazy to use the slider (0–500)",
     Placeholder = tostring(defaultGravity),
     InputIcon = "clock-arrow-down",
     Type = "Input",
@@ -445,6 +444,7 @@ GravityInput = Player:Input({
         end
     end
 })
+
 
 
 
