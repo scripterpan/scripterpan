@@ -189,44 +189,60 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 
-
+-- Player Misc
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
+-- State
 local speedEnabled = false
 local jumpEnabled = false
+local gravityEnabled = false
 
+-- Default values
 local defaultSpeed = 16
-local desiredSpeed = 16
-
 local defaultJumpPower = 50
-local desiredJumpPower = 50
+local defaultGravity = 196.2
 
---  Utility: Set WalkSpeed
+-- Desired (editable)
+local desiredSpeed = defaultSpeed
+local desiredJumpPower = defaultJumpPower
+local desiredGravity = defaultGravity
+
+-- Apply Functions
 local function setSpeed(speed)
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = speed
     end
 end
 
---  Utility: Set JumpPower
 local function setJumpPower(power)
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.JumpPower = power
     end
 end
 
---  Reapply on respawn
-player.CharacterAdded:Connect(function(char)
-    repeat task.wait() until char:FindFirstChild("Humanoid")
+local function setGravity(g)
+    workspace.Gravity = g
+end
+
+-- Reapply on respawn
+player.CharacterAdded:Connect(function()
+    repeat task.wait() until player.Character:FindFirstChild("Humanoid")
+
     if speedEnabled then setSpeed(desiredSpeed) end
     if jumpEnabled then setJumpPower(desiredJumpPower) end
+    if gravityEnabled then setGravity(desiredGravity) end
 end)
 
--- Toggle: Speed
+-- Start Here
+local SpeedSlider, SpeedInput
+local JumpSlider, JumpInput
+local GravitySlider, GravityInput
+
+-- SPEED TOGGLE
 local SpeedToggle = Player:Toggle({
     Title = "Speed Boost",
-    Desc = "Enable walk speed boost",
+    Desc = "Enable speed boost",
     Icon = "chevrons-up",
     Type = "Toggle",
     Default = false,
@@ -250,28 +266,31 @@ local SpeedToggle = Player:Toggle({
     end
 })
 
--- Slider: Walk Speed (1-500)
-local SpeedSlider = Player:Slider({
+-- SPEED SLIDER
+SpeedSlider = Player:Slider({
     Title = "Walk Speed",
     Step = 1,
     Value = {
         Min = 1,
         Max = 500,
-        Default = 16,
+        Default = defaultSpeed,
     },
     Callback = function(val)
         desiredSpeed = val
+        if SpeedInput then
+            SpeedInput:SetValue(tostring(val))
+        end
         if speedEnabled then
             setSpeed(desiredSpeed)
         end
     end
 })
 
--- 🔤 Input: Walk Speed
-local SpeedInput = Player:Input({
+-- SPEED INPUT
+SpeedInput = Player:Input({
     Title = "Set Walk Speed",
-    Desc = "type speed here \n if you're lazy to do the slider (1-500)",
-    Placeholder = "16",
+    Desc = "Type your speed value here \nif you're lazy to do the slider (1–500)",
+    Placeholder = tostring(defaultSpeed),
     InputIcon = "chevrons-up",
     Type = "Input",
     Value = tostring(desiredSpeed),
@@ -287,7 +306,7 @@ local SpeedInput = Player:Input({
     end
 })
 
---Toggle: Jump Boost
+-- JUMP TOGGLE
 local JumpToggle = Player:Toggle({
     Title = "Jump Boost",
     Desc = "Enable jump boost",
@@ -298,34 +317,47 @@ local JumpToggle = Player:Toggle({
         jumpEnabled = state
         if state then
             setJumpPower(desiredJumpPower)
+            task.spawn(function()
+                while jumpEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.JumpPower ~= desiredJumpPower then
+                            setJumpPower(desiredJumpPower)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
         else
             setJumpPower(defaultJumpPower)
         end
     end
 })
 
--- Slider: Jump Power (1–500)
-local JumpSlider = Player:Slider({
-    Title = "JumpPower",
+-- JUMP SLIDER
+JumpSlider = Player:Slider({
+    Title = "Jump Power",
     Step = 1,
     Value = {
         Min = 1,
         Max = 500,
-        Default = 50,
+        Default = defaultJumpPower,
     },
     Callback = function(val)
         desiredJumpPower = val
+        if JumpInput then
+            JumpInput:SetValue(tostring(val))
+        end
         if jumpEnabled then
             setJumpPower(desiredJumpPower)
         end
     end
 })
 
---  Input: Jump Power
+-- JUMP INPUT
 local JumpInput = Player:Input({
-    Title = "Set JumpPower",
-    Desc = "type jumppower here \n if you're lazy to do the slider(1-500)",
-    Placeholder = "50",
+    Title = "Set Jump Power",
+    Desc = "Type jumppower here \nif you're lazy to do the slider (1–500)",
+    Placeholder = tostring(defaultJumpPower),
     InputIcon = "person-standing",
     Type = "Input",
     Value = tostring(desiredJumpPower),
@@ -336,6 +368,71 @@ local JumpInput = Player:Input({
             JumpSlider:SetValue(num)
             if jumpEnabled then
                 setJumpPower(desiredJumpPower)
+            end
+        end
+    end
+})
+
+-- GRAVITY TOGGLE
+local GravityToggle = Player:Toggle({
+    Title = "Change Gravity",
+    Desc = "Change your gravity",
+    Icon = "clock-arrow-down",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        gravityEnabled = state
+        if state then
+            setGravity(desiredGravity)
+            task.spawn(function()
+                while gravityEnabled do
+                    if workspace.Gravity ~= desiredGravity then
+                        setGravity(desiredGravity)
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setGravity(defaultGravity)
+        end
+    end
+})
+
+-- GRAVITY SLIDER
+local GravitySlider = Player:Slider({
+    Title = "Gravity Value",
+    Step = 1,
+    Value = {
+        Min = 0,
+        Max = 500,
+        Default = defaultGravity,
+    },
+    Callback = function(val)
+        desiredGravity = val
+        if GravityInput then
+            GravityInput:SetValue(tostring(val))
+        end
+        if gravityEnabled then
+            setGravity(desiredGravity)
+        end
+    end
+})
+
+-- GRAVITY INPUT
+local GravityInput = Player:Input({
+    Title = "Set Gravity",
+    Desc = "Type Gravity Value Here \nif you're lazy to do the slider (0–500)",
+    Placeholder = tostring(defaultGravity),
+    InputIcon = "clock-arrow-down",
+    Type = "Input",
+    Value = tostring(desiredGravity),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 0 and num <= 500 then
+            desiredGravity = num
+            GravitySlider:SetValue(num)
+            if gravityEnabled then
+                setGravity(desiredGravity)
             end
         end
     end
@@ -352,7 +449,7 @@ local JumpInput = Player:Input({
 
     
 
- 
+-- ESP 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local espConnections = {} -- store connections for cleanup
