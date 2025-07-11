@@ -7,7 +7,7 @@
 - 🟦 = New script/New game
 - 🟫⬛ = Too stupid to continue/make
 
-
+---
 
 ## Supported Game List
 - Fisch 🟥
@@ -25,6 +25,8 @@
 
 ## More supported game soon!
 
+---
+
 ### Executor that (maybe) support the script, status
 - 🟩 = Fully Supported!
 - 🟨 = Maybe Support 🤔
@@ -33,33 +35,45 @@
 - 🔐 = Key System!
 - ❌🔐 = No Key system!
 
+---
+
 ### Supported Executor (Mobile, PC)
 The list of the executor that (maybe) support the script :
-- Codex (Mobile) 🟩🔐 : https://codex.lol/
-- Arceus X (Mobile) 🟦🔐 : https://spdmteam.com/
-- Delta (Mobile) 🟦🔐 : https://deltaexploits.gg/android_dl
-- Trigon (Mobile) 🟦🔐 : https://trigonevo.com/android/
-- Vocalno (PC) 🟦🔐 : https://volcano.best/
-- KRNL (Mobile) 🟦🔐 : https://krnl.cat/
-- Vega X (Mobile) 🟦🔐 : https://vegax.gg/
-- Cryptic (Mobile) 🟦🔐 : https://getcryptic.net/
+- **Codex (Mobile)** 🟩🔐 : https://codex.lol/
+- **Arceus X (Mobile)** 🟦🔐 : https://spdmteam.com/
+- **Delta (Mobile)** 🟦🔐 : https://deltaexploits.gg/android_dl
+- **Trigon (Mobile)** 🟦🔐 : https://trigonevo.com/android/
+- **Vocalno (PC)** 🟦🔐 : https://volcano.wtf/
+- **KRNL (Mobile)** 🟩🔐 : https://krnl.cat/
+- **Vega X (Mobile)** 🟦🔐 : https://vegax.gg/
+- **Cryptic (Mobile)** 🟦🔐 : https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
 #### Visit https://weao.xyz/ now!
 
-
-
+---
 
 #### This script is intended for use in controlled environments and may violate Roblox's Terms of Service. Use at your own risk!!
 
-
+---
 
 ### Loader
 
 You can use our loader to use the script :P
 
+- Main Loader
+
 ```lua
-print("test")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Loader/Main.lua"))()
 ```
 
+- Universal
+
+```lua
+
+```
+
+---
+
 > i love making dead game script 
+> open source btw
