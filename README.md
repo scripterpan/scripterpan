@@ -43,13 +43,13 @@
 The list of the executor that (maybe) support the script :
 
 - Mobile
- - [**Codex (Mobile)** 🟩🔐](https://codex.lol/)
-  - [**KRNL (Mobile)** 🟩🔐 ](https://krnl.cat)
-  - **Arceus X (Mobile)** 🟦🔐 : https://spdmteam.com/
-  - **Delta (Mobile)** 🟦🔐 : https://deltaexploits.gg/android_dl
-  - **Trigon (Mobile)** 🟦🔐 : https://trigonevo.com/android/
-  - **Vega X (Mobile)** 🟦🔐 : https://vegax.gg/
-  - **Cryptic (Mobile)** 🟦🔐 : https://getcryptic.net/
+  - [**Codex** 🟩🔐](https://codex.lol/)
+  - [**KRNL** 🟩🔐 ](https://krnl.cat)
+  - [**Arceus X** 🟦🔐] (https://spdmteam.com/)
+  - [**Delta** 🟦🔐](https://deltaexploits.gg/android_dl
+  - [**Trigon** 🟦🔐]https://trigonevo.com/android/
+  - [**Vega X** 🟦🔐]https://vegax.gg/
+  - [**Cryptic** 🟦🔐]https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
 #### Visit [What executor are online](https://weao.xyz/) now!
