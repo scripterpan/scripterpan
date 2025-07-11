@@ -190,6 +190,160 @@ end)
 
 
 
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local speedEnabled = false
+local jumpEnabled = false
+
+local defaultSpeed = 16
+local desiredSpeed = 16
+
+local defaultJumpPower = 50
+local desiredJumpPower = 50
+
+--  Utility: Set WalkSpeed
+local function setSpeed(speed)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.WalkSpeed = speed
+    end
+end
+
+--  Utility: Set JumpPower
+local function setJumpPower(power)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.JumpPower = power
+    end
+end
+
+--  Reapply on respawn
+player.CharacterAdded:Connect(function(char)
+    repeat task.wait() until char:FindFirstChild("Humanoid")
+    if speedEnabled then setSpeed(desiredSpeed) end
+    if jumpEnabled then setJumpPower(desiredJumpPower) end
+end)
+
+-- Toggle: Speed
+local SpeedToggle = Player:Toggle({
+    Title = "Speed Boost",
+    Desc = "Enable walk speed boost",
+    Icon = "chevrons-up",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        speedEnabled = state
+        if state then
+            setSpeed(desiredSpeed)
+            task.spawn(function()
+                while speedEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                            setSpeed(desiredSpeed)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setSpeed(defaultSpeed)
+        end
+    end
+})
+
+-- Slider: Walk Speed (1-500)
+local SpeedSlider = Player:Slider({
+    Title = "Walk Speed",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 16,
+    },
+    Callback = function(val)
+        desiredSpeed = val
+        if speedEnabled then
+            setSpeed(desiredSpeed)
+        end
+    end
+})
+
+-- 🔤 Input: Walk Speed
+local SpeedInput = Player:Input({
+    Title = "Set Walk Speed",
+    Desc = "type speed here \n if you're lazy to do the slider (1-500)",
+    Placeholder = "16",
+    InputIcon = "chevrons-up",
+    Type = "Input",
+    Value = tostring(desiredSpeed),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredSpeed = num
+            SpeedSlider:SetValue(num)
+            if speedEnabled then
+                setSpeed(desiredSpeed)
+            end
+        end
+    end
+})
+
+--Toggle: Jump Boost
+local JumpToggle = Player:Toggle({
+    Title = "Jump Boost",
+    Desc = "Enable jump boost",
+    Icon = "person-standing",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        jumpEnabled = state
+        if state then
+            setJumpPower(desiredJumpPower)
+        else
+            setJumpPower(defaultJumpPower)
+        end
+    end
+})
+
+-- Slider: Jump Power (1–500)
+local JumpSlider = Player:Slider({
+    Title = "JumpPower",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 50,
+    },
+    Callback = function(val)
+        desiredJumpPower = val
+        if jumpEnabled then
+            setJumpPower(desiredJumpPower)
+        end
+    end
+})
+
+--  Input: Jump Power
+local JumpInput = Player:Input({
+    Title = "Set JumpPower",
+    Desc = "type jumppower here \n if you're lazy to do the slider(1-500)",
+    Placeholder = "50",
+    InputIcon = "person-standing",
+    Type = "Input",
+    Value = tostring(desiredJumpPower),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredJumpPower = num
+            JumpSlider:SetValue(num)
+            if jumpEnabled then
+                setJumpPower(desiredJumpPower)
+            end
+        end
+    end
+})
+
+
+
+
 
 
 
