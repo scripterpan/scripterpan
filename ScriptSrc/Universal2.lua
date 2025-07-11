@@ -236,3 +236,16 @@ local Toggle = ESP:Toggle({
         end
     end
 })
+
+
+
+local Toggle = Other:Toggle({
+    Title = "FullBright",
+    Desc = "Yes Brightnes",
+    Icon = "sun",
+    Type = "toggle",
+    Default = false,
+    Callback = function(val) 
+        game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
+    end
+})
