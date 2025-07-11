@@ -49,7 +49,7 @@ The list of the executor that (maybe) support the script :
   - [**Delta** 🟦🔐](https://deltaexploits.gg/android_dl)
   - [**Trigon** 🟦🔐](https://trigonevo.com/android/)
   - [**Vega X** 🟦🔐](https://vegax.gg/)
-  - [**Cryptic** 🟦](https://getcryptic.net/)
+  - [**Cryptic** 🟦🔐](https://getcryptic.net/)
  
 - PC
   - [**Vocalno** 🟦🔐](https://volcano.wtf/)
