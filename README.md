@@ -39,16 +39,17 @@
 
 ---
 
-### Supported Executor (Mobile, PC)
+### Supported Executor
 The list of the executor that (maybe) support the script :
-- [**Codex (Mobile)** 🟩🔐](https://codex.lol/)
-- [**KRNL (Mobile)** 🟩🔐 ](https://krnl.cat)
-- **Arceus X (Mobile)** 🟦🔐 : https://spdmteam.com/
-- **Delta (Mobile)** 🟦🔐 : https://deltaexploits.gg/android_dl
-- **Trigon (Mobile)** 🟦🔐 : https://trigonevo.com/android/
-- **Vocalno (PC)** 🟦🔐 : https://volcano.wtf/
-- **Vega X (Mobile)** 🟦🔐 : https://vegax.gg/
-- **Cryptic (Mobile)** 🟦🔐 : https://getcryptic.net/
+
+- Mobile
+ - [**Codex (Mobile)** 🟩🔐](https://codex.lol/)
+  - [**KRNL (Mobile)** 🟩🔐 ](https://krnl.cat)
+  - **Arceus X (Mobile)** 🟦🔐 : https://spdmteam.com/
+  - **Delta (Mobile)** 🟦🔐 : https://deltaexploits.gg/android_dl
+  - **Trigon (Mobile)** 🟦🔐 : https://trigonevo.com/android/
+  - **Vega X (Mobile)** 🟦🔐 : https://vegax.gg/
+  - **Cryptic (Mobile)** 🟦🔐 : https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
 #### Visit [What executor are online](https://weao.xyz/) now!
