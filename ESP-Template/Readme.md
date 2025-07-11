@@ -290,6 +290,7 @@ This will ESP all the visible coin parts inside the models.
 ```lua
 local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
 
+-- Inside Workspace (First)
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
 espLib(workspace:WaitForChild("Midnight"), Color3.fromRGB(255, 0, 0))
 espLib(workspace.Item, Color3.fromRGB(0, 255, 255))
