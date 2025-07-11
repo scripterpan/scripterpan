@@ -1,34 +1,3 @@
-repeat task.wait(0.25) until game:IsLoaded()
-
-getgenv().Image = "rbxassetid://118507736312114"
-getgenv().ToggleUI = "LeftControl"
-task.spawn(function()
-    if not getgenv().LoadedMobileUI then getgenv().LoadedMobileUI = true
-        local OpenUI = Instance.new("ScreenGui")
-        local ImageButton = Instance.new("ImageButton")
-        local UICorner = Instance.new("UICorner")
-        OpenUI.Name = "OpenUI"
-        OpenUI.Parent = game:GetService("CoreGui")
-        ImageButton.Parent = OpenUI
-        ImageButton.BackgroundColor3 = Color3.fromRGB(105,105,105)
-        ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0.9,0,0.1,0)
-        ImageButton.Size = UDim2.new(0,50,0,50)
-        ImageButton.Image = getgenv().Image
-        ImageButton.Draggable = true
-        UICorner.CornerRadius = UDim.new(0,200)
-        UICorner.Parent = ImageButton
-        ImageButton.MouseButton1Click:Connect(function()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,getgenv().ToggleUI,false,game)
-        end)
-    end
-end)
-
--- Load Fluent UI
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
 -- Setup
 local lp = game.Players.LocalPlayer
 local char = lp.Character or lp.CharacterAdded:Wait()
@@ -51,30 +20,53 @@ else
     writefile("PannHubNl/Settings.json", HttpService:JSONEncode(settings))
 end
 
--- Fluent Window
-local Window = Fluent:CreateWindow({
-    Title = "Pann Hub",
-    SubTitle = "Nightlight Script",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(480, 320),
-    Acrylic = true,
-    Theme = "Darker",
-    MinimizeKey = Enum.KeyCode.LeftControl
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "Nightlight (Horror)",
+    Icon = "door-open",
+    Author = "Pann Hub",
+    Folder = "PannHub-Nightlight",
+    Size = UDim2.fromOffset(500, 360),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    Background = "rbxassetid://132146349437310", -- rbxassetid only
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
 })
 
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
+Window:EditOpenButton({
+    Title = "Pann Hub (Nighlight)",
+    Icon = "book-open",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new( -- gradient
+        Color3.fromHex("FF0F7B"), 
+        Color3.fromHex("F89B29")
+    ),
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
 
-local Options = Fluent.Options
+})   
 
--- Notify
-Fluent:Notify({
-    Title = "Pann Hub",
-    Content = "Script loaded successfully!",
-    Duration = 4
+
+local main = Window:Tab({
+    Title = "Main",
+    Icon = "scroll-text",
+    Locked = false,
 })
+
+local setting = Window:Tab({
+    Title = "Settings",
+    Icon = "settings",
+    Locked = false,
+})
+
 
 -- Functions
 function CollectNotes()
@@ -104,9 +96,13 @@ function Exit()
     fireproximityprompt(workspace.House.ExitPart.ProximityPrompt)
 end
 
+
 -- Buttons
-Tabs.Main:AddButton({
+
+local Button = main:Button({
     Title = "Collect Notes",
+    Desc = "Collect All Notes For You",
+    Locked = false,
     Callback = function()
         local cf = Root.CFrame
         CollectNotes()
@@ -115,8 +111,10 @@ Tabs.Main:AddButton({
     end
 })
 
-Tabs.Main:AddButton({
+local Button = main:Button({
     Title = "Collect Coins",
+    Desc = "Collect All Coins For You",
+    Locked = false,
     Callback = function()
         local cf = Root.CFrame
         CollectCoins()
@@ -125,8 +123,11 @@ Tabs.Main:AddButton({
     end
 })
 
-Tabs.Main:AddButton({
+
+local Button = main:Button({
     Title = "Collect Matches",
+    Desc = "Collect All Matches For You",
+    Locked = false,
     Callback = function()
         local cf = Root.CFrame
         for i, v in pairs(workspace.Matches:GetChildren()) do
@@ -140,27 +141,39 @@ Tabs.Main:AddButton({
     end
 })
 
-Tabs.Main:AddButton({
-    Title = "Auto Win (Collect notes and TP to Door)",
+local Button = main:Button({
+    Title = "Teleport To The Exit",
+    Desc = "Teleport You To The Exit And Leave For You",
+    Locked = false,
     Callback = function()
-        for i = 1, 3 do
-            CollectNotes()
-            if settings.CollectCoins then
-                CollectCoins()
-            end
             Exit()
-            task.wait(0.75)
-        end
-    end
+     end
 })
 
 
 
-Tabs.Main:AddToggle("AutoAllInOne", {
-    Title = "Full Auto Win (Toggle)",
-    Default = settings.AutoWin
-}):OnChanged(function(val)
-    settings.AutoWin = val
+local Button = main:Button({
+    Title = "Auto Win",
+    Desc = "Collect notes and TP to Door",
+    Locked = false,
+    Callback = function()
+                for i = 1, 3 do
+            CollectNotes()
+            Exit()
+            task.wait(0.75)
+    end
+end
+})
+
+
+local Toggle = main:Toggle({
+    Title = "Full Auto Win",
+    Desc = "Idk what's the difference between the button one and this one",
+    Icon = "trophy",
+    Type = "Toggle",
+    Default = settings.AutoWin,
+    Callback = function(val) 
+        settings.AutoWin = val
     if val then
         task.spawn(function()
             while settings.AutoWin and task.wait(0.25) do
@@ -170,26 +183,24 @@ Tabs.Main:AddToggle("AutoAllInOne", {
             end
         end)
     end
-end)
+    end
+})
 
--- Settings Toggles
-Tabs.Settings:AddToggle("CoinToggle", {
-    Title = "Collect Coins",
-    Default = settings.CollectCoins
-}):OnChanged(function(val)
-    settings.CollectCoins = val
-end)
 
-Tabs.Settings:AddToggle("FullBright", {
-    Title = "Full Bright",
-    Default = settings.FB
-}):OnChanged(function(val)
-    settings.FB = val
+local Toggle = setting:Toggle({
+    Title = "FullBright",
+    Desc = "Change Brightness",
+    Icon = "sun",
+    Type = "Toggle",
+    Default = settings.FB,
+    Callback = function(val) 
+            settings.FB = val
     game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
-end)
+    end
+})
 
 
--- Monster ESP (Highlight for Beta & Midnight with auto-respawn support)
+-- Monster ESP
 local monsterESPEnabled = false
 local highlights = {}
 
@@ -237,12 +248,26 @@ task.spawn(function()
     end
 end)
 
-Tabs.Settings:AddToggle("MonsterESP", {
-    Title = "Monster ESP",
-    Default = false
-}):OnChanged(function(val)
-    monsterESPEnabled = val
-end)
+
+
+local Toggle = setting:Toggle({
+    Title = "ESP Monster",
+    Desc = "See where the monster is",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val) 
+        monsterESPEnabled = val
+    end
+})
+
+
+
+-- Item ESP
+
+-- Soon maybe
+
+
 
 
 
@@ -252,4 +277,3 @@ game.Players.PlayerRemoving:Connect(function(p)
         writefile("PannHubNl/Settings.json", HttpService:JSONEncode(settings))
     end
 end)
-
