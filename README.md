@@ -31,7 +31,7 @@
 
 ### Executor that (maybe) support the script, status
 - 🟩 = Fully Supported!
-- 🟨 = Maybe Support 🤔
+- 🟨 = Might Support 🤔
 - 🟥 = Not Supported 😔 
 - 🟦 = idk, i haven't test it yet (Might support)🥀💔
 - 🔐 = Key System!
@@ -41,8 +41,8 @@
 
 ### Supported Executor (Mobile, PC)
 The list of the executor that (maybe) support the script :
-- **Codex (Mobile)** 🟩🔐 : https://codex.lol/
-- **KRNL (Mobile)** 🟩🔐 : https://krnl.cat/
+- [**Codex (Mobile)** 🟩🔐](https://codex.lol/)
+- [**KRNL (Mobile)** 🟩🔐 ](https://krnl.cat)
 - **Arceus X (Mobile)** 🟦🔐 : https://spdmteam.com/
 - **Delta (Mobile)** 🟦🔐 : https://deltaexploits.gg/android_dl
 - **Trigon (Mobile)** 🟦🔐 : https://trigonevo.com/android/
@@ -51,7 +51,7 @@ The list of the executor that (maybe) support the script :
 - **Cryptic (Mobile)** 🟦🔐 : https://getcryptic.net/
 
 #### Wanted to see what executor is working/online right now? 
-#### Visit https://weao.xyz/ now!
+#### Visit [What executor are online](https://weao.xyz/) now!
 
 ---
 
