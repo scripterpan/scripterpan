@@ -189,7 +189,7 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 
--- Player Misc
+-- Player Spped, Jumppower, Gravity 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
@@ -203,7 +203,7 @@ local defaultSpeed = 16
 local defaultJumpPower = 50
 local defaultGravity = 196.2
 
--- Desired (editable)
+-- Desired values
 local desiredSpeed = defaultSpeed
 local desiredJumpPower = defaultJumpPower
 local desiredGravity = defaultGravity
@@ -217,9 +217,9 @@ end
 
 local function setJumpPower(power)
     if player.Character and player.Character:FindFirstChild("Humanoid") then
-        local humanoid = player.Character:FindFirstChild("Humanoid")
-        humanoid.UseJumpPower = true
-        humanoid.JumpPower = power
+        local hum = player.Character:FindFirstChild("Humanoid")
+        hum.UseJumpPower = true
+        hum.JumpPower = power
     end
 end
 
@@ -236,7 +236,7 @@ player.CharacterAdded:Connect(function()
     if gravityEnabled then setGravity(desiredGravity) end
 end)
 
--- UI Elements
+-- UI Element references
 local SpeedSlider, SpeedInput
 local JumpSlider, JumpInput
 local GravitySlider, GravityInput
@@ -279,8 +279,8 @@ SpeedSlider = Player:Slider({
     },
     Callback = function(val)
         desiredSpeed = val
-        if SpeedInput and SpeedInput.SetValue then
-            SpeedInput:SetValue(tostring(val))
+        if SpeedInput and SpeedInput.SetText then
+            SpeedInput:SetText(tostring(val))
         end
         if speedEnabled then
             setSpeed(desiredSpeed)
@@ -300,8 +300,8 @@ SpeedInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredSpeed = num
-            if SpeedSlider and SpeedSlider.SetValue then
-                SpeedSlider:SetValue(num)
+            if SpeedSlider and SpeedSlider.Set then
+                SpeedSlider:Set(num)
             end
             if speedEnabled then
                 setSpeed(desiredSpeed)
@@ -348,8 +348,8 @@ JumpSlider = Player:Slider({
     },
     Callback = function(val)
         desiredJumpPower = val
-        if JumpInput and JumpInput.SetValue then
-            JumpInput:SetValue(tostring(val))
+        if JumpInput and JumpInput.SetText then
+            JumpInput:SetText(tostring(val))
         end
         if jumpEnabled then
             setJumpPower(desiredJumpPower)
@@ -369,8 +369,8 @@ JumpInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredJumpPower = num
-            if JumpSlider and JumpSlider.SetValue then
-                JumpSlider:SetValue(num)
+            if JumpSlider and JumpSlider.Set then
+                JumpSlider:Set(num)
             end
             if jumpEnabled then
                 setJumpPower(desiredJumpPower)
@@ -415,8 +415,8 @@ GravitySlider = Player:Slider({
     },
     Callback = function(val)
         desiredGravity = val
-        if GravityInput and GravityInput.SetValue then
-            GravityInput:SetValue(tostring(val))
+        if GravityInput and GravityInput.SetText then
+            GravityInput:SetText(tostring(val))
         end
         if gravityEnabled then
             setGravity(desiredGravity)
@@ -436,8 +436,8 @@ GravityInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 0 and num <= 500 then
             desiredGravity = num
-            if GravitySlider and GravitySlider.SetValue then
-                GravitySlider:SetValue(num)
+            if GravitySlider and GravitySlider.Set then
+                GravitySlider:Set(num)
             end
             if gravityEnabled then
                 setGravity(desiredGravity)
