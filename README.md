@@ -45,11 +45,11 @@ The list of the executor that (maybe) support the script :
 - Mobile
   - [**Codex** 🟩🔐](https://codex.lol/)
   - [**KRNL** 🟩🔐 ](https://krnl.cat)
-  - [**Arceus X** 🟦🔐] (https://spdmteam.com/)
+  - [**Arceus X** 🟦🔐](https://spdmteam.com/)
   - [**Delta** 🟦🔐](https://deltaexploits.gg/android_dl)
   - [**Trigon** 🟦🔐]()
   - [**Vega X** 🟦🔐]()
-  - [**Cryptic** 🟦🔐]https://getcryptic.net/
+  - [**Cryptic** 🟦](🔐]https://getcryptic.net/)
 
 #### Wanted to see what executor is working/online right now? 
 #### Visit [What executor are online](https://weao.xyz/) now!
