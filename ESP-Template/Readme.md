@@ -187,7 +187,7 @@ end
 This prints the names of all direct children inside SomeFolder.
 
 ## Important:
-GetChildren() only returns children that are one level down — it does not return grandchildren or deeper descendants.
+`GetChildren()` only returns children that are **one level down** — it does not return grandchildren or deeper descendants.
 
 
 
