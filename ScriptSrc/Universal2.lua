@@ -17,8 +17,8 @@ local Window = WindUI:CreateWindow({
 })
 
 Window:EditOpenButton({
-    Title = "Open Example UI",
-    Icon = "monitor",
+    Title = "Pann Universal",
+    Icon = "book-open",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
@@ -243,9 +243,92 @@ local Toggle = Other:Toggle({
     Title = "FullBright",
     Desc = "Yes Brightnes",
     Icon = "sun",
-    Type = "toggle",
+    Type = "Toggle",
     Default = false,
     Callback = function(val) 
         game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
+    end
+})
+
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection
+local promptAddedConnection
+local modifiedPrompts = {} -- Track modified prompts and their original settings
+
+-- Make the prompt instant (no delay, no hold animation)
+local function makePromptInstant(prompt)
+    -- Store original values once
+    if not modifiedPrompts[prompt] then
+        modifiedPrompts[prompt] = {
+            HoldDuration = prompt.HoldDuration,
+            RequiresLineOfSight = prompt.RequiresLineOfSight,
+            ClickablePrompt = prompt.ClickablePrompt
+        }
+    end
+
+    prompt.HoldDuration = 0
+    prompt.RequiresLineOfSight = false
+    prompt.ClickablePrompt = true
+end
+
+-- Restore original prompt settings
+local function restorePrompt(prompt)
+    local original = modifiedPrompts[prompt]
+    if original then
+        prompt.HoldDuration = original.HoldDuration
+        prompt.RequiresLineOfSight = original.RequiresLineOfSight
+        prompt.ClickablePrompt = original.ClickablePrompt
+        modifiedPrompts[prompt] = nil
+    end
+end
+
+-- Turn on/off Instant Interact
+local function toggleInstantInteract(enabled)
+    if enabled then
+        -- Update all existing prompts
+        for _, obj in ipairs(game:GetDescendants()) do
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end
+
+        -- Fire prompt instantly when hold begins
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
+
+        -- Make new prompts instant too
+        promptAddedConnection = game.DescendantAdded:Connect(function(obj)
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end)
+    else
+        -- Disconnect events
+        if proximityConnection then
+            proximityConnection:Disconnect()
+            proximityConnection = nil
+        end
+        if promptAddedConnection then
+            promptAddedConnection:Disconnect()
+            promptAddedConnection = nil
+        end
+
+        -- Restore all modified prompts
+        for prompt, _ in pairs(modifiedPrompts) do
+            restorePrompt(prompt)
+        end
+    end
+end
+
+-- WindUI Toggle
+local Toggle = Other:Toggle({
+    Title = "Instant Interact",
+    Desc = "ok",
+    Icon = "hand",
+    Type = "Toggle", -- Checkbox Or toggle Mango
+    Default = false,
+    Callback = function(state)
+        toggleInstantInteract(state)
     end
 })
