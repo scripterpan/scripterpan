@@ -37,6 +37,10 @@ local Window = WindUI:CreateWindow({
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
+    User = {
+        Enabled = true,
+        Anonymous = false,
+    }
 })
 
 Window:EditOpenButton({
