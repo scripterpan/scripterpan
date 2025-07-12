@@ -612,7 +612,7 @@ local function disableFullbright()
 end
 
 -- WindUI Toggle
-local Toggle = setting:Toggle({
+local Toggle = Other:Toggle({
     Title = "Fullbright",
     Desc = "Brightness Yes 👍",
     Icon = "sun",
