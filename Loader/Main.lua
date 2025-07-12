@@ -7,7 +7,7 @@ local StarterGui = game:GetService("StarterGui")
 
 StarterGui:SetCore("SendNotification", {
     Title = "Pann Loader";
-    Text = "Checking if this game \n is support or not";
+    Text = "Checking If This Game Is Support Or Not";
     Duration = 5;
 })
 
