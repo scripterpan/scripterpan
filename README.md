@@ -53,9 +53,9 @@ The list of the executor that (maybe) support the script :
  
 - PC
   - [**Vocalno** 🟦🔐](https://volcano.wtf/)
-  - [**Velocity** `idk🔐`](https://getvelocity.live/)
-  - [**Solara** ❌🔐](https://getsolara.dev/)
-  - [**Xeno** ❌🔐](https://www.xeno.onl/)
+  - [**Velocity** 🟦`idk🔐`](https://getvelocity.live/)
+  - [**Solara** 🟦❌🔐](https://getsolara.dev/)
+  - [**Xeno** 🟦❌🔐](https://www.xeno.onl/)
 
 
 
