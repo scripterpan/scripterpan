@@ -34,44 +34,44 @@ Window:EditOpenButton({
 
 local info = Window:Tab({
     Title = "Information",
-    Icon = "scroll-text",
+    Icon = "book-open-text",
     Locked = false,
 })
 
 local main = Window:Tab({
     Title = "Main",
-    Icon = "users",
+    Icon = "tool-case",
     Locked = false,
 })
 
 local cook = Window:Tab({
     Title = "Cook",
-    Icon = "crosshair",
+    Icon = "cooking-pot",
     Locked = false,
 })
 
 local auto = Window:Tab({
     Title = "Automatic",
-    Icon = "eye",
+    Icon = "square-function",
     Locked = false,
 })
 
 
 local tp = Window:Tab({
     Title = "Teleport",
-    Icon = "badge-plus",
+    Icon = "nfc",
     Locked = false,
 })
 
 local misc = Window:Tab({
     Title = "Miscellaneous",
-    Icon = "badge-plus",
+    Icon = "search",
     Locked = false,
 })
 
 local mul = Window:Tab({
     Title = "Multiplayer",
-    Icon = "badge-plus",
+    Icon = "users",
     Locked = false,
 })
 
