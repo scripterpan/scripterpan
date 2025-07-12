@@ -585,18 +585,56 @@ local Toggle = ESP:Toggle({
     end
 })
 
+-- FullBright 
 
+local fullbrightEnabled = false
+local lighting = game:GetService("Lighting")
+local originalSettings = {
+    Brightness = lighting.Brightness,
+    ClockTime = lighting.ClockTime,
+    Ambient = lighting.Ambient,
+    OutdoorAmbient = lighting.OutdoorAmbient,
+}
 
+-- Function to enable Fullbright
+local function enableFullbright()
+    lighting.Brightness = 2
+    lighting.ClockTime = 14 -- Set to daytime
+    lighting.Ambient = Color3.new(1, 1, 1)
+    lighting.OutdoorAmbient = Color3.new(1, 1, 1)
+end
+
+-- Function to disable Fullbright
+local function disableFullbright()
+    lighting.Brightness = originalSettings.Brightness
+    lighting.ClockTime = originalSettings.ClockTime
+    lighting.Ambient = originalSettings.Ambient
+    lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
+end
+
+-- Add toggle to the UI
 local Toggle = Other:Toggle({
     Title = "FullBright",
-    Desc = "Yes Brightnes",
-    Icon = "sun",
+    Desc = "Yes Brightness",
+    Icon = "eye",
     Type = "Toggle",
     Default = false,
     Callback = function(val) 
-        game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
+        fullbrightEnabled = val
     end
-})
+})    
+
+    if fullbrightEnabled then
+        enableFullbright()
+    else
+        disableFullbright()
+    end
+end)
+
+
+
+
+
 
 local ProximityPromptService = game:GetService("ProximityPromptService")
 local proximityConnection
