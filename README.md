@@ -3,7 +3,7 @@
 ### Status
 - 🟩 = Working fine!
 - 🟨 = Updating/Improving (May have some bugs
-- 🟥 = Discontinued (Detectable/Might not work)
+- 🟥 = Discontinued (Detected/Might not work)
 - 🟦 = New script/New game
 - ⬛ = Too stupid to continue, lazy
 
