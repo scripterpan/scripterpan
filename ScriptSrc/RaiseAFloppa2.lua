@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 local Window = WindUI:CreateWindow({
     Title = "Raise A Floppa 2",
-    Icon = "shrub",
+    Icon = "cat",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
     Size = UDim2.fromOffset(500, 360),
@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
 
 Window:EditOpenButton({
     Title = "Pann Hub (Raise A Floppa 2)",
-    Icon = "book-open",
+    Icon = "cat",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
@@ -35,52 +35,34 @@ Window:EditOpenButton({
 
 })   
 
+local Tabs = {}
 
-local info = Window:Tab({
-    Title = "Information",
-    Icon = "book-open-text",
-    Locked = false,
-})
+do
+    Tabs.main = Window:Section({
+        Title = "Main",
+        Opened = true,
+    })
 
-local main = Window:Tab({
-    Title = "Main",
-    Icon = "album",
-    Locked = false,
-})
+    Tabs.misc = Window:Section({
+        Title = "Miscellaneous",
+        Opened = true,
+    })
+    
+    
+    Tabs.Other = Window:Section({
+        Title = "Other",
+        Opened = true,
+    })
 
-local cook = Window:Tab({
-    Title = "Cook",
-    Icon = "cooking-pot",
-    Locked = false,
-})
+    
+    local main = Tabs.main:Tab({ Title = "Main", Icon = "album" })
+    local cook = Tabs.main:Tab({ Title = "Cook", Icon = "cooking-pot" })
+    local auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
+    local Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
+    local gemisc = Tabs.misc:Tab({ Title = "General Misc", Icon = "tv-minimal"})
+    local plmisc = Tabs.misc:Tab({ Title = "Player Misc", Icon = "person-standing"})
+    local mul = Tabs.Other:Tab({ Title = "Multiplayer", Icon = "users-round" })
+    local src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
+    local exec = Tabs.Other:Tab({ Title = "Built-in Executor (Ok wth)", Icon = "toggle-left" })
 
-local auto = Window:Tab({
-    Title = "Automatic",
-    Icon = "square-function",
-    Locked = false,
-})
-
-
-local tp = Window:Tab({
-    Title = "Teleport",
-    Icon = "nfc",
-    Locked = false,
-})
-
-local misc = Window:Tab({
-    Title = "Miscellaneous",
-    Icon = "search",
-    Locked = false,
-})
-
-local mul = Window:Tab({
-    Title = "Multiplayer",
-    Icon = "users",
-    Locked = false,
-})
-
-local Other = Window:Tab({
-    Title = "Other",
-    Icon = "badge-plus",
-    Locked = false,
-})
+end
