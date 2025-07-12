@@ -144,15 +144,15 @@ CheckButton.MouseButton1Click:Connect(function()
 
             -- Load the script for the game based on PlaceId
             if placeID == 6243699076 then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/TheMimic"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptScr/TheMimic"))()
             elseif placeID == 15532962292 then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/SolsRNG"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/SolsRNG"))()
             elseif placeID == 9772878203 then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/RaiseAFloppa2"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/RaiseAFloppa2"))()
             elseif placeID == 9921522947 then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/RaiseAFloppa2"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/RaiseAFloppa2"))()
             elseif placeID == 132991738534170 then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/JobApplication"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/JobApplication"))()
             elseif placeID == 121308443347459 then
                 -- 7DTL
             end
