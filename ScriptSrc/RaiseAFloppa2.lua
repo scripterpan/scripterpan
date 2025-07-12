@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 local Window = WindUI:CreateWindow({
     Title = "Raise A Floppa 2",
-    Icon = "door-open",
+    Icon = "shrub",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
     Size = UDim2.fromOffset(500, 360),
@@ -40,7 +40,7 @@ local info = Window:Tab({
 
 local main = Window:Tab({
     Title = "Main",
-    Icon = "tool-case",
+    Icon = "album",
     Locked = false,
 })
 
