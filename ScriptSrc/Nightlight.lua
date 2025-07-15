@@ -258,7 +258,7 @@ local Toggle = esp:Toggle({
 })
 
 
-local Button = misc:Button({
+local Button = esp:Button({
     Title = "ESP Notes",
     Desc = "Press Again After The New Round Start",
     Locked = false,
@@ -273,7 +273,7 @@ local Button = misc:Button({
 })
 
 
-local Button = misc:Button({
+local Button = esp:Button({
     Title = "ESP Matches",
     Desc = "Press Only One",
     Locked = false,
@@ -288,7 +288,7 @@ local Button = misc:Button({
 })
 
 
-local Button = misc:Button({
+local Button = esp:Button({
     Title = "ESP Coins",
     Desc = "Press Only One",
     Locked = false,
