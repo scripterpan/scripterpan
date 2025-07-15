@@ -65,7 +65,7 @@ local main = Window:Tab({
     Locked = false,
 })
 
-local setting = Window:Tab({
+local misc = Window:Tab({
     Title = "Settings",
     Icon = "settings",
     Locked = false,
@@ -191,7 +191,7 @@ local Toggle = main:Toggle({
 })
 
 
-local Toggle = setting:Toggle({
+local Toggle = misc:Toggle({
     Title = "FullBright",
     Desc = "Change Brightness",
     Icon = "sun",
@@ -253,6 +253,22 @@ task.spawn(function()
 end)
 
 
+local Toggle = misc:Toggle({
+    Title = "ESP Monster",
+    Desc = "See where the monster is",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val) 
+        monsterESPEnabled = val
+    end
+})
+
+
+
+
+
+
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -307,7 +323,7 @@ local function stopNoclip()
 end
 
 -- WindUI Toggle
-local Toggle = setting:Toggle({
+local Toggle = misc:Toggle({
     Title = "Noclip",
     Desc = "Noclip Yes 👍",
     Icon = "expand",
@@ -336,7 +352,7 @@ end)
 
 
 
-local Toggle = setting:Toggle({
+local Toggle = misc:Toggle({
     Title = "ESP Monster",
     Desc = "See where the monster is",
     Icon = "eye",
@@ -346,6 +362,101 @@ local Toggle = setting:Toggle({
         monsterESPEnabled = val
     end
 })
+
+
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+
+local defaultSpeed = 16
+local desiredSpeed = defaultSpeed
+
+local function setSpeed(speed)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.WalkSpeed = speed
+    end
+end
+
+player.CharacterAdded:Connect(function()
+    repeat task.wait() until player.Character:FindFirstChild("Humanoid")
+    if speedEnabled then setSpeed(desiredSpeed) end
+    if jumpEnabled then setJumpPower(desiredJumpPower) end
+    if gravityEnabled then setGravity(desiredGravity) end
+end)
+
+local SpeedSlider, SpeedInput
+
+local SpeedToggle = misc:Toggle({
+    Title = "Speed Boost",
+    Desc = "Enable speed boost",
+    Icon = "chevrons-up",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        speedEnabled = state
+        if state then
+            setSpeed(desiredSpeed)
+            task.spawn(function()
+                while speedEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                            setSpeed(desiredSpeed)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setSpeed(defaultSpeed)
+        end
+    end
+})
+
+-- SPEED SLIDER
+SpeedSlider = misc:Slider({
+    Title = "Walk Speed",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = defaultSpeed,
+    },
+    Callback = function(val)
+        desiredSpeed = val
+        if SpeedInput and SpeedInput.SetValue then
+            SpeedInput:SetValue(tostring(val))
+        end
+        if speedEnabled then
+            setSpeed(desiredSpeed)
+        end
+    end
+})
+
+-- SPEED INPUT
+SpeedInput = misc:Input({
+    Title = "Set Walk Speed",
+    Desc = "Type your speed value here\nif you're lazy to use the slider (1–500)",
+    Placeholder = tostring(defaultSpeed),
+    InputIcon = "chevrons-up",
+    Type = "Input",
+    Value = tostring(desiredSpeed),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredSpeed = num
+            if SpeedSlider and SpeedSlider.Set then
+                SpeedSlider:Set(num)
+            end
+            if speedEnabled then
+                setSpeed(desiredSpeed)
+            end
+        end
+    end
+})
+
+
+
 
 
 
