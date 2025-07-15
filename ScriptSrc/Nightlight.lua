@@ -254,6 +254,88 @@ end)
 
 
 
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local noclipConnection
+local originalCollisions = {}
+
+-- Save original collision states
+local function saveOriginalCollisions()
+    originalCollisions = {}
+    if LocalPlayer.Character then
+        for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                originalCollisions[part] = part.CanCollide
+            end
+        end
+    end
+end
+
+-- Apply noclip (no collisions)
+local function startNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+    end
+
+    saveOriginalCollisions()
+
+    noclipConnection = RunService.Stepped:Connect(function()
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+-- Restore original collision
+local function stopNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+        noclipConnection = nil
+    end
+    for part, canCollide in pairs(originalCollisions) do
+        if part and part:IsA("BasePart") then
+            part.CanCollide = canCollide
+        end
+    end
+    originalCollisions = {}
+end
+
+-- WindUI Toggle
+local Toggle = setting:Toggle({
+    Title = "Noclip",
+    Desc = "Noclip Yes 👍",
+    Icon = "expand",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            startNoclip()
+        else
+            stopNoclip()
+        end
+    end
+})
+
+-- Handle respawn
+LocalPlayer.CharacterAdded:Connect(function()
+    repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+    saveOriginalCollisions()
+    if Toggle.Value then
+        startNoclip()
+    end
+end)
+
+
+
+
+
+
 local Toggle = setting:Toggle({
     Title = "ESP Monster",
     Desc = "See where the monster is",
