@@ -65,6 +65,12 @@ local main = Window:Tab({
     Locked = false,
 })
 
+local esp = Window:Tab({
+    Title = "ESP",
+    Icon = "eye",
+    Locked = false,
+})
+
 local misc = Window:Tab({
     Title = "Miscellaneous",
     Icon = "settings",
@@ -191,20 +197,7 @@ local Toggle = main:Toggle({
 })
 
 
-local Toggle = misc:Toggle({
-    Title = "FullBright",
-    Desc = "Change Brightness",
-    Icon = "sun",
-    Type = "Toggle",
-    Default = settings.FB,
-    Callback = function(val) 
-            settings.FB = val
-    game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
-    end
-})
 
-
--- Monster ESP
 local monsterESPEnabled = false
 local highlights = {}
 
@@ -253,7 +246,7 @@ task.spawn(function()
 end)
 
 
-local Toggle = misc:Toggle({
+local Toggle = esp:Toggle({
     Title = "ESP Monster",
     Desc = "See where the monster is",
     Icon = "eye",
@@ -263,6 +256,69 @@ local Toggle = misc:Toggle({
         monsterESPEnabled = val
     end
 })
+
+
+local Button = misc:Button({
+    Title = "ESP Notes",
+    Desc = "Press Again After The New Round Start",
+    Locked = false,
+    Callback = function()
+        local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+        for _, note in pairs(workspace.Notes:GetChildren()) do
+            if not note:IsA("Folder") then
+        espLib(note, Color3.fromRGB(0, 255, 0)) -- Green
+            end
+        end
+    end
+})
+
+
+local Button = misc:Button({
+    Title = "ESP Matches",
+    Desc = "Press Only One",
+    Locked = false,
+    Callback = function()
+        local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+        for _, child in pairs(workspace.Matches:GetChildren()) do
+            if not child:IsA("Folder") then
+        espLib(child, Color3.fromRGB(0, 0, 255)) -- Blue
+            end
+        end
+    end
+})
+
+
+local Button = misc:Button({
+    Title = "ESP Coins",
+    Desc = "Press Only One",
+    Locked = false,
+    Callback = function()
+        local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+        for _, coin in pairs(workspace.House.Coins:GetChildren()) do
+            if not coin:IsA("Folder") then
+        espLib(coin, Color3.fromRGB(255, 255, 0)) -- Yellow
+            end
+        end
+    end
+})
+
+
+
+
+
+
+local Toggle = misc:Toggle({
+    Title = "FullBright",
+    Desc = "Change Brightness",
+    Icon = "sun",
+    Type = "Toggle",
+    Default = settings.FB,
+    Callback = function(val) 
+            settings.FB = val
+    game:GetService("Lighting").Ambient = val and Color3.new(1,1,1) or Color3.new(0,0,0)
+    end
+})
+
 
 
 
@@ -443,14 +499,6 @@ SpeedInput = misc:Input({
     end
 })
 
-
-
-
-
-
--- Item ESP
-
--- Soon maybe
 
 
 
