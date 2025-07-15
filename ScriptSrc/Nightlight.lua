@@ -325,7 +325,7 @@ end
 -- WindUI Toggle
 local Toggle = misc:Toggle({
     Title = "Noclip",
-    Desc = "Noclip Yes 👍",
+    Desc = "Walk Through The Wall",
     Icon = "expand",
     Type = "Toggle",
     Default = false,
@@ -350,18 +350,6 @@ end)
 
 
 
-
-
-local Toggle = misc:Toggle({
-    Title = "ESP Monster",
-    Desc = "See where the monster is",
-    Icon = "eye",
-    Type = "Toggle",
-    Default = false,
-    Callback = function(val) 
-        monsterESPEnabled = val
-    end
-})
 
 
 
