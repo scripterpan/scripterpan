@@ -94,10 +94,10 @@ local Button = Uni:Button({
 
 local Button = Uni:Button({
     Title = "Dex V4",
-    Desc = "Dark Dex V4 Mobile (No key) Credits to Yume Hub",
+    Desc = "Dark Dex V4 Mobile",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Artifacttx/YumeHub/refs/heads/main/Universal/DarkDex_Mobile", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
     end
 })
     
