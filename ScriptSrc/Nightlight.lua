@@ -66,7 +66,7 @@ local main = Window:Tab({
 })
 
 local misc = Window:Tab({
-    Title = "Settings",
+    Title = "Miscellaneous",
     Icon = "settings",
     Locked = false,
 })
