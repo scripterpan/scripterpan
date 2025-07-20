@@ -19,7 +19,7 @@ It auto-updates every second, so if something respawns, the ESP is reapplied.
 Paste this in your executor or script:
 
 ```lua
-local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Source.lua"))()
 ```
 
 ---
@@ -288,7 +288,7 @@ This will ESP all the visible coin parts inside the models.
 ## ✅ Example Full Script
 
 ```lua
-local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Script.lua"))()
+local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ESP-Template/Source.lua"))()
 
 -- Inside Workspace (First)
 espLib(workspace:WaitForChild("Beta"), Color3.fromRGB(255, 0, 0))
