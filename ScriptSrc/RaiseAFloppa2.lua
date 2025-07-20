@@ -65,8 +65,9 @@ Tabs.stat = Window:Section({
     Tabs.StatServer = Tabs.stat:Tab({ Title = "Server's Status", Icon = "server" })
     Tabs.StatOther = Tabs.stat:Tab({ Title = "Other's Status", Icon = "search" })
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
-    Tabs.Farm = Tabs.main:Tab({ Title = "AutoFarm", Icon = "bolt" })
+
     Tabs.cook = Tabs.main:Tab({ Title = "Cook", Icon = "cooking-pot" })
+    Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
@@ -95,6 +96,7 @@ local RunService = game:GetService("RunService")
 -- setup for something important
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
+
 
 
 
@@ -132,6 +134,11 @@ end
 -- moodlets
 
 local moodletFolder = workspace:WaitForChild("Floppa"):WaitForChild("Moodlets")
+
+-- trophies 
+local trophies = workspace:WaitForChild("Trophies")
+
+
 
 
 
@@ -244,6 +251,29 @@ end)
 
 
 
+local paragraph = Tabs.StatPlayer:Paragraph({
+    Title = "Trophies (Badge)",
+    Desc = "Checking...",
+    Locked = false,
+})
+
+task.spawn(function()
+    while true do
+        local trophyList = trophies:GetChildren()
+        local count = #trophyList
+
+        local desc = "Trophies Unlocked: " .. count .. "\nUnlocked Trophies list:"
+
+        for _, trophy in ipairs(trophyList) do
+            desc = desc .. "\n- " .. trophy.Name
+        end
+
+        paragraph:SetDesc(desc)
+        task.wait(0.25)
+    end
+end)
+
+
 
 
 
@@ -353,10 +383,104 @@ end)
 
 
 
+local paragraph = Tabs.StatOther:Paragraph({
+    Title = "Altar Info",
+    Desc = "Checking...",
+    Locked = false,
+})
+
+local function shorten(n)
+    local suffixes = {"", "K", "M", "B", "T", "Qa", "Qi"}
+    local i = 1
+    while n >= 1000 and i < #suffixes do
+        n = n / 1000
+        i += 1
+    end
+    return string.format("%.1f%s", n, suffixes[i])
+end
+
+task.spawn(function()
+    while true do
+        local altar = unlocks:FindFirstChild("Altar")
+
+        if altar and altar:FindFirstChild("Faith") and altar:FindFirstChild("Cost") then
+            local currentFaith = math.floor(altar.Faith.Value)
+            local nextFaith = currentFaith + 5
+            local cost = shorten(altar.Cost.Value)
+
+            paragraph:SetDesc(
+                "Current Faith: " .. currentFaith .. "\n" ..
+                "Next Faith: " .. nextFaith .. "\n" ..
+                "Cost: " .. cost
+            )
+        else
+            paragraph:SetDesc("Purchase Altar first!")
+        end
+
+        task.wait(0.25)
+    end
+end)
 
 
 
-Tabs.main1:Button({
+local paragraph = Tabs.StatOther:Paragraph({
+    Title = "Floppa Inc Stats",
+    Desc = "Checking...",
+    Locked = false,
+})
+
+local function shorten(n)
+    local suffixes = {"", "K", "M", "B", "T", "Qa", "Qi"}
+    local i = 1
+    while n >= 1000 and i < #suffixes do
+        n = n / 1000
+        i += 1
+    end
+    return string.format("%.2f%s", n, suffixes[i])
+end
+
+task.spawn(function()
+    while true do
+        local inc = unlocks:FindFirstChild("Floppa Inc")
+
+        if inc and inc:FindFirstChild("Multiplier") and inc:FindFirstChild("Profits") and inc:FindFirstChild("GoldProfits") then
+            local multiplier = math.floor(inc.Multiplier.Value)
+            local profits = shorten(inc.Profits.Value)
+            local goldProfits = shorten(inc.GoldProfits.Value)
+
+            paragraph:SetDesc(
+                "Multiplier: " .. multiplier .. "x\n" ..
+                "Profits: $" .. profits .. "\n" ..
+                "Gold Profits: $" .. goldProfits
+            )
+        else
+            paragraph:SetDesc("Purchase Floppa Inc first!")
+        end
+
+        task.wait(0.25)
+    end
+end)
+
+
+
+Tabs.manual:Button({
+    Title = "Pet Floppa",
+    Desc = "Teleport to Floppa and pet it to increase its happiness",
+    Callback = function() 
+        saveOriginalPosition()
+        teleportToFloppa()
+        task.wait(0.2)
+        interact()
+        task.wait(0.2)
+        teleportBack()
+end
+})
+
+
+
+
+
+Tabs.manual:Button({
     Title = "Floppa's Moodlets",
     Desc = "Feed Floppa Hot Chocolate, Lemonade When Floppa Is Cold, Hot",
     Callback = function() 
@@ -382,7 +506,7 @@ end
 })
 
 
-Tabs.main1:Button({
+Tabs.manual:Button({
     Title = "Activate Meteorite Magnet",
     Desc = "Activate Meteorite Magnet if purchase",
     Callback = function() 
@@ -394,9 +518,9 @@ Tabs.main1:Button({
         if hasMeteoriteMagnet() then
             saveOriginalPosition()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8612709, 153.73613, -41.5506172)
-            task.wait(0.45)
+            task.wait(0.2)
             interact()
-            task.wait(0.5)
+            task.wait(0.2)
             teleportBack()
         else
             WindUI:Notify({
@@ -409,7 +533,7 @@ Tabs.main1:Button({
     end
 })
 
-Tabs.main1:Button({
+Tabs.manual:Button({
     Title = "Throw DJ El Gato's Party",
     Desc = "Throw DJ El Gato's Party if DJ El Gato is purchased",
     Callback = function() 
@@ -434,9 +558,9 @@ end
 
             saveOriginalPosition()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-81.2888412, 76.0521393, -41.9822617, 0.66582495, -6.3948292e-08, -0.746107996, 5.74261918e-08, 1, -3.44621682e-08, 0.746107996, -1.99003694e-08, 0.66582495)
-            task.wait(0.35)
+            task.wait(0.2)
             interact()
-            task.wait(0.3)
+            task.wait(0.2)
             teleportBack()
         else
             WindUI:Notify({
