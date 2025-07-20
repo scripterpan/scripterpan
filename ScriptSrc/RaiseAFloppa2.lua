@@ -729,7 +729,8 @@ Tabs.auto:Toggle({
                 local milkDelivery = workspace:FindFirstChild("Milk Delivery")
                 if milkDelivery and milkDelivery:FindFirstChild("Crate") then
                     for _, v in ipairs(milkDelivery:GetChildren()) do
-                        if v.Name == "Crate" and v:FindFirstChild("ProximityPrompt") then
+                        if v.Name == "Crate" and v:FindFirstChild("ProximityPrompt") then 
+                            saveOriginalPosition()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                             interact()
                             task.wait(0.25)
