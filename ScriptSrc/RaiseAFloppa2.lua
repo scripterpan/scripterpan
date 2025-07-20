@@ -463,6 +463,108 @@ end)
 
 
 
+Tabs.main1:Toggle({
+    Title = "Auto Click Floppa",
+    Desc = "Get money by clicking Floppa",
+    Icon = "mouse-pointer-click",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoClickFloppa = val
+
+        task.spawn(function()
+            while _G.AutoClickFloppa do
+                local floppa = workspace:FindFirstChild("Floppa")
+                if floppa then
+                    local clickDetector = floppa:FindFirstChild("ClickDetector")
+                    if clickDetector then
+                        fireclickdetector(clickDetector)
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+Tabs.main1:Toggle({
+    Title = "Auto Click Baby Floppa",
+    Desc = "Get money by clicking Baby Floppa",
+    Icon = "mouse-pointer-click",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoClickBabyFloppa = val
+
+        task.spawn(function()
+            while _G.AutoClickBabyFloppa do
+                for _, v in pairs(game.Workspace.Unlocks:GetChildren()) do
+                    if v.Name == "Baby Floppa" and v:FindFirstChild("ClickDetector") then
+                        fireclickdetector(v.ClickDetector)
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+Tabs.main1:Toggle({
+    Title = "Auto Collect Money",
+    Desc = "Automatically collects money that drops from both Baby Floppa and Floppa",
+    Icon = "hand-coins",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoCollectMoney = val
+
+        task.spawn(function()
+            while _G.AutoCollectMoney do
+                for _, v in pairs(workspace:GetChildren()) do
+                    if (v.Name:find("Money") or v.Name == "Money Bag" or v.Name == "Gold") 
+                        and v:FindFirstChildWhichIsA("TouchTransmitter") then
+
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+Tabs.main1:Toggle({
+    Title = "Auto Collect Gem",
+    Desc = "Automatically collects gems that drops from Queen Floppa",
+    Icon = "gem",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoCollectGem = val
+
+        task.spawn(function()
+            while _G.AutoCollectGem do
+                for _, v in pairs(workspace:GetChildren()) do
+                    if v.Name == "Ruby" or v.Name == "Diamond" or v.Name == "Emerald" or v.Name == "Sapphire" then
+                        firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v, 0)
+                        firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v, 1)
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+
+
+
+
 Tabs.manual:Button({
     Title = "Pet Floppa",
     Desc = "Teleport to Floppa and pet it to increase its happiness",
@@ -610,3 +712,34 @@ Tabs.auto:Toggle({
         end
     end
 })
+
+
+
+Tabs.auto:Toggle({
+    Title = "Auto Collect Milk",
+    Desc = "Automatically collects milk crates from Milk Delivery",
+    Icon = "milk",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoCollectMilk = val
+
+        task.spawn(function()
+            while _G.AutoCollectMilk do
+                local milkDelivery = workspace:FindFirstChild("Milk Delivery")
+                if milkDelivery and milkDelivery:FindFirstChild("Crate") then
+                    for _, v in ipairs(milkDelivery:GetChildren()) do
+                        if v.Name == "Crate" and v:FindFirstChild("ProximityPrompt") then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                            interact()
+                            task.wait(0.25)
+                            teleportBack()
+                        end
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
