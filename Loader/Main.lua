@@ -83,7 +83,14 @@ WindUI:Popup({
                         Buttons = {
                             {
                                 Title = "No, Thanks",
-                                Callback = function() end,
+                                Callback = function()
+                                    WindUI:Notify({
+                                        Title = "Ok",
+                                        Content = "Bye Bye, Have a good day!",
+                                        Icon = "hand",
+                                        Duration = 5,
+                                    })    
+                                end,
                                 Variant = "Tertiary",
                             },
                             {
