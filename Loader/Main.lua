@@ -33,7 +33,7 @@ WindUI:Popup({
 
                 WindUI:Notify({
                     Title = "Checking if this game is supported or not",
-                    Content = "did you know, idk how to use dex?",
+                    Content = "Checking, Please wait",
                     Icon = "info",
                     Duration = 5,
                 })
@@ -60,7 +60,7 @@ WindUI:Popup({
                     })
                 else
                     WindUI:Notify({
-                        Title = "Unsupported",
+                        Title = "Unsupported!",
                         Content = "We'll be adding the list of supported games soon",
                         Icon = "info",
                         Duration = 5,
