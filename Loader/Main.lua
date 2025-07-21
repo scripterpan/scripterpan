@@ -49,6 +49,7 @@ WindUI:Popup({
                     })
 
                     task.wait(1.5)
+                    
                     loadstring(game:HttpGet(games[creator]))()
 
                     WindUI:Notify({
