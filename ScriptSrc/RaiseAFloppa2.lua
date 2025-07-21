@@ -65,11 +65,11 @@ Tabs.stat = Window:Section({
     Tabs.StatServer = Tabs.stat:Tab({ Title = "Server's Status", Icon = "server" })
     Tabs.StatOther = Tabs.stat:Tab({ Title = "Other's Status", Icon = "search" })
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
-
     Tabs.cook = Tabs.main:Tab({ Title = "Cook", Icon = "cooking-pot" })
     Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
+    Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal", Icon = "bomb" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
     Tabs.gemisc = Tabs.misc:Tab({ Title = "General Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Player Misc", Icon = "person-standing"})
@@ -729,12 +729,56 @@ Tabs.auto:Toggle({
                 local milkDelivery = workspace:FindFirstChild("Milk Delivery")
                 if milkDelivery and milkDelivery:FindFirstChild("Crate") then
                     for _, v in ipairs(milkDelivery:GetChildren()) do
-                        if v.Name == "Crate" and v:FindFirstChild("ProximityPrompt") then 
+                        if v.Name == "Crate" and v:FindFirstChild("ProximityPrompt") then
                             saveOriginalPosition()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                             interact()
                             task.wait(0.25)
                             teleportBack()
+                        end
+                    end
+                end
+                       task.wait()
+            end
+        end)
+    end
+})
+
+Tabs.auto:Toggle({
+    Title = "Auto Clean Poop",
+    Desc = "Automatically cleans up poop from the Litter Box and the floor",
+    Icon = "trash",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoClearPoop = val
+
+        task.spawn(function()
+            while _G.AutoClearPoop do
+                -- Clean from Litter Box
+                local keyParts = workspace:FindFirstChild("Key Parts")
+                if keyParts then
+                    local litterBox = keyParts:FindFirstChild("Litter Box")
+                    if litterBox then
+                        for _, v in pairs(litterBox:GetChildren()) do
+                            if v.Name:find("Poop") and v:FindFirstChild("PoopPart") and v:FindFirstChild("ProximityPrompt") then
+                                local char = game.Players.LocalPlayer.Character
+                                if char and char:FindFirstChild("HumanoidRootPart") then
+                                    char.HumanoidRootPart.CFrame = v.PoopPart.CFrame
+                                    fireproximityprompt(v.ProximityPrompt)
+                                end
+                            end
+                        end
+                    end
+                end
+
+                -- Clean from world floor
+                for _, v in pairs(workspace:GetChildren()) do
+                    if v.Name:find("Poop") and v:FindFirstChild("PoopPart") and v:FindFirstChild("ProximityPrompt") then
+                        local char = game.Players.LocalPlayer.Character
+                        if char and char:FindFirstChild("HumanoidRootPart") then
+                            char.HumanoidRootPart.CFrame = v.PoopPart.CFrame
+                            fireproximityprompt(v.ProximityPrompt)
                         end
                     end
                 end
@@ -744,3 +788,206 @@ Tabs.auto:Toggle({
     end
 })
 
+
+
+
+Tabs.plant:Toggle({
+    Title = "Auto Pickup Seed",
+    Desc = "Automatically picks up seeds",
+    Icon = "bean",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoPickUpSeeds = Value
+
+        task.spawn(function()
+            while _G.AutoPickUpSeeds do
+                for _, v in ipairs(workspace.Seeds:GetChildren()) do
+                    if v:FindFirstChild("ProximityPrompt") then
+                        local char = game.Players.LocalPlayer.Character
+                        if char and char:FindFirstChild("HumanoidRootPart") then
+                            char.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(0, 2.5, 0)
+                            fireproximityprompt(v.ProximityPrompt)
+                        end
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+Tabs.plant:Toggle({
+    Title = "Auto Plant Seed",
+    Desc = "Automatically plants seeds in empty planters",
+    Icon = "bean",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(Val)
+        _G.AutoPlantSeeds = Val
+
+        task.spawn(function()
+            while _G.AutoPlantSeeds do
+                local Seeds = {}
+                local player = game.Players.LocalPlayer
+
+                for _, item in ipairs(player.Character:GetChildren()) do
+                    if item.Name:match("Seed") or item.Name:match("Spore") then
+                        table.insert(Seeds, item)
+                    end
+                end
+                for _, item in ipairs(player.Backpack:GetChildren()) do
+                    if item.Name:match("Seed") or item.Name:match("Spore") then
+                        table.insert(Seeds, item)
+                    end
+                end
+
+                for _, seed in ipairs(Seeds) do
+                    seed.Parent = player.Character
+                end
+
+                for _, planter in ipairs(workspace.Unlocks:GetChildren()) do
+                    if planter.Name:match("Planter") and #Seeds > 0 then
+                        if planter:FindFirstChild("Plant") and (planter.Plant.Value == nil or planter.Plant.Value == "") then
+                            player.Character.HumanoidRootPart.CFrame = planter.Soil.CFrame * CFrame.new(-1, -5, 0)
+                            fireproximityprompt(planter.Soil:FindFirstChild("ProximityPrompt"))
+                        end
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+Tabs.plant:Toggle({
+    Title = "Auto Harvest Plant",
+    Desc = "Automatically harvests fully grown plants",
+    Icon = "bean",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(Val)
+        _G.AutoHarvestPlants = Val
+
+        task.spawn(function()
+            while _G.AutoHarvestPlants do
+                for _, planter in ipairs(workspace.Unlocks:GetChildren()) do
+                    if planter.Name:match("Planter") and planter:FindFirstChild("Plant") and planter:FindFirstChild("Growth") then
+                        if planter.Plant.Value ~= nil and planter.Growth.Value == 100 then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = planter.Soil.CFrame * CFrame.new(-1, -5, 0)
+                            fireproximityprompt(planter.Soil:FindFirstChild("ProximityPrompt"))
+                        end
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+
+
+
+Tabs.Tp:Button({
+    Title = "House",
+    Desc = "Teleport To House",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.4003258, 73.4750061, -37.8793678, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "1st Basement",
+    Desc = "Teleport To 1st Basement",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-67.2391968, 55.4000168, -39.330204, 0.0412380993, 4.33183925e-16, -0.999149323, -9.00663685e-16, 1, 3.96379444e-16, 0.999149323, 8.83551608e-16, 0.0412380993)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "2nd Basement",
+    Desc = "Teleport To 2nd Basement",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.9028969, 35.9000168, -38.1604042, 0.392780244, 1.67481833e-08, -0.919632375, -3.26389724e-08, 1, 4.27153291e-09, 0.919632375, 2.83380803e-08, 0.392780244)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "1st Upper Floor",
+    Desc = "Teleport To 1st Upper Floor",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-62.7135963, 91.4000168, -30.2685719, -0.469526678, -2.73245995e-08, -0.882918298, -5.78674388e-08, 1, -1.74752851e-10, 0.882918298, 5.10101685e-08, -0.469526678)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "2nd Upper Floor",
+    Desc = "Teleport To 2nd Upper Floor",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.0160217, 110.500015, -36.4459419, 0.284452379, -7.96052557e-09, -0.958690166, -3.11641237e-08, 1, -1.75502315e-08, 0.958690166, 3.48689433e-08, 0.284452379)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "Roof",
+    Desc = "Teleport To Roof",
+    Locked = false,
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-53.264492, 145.400024, -41.4740868, -0.371924132, -9.61286273e-10, -0.928263128, -8.72383388e-10, 1, -6.86040169e-10, 0.928263128, 5.54646495e-10, -0.371924132)
+    end
+})
+
+Tabs.Tp:Button({
+    Title = "Patio",
+    Desc = "Teleport To Patio",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-63.1400528, 91.4000092, -90.8524628, 0.986670196, 8.35140401e-09, 0.162732586, -1.94483754e-08, 1, 6.6598389e-08, -0.162732586, -6.88755293e-08, 0.986670196)
+    end
+})
+
+
+
+
+
+Tabs.Tp:Button({
+    Title = "Market",
+    Desc = "Teleport To Market",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28.0548782, 70.1997757, -108.054405, 0.786984861, 1.86600291e-09, -0.616972327, 4.16374135e-08, 1, 5.61354447e-08, 0.616972327, -6.98668785e-08, 0.786984861)
+    end
+})
+
+
+Tabs.Tp:Button({
+    Title = "Jinx's Cauldron",
+    Desc = "Teleport To Jinx's Cauldron",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-114.476074, 68.593689, -144.418213, -0.425411254, 3.78284035e-08, -0.90500015, 3.78207954e-09, 1, 4.00215008e-08, 0.90500015, 1.3602814e-08, -0.425411254)
+    end
+})
+
+
+Tabs.Tp:Button({
+    Title = "Backroom",
+    Desc = "Teleport To Backroom",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248.705948, -1216.1001, -52.4668922, 0.747585952, -3.66916169e-08, -0.66416508, 2.22550529e-08, 1, -3.01943786e-08, 0.66416508, 7.79186315e-09, 0.747585952)
+    end
+})
+
+
+
+Tabs.Tp:Button({
+    Title = "Space",
+    Desc = "Teleport To Space",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-42173.7617, 529.839417, -118.53688, 0.966301262, -1.5619916e-08, 0.257413775, 6.48822107e-09, 1, 3.63241597e-08, -0.257413775, -3.34299237e-08, 0.966301262)
+    end
+})
