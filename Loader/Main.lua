@@ -104,7 +104,7 @@ WindUI:Popup({
                                         Duration = 5,
                                     })
 
-                                    task.wait(2)
+                                    task.wait(1.25)
 
                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Universal.lua"))()
 
