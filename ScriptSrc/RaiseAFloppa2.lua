@@ -1129,7 +1129,7 @@ local JumpSlider, JumpInput
 local GravitySlider, GravityInput
 
 -- speed
-local SpeedToggle = plmisc:Toggle({
+Tabs.plmisc:Toggle({
     Title = "Speed Boost",
     Desc = "Enable speed boost",
     Icon = "chevrons-up",
@@ -1155,7 +1155,7 @@ local SpeedToggle = plmisc:Toggle({
     end
 })
 
-SpeedSlider = plmisc:Slider({
+Tabs.plmisc:Slider({
     Title = "Walk Speed",
     Step = 1,
     Value = {
@@ -1174,7 +1174,7 @@ SpeedSlider = plmisc:Slider({
     end
 })
 
-SpeedInput = plmisc:Input({
+Tabs.plmisc:Input({
     Title = "Set Walk Speed",
     Desc = "Type your speed value here if you're lazy to use the slider (1–500)",
     Placeholder = tostring(defaultSpeed),
@@ -1196,7 +1196,7 @@ SpeedInput = plmisc:Input({
 })
 
 -- Jumppower
-local JumpToggle = plmisc:Toggle({
+Tabs.plmisc:Toggle({
     Title = "Jump Boost",
     Desc = "Enable jump boost",
     Icon = "person-standing",
@@ -1222,7 +1222,7 @@ local JumpToggle = plmisc:Toggle({
     end
 })
 
-JumpSlider = plmisc:Slider({
+Tabs.plmisc:Slider({
     Title = "Jump Power",
     Step = 1,
     Value = {
@@ -1241,7 +1241,7 @@ JumpSlider = plmisc:Slider({
     end
 })
 
-JumpInput = plmisc:Input({
+Tabs.plmisc:Input({
     Title = "Set Jump Power",
     Desc = "Type jump power value here if you're lazy to use the slider (1–500)",
     Placeholder = tostring(defaultJumpPower),
@@ -1263,7 +1263,7 @@ JumpInput = plmisc:Input({
 })
 
 -- Gravy 
-local GravityToggle = plmisc:Toggle({
+Tabs.plmisc:Toggle({
     Title = "Change Gravity",
     Desc = "Enable gravity changer",
     Icon = "clock-arrow-down",
@@ -1287,7 +1287,7 @@ local GravityToggle = plmisc:Toggle({
     end
 })
 
-GravitySlider = plmisc:Slider({
+Tabs.plmisc:Slider({
     Title = "Gravity Value",
     Step = 1,
     Value = {
@@ -1306,7 +1306,7 @@ GravitySlider = plmisc:Slider({
     end
 })
 
-GravityInput = plmisc:Input({
+Tabsplmisc:Input({
     Title = "Set Gravity",
     Desc = "Type gravity value if you're lazy to use the slider (0–500)",
     Placeholder = tostring(defaultGravity),
