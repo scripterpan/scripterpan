@@ -1001,9 +1001,64 @@ Tabs.Tp:Button({
 
 
 
+local infiniteJumpEnabled = false
+local humanoid = nil
+local conn = nil
+
+local function enableInfiniteJump()
+    if conn then conn:Disconnect() end
+    conn = game:GetService("UserInputService").JumpRequest:Connect(function()
+        if infiniteJumpEnabled and humanoid then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+end
+
+local function setupCharacter(char)
+    humanoid = char:WaitForChild("Humanoid", 5)
+    if infiniteJumpEnabled then
+        enableInfiniteJump()
+    end
+end
+
+player.CharacterAdded:Connect(function(char)
+    setupCharacter(char)
+end)
+
+if player.Character then
+    setupCharacter(player.Character)
+end
+
+Tabs.plmisc:Toggle({
+    Title = "Infinite Jump",
+    Desc = "Toggle Infinite Jump",
+    Icon = "arrow-big-up-dash",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        infiniteJumpEnabled = state
+        if state then
+            if player.Character then
+                setupCharacter(player.Character)
+            end
+        else
+            if conn then conn:Disconnect() end
+        end
+    end
+})
 
 
-local Players = game:GetService("Players")
+
+
+
+
+
+
+
+
+
+
+
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
