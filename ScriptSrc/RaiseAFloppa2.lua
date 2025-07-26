@@ -1078,3 +1078,255 @@ LocalPlayer.CharacterAdded:Connect(function()
         startNoclip()
     end
 end)
+
+
+
+
+local speedEnabled = false
+local jumpEnabled = false
+local gravityEnabled = false
+
+
+local defaultSpeed = 16
+local defaultJumpPower = 50
+local defaultGravity = 196.2
+
+
+local desiredSpeed = defaultSpeed
+local desiredJumpPower = defaultJumpPower
+local desiredGravity = defaultGravity
+
+
+local function setSpeed(speed)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.WalkSpeed = speed
+    end
+end
+
+local function setJumpPower(power)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        local hum = player.Character:FindFirstChild("Humanoid")
+        hum.UseJumpPower = true
+        hum.JumpPower = power
+    end
+end
+
+local function setGravity(g)
+    workspace.Gravity = g
+end
+
+
+player.CharacterAdded:Connect(function()
+    repeat task.wait() until player.Character:FindFirstChild("Humanoid")
+    if speedEnabled then setSpeed(desiredSpeed) end
+    if jumpEnabled then setJumpPower(desiredJumpPower) end
+    if gravityEnabled then setGravity(desiredGravity) end
+end)
+
+
+local SpeedSlider, SpeedInput
+local JumpSlider, JumpInput
+local GravitySlider, GravityInput
+
+-- speed
+local SpeedToggle = plmisc:Toggle({
+    Title = "Speed Boost",
+    Desc = "Enable speed boost",
+    Icon = "chevrons-up",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        speedEnabled = state
+        if state then
+            setSpeed(desiredSpeed)
+            task.spawn(function()
+                while speedEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                            setSpeed(desiredSpeed)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setSpeed(defaultSpeed)
+        end
+    end
+})
+
+SpeedSlider = plmisc:Slider({
+    Title = "Walk Speed",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = defaultSpeed,
+    },
+    Callback = function(val)
+        desiredSpeed = val
+        if SpeedInput and SpeedInput.SetValue then
+            SpeedInput:SetValue(tostring(val))
+        end
+        if speedEnabled then
+            setSpeed(desiredSpeed)
+        end
+    end
+})
+
+SpeedInput = plmisc:Input({
+    Title = "Set Walk Speed",
+    Desc = "Type your speed value here if you're lazy to use the slider (1–500)",
+    Placeholder = tostring(defaultSpeed),
+    InputIcon = "chevrons-up",
+    Type = "Input",
+    Value = tostring(desiredSpeed),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredSpeed = num
+            if SpeedSlider and SpeedSlider.Set then
+                SpeedSlider:Set(num)
+            end
+            if speedEnabled then
+                setSpeed(desiredSpeed)
+            end
+        end
+    end
+})
+
+-- Jumppower
+local JumpToggle = plmisc:Toggle({
+    Title = "Jump Boost",
+    Desc = "Enable jump boost",
+    Icon = "person-standing",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        jumpEnabled = state
+        if state then
+            setJumpPower(desiredJumpPower)
+            task.spawn(function()
+                while jumpEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.JumpPower ~= desiredJumpPower then
+                            setJumpPower(desiredJumpPower)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setJumpPower(defaultJumpPower)
+        end
+    end
+})
+
+JumpSlider = plmisc:Slider({
+    Title = "Jump Power",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = defaultJumpPower,
+    },
+    Callback = function(val)
+        desiredJumpPower = val
+        if JumpInput and JumpInput.SetValue then
+            JumpInput:SetValue(tostring(val))
+        end
+        if jumpEnabled then
+            setJumpPower(desiredJumpPower)
+        end
+    end
+})
+
+JumpInput = plmisc:Input({
+    Title = "Set Jump Power",
+    Desc = "Type jump power value here if you're lazy to use the slider (1–500)",
+    Placeholder = tostring(defaultJumpPower),
+    InputIcon = "person-standing",
+    Type = "Input",
+    Value = tostring(desiredJumpPower),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredJumpPower = num
+            if JumpSlider and JumpSlider.Set then
+                JumpSlider:Set(num)
+            end
+            if jumpEnabled then
+                setJumpPower(desiredJumpPower)
+            end
+        end
+    end
+})
+
+-- Gravy 
+local GravityToggle = plmisc:Toggle({
+    Title = "Change Gravity",
+    Desc = "Enable gravity changer",
+    Icon = "clock-arrow-down",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        gravityEnabled = state
+        if state then
+            setGravity(desiredGravity)
+            task.spawn(function()
+                while gravityEnabled do
+                    if workspace.Gravity ~= desiredGravity then
+                        setGravity(desiredGravity)
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setGravity(defaultGravity)
+        end
+    end
+})
+
+GravitySlider = plmisc:Slider({
+    Title = "Gravity Value",
+    Step = 1,
+    Value = {
+        Min = 0,
+        Max = 500,
+        Default = defaultGravity,
+    },
+    Callback = function(val)
+        desiredGravity = val
+        if GravityInput and GravityInput.SetValue then
+            GravityInput:SetValue(tostring(val))
+        end
+        if gravityEnabled then
+            setGravity(desiredGravity)
+        end
+    end
+})
+
+GravityInput = plmisc:Input({
+    Title = "Set Gravity",
+    Desc = "Type gravity value if you're lazy to use the slider (0–500)",
+    Placeholder = tostring(defaultGravity),
+    InputIcon = "clock-arrow-down",
+    Type = "Input",
+    Value = tostring(desiredGravity),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 0 and num <= 500 then
+            desiredGravity = num
+            if GravitySlider and GravitySlider.Set then
+                GravitySlider:Set(num)
+            end
+            if gravityEnabled then
+                setGravity(desiredGravity)
+            end
+        end
+    end
+})
+
+
+
+
