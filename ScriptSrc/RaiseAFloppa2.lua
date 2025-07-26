@@ -136,8 +136,15 @@ local function teleportBack()
 end
 
 
--- moodlets
+-- instant interact
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection
+local promptAddedConnection
+local modifiedPrompts = {}
 
+
+
+-- moodlets
 local moodletFolder = workspace:WaitForChild("Floppa"):WaitForChild("Moodlets")
 
 -- trophies 
@@ -996,6 +1003,84 @@ Tabs.Tp:Button({
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-42173.7617, 529.839417, -118.53688, 0.966301262, -1.5619916e-08, 0.257413775, 6.48822107e-09, 1, 3.63241597e-08, -0.257413775, -3.34299237e-08, 0.966301262)
     end
 })
+
+
+
+
+
+local function makePromptInstant(prompt)
+    if not modifiedPrompts[prompt] then
+        modifiedPrompts[prompt] = {
+            HoldDuration = prompt.HoldDuration,
+            RequiresLineOfSight = prompt.RequiresLineOfSight,
+            ClickablePrompt = prompt.ClickablePrompt
+        }
+    end
+
+    prompt.HoldDuration = 0
+    prompt.RequiresLineOfSight = false
+    prompt.ClickablePrompt = true
+end
+
+local function restorePrompt(prompt)
+    local original = modifiedPrompts[prompt]
+    if original then
+        prompt.HoldDuration = original.HoldDuration
+        prompt.RequiresLineOfSight = original.RequiresLineOfSight
+        prompt.ClickablePrompt = original.ClickablePrompt
+        modifiedPrompts[prompt] = nil
+    end
+end
+
+local function toggleInstantInteract(enabled)
+    if enabled then
+        for _, obj in ipairs(game:GetDescendants()) do
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end  
+        
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
+
+        promptAddedConnection = game.DescendantAdded:Connect(function(obj)
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end)
+    else
+
+        if proximityConnection then
+            proximityConnection:Disconnect()
+            proximityConnection = nil
+        end
+        if promptAddedConnection then
+            promptAddedConnection:Disconnect()
+            promptAddedConnection = nil
+        end
+
+        for prompt, _ in pairs(modifiedPrompts) do
+            restorePrompt(prompt)
+        end
+    end
+end
+
+
+Tabs.gemisc:Toggle({
+    Title = "Instant Interact",
+    Desc = "Interact with anything without a cooldown",
+    Icon = "hand",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        toggleInstantInteract(state)
+    end
+})
+
+
+
+
 
 
 
