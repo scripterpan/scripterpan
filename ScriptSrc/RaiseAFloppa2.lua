@@ -70,6 +70,7 @@ Tabs.stat = Window:Section({
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
     Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal (W.I.P)", Icon = "bomb", Locked = "true" })
+    Tabs.slot = Tabs.main:Tab({ Title = "Floppa Slot (W.I.P)", Icon = "bitcoin", Locked = "true" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
     Tabs.gemisc = Tabs.misc:Tab({ Title = "General Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Player Misc", Icon = "person-standing"})
@@ -1077,6 +1078,9 @@ Tabs.gemisc:Toggle({
         toggleInstantInteract(state)
     end
 })
+
+
+Tabs.gemisc:Section({ Title = "Visual", Icon = "binoculars" })
 
 
 
