@@ -43,7 +43,7 @@ WindUI:Popup({
                 if games[creator] then
                     WindUI:Notify({
                         Title = "Supported!",
-                        Content = "Loading,  please wait",
+                        Content = "Loading, Please wait",
                         Icon = "info",
                         Duration = 5,
                     })
