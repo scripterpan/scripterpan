@@ -1184,10 +1184,13 @@ local JumpInput
 local GravityInput
 
 -- speed
+Tabs.plmisc:Section({ Title = "Speed", Icon = "zap" })
+
+
 Tabs.plmisc:Toggle({
     Title = "Speed Boost",
     Desc = "Enable speed boost",
-    Icon = "chevrons-up",
+    Icon = "zap",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
@@ -1229,6 +1232,8 @@ Tabs.plmisc:Input({
 })
 
 -- Jumppower
+Tabs.plmisc:Section({ Title = "Jump Power", Icon = "person-standing" })
+
 Tabs.plmisc:Toggle({
     Title = "Jump Boost",
     Desc = "Enable jump boost",
@@ -1275,6 +1280,8 @@ Tabs.plmisc:Input({
 
 
 -- Gravity 
+Tabs.plmisc:Section({ Title = "Gravity", Icon = "clock-arrow-down" })
+
 Tabs.plmisc:Toggle({
     Title = "Change Gravity",
     Desc = "Enable gravity changer",
