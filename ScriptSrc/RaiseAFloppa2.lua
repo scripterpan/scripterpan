@@ -74,10 +74,8 @@ Tabs.stat = Window:Section({
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
     Tabs.gemisc = Tabs.misc:Tab({ Title = "General Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Player Misc", Icon = "person-standing"})
-    Tabs.mul = Tabs.Other:Tab({ Title = "Multiplayer", Icon = "users-round" })
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
-    Tabs.exec = Tabs.Other:Tab({ Title = "Built-in Executor (Ok wth)", Icon = "toggle-left" })
-
+    
 end
 
 
@@ -1502,4 +1500,45 @@ Tabs.plmisc:Input({
 
 
 
+Tabs.src:Button({
+    Title = "Infinite Yield",
+    Desc = "Best command script",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source"))()
+    end
+})
+    
 
+
+Tabs.src:Button({
+    Title = "Fly GUI",
+    Desc = "Best Fly Script",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
+    
+
+
+
+
+Tabs.src:Button({
+    Title = "Dex V4",
+    Desc = "Dark Dex V4 Mobile good for scripting",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+    end
+})
+
+
+Tabs.src:Button({
+    Title = "Simple SPY",
+    Desc = "Best script for logging remote that happened in game \nyout executor must have/support hookmetamethod\ngetnamecallmethod\nsetnamecallmethod\nnewcclosure\ngetrawmetatable\nsetreadonly",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
+    end
+})
