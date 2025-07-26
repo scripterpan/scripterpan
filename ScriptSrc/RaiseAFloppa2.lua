@@ -86,6 +86,11 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
 
+
+
+
+
+
 -- setup for show ping and fps
 local Stats = game:GetService("Stats")
 local network = Stats:FindFirstChild("Network")
@@ -991,3 +996,85 @@ Tabs.Tp:Button({
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-42173.7617, 529.839417, -118.53688, 0.966301262, -1.5619916e-08, 0.257413775, 6.48822107e-09, 1, 3.63241597e-08, -0.257413775, -3.34299237e-08, 0.966301262)
     end
 })
+
+
+
+
+
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local noclipConnection
+local originalCollisions = {}
+
+
+local function saveOriginalCollisions()
+    originalCollisions = {}
+    if LocalPlayer.Character then
+        for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                originalCollisions[part] = part.CanCollide
+            end
+        end
+    end
+end
+
+
+local function startNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+    end
+
+    saveOriginalCollisions()
+
+    noclipConnection = RunService.Stepped:Connect(function()
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+local function stopNoclip()
+    if noclipConnection then
+        noclipConnection:Disconnect()
+        noclipConnection = nil
+    end
+    for part, canCollide in pairs(originalCollisions) do
+        if part and part:IsA("BasePart") then
+            part.CanCollide = canCollide
+        end
+    end
+    originalCollisions = {}
+end
+
+
+Tabs.plmisc:Toggle({
+    Title = "Noclip",
+    Desc = "Walk Through Objects",
+    Icon = "expand",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            startNoclip()
+        else
+            stopNoclip()
+        end
+    end
+})
+
+-- Handle respawn
+LocalPlayer.CharacterAdded:Connect(function()
+    repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+    saveOriginalCollisions()
+    if Toggle.Value then
+        startNoclip()
+    end
+end)
