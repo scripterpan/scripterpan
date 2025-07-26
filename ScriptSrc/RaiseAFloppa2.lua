@@ -104,7 +104,8 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
 
-
+-- lighting
+local lighting = game:GetService("Lighting")
 
 -- unlock
 local unlocks = workspace:WaitForChild("Unlocks")
@@ -1079,10 +1080,44 @@ Tabs.gemisc:Toggle({
     end
 })
 
+Tabs.gemisc:Section({ Title = "Visual / GPU Related", Icon = "binoculars" })
 
-Tabs.gemisc:Section({ Title = "Visual", Icon = "binoculars" })
+-- FullBright 
+local originalSettings = {
+    Brightness = lighting.Brightness,
+    ClockTime = lighting.ClockTime,
+    Ambient = lighting.Ambient,
+    OutdoorAmbient = lighting.OutdoorAmbient,
+}
 
+local function enableFullbright()
+    lighting.Brightness = 2
+    lighting.ClockTime = 14
+    lighting.Ambient = Color3.new(1, 1, 1)
+    lighting.OutdoorAmbient = Color3.new(1, 1, 1)
+end
 
+local function disableFullbright()
+    lighting.Brightness = originalSettings.Brightness
+    lighting.ClockTime = originalSettings.ClockTime
+    lighting.Ambient = originalSettings.Ambient
+    lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
+end
+
+Tabs.gemisc:Toggle({
+    Title = "Fullbright",
+    Desc = "Increase Brightness",
+    Icon = "sun",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        if val then
+            enableFullbright()
+        else
+            disableFullbright()
+        end
+    end
+})
 
 
 
