@@ -1,3 +1,5 @@
+-- NOT MINE
+
 --[[
     SimpleSpy v2.2 SOURCE
 
