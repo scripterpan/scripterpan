@@ -1536,7 +1536,7 @@ Tabs.src:Button({
 
 Tabs.src:Button({
     Title = "Simple SPY",
-    Desc = "Best script for logging remote that happened in game \nYour executor must support \n-hookmetamethod\n-getnamecallmethod\n-setnamecallmethod\n-newcclosure\n-getrawmetatable\n-setreadonly",
+    Desc = "Best script for logging remote that happened in game \nYour executor must support : \n- hookmetamethod\n- getnamecallmethod\n- setnamecallmethod\n- newcclosure\n- getrawmetatable\n- setreadonly",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
