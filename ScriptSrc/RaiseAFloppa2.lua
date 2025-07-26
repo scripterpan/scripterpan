@@ -1124,9 +1124,9 @@ player.CharacterAdded:Connect(function()
 end)
 
 
-local SpeedSlider, SpeedInput
-local JumpSlider, JumpInput
-local GravitySlider, GravityInput
+local SpeedInput
+local JumpInput
+local GravityInput
 
 -- speed
 Tabs.plmisc:Toggle({
@@ -1155,28 +1155,9 @@ Tabs.plmisc:Toggle({
     end
 })
 
-Tabs.plmisc:Slider({
-    Title = "Walk Speed",
-    Step = 1,
-    Value = {
-        Min = 1,
-        Max = 500,
-        Default = defaultSpeed,
-    },
-    Callback = function(val)
-        desiredSpeed = val
-        if SpeedInput and SpeedInput.SetValue then
-            SpeedInput:SetValue(tostring(val))
-        end
-        if speedEnabled then
-            setSpeed(desiredSpeed)
-        end
-    end
-})
-
 Tabs.plmisc:Input({
     Title = "Set Walk Speed",
-    Desc = "Type your speed value here if you're lazy to use the slider (1–500)",
+    Desc = "Type your speed value here (1–500)",
     Placeholder = tostring(defaultSpeed),
     InputIcon = "chevrons-up",
     Type = "Input",
@@ -1185,9 +1166,6 @@ Tabs.plmisc:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredSpeed = num
-            if SpeedSlider and SpeedSlider.Set then
-                SpeedSlider:Set(num)
-            end
             if speedEnabled then
                 setSpeed(desiredSpeed)
             end
@@ -1222,28 +1200,9 @@ Tabs.plmisc:Toggle({
     end
 })
 
-Tabs.plmisc:Slider({
-    Title = "Jump Power",
-    Step = 1,
-    Value = {
-        Min = 1,
-        Max = 500,
-        Default = defaultJumpPower,
-    },
-    Callback = function(val)
-        desiredJumpPower = val
-        if JumpInput and JumpInput.SetValue then
-            JumpInput:SetValue(tostring(val))
-        end
-        if jumpEnabled then
-            setJumpPower(desiredJumpPower)
-        end
-    end
-})
-
 Tabs.plmisc:Input({
     Title = "Set Jump Power",
-    Desc = "Type jump power value here if you're lazy to use the slider (1–500)",
+    Desc = "Type jump power value (1–500)",
     Placeholder = tostring(defaultJumpPower),
     InputIcon = "person-standing",
     Type = "Input",
@@ -1252,9 +1211,6 @@ Tabs.plmisc:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredJumpPower = num
-            if JumpSlider and JumpSlider.Set then
-                JumpSlider:Set(num)
-            end
             if jumpEnabled then
                 setJumpPower(desiredJumpPower)
             end
@@ -1262,7 +1218,8 @@ Tabs.plmisc:Input({
     end
 })
 
--- Gravy 
+
+-- Gravity 
 Tabs.plmisc:Toggle({
     Title = "Change Gravity",
     Desc = "Enable gravity changer",
@@ -1287,28 +1244,9 @@ Tabs.plmisc:Toggle({
     end
 })
 
-Tabs.plmisc:Slider({
-    Title = "Gravity Value",
-    Step = 1,
-    Value = {
-        Min = 0,
-        Max = 500,
-        Default = defaultGravity,
-    },
-    Callback = function(val)
-        desiredGravity = val
-        if GravityInput and GravityInput.SetValue then
-            GravityInput:SetValue(tostring(val))
-        end
-        if gravityEnabled then
-            setGravity(desiredGravity)
-        end
-    end
-})
-
-Tabsplmisc:Input({
+Tabs.plmisc:Input({
     Title = "Set Gravity",
-    Desc = "Type gravity value if you're lazy to use the slider (0–500)",
+    Desc = "Type gravity value (0–500)",
     Placeholder = tostring(defaultGravity),
     InputIcon = "clock-arrow-down",
     Type = "Input",
@@ -1317,9 +1255,6 @@ Tabsplmisc:Input({
         local num = tonumber(input)
         if num and num >= 0 and num <= 500 then
             desiredGravity = num
-            if GravitySlider and GravitySlider.Set then
-                GravitySlider:Set(num)
-            end
             if gravityEnabled then
                 setGravity(desiredGravity)
             end
