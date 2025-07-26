@@ -1080,7 +1080,7 @@ Tabs.gemisc:Toggle({
     end
 })
 
-Tabs.gemisc:Section({ Title = "Visual / GPU Related", Icon = "binoculars" })
+Tabs.gemisc:Section({ Title = "Visual", Icon = "binoculars" })
 
 -- FullBright 
 local originalSettings = {
@@ -1119,9 +1119,61 @@ Tabs.gemisc:Toggle({
     end
 })
 
+Tabs.gemisc:Section({ Title = "GPU Care", Icon = "CPU" })
 
+local whiteScreen
 
+Tabs.gemisc:Toggle({
+    Title = "White Screen",
+    Desc = "Self-explanatory",
+    Icon = "bird",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            whiteScreen = Instance.new("ScreenGui", game:GetService("CoreGui"))
+            whiteScreen.IgnoreGuiInset = true
+            whiteScreen.Name = "WhiteScreenOverlay"
 
+            local frame = Instance.new("Frame", whiteScreen)
+            frame.BackgroundColor3 = Color3.new(1, 1, 1)
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.Position = UDim2.new(0, 0, 0, 0)
+        else
+            if whiteScreen then
+                whiteScreen:Destroy()
+                whiteScreen = nil
+            end
+        end
+    end
+})
+
+local blackScreen
+
+Tabs.gemisc:Toggle({
+    Title = "Black Screen",
+    Desc = "Self-explanatory",
+    Icon = "bird",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            blackScreen = Instance.new("ScreenGui", game:GetService("CoreGui"))
+            blackScreen.IgnoreGuiInset = true
+            blackScreen.Name = "BlackScreenOverlay"
+
+            local frame = Instance.new("Frame", blackScreen)
+            frame.BackgroundColor3 = Color3.new(0, 0, 0)
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.Position = UDim2.new(0, 0, 0, 0)
+        else
+            if blackScreen then
+                blackScreen:Destroy()
+                blackScreen = nil
+            end
+        end
+    end
+})
 
 
 
