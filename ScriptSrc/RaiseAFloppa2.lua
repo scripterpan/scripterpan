@@ -1119,14 +1119,14 @@ Tabs.gemisc:Toggle({
     end
 })
 
-Tabs.gemisc:Section({ Title = "GPU Care", Icon = "CPU" })
+Tabs.gemisc:Section({ Title = "GPU Care", Icon = "cpu" })
 
 local whiteScreen
 
 Tabs.gemisc:Toggle({
     Title = "White Screen",
     Desc = "Self-explanatory",
-    Icon = "bird",
+    Icon = "cpu",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
@@ -1153,7 +1153,7 @@ local blackScreen
 Tabs.gemisc:Toggle({
     Title = "Black Screen",
     Desc = "Self-explanatory",
-    Icon = "bird",
+    Icon = "cpu",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
