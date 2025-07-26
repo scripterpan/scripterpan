@@ -72,8 +72,8 @@ Tabs.stat = Window:Section({
     Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal (W.I.P)", Icon = "bomb", Locked = "true" })
     Tabs.slot = Tabs.main:Tab({ Title = "Floppa Slot (W.I.P)", Icon = "bitcoin", Locked = "true" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
-    Tabs.gemisc = Tabs.misc:Tab({ Title = "General Misc", Icon = "tv-minimal"})
-    Tabs.plmisc = Tabs.misc:Tab({ Title = "Player Misc", Icon = "person-standing"})
+    Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
+    Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
     
 end
@@ -1512,7 +1512,7 @@ Tabs.src:Button({
 
 
 Tabs.src:Button({
-    Title = "Fly GUI",
+    Title = "Fly GUI V3",
     Desc = "Best Fly Script",
     Locked = false,
     Callback = function()
@@ -1526,7 +1526,7 @@ Tabs.src:Button({
 
 Tabs.src:Button({
     Title = "Dex V4",
-    Desc = "Dark Dex V4 Mobile good for scripting",
+    Desc = "Dark Dex V4 Mobile \nGood for scripting",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
@@ -1536,7 +1536,7 @@ Tabs.src:Button({
 
 Tabs.src:Button({
     Title = "Simple SPY",
-    Desc = "Best script for logging remote that happened in game \nyout executor must have/support hookmetamethod\ngetnamecallmethod\nsetnamecallmethod\nnewcclosure\ngetrawmetatable\nsetreadonly",
+    Desc = "Best script for logging remote that happened in game \nYour executor must support \n-hookmetamethod\n-getnamecallmethod\n-setnamecallmethod\n-newcclosure\n-getrawmetatable\n-setreadonly",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
