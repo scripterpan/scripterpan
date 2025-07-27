@@ -69,6 +69,7 @@ Tabs.stat = Window:Section({
     Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
+    Tabs.shop = Tabs.main:Tab({ Title = "Market (W.I.P)", Icon = "shopping-cart", Locked = "true" })
     Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal (W.I.P)", Icon = "bomb", Locked = "true" })
     Tabs.slot = Tabs.main:Tab({ Title = "Floppa Slot (W.I.P)", Icon = "bitcoin", Locked = "true" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
@@ -107,6 +108,48 @@ local lighting = game:GetService("Lighting")
 
 -- unlock
 local unlocks = workspace:WaitForChild("Unlocks")
+
+-- for shop and cooking
+local function tpSword()
+    local target = workspace.Village.SwordStore.Sword
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpChicken()
+    local target = workspace.Village.FoodMarket.Chicken
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpCheese()
+    local target = workspace.Village.FoodMarket.Cheese
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpBeef()
+    local target = workspace.Village.FoodMarket.Beef
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpNoodles()
+    local target = workspace.Village.FoodMarket.Noodles
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpEggs()
+    local target = workspace.Village.FoodMarket.Eggs
+    local offset = Vector3.new(0, 5, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+
+
+
+
 
 
 
