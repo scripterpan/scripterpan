@@ -1254,6 +1254,21 @@ Tabs.Tp:Button({
 
 
 
+Tabs.gemisc:Button({
+    Title = "AntiAFK",
+    Desc = "Prevents you from being kicked for being idle for 20 minutes",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/AntiAFK.lua"))()
+        WindUI:Notify({
+            Title = "Loaded!",
+            Content = "Credits to luca5432 for making this. Huge thanks!",
+            Icon = "droplet-off",
+            Duration = 5,
+        })
+    end
+})
+
 
 
 local function makePromptInstant(prompt)
