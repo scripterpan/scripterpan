@@ -177,7 +177,7 @@ local happinessValue = workspace.Floppa.Configuration.Happiness
 
 -- setup interact 
 
-function interact()
+local function interact()
     local function getVisiblePrompt()
         local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         if not hrp then return end
@@ -379,50 +379,84 @@ end
 
 -- buy things (food)
 local function buyChicken()
-    save
+    saveOriginalPosition()
+    tpChicken()
+    interact()
+    teleportBack()
 end
 
 local function buyCheese()
-    
-    
+    saveOriginalPosition()
+    tpCheese()
+    interact()
+    teleportBack()
 end
 
 local function buyBeef()
-    
+    saveOriginalPosition()
+    tpBeef()
+    interact()
+    teleportBack()
 end
 
 local function buyNoodles()
-    
+    saveOriginalPosition()
+    toNoodles()
+    interact()
+    teleportBack()
 end
 
 local function buyEggs()
-    
+    saveOriginalPosition()
+    tpEggs()
+    interact()
+    teleportBack()
 end
 
 local function buySugar()
-    
+    saveOriginalPosition()
+    tpSugar()
+    interact()
+    teleportBack()
 end
 
 local function buyBread()
-    
+    saveOriginalPosition()
+    tpBread()
+    interact()
+    teleportBack()
 end
 
 local function buyFlour()
-    
+    saveOriginalPosition()
+    tpFlour()
+    interact()
+    teleportBack()
 end
 
 -- buy things (tools)
 local function buySword()
-    
+    saveOriginalPosition()
+    tpSword()
+    interact()
+    teleportBack()
 end
 
 local function buyCan()
-    
+    saveOriginalPosition()
+    tpCan()
+    interact()
+    teleportBack()
 end
 
-local function buyFRod()
-    
+local function buyFishRod()
+    saveOriginalPosition()
+    tpFish()
+    interact()
+    teleportBack()
 end
+
+
 
 
 
