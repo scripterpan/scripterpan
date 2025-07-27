@@ -1617,7 +1617,6 @@ Tabs.plmisc:Toggle({
     end
 })
 
--- Handle respawn
 LocalPlayer.CharacterAdded:Connect(function()
     repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
     saveOriginalCollisions()
