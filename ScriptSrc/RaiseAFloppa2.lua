@@ -459,7 +459,7 @@ end
 
 local function buyNoodles()
     saveOriginalPosition()
-    toNoodles()
+    tpNoodles()
     task.wait(0.2)
     clickNoodles()
     task.wait(0.2)
@@ -1262,25 +1262,26 @@ Tabs.shop:Section({ Title = "Foods/Ingredients", Icon = "beef" })
 
 
 local foodOptions = {
-    "Noodles",
-    "Beef",
-    "Cheese",
     "Chicken",
+    "Cheese",
+    "Beef",
+    "Noodles",
+    "Eggs",
     "Flour",
     "Bread",
-    "Sugar",
-    "Eggs"
+    "Sugar"
 }
 
 local foodActions = {
-    Noodles = buyNoodles,
-    Beef = buyBeef,
-    Cheese = buyCheese,
     Chicken = buyChicken,
+    Cheese = buyCheese,
+    Beef = buyBeef,
+    Noodles = buyNoodles,
+    Eggs = buyEggs,
     Flour = buyFlour,
     Bread = buyBread,
-    Sugar = buySugar,
-    Eggs = buyEggs
+    Sugar = buySugar
+    
 }
 
 local selectedFood = nil
