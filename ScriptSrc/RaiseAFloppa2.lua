@@ -370,6 +370,31 @@ local function tpFish()
     end
 end
 
+-- interact to buy these thing
+local function clickFlour()
+    local prompt = workspace.Village.FoodMarket["Flour Crate"].Crate["Empty Display Crate"].Primary:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickBread()
+    local prompt = workspace.Village.FoodMarket["Bread Crate"].Crate["Empty Display Crate"].Primary:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickSugar()
+    local prompt = workspace.Village.FoodMarket["Sugar Crate"].Crate["Empty Display Crate"].Primary:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+
+
+
 -- buy things (food)
 local function buyChicken()
     saveOriginalPosition()
