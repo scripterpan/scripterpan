@@ -956,26 +956,18 @@ end
 Tabs.manual:Button({
     Title = "Floppa's Moodlets",
     Desc = "Feed Floppa Hot Chocolate, Lemonade When Floppa Is Cold, Hot",
-    Callback = function() 
-saveOriginalPosition()
-        humanoidRootPart.CFrame = CFrame.new(-5.52987146, 69.0936737, -108.875877, 0.307733119, 1.24310662e-09, 0.9514727, -2.64562194e-09, 1, -4.50839088e-10, -0.9514727, -2.37849895e-09, 0.307733119)
-
-        task.wait(0.2)
-
-        interact()
-
-        task.wait(0.2)
-
-        teleportToFloppa()
-
-        task.wait(0.2)
-
-        interact()
-
-        task.wait(0.2)
-
-        teleportBack()
-end
+    Callback = function()
+            saveOriginalPosition()
+            humanoidRootPart.CFrame = CFrame.new(-5.52987146, 69.0936737, -108.875877, 0.307733119, 1.24310662e-09, 0.9514727, -2.64562194e-09, 1, -4.50839088e-10, -0.9514727, -2.37849895e-09, 0.307733119)
+            task.wait(0.2)
+            interact()
+            task.wait(0.2)
+            teleportToFloppa()
+            task.wait(0.2)
+            interact()
+            task.wait(0.2)
+            teleportBack()
+        end
 })
 
 
@@ -1110,6 +1102,32 @@ Tabs.auto:Toggle({
                     end
                 end
                        task.wait()
+            end
+        end)
+    end
+})
+
+Tabs.auto:Toggle({
+    Title = "Auto Collect Meteorite",
+    Desc = "Automatically collects dropped meteorites",
+    Icon = "cloud-rain-wind",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoCollectMeteorite = val
+
+        task.spawn(function()
+            while _G.AutoCollectMeteorite do
+                local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if hrp and workspace:FindFirstChild("Meteorite") then
+                    for _, v in pairs(workspace.Meteorite:GetChildren()) do
+                        if v:IsA("BasePart") and v:FindFirstChildWhichIsA("TouchTransmitter") then
+                            firetouchinterest(hrp, v, 0)
+                            firetouchinterest(hrp, v, 1)
+                        end
+                    end
+                end
+                task.wait()
             end
         end)
     end
