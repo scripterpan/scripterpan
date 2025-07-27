@@ -146,6 +146,151 @@ local function tpEggs()
     game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
 end
 
+local function tpCan()
+    local target = workspace.Village.Villager.HumanoidRootPart
+    local offset = Vector3.new(1, 2, 0)
+    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+end
+
+local function tpSugar()
+    local model = workspace.Village.FoodMarket:FindFirstChild("Sugar Crate")
+    if model and model:IsA("Model") then
+        local distance = 5
+        local char = game.Players.LocalPlayer.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if root then
+            local frontCFrame
+            if model.PrimaryPart then
+                frontCFrame = model.PrimaryPart.CFrame + (model.PrimaryPart.CFrame.LookVector * -distance)
+            else
+                for _, part in ipairs(model:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        frontCFrame = part.CFrame + (part.CFrame.LookVector * -distance)
+                        break
+                    end
+                end
+            end
+            if frontCFrame then
+                local origin = frontCFrame.Position + Vector3.new(0, 10, 0)
+                local direction = Vector3.new(0, -50, 0)
+                local raycastParams = RaycastParams.new()
+                raycastParams.FilterDescendantsInstances = {char}
+                raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+                local result = workspace:Raycast(origin, direction, raycastParams)
+                if result then
+                    local groundPos = result.Position + Vector3.new(0, 3, 0)
+                    root.CFrame = CFrame.new(groundPos)
+                end
+            end
+        end
+    end
+end
+
+local function tpBread()
+    local model = workspace.Village.FoodMarket:FindFirstChild("Bread Crate")
+    if model and model:IsA("Model") then
+        local distance = 5
+        local char = game.Players.LocalPlayer.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if root then
+            local frontCFrame
+            if model.PrimaryPart then
+                frontCFrame = model.PrimaryPart.CFrame + (model.PrimaryPart.CFrame.LookVector * -distance)
+            else
+                for _, part in ipairs(model:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        frontCFrame = part.CFrame + (part.CFrame.LookVector * -distance)
+                        break
+                    end
+                end
+            end
+            if frontCFrame then
+                local origin = frontCFrame.Position + Vector3.new(0, 10, 0)
+                local direction = Vector3.new(0, -50, 0)
+                local raycastParams = RaycastParams.new()
+                raycastParams.FilterDescendantsInstances = {char}
+                raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+                local result = workspace:Raycast(origin, direction, raycastParams)
+                if result then
+                    local groundPos = result.Position + Vector3.new(0, 3, 0)
+                    root.CFrame = CFrame.new(groundPos)
+                end
+            end
+        end
+    end
+end
+
+local function tpFlour()
+    local model = workspace.Village.FoodMarket:FindFirstChild("Flour Crate")
+    if model and model:IsA("Model") then
+        local distance = 5
+        local char = game.Players.LocalPlayer.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if root then
+            local frontCFrame
+            if model.PrimaryPart then
+                frontCFrame = model.PrimaryPart.CFrame + (model.PrimaryPart.CFrame.LookVector * -distance)
+            else
+                for _, part in ipairs(model:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        frontCFrame = part.CFrame + (part.CFrame.LookVector * -distance)
+                        break
+                    end
+                end
+            end
+            if frontCFrame then
+                local origin = frontCFrame.Position + Vector3.new(0, 10, 0)
+                local direction = Vector3.new(0, -50, 0)
+                local raycastParams = RaycastParams.new()
+                raycastParams.FilterDescendantsInstances = {char}
+                raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+                local result = workspace:Raycast(origin, direction, raycastParams)
+                if result then
+                    local groundPos = result.Position + Vector3.new(0, 3, 0)
+                    root.CFrame = CFrame.new(groundPos)
+                end
+            end
+        end
+    end
+end
+
+local function tpFish()
+    local model = workspace.Village.FishStore:FindFirstChild("NPC")
+    if model and model:IsA("Model") then
+        local distance = 0
+        local char = game.Players.LocalPlayer.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if root then
+            local frontCFrame
+            if model.PrimaryPart then
+                frontCFrame = model.PrimaryPart.CFrame + (model.PrimaryPart.CFrame.LookVector * -distance)
+            else
+                for _, part in ipairs(model:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        frontCFrame = part.CFrame + (part.CFrame.LookVector * -distance)
+                        break
+                    end
+                end
+            end
+            if frontCFrame then
+                local origin = frontCFrame.Position + Vector3.new(0, -2, 0)
+                local direction = Vector3.new(0, -50, 0)
+                local raycastParams = RaycastParams.new()
+                raycastParams.FilterDescendantsInstances = {char}
+                raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+                local result = workspace:Raycast(origin, direction, raycastParams)
+                if result then
+                    local groundPos = result.Position + Vector3.new(0, 3, 0)
+                    root.CFrame = CFrame.new(groundPos)
+                end
+            end
+        end
+    end
+end
+
+
+
+
 
 
 
