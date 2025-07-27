@@ -88,5 +88,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterp
 
 ---
 
-> - i love making dead game script 
-> - open source btw
+> - I love making dead game script 
+> - Open source btw
+> - I might not open-source the Raise a Floppa 2 script anytime
