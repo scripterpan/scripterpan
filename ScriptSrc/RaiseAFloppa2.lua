@@ -102,6 +102,10 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
+-- AntiAFK
+local vu = game:GetService("VirtualUser")
+
+
 
 -- lighting
 local lighting = game:GetService("Lighting")
@@ -1254,21 +1258,39 @@ Tabs.Tp:Button({
 
 
 
-Tabs.gemisc:Button({
-    Title = "AntiAFK",
-    Desc = "Prevents you from being kicked for being idle for 20 minutes",
+local connection
+
+local paragraph = Tabs.gemisc:Paragraph({
+    Title = "AntiAFK Status",
+    Desc = "Status: Disabled",
     Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/AntiAFK.lua"))()
-        WindUI:Notify({
-            Title = "Loaded!",
-            Content = "Credits to luca5432 for making this. Huge thanks!",
-            Icon = "droplet-off",
-            Duration = 5,
-        })
-    end
 })
 
+Tabs.gemisc:Toggle({
+    Title = "AntiAFK",
+    Desc = "Prevents you from getting kicked for being idle",
+    Icon = "bird",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+
+        if state then
+            connection = player.Idled:Connect(function()
+                vu:CaptureController()
+                vu:ClickButton2(Vector2.new())
+                paragraph:setDesc("Roblox tried kicking you but I stopped it!")
+                task.wait(5)
+                paragraph:setDesc("Status: Active")
+            end)
+        else
+            paragraph:setDesc("Status: Disabled")
+        end
+    end
+})
 
 
 local function makePromptInstant(prompt)
