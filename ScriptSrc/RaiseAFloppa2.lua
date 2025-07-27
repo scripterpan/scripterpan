@@ -710,10 +710,9 @@ Tabs.main1:Toggle({
     end
 })
 
-
 Tabs.main1:Toggle({
     Title = "Auto Collect Money",
-    Desc = "Automatically collects money that drops from both Baby Floppa and Floppa",
+    Desc = "Automatically collects money that drops from both Floppa and Baby Floppa",
     Icon = "hand-coins",
     Type = "Toggle",
     Default = false,
@@ -723,9 +722,32 @@ Tabs.main1:Toggle({
         task.spawn(function()
             while _G.AutoCollectMoney do
                 for _, v in pairs(workspace:GetChildren()) do
-                    if (v.Name:find("Money") or v.Name == "Money Bag" or v.Name == "Gold") 
+                    if (v.Name:find("Money") or v.Name == "Money Bag")
                         and v:FindFirstChildWhichIsA("TouchTransmitter") then
 
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
+                    end
+                end
+                task.wait()
+            end
+        end)
+    end
+})
+
+Tabs.main1:Toggle({
+    Title = "Auto Collect Gold",
+    Desc = "Automatically collects dropped gold",
+    Icon = "coins",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        _G.AutoCollectMoney = val
+
+        task.spawn(function()
+            while _G.AutoCollectMoney do
+                for _, v in pairs(workspace:GetChildren()) do
+                    if v.Name == "Gold" and v:FindFirstChildWhichIsA("TouchTransmitter") then
                         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
                         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
                     end
