@@ -113,6 +113,91 @@ local lighting = game:GetService("Lighting")
 -- unlock
 local unlocks = workspace:WaitForChild("Unlocks")
 
+
+
+
+-- setup tp back
+local originalCFrame = nil
+
+local function saveOriginalPosition()
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            originalCFrame = hrp.CFrame
+        end
+    end
+end
+
+local function teleportBack()
+    local character = game.Players.LocalPlayer.Character
+    if character and originalCFrame then
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = originalCFrame
+        end
+    end
+end
+
+
+-- instant interact
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection
+local promptAddedConnection
+local modifiedPrompts = {}
+
+
+
+-- moodlets
+local moodletFolder = workspace:WaitForChild("Floppa"):WaitForChild("Moodlets")
+
+-- trophies 
+local trophies = workspace:WaitForChild("Trophies")
+
+
+
+
+
+-- Setup Tp to Floppa
+local function teleportToFloppa()
+    local floppa = workspace:FindFirstChild("Floppa")
+    if floppa then
+        humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
+    end
+end
+
+
+
+--floppa happiness 
+local happiness = floppa and floppa:FindFirstChild("Configuration") and floppa.Configuration:FindFirstChild("Happiness")
+
+-- happiness value (for status tab)
+local happinessValue = workspace.Floppa.Configuration.Happiness
+
+
+-- setup interact 
+
+function interact()
+    local function getVisiblePrompt()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+
+        for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("ProximityPrompt") and v.Enabled and v.Parent:IsA("BasePart") then
+                local dist = (hrp.Position - v.Parent.Position).Magnitude
+                if dist <= v.MaxActivationDistance then
+                    return v
+                end
+            end
+        end
+    end
+
+    local prompt = getVisiblePrompt()
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
 -- for shop and cooking
 local function tpSword()
     local target = workspace.Village.SwordStore.Sword
@@ -292,13 +377,13 @@ local function tpFish()
     end
 end
 
-
 -- buy things (food)
 local function buyChicken()
-    
+    save
 end
 
 local function buyCheese()
+    
     
 end
 
@@ -307,7 +392,7 @@ local function buyBeef()
 end
 
 local function buyNoodles()
-
+    
 end
 
 local function buyEggs()
@@ -315,116 +400,30 @@ local function buyEggs()
 end
 
 local function buySugar()
-
+    
 end
 
 local function buyBread()
-
+    
 end
 
 local function buyFlour()
-
+    
 end
 
 -- buy things (tools)
 local function buySword()
-
+    
 end
 
 local function buyCan()
-
+    
 end
 
 local function buyFRod()
-
+    
 end
 
-
-
-
--- setup tp back
-local originalCFrame = nil
-
-local function saveOriginalPosition()
-    local character = game.Players.LocalPlayer.Character
-    if character then
-        local hrp = character:FindFirstChild("HumanoidRootPart")
-        if hrp then
-            originalCFrame = hrp.CFrame
-        end
-    end
-end
-
-local function teleportBack()
-    local character = game.Players.LocalPlayer.Character
-    if character and originalCFrame then
-        local hrp = character:FindFirstChild("HumanoidRootPart")
-        if hrp then
-            hrp.CFrame = originalCFrame
-        end
-    end
-end
-
-
--- instant interact
-local ProximityPromptService = game:GetService("ProximityPromptService")
-local proximityConnection
-local promptAddedConnection
-local modifiedPrompts = {}
-
-
-
--- moodlets
-local moodletFolder = workspace:WaitForChild("Floppa"):WaitForChild("Moodlets")
-
--- trophies 
-local trophies = workspace:WaitForChild("Trophies")
-
-
-
-
-
--- Setup Tp to Floppa
-
-        local function teleportToFloppa()
-            local floppa = workspace:FindFirstChild("Floppa")
-
-            if floppa then
-                humanoidRootPart.CFrame = floppa.HumanoidRootPart.CFrame
-            end
-        end
-
-
-
---floppa happiness 
-local happiness = floppa and floppa:FindFirstChild("Configuration") and floppa.Configuration:FindFirstChild("Happiness")
-
--- happiness value (for status tab)
-local happinessValue = workspace.Floppa.Configuration.Happiness
-
-
--- setup interact 
-
-function interact()
-    local function getVisiblePrompt()
-        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if not hrp then return end
-
-        for _, v in ipairs(workspace:GetDescendants()) do
-            if v:IsA("ProximityPrompt") and v.Enabled and v.Parent:IsA("BasePart") then
-                local dist = (hrp.Position - v.Parent.Position).Magnitude
-                if dist <= v.MaxActivationDistance then
-                    return v
-                end
-            end
-        end
-    end
-
-    local prompt = getVisiblePrompt()
-    if prompt then
-        fireproximityprompt(prompt)
-    end
-end
 
 
 
