@@ -392,6 +392,40 @@ local function clickSugar()
     end
 end
 
+local function clickCheese()
+    local prompt = workspace.Village.FoodMarket.Cheese:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickNoodles()
+    local prompt = workspace.Village.FoodMarket.Noodles:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickBeef()
+    local prompt = workspace.Village.FoodMarket.Beef:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickChicken()
+    local prompt = workspace.Village.FoodMarket.Chicken:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function clickEggs()
+    local prompt = workspace.Village.FoodMarket.Eggs:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
 
 
 
@@ -400,7 +434,7 @@ local function buyChicken()
     saveOriginalPosition()
     tpChicken()
     task.wait(0.2)
-    interact()
+    clickChicken()
     task.wait(0.2)
     teleportBack()
 end
@@ -409,7 +443,7 @@ local function buyCheese()
     saveOriginalPosition()
     tpCheese()
     task.wait(0.2)
-    interact()
+    clickCheese()
     task.wait(0.2)
     teleportBack()
 end
@@ -418,7 +452,7 @@ local function buyBeef()
     saveOriginalPosition()
     tpBeef()
     task.wait(0.2)
-    interact()
+    clickBeef()
     task.wait(0.2)
     teleportBack()
 end
@@ -427,7 +461,7 @@ local function buyNoodles()
     saveOriginalPosition()
     toNoodles()
     task.wait(0.2)
-    interact()
+    clickNoodles()
     task.wait(0.2)
     teleportBack()
 end
@@ -436,7 +470,7 @@ local function buyEggs()
     saveOriginalPosition()
     tpEggs()
     task.wait(0.2)
-    interact()
+    clickEggs()
     task.wait(0.2)
     teleportBack()
 end
@@ -445,7 +479,7 @@ local function buySugar()
     saveOriginalPosition()
     tpSugar()
     task.wait(0.2)
-    interact()
+    clickSugar()
     task.wait(0.2)
     teleportBack()
 end
@@ -454,7 +488,7 @@ local function buyBread()
     saveOriginalPosition()
     tpBread()
     task.wait(0.2)
-    interact()
+    clickBread()
     task.wait(0.2)
     teleportBack()
 end
@@ -463,7 +497,7 @@ local function buyFlour()
     saveOriginalPosition()
     tpFlour()
     task.wait(0.2)
-    interact()
+    clickFlour()
     task.wait(0.2)
     teleportBack()
 end
