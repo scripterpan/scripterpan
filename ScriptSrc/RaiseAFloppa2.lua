@@ -289,13 +289,51 @@ local function tpFish()
 end
 
 
+-- buy things (food)
+local function buyChicken()
+    
+end
 
+local function buyCheese()
+    
+end
 
+local function buyBeef()
+    
+end
 
+local function buyNoodles()
 
+end
 
+local function buyEggs()
+    
+end
 
+local function buySugar()
 
+end
+
+local function buyBread()
+
+end
+
+local function buyFlour()
+
+end
+
+-- buy things (tools)
+local function buySword()
+
+end
+
+local function buyCan()
+
+end
+
+local function buyFRod()
+
+end
 
 
 
