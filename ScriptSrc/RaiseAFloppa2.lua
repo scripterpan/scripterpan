@@ -1293,11 +1293,6 @@ Tabs.Tp:Button({
 
 local connection
 
-local paragraph = Tabs.gemisc:Paragraph({
-    Title = "AntiAFK Status",
-    Desc = "Status: Disabled",
-    Locked = false,
-})
 
 Tabs.gemisc:Toggle({
     Title = "AntiAFK",
@@ -1315,13 +1310,7 @@ Tabs.gemisc:Toggle({
             connection = player.Idled:Connect(function()
                 vu:CaptureController()
                 vu:ClickButton2(Vector2.new())
-                paragraph:setDesc("Roblox tried kicking you but I stopped it!")
-                task.wait(5)
-                paragraph:setDesc("Status: Active")
-            end)
-        else
-            paragraph:setDesc("Status: Disabled")
-        end
+        end)
     end
 })
 
