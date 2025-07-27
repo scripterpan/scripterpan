@@ -176,25 +176,18 @@ local happinessValue = workspace.Floppa.Configuration.Happiness
 
 
 -- setup interact 
+function interact()
+    local char = game.Players.LocalPlayer.Character
+    if not char then return end
 
-local function interact()
-    local function getVisiblePrompt()
-        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if not hrp then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
 
-        for _, v in ipairs(workspace:GetDescendants()) do
-            if v:IsA("ProximityPrompt") and v.Enabled and v.Parent:IsA("BasePart") then
-                local dist = (hrp.Position - v.Parent.Position).Magnitude
-                if dist <= v.MaxActivationDistance then
-                    return v
-                end
-            end
+    for _, v in ipairs(workspace:GetDescendants()) do
+        if v:IsA("ProximityPrompt") and (v.MaxActivationDistance >= (v.Parent.Position - root.Position).Magnitude) then
+            fireproximityprompt(v)
+            break
         end
-    end
-
-    local prompt = getVisiblePrompt()
-    if prompt then
-        fireproximityprompt(prompt)
     end
 end
 
@@ -381,56 +374,72 @@ end
 local function buyChicken()
     saveOriginalPosition()
     tpChicken()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyCheese()
     saveOriginalPosition()
     tpCheese()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyBeef()
     saveOriginalPosition()
     tpBeef()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyNoodles()
     saveOriginalPosition()
     toNoodles()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyEggs()
     saveOriginalPosition()
     tpEggs()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buySugar()
     saveOriginalPosition()
     tpSugar()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyBread()
     saveOriginalPosition()
     tpBread()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyFlour()
     saveOriginalPosition()
     tpFlour()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
@@ -438,21 +447,27 @@ end
 local function buySword()
     saveOriginalPosition()
     tpSword()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyCan()
     saveOriginalPosition()
     tpCan()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
 local function buyFishRod()
     saveOriginalPosition()
     tpFish()
+    task.wait(0.2)
     interact()
+    task.wait(0.2)
     teleportBack()
 end
 
@@ -1184,7 +1199,6 @@ Tabs.plant:Toggle({
     end
 })
 
-
 Tabs.shop:Section({ Title = "Foods/Ingredients", Icon = "beef" })
 
 
@@ -1255,8 +1269,8 @@ local toolActions = {
 local selectedTool = nil
 
 Tabs.shop:Dropdown({
-    Title = "Select Food/Ingredients",
-    Values = foodOptions,
+    Title = "Select Tools",
+    Values = toolOptions,
     Callback = function(option)
         selectedTool = option
     end
@@ -1266,7 +1280,7 @@ Tabs.shop:Button({
     Title = "Buy Selected Tool",
     Desc = "Teleport to the selected tool and purchase it",
     Callback = function()
-        if not selectedFood then
+        if not selectedTool then
             WindUI:Notify({
                 Title = "No Tool Selected",
                 Content = "Please select a tool first.",
