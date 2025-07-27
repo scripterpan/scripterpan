@@ -1293,11 +1293,10 @@ Tabs.Tp:Button({
 
 local connection
 
-
 Tabs.gemisc:Toggle({
     Title = "AntiAFK",
     Desc = "Prevents you from getting kicked for being idle",
-    Icon = "bird",
+    Icon = "shield-ban",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
@@ -1310,7 +1309,8 @@ Tabs.gemisc:Toggle({
             connection = player.Idled:Connect(function()
                 vu:CaptureController()
                 vu:ClickButton2(Vector2.new())
-        end)
+            end)
+        end
     end
 })
 
