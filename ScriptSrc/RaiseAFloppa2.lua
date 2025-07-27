@@ -896,7 +896,8 @@ Tabs.main1:Toggle({
         task.spawn(function()
             while _G.AutoCollectMoney do
                 for _, v in pairs(workspace:GetChildren()) do
-                    if v.Name == "Gold" and v:FindFirstChildWhichIsA("TouchTransmitter") then
+                    if (v.Name:find("Gold") or v.Name == "Gold Bar")
+                        and v:FindFirstChildWhichIsA("TouchTransmitter") then
                         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
                         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
                     end
