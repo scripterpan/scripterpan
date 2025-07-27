@@ -1185,6 +1185,106 @@ Tabs.plant:Toggle({
 })
 
 
+Tabs.shop:Section({ Title = "Foods/Ingredients", Icon = "beef" })
+
+
+local foodOptions = {
+    "Noodles",
+    "Beef",
+    "Cheese",
+    "Chicken",
+    "Flour",
+    "Bread",
+    "Sugar",
+    "Eggs"
+}
+
+local foodActions = {
+    Noodles = buyNoodles,
+    Beef = buyBeef,
+    Cheese = buyCheese,
+    Chicken = buyChicken,
+    Flour = buyFlour,
+    Bread = buyBread,
+    Sugar = buySugar,
+    Eggs = buyEggs
+}
+
+local selectedFood = nil
+
+Tabs.shop:Dropdown({
+    Title = "Select Foods/Ingredient",
+    Values = foodOptions,
+    Callback = function(option)
+        selectedFood = option
+    end
+})
+
+Tabs.shop:Button({
+    Title = "Buy Selected Food/Ingredient",
+    Desc = "Teleport to the selected food and purchase it",
+    Callback = function()
+        if not selectedFood then
+            WindUI:Notify({
+                Title = "No Food Selected",
+                Content = "Please select a food/ingredient first.",
+                Icon = "circle-alert",
+                Duration = 5,
+            })
+            return
+        end
+
+        foodActions[selectedFood]()
+    end
+})
+
+Tabs.shop:Section({ Title = "Tools/Weapon", Icon = "axe" })
+
+local toolOptions = {
+    "Sword",
+    "Watering Can",
+    "Fishing Rod"
+}
+
+local toolActions = {
+    Sword = buySword,
+    [Watering Can] = buyCan,
+    [Fishing Rod] = buyFishRod,
+}
+
+local selectedTool = nil
+
+Tabs.shop:Dropdown({
+    Title = "Select Food/Ingredients",
+    Values = foodOptions,
+    Callback = function(option)
+        selectedTool = option
+    end
+})
+
+Tabs.shop:Button({
+    Title = "Buy Selected Tool",
+    Desc = "Teleport to the selected tool and purchase it",
+    Callback = function()
+        if not selectedFood then
+            WindUI:Notify({
+                Title = "No Tool Selected",
+                Content = "Please select a tool first.",
+                Icon = "circle-alert",
+                Duration = 5,
+            })
+            return
+        end
+
+        toolActions[selectedTool]()
+    end
+})
+
+
+
+
+
+
 
 
 Tabs.Tp:Button({
