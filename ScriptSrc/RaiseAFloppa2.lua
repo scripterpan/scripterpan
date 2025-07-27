@@ -69,7 +69,7 @@ Tabs.stat = Window:Section({
     Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
-    Tabs.shop = Tabs.main:Tab({ Title = "Market (W.I.P)", Icon = "shopping-cart", Locked = "true" })
+    Tabs.shop = Tabs.main:Tab({ Title = "Market", Icon = "shopping-cart" })
     Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal (W.I.P)", Icon = "bomb", Locked = "true" })
     Tabs.slot = Tabs.main:Tab({ Title = "Floppa Slot (W.I.P)", Icon = "bitcoin", Locked = "true" })
     Tabs.Tp = Tabs.main:Tab({ Title = "Teleport", Icon = "arrow-down-to-dot" })
@@ -1248,8 +1248,8 @@ local toolOptions = {
 
 local toolActions = {
     Sword = buySword,
-    [Watering Can] = buyCan,
-    [Fishing Rod] = buyFishRod,
+    ["Watering Can"] = buyCan,
+    ["Fishing Rod"] = buyFishRod,
 }
 
 local selectedTool = nil
