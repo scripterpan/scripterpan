@@ -65,7 +65,7 @@ do
     Tabs.lvl5 = Tabs.main:Tab({ Title = "Level 5", Icon = "book-copy" })
     Tabs.lvl6 = Tabs.main:Tab({ Title = "Level 6", Icon = "book-copy" })
     Tabs.warning = Tabs.main:Tab({ Title = "Idk", Icon = "book-copy", Locked = "true" })
-    Tabs.stat = Tabs.misc:Tab({ Title = "Status", Icon = "tv-minimal"})
+    Tabs.stat = Tabs.misc:Tab({ Title = "Status", Icon = "server"})
     Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
@@ -571,7 +571,75 @@ end)
 })
 
 
+Tabs.gemisc:Section({ Title = "Status", Icon = "chart-column-decreasing" })
 
+
+
+Tabs.stat:Paragraph({
+    Title = "Your Executor",
+    Desc = identifyexecutor(),
+    Locked = false,
+})
+
+
+local paragraph = Tabs.stat:Paragraph({
+    Title = "Your Ping",
+    Desc = "Loading...",
+    Locked = false,
+})
+
+task.spawn(function()
+    while true do
+        local ping = nil
+        pcall(function()
+            local serverStats = network and network:FindFirstChild("ServerStatsItem")
+            local dataPing = serverStats and serverStats:FindFirstChild("Data Ping")
+            if dataPing then
+                ping = dataPing:GetValue()
+            end
+        end)
+
+        if ping then
+            paragraph:SetDesc("Ping: " .. string.format("%.2f", ping) .. " ms")
+        else
+            paragraph:SetDesc("Ping: N/A")
+        end
+
+        task.wait(1)
+    end
+end)
+
+
+local paragraph = Tabs.stat:Paragraph({
+    Title = "Your FPS",
+    Desc = "Loading...",
+    Locked = false,
+})
+
+local fps = 60
+local frames = 0
+local lastTime = tick()
+
+RunService.RenderStepped:Connect(function()
+    frames += 1
+    local now = tick()
+    if now - lastTime >= 1 then
+        fps = frames
+        frames = 0
+        lastTime = now
+    end
+end)
+
+task.spawn(function()
+    while true do
+        paragraph:SetDesc("FPS: " .. tostring(fps))
+        task.wait(1)
+    end
+end)
+
+
+
+Tabs.gemisc:Section({ Title = "code", Icon = "binoculars" })
 
 
 
