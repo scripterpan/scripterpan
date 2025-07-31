@@ -46,6 +46,25 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings"}) 
 }
 
+
+-- setup interact 
+function interact()
+    local char = game.Players.LocalPlayer.Character
+    if not char then return end
+
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+
+    for _, v in ipairs(workspace:GetDescendants()) do
+        if v:IsA("ProximityPrompt") and (v.MaxActivationDistance >= (v.Parent.Position - root.Position).Magnitude) then
+            fireproximityprompt(v)
+            break
+        end
+    end
+end
+
+
+
 local Options = Fluent.Options
 
 
@@ -66,17 +85,17 @@ local DelaySlider = Tabs.Main:AddSlider("PressDelay", {
     end
 })
 
--- Auto Press E toggle
-Tabs.Main:AddToggle("AutoE", {
+-- Auto Interact toggle
+Tabs.Main:AddToggle("AutoInteract", {
     Title = "Auto Press E",
-    Description = "Presses the E key every X seconds",
+    Description = "Interact key every X seconds",
     Default = false
 }):OnChanged(function(Value)
     autoPressing = Value
     if autoPressing then
         loopThread = task.spawn(function()
             while autoPressing do
-                keypress(0x45) -- E key
+                interact()
                 task.wait(delayTime)
             end
         end)
