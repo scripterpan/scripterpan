@@ -1,8 +1,8 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "Raise A Floppa 2",
-    Icon = "cat",
+    Title = "Funky Friday",
+    Icon = "ticket-x",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
     Size = UDim2.fromOffset(520, 360),
@@ -21,8 +21,8 @@ local Window = WindUI:CreateWindow({
 })
 
 Window:EditOpenButton({
-    Title = "Pann Hub (Raise A Floppa 2)",
-    Icon = "cat",
+    Title = "Pann Hub (Funky Friday)",
+    Icon = "ticket-x",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
