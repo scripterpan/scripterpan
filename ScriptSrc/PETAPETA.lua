@@ -487,42 +487,103 @@ end)
 
 
 
-Tabs.Misc:AddSection("Misc")
+local connection
+
+Tabs.gemisc:Toggle({
+    Title = "AntiAFK",
+    Desc = "Prevents you from getting kicked for being idle",
+    Icon = "shield-ban",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+
+        if state then
+            connection = player.Idled:Connect(function()
+                vu:CaptureController()
+                vu:ClickButton2(Vector2.new())
+            end)
+        end
+    end
+})
 
 
+local function makePromptInstant(prompt)
+    if not modifiedPrompts[prompt] then
+        modifiedPrompts[prompt] = {
+            HoldDuration = prompt.HoldDuration,
+            RequiresLineOfSight = prompt.RequiresLineOfSight,
+            ClickablePrompt = prompt.ClickablePrompt
+        }
+    end
 
+    prompt.HoldDuration = 0
+    prompt.RequiresLineOfSight = false
+    prompt.ClickablePrompt = true
+end
 
--- Proximity Prompt Toggle Script
-local ProximityPromptService = game:GetService("ProximityPromptService")
-local proximityConnection -- To store the connection
-
--- Function to enable/disable Proximity Prompt interactions
-local function toggleProximityPrompt(enable)
-    if enable then
-        -- Connect to the event if enabled
-        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
-            fireproximityprompt(prompt)
-        end)
-    elseif proximityConnection then
-        -- Disconnect the event if it was connected
-        proximityConnection:Disconnect()
-        proximityConnection = nil -- Reset the variable after disconnecting
+local function restorePrompt(prompt)
+    local original = modifiedPrompts[prompt]
+    if original then
+        prompt.HoldDuration = original.HoldDuration
+        prompt.RequiresLineOfSight = original.RequiresLineOfSight
+        prompt.ClickablePrompt = original.ClickablePrompt
+        modifiedPrompts[prompt] = nil
     end
 end
 
--- Toggle for Proximity Prompt in the UI
-local ToggleProximity = Tabs.Misc:AddToggle("ProximityPromptToggle", {Title = "Instant Interact", Default = true})
+local function toggleInstantInteract(enabled)
+    if enabled then
+        for _, obj in ipairs(game:GetDescendants()) do
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end  
+        
+        proximityConnection = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+            fireproximityprompt(prompt)
+        end)
 
--- Handle the toggle state change
-ToggleProximity:OnChanged(function()
-    local isProximityOn = ToggleProximity.Value
-    toggleProximityPrompt(isProximityOn)
-end)
+        promptAddedConnection = game.DescendantAdded:Connect(function(obj)
+            if obj:IsA("ProximityPrompt") then
+                makePromptInstant(obj)
+            end
+        end)
+    else
+
+        if proximityConnection then
+            proximityConnection:Disconnect()
+            proximityConnection = nil
+        end
+        if promptAddedConnection then
+            promptAddedConnection:Disconnect()
+            promptAddedConnection = nil
+        end
+
+        for prompt, _ in pairs(modifiedPrompts) do
+            restorePrompt(prompt)
+        end
+    end
+end
 
 
--- Initialize variables
-local fullbrightEnabled = false
-local lighting = game:GetService("Lighting")
+Tabs.gemisc:Toggle({
+    Title = "Instant Interact",
+    Desc = "Interact with anything without a cooldown",
+    Icon = "hand",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        toggleInstantInteract(state)
+    end
+})
+
+Tabs.gemisc:Section({ Title = "Visual", Icon = "binoculars" })
+
+-- FullBright 
 local originalSettings = {
     Brightness = lighting.Brightness,
     ClockTime = lighting.ClockTime,
@@ -530,15 +591,13 @@ local originalSettings = {
     OutdoorAmbient = lighting.OutdoorAmbient,
 }
 
--- Function to enable Fullbright
 local function enableFullbright()
     lighting.Brightness = 2
-    lighting.ClockTime = 14 -- Set to daytime
+    lighting.ClockTime = 14
     lighting.Ambient = Color3.new(1, 1, 1)
     lighting.OutdoorAmbient = Color3.new(1, 1, 1)
 end
 
--- Function to disable Fullbright
 local function disableFullbright()
     lighting.Brightness = originalSettings.Brightness
     lighting.ClockTime = originalSettings.ClockTime
@@ -546,34 +605,144 @@ local function disableFullbright()
     lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
 end
 
--- Add toggle to the UI
-local Toggle = Tabs.Misc:AddToggle("FullbrightToggle", { Title = "Fullbright", Default = false })
-
--- Handle toggle state changes
-Toggle:OnChanged(function()
-    fullbrightEnabled = Toggle.Value
-    
-
-    if fullbrightEnabled then
-        enableFullbright()
-    else
-        disableFullbright()
+Tabs.gemisc:Toggle({
+    Title = "Fullbright",
+    Desc = "Increase Brightness",
+    Icon = "sun",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(val)
+        if val then
+            enableFullbright()
+        else
+            disableFullbright()
+        end
     end
+})
+
+Tabs.gemisc:Section({ Title = "GPU Care", Icon = "cpu" })
+
+local whiteScreen
+
+Tabs.gemisc:Toggle({
+    Title = "White Screen",
+    Desc = "Self-explanatory",
+    Icon = "cpu",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            whiteScreen = Instance.new("ScreenGui", game:GetService("CoreGui"))
+            whiteScreen.IgnoreGuiInset = true
+            whiteScreen.Name = "WhiteScreenOverlay"
+
+            local frame = Instance.new("Frame", whiteScreen)
+            frame.BackgroundColor3 = Color3.new(1, 1, 1)
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.Position = UDim2.new(0, 0, 0, 0)
+        else
+            if whiteScreen then
+                whiteScreen:Destroy()
+                whiteScreen = nil
+            end
+        end
+    end
+})
+
+local blackScreen
+
+Tabs.gemisc:Toggle({
+    Title = "Black Screen",
+    Desc = "Self-explanatory",
+    Icon = "cpu",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            blackScreen = Instance.new("ScreenGui", game:GetService("CoreGui"))
+            blackScreen.IgnoreGuiInset = true
+            blackScreen.Name = "BlackScreenOverlay"
+
+            local frame = Instance.new("Frame", blackScreen)
+            frame.BackgroundColor3 = Color3.new(0, 0, 0)
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.Position = UDim2.new(0, 0, 0, 0)
+        else
+            if blackScreen then
+                blackScreen:Destroy()
+                blackScreen = nil
+            end
+        end
+    end
+})
+
+
+
+local infiniteJumpEnabled = false
+local humanoid = nil
+local conn = nil
+
+local function enableInfiniteJump()
+    if conn then conn:Disconnect() end
+    conn = game:GetService("UserInputService").JumpRequest:Connect(function()
+        if infiniteJumpEnabled and humanoid then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+end
+
+local function setupCharacter(char)
+    humanoid = char:WaitForChild("Humanoid", 5)
+    if infiniteJumpEnabled then
+        enableInfiniteJump()
+    end
+end
+
+player.CharacterAdded:Connect(function(char)
+    setupCharacter(char)
 end)
 
+if player.Character then
+    setupCharacter(player.Character)
+end
+
+Tabs.plmisc:Toggle({
+    Title = "Infinite Jump",
+    Desc = "Toggle Infinite Jump",
+    Icon = "arrow-big-up-dash",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        infiniteJumpEnabled = state
+        if state then
+            if player.Character then
+                setupCharacter(player.Character)
+            end
+        else
+            if conn then conn:Disconnect() end
+        end
+    end
+})
 
 
-Tabs.Misc:AddSection("Player Misc")
 
-local Players = game:GetService("Players")
+
+
+
+
+
+
+
+
+
+
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
-local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Noclip", Default = false})
 local noclipConnection
 local originalCollisions = {}
 
--- Save the character's current collision states
+
 local function saveOriginalCollisions()
     originalCollisions = {}
     if LocalPlayer.Character then
@@ -585,9 +754,7 @@ local function saveOriginalCollisions()
     end
 end
 
-saveOriginalCollisions() -- << ADD THIS after defining the function!
 
--- Apply noclip (force CanCollide false)
 local function startNoclip()
     if noclipConnection then
         noclipConnection:Disconnect()
@@ -606,7 +773,6 @@ local function startNoclip()
     end)
 end
 
--- Restore original collision
 local function stopNoclip()
     if noclipConnection then
         noclipConnection:Disconnect()
@@ -620,109 +786,261 @@ local function stopNoclip()
     originalCollisions = {}
 end
 
--- When toggle is changed
-Toggle:OnChanged(function()
-    if Toggle.Value then
-        startNoclip()
-    else
-        stopNoclip()
-    end
-end)
 
--- Handle respawn
+Tabs.plmisc:Toggle({
+    Title = "Noclip",
+    Desc = "Walk Through Objects",
+    Icon = "expand",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if state then
+            startNoclip()
+        else
+            stopNoclip()
+        end
+    end
+})
+
 LocalPlayer.CharacterAdded:Connect(function()
     repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
     saveOriginalCollisions()
-
     if Toggle.Value then
         startNoclip()
     end
 end)
 
-Toggle:SetValue(false)
 
 
--- Initialize variables
+
 local speedEnabled = false
 local jumpEnabled = false
-local desiredSpeed = 16 -- Default Roblox speed
-local defaultSpeed = 16
-local desiredJumpPower = 50 -- Default Roblox jump power
-local defaultJumpPower = 50
-local player = game.Players.LocalPlayer
+local gravityEnabled = false
 
--- Function to set player speed
+
+local defaultSpeed = 16
+local defaultJumpPower = 50
+local defaultGravity = 196.2
+
+
+local desiredSpeed = defaultSpeed
+local desiredJumpPower = defaultJumpPower
+local desiredGravity = defaultGravity
+
+
 local function setSpeed(speed)
-    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = speed
     end
 end
 
--- Function to set player jump power
-local function setJumpPower(jumpPower)
-    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.JumpPower = jumpPower
+local function setJumpPower(power)
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        local hum = player.Character:FindFirstChild("Humanoid")
+        hum.UseJumpPower = true
+        hum.JumpPower = power
     end
 end
 
+local function setGravity(g)
+    workspace.Gravity = g
+end
 
 
--- Monitor respawn to ensure speed and jump power persist
-player.CharacterAdded:Connect(function(character)
-    -- Wait for the character to load
-    repeat task.wait() until character:FindFirstChild("Humanoid")
-
-    -- Reapply speed if the toggle is on
-    if speedEnabled then
-        setSpeed(desiredSpeed)
-    end
-
-    -- Reapply jump power if the toggle is on
-    if jumpEnabled then
-        setJumpPower(desiredJumpPower)
-    end
+player.CharacterAdded:Connect(function()
+    repeat task.wait() until player.Character:FindFirstChild("Humanoid")
+    if speedEnabled then setSpeed(desiredSpeed) end
+    if jumpEnabled then setJumpPower(desiredJumpPower) end
+    if gravityEnabled then setGravity(desiredGravity) end
 end)
 
--- Toggle for Speed Control
-local SpeedToggle = Tabs.Misc:AddToggle("SpeedToggle", { Title = "Player Speed Boost", Default = false })
 
-SpeedToggle:OnChanged(function()
-    speedEnabled = SpeedToggle.Value
+local SpeedInput
+local JumpInput
+local GravityInput
 
-    if speedEnabled then
-        -- Apply the current desired speed and start the monitoring loop
-        setSpeed(desiredSpeed)
-        task.spawn(function()
-            while speedEnabled do
-                if player.Character and player.Character:FindFirstChild("Humanoid") then
-                    if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
-                        setSpeed(desiredSpeed)
-                    end
-                end
-                task.wait(0.1)
-            end
-        end)
-    else
--- Reset to default speed when toggled off
-        setSpeed(defaultSpeed)
-    end
-end)
+-- speed
+Tabs.plmisc:Section({ Title = "Speed", Icon = "zap" })
 
--- Slider for Speed Adjustment
-local SpeedSlider = Tabs.Misc:AddSlider("SpeedSlider", {
-    Title = "Player Speed",
-    Description = "Adjust your walk speed",
-    Default = 16,
-    Min = 1,
-    Max = 120, -- Increased max speed to 120
-    Rounding = 0,
-    Callback = function(Value)
-        desiredSpeed = Value
-        if speedEnabled then
+
+Tabs.plmisc:Toggle({
+    Title = "Speed Boost",
+    Desc = "Enable speed boost",
+    Icon = "zap",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        speedEnabled = state
+        if state then
             setSpeed(desiredSpeed)
+            task.spawn(function()
+                while speedEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.WalkSpeed ~= desiredSpeed then
+                            setSpeed(desiredSpeed)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setSpeed(defaultSpeed)
         end
-    end,
+    end
 })
-SpeedSlider:SetValue(16) -- Set initial value
+
+Tabs.plmisc:Input({
+    Title = "Set Walk Speed",
+    Desc = "Type your speed value here (1–500)",
+    Placeholder = tostring(defaultSpeed),
+    InputIcon = "chevrons-up",
+    Type = "Input",
+    Value = tostring(desiredSpeed),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredSpeed = num
+            if speedEnabled then
+                setSpeed(desiredSpeed)
+            end
+        end
+    end
+})
+
+-- Jumppower
+Tabs.plmisc:Section({ Title = "Jump Power", Icon = "person-standing" })
+
+Tabs.plmisc:Toggle({
+    Title = "Jump Boost",
+    Desc = "Enable jump boost",
+    Icon = "person-standing",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        jumpEnabled = state
+        if state then
+            setJumpPower(desiredJumpPower)
+            task.spawn(function()
+                while jumpEnabled do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        if player.Character.Humanoid.JumpPower ~= desiredJumpPower then
+                            setJumpPower(desiredJumpPower)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setJumpPower(defaultJumpPower)
+        end
+    end
+})
+
+Tabs.plmisc:Input({
+    Title = "Set Jump Power",
+    Desc = "Type jump power value (1–500)",
+    Placeholder = tostring(defaultJumpPower),
+    InputIcon = "person-standing",
+    Type = "Input",
+    Value = tostring(desiredJumpPower),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 1 and num <= 500 then
+            desiredJumpPower = num
+            if jumpEnabled then
+                setJumpPower(desiredJumpPower)
+            end
+        end
+    end
+})
 
 
+-- Gravity 
+Tabs.plmisc:Section({ Title = "Gravity", Icon = "clock-arrow-down" })
+
+Tabs.plmisc:Toggle({
+    Title = "Change Gravity",
+    Desc = "Enable gravity changer",
+    Icon = "clock-arrow-down",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        gravityEnabled = state
+        if state then
+            setGravity(desiredGravity)
+            task.spawn(function()
+                while gravityEnabled do
+                    if workspace.Gravity ~= desiredGravity then
+                        setGravity(desiredGravity)
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            setGravity(defaultGravity)
+        end
+    end
+})
+
+Tabs.plmisc:Input({
+    Title = "Set Gravity",
+    Desc = "Type gravity value (0–500)",
+    Placeholder = tostring(defaultGravity),
+    InputIcon = "clock-arrow-down",
+    Type = "Input",
+    Value = tostring(desiredGravity),
+    Callback = function(input)
+        local num = tonumber(input)
+        if num and num >= 0 and num <= 500 then
+            desiredGravity = num
+            if gravityEnabled then
+                setGravity(desiredGravity)
+            end
+        end
+    end
+})
+
+
+
+Tabs.src:Button({
+    Title = "Infinite Yield",
+    Desc = "Best command script",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source"))()
+    end
+})
+    
+
+
+Tabs.src:Button({
+    Title = "Fly GUI V3",
+    Desc = "Best Fly Script",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
+    
+
+
+
+
+Tabs.src:Button({
+    Title = "Dex V4",
+    Desc = "Dark Dex V4 Mobile \nGood for scripting",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+    end
+})
+
+
+Tabs.src:Button({
+    Title = "Simple SPY",
+    Desc = "Best script for logging remote that happened in game \nYour executor must support : \n- hookmetamethod\n- getnamecallmethod\n- setnamecallmethod\n- newcclosure\n- getrawmetatable\n- setreadonly",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
+    end
+})
