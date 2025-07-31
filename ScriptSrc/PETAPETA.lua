@@ -70,6 +70,75 @@ do
     
 end
 
+-- setup function for teleport 
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+
+
+
+
+
+
+-- setup for show ping and fps
+local Stats = game:GetService("Stats")
+local network = Stats:FindFirstChild("Network")
+local RunService = game:GetService("RunService")
+
+
+
+-- setup for something important
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- AntiAFK
+local vu = game:GetService("VirtualUser")
+
+
+
+-- lighting
+local lighting = game:GetService("Lighting")
+
+-- unlock
+local unlocks = workspace:WaitForChild("Unlocks")
+
+
+
+
+-- setup tp back
+local originalCFrame = nil
+
+local function saveOriginalPosition()
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            originalCFrame = hrp.CFrame
+        end
+    end
+end
+
+local function teleportBack()
+    local character = game.Players.LocalPlayer.Character
+    if character and originalCFrame then
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = originalCFrame
+        end
+    end
+end
+
+
+-- instant interact
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local proximityConnection
+local promptAddedConnection
+local modifiedPrompts = {}
+
+
+
+
 
 -- setup interact 
 function interact()
