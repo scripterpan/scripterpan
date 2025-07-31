@@ -10,7 +10,7 @@ local games = {
     [32900163] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/PETAPETA.lua',       -- PETAPETA (Original and School)
     [33541525] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/7DTL.lua',           -- 7 Days To Live
     [7314991]  = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Nightlight.lua',     -- Nightlight (Horror)
-    [] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/FunkyFriday.lua',            -- Funky Friday 
+    [5449496] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/FunkyFriday.lua',     -- Funky Friday 
 }
 
 WindUI:Popup({
