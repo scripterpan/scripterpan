@@ -1,3 +1,4 @@
+
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -64,6 +65,7 @@ do
     Tabs.lvl5 = Tabs.main:Tab({ Title = "Level 5", Icon = "book-copy" })
     Tabs.lvl6 = Tabs.main:Tab({ Title = "Level 6", Icon = "book-copy" })
     Tabs.warning = Tabs.main:Tab({ Title = "Idk", Icon = "book-copy", Locked = "true" })
+    Tabs.stat = Tabs.misc:Tab({ Title = "Status", Icon = "tv-minimal"})
     Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
