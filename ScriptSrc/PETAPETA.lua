@@ -71,6 +71,24 @@ do
 end
 
 
+-- setup interact 
+function interact()
+    local char = game.Players.LocalPlayer.Character
+    if not char then return end
+
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+
+    for _, v in ipairs(workspace:GetDescendants()) do
+        if v:IsA("ProximityPrompt") and (v.MaxActivationDistance >= (v.Parent.Position - root.Position).Magnitude) then
+            fireproximityprompt(v)
+            break
+        end
+    end
+end
+
+
+
 
 
 
