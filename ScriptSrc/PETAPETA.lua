@@ -1,59 +1,74 @@
-repeat task.wait(0.25) until game:IsLoaded();
-getgenv().Image = "rbxassetid://118507736312114"; --put a asset id in here to make it work
-getgenv().ToggleUI = "LeftControl" -- This where you can Toggle the Fluent ui library
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-task.spawn(function()
-    if not getgenv().LoadedMobileUI == true then getgenv().LoadedMobileUI = true
-        local OpenUI = Instance.new("ScreenGui");
-        local ImageButton = Instance.new("ImageButton");
-        local UICorner = Instance.new("UICorner");
-        OpenUI.Name = "OpenUI";
-        OpenUI.Parent = game:GetService("CoreGui");
-        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-        ImageButton.Parent = OpenUI;
-        ImageButton.BackgroundColor3 = Color3.fromRGB(105,105,105);
-        ImageButton.BackgroundTransparency = 0.8
-        ImageButton.Position = UDim2.new(0.9,0,0.1,0);
-        ImageButton.Size = UDim2.new(0,50,0,50);
-        ImageButton.Image = getgenv().Image;
-        ImageButton.Draggable = true;
-        ImageButton.Transparency = 1;
-        UICorner.CornerRadius = UDim.new(0,200);
-        UICorner.Parent = ImageButton;
-        ImageButton.MouseButton1Click:Connect(function()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,getgenv().ToggleUI,false,game);
-        end)
-    end
-end)
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
-
-local Window = Fluent:CreateWindow({
-    Title = "The Mimic ",
-    SubTitle = "By Pann",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(480, 320),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Darker",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+local Window = WindUI:CreateWindow({
+    Title = "Raise A Floppa 2",
+    Icon = "cat",
+    Author = "Pann Hub",
+    Folder = "PannHub-WindUi-RAF2",
+    Size = UDim2.fromOffset(520, 360),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    Background = "", -- rbxassetid only
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
+    User = {
+        Enabled = true,
+        Anonymous = false,
+    }
 })
 
-local Tabs = {
+Window:EditOpenButton({
+    Title = "Pann Hub (Raise A Floppa 2)",
+    Icon = "cat",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new( -- gradient
+        Color3.fromHex("#32a89d"), 
+        Color3.fromHex("32a0a8")
+    ),
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
 
-lv1 = Window:AddTab({ Title = "Level 1", Icon = "" }),
-lv2 = Window:AddTab({ Title = "Level 2", Icon = "" }),
-lv3 = Window:AddTab({ Title = "Level 3", Icon = "" }),
-lv4 = Window:AddTab({ Title = "Level 4", Icon = "" }),
-lv5 = Window:AddTab({ Title = "Level 5", Icon = "" }),
-lv6 = Window:AddTab({ Title = "Level 6", Icon = "" }),
-Misc = Window:AddTab({ Title = "Misc", Icon = "" })
+})   
 
-}
+local Tabs = {}
 
+do
 
-local Options = Fluent.Options
+    Tabs.main = Window:Section({
+        Title = "Main",
+        Opened = true,
+    })
+
+    Tabs.misc = Window:Section({
+        Title = "Miscellaneous",
+        Opened = true,
+    })
+    
+    
+    Tabs.Other = Window:Section({
+        Title = "Other",
+        Opened = true,
+    })
+
+    
+    
+    Tabs.lvl1 = Tabs.main:Tab({ Title = "Level 1", Icon = "book-copy" })
+    Tabs.lvl2 = Tabs.main:Tab({ Title = "Level 2", Icon = "book-copy" })
+    Tabs.lvl3 = Tabs.main:Tab({ Title = "Level 3", Icon = "book-copy" })
+    Tabs.lvl4 = Tabs.main:Tab({ Title = "Level 4", Icon = "book-copy" })
+    Tabs.lvl5 = Tabs.main:Tab({ Title = "Level 5", Icon = "book-copy" })
+    Tabs.lvl6 = Tabs.main:Tab({ Title = "Level 6", Icon = "book-copy" })
+    Tabs.warning = Tabs.main:Tab({ Title = "Idk", Icon = "book-copy", Locked = "true" })
+    Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
+    Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
+    Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
+    
+end
 
 
 
