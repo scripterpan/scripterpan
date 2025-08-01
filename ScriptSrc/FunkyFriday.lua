@@ -75,10 +75,10 @@ local Side = nil
 local Toggle = Tab:Toggle({
     Title = "AutoPlay",
     Desc = "Automatically Click The Not For you",
-    Icon = "bird",
+    Icon = "workflow",
     Type = "Toggle",
     Default = false,
     Callback = function(state) 
-        print("Toggle Activated" .. tostring(state))
+        --function
     end
 })
