@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 local Window = WindUI:CreateWindow({
     Title = "Funky Friday",
-    Icon = "ticket-x",
+    Icon = "ferris-wheel",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
     Size = UDim2.fromOffset(520, 360),
@@ -22,12 +22,12 @@ local Window = WindUI:CreateWindow({
 
 Window:EditOpenButton({
     Title = "Pann Hub (Funky Friday)",
-    Icon = "ticket-x",
+    Icon = "ferris-wheel",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
-        Color3.fromHex("#32a89d"), 
-        Color3.fromHex("32a0a8")
+        Color3.fromHex("#FF0F7B"), 
+        Color3.fromHex("F89B29")
     ),
     OnlyMobile = false,
     Enabled = true,
@@ -67,3 +67,18 @@ Tabs.stat = Window:Section({
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
     
 end
+
+
+local Side = nil
+
+
+local Toggle = Tab:Toggle({
+    Title = "AutoPlay",
+    Desc = "Automatically Click The Not For you",
+    Icon = "bird",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        print("Toggle Activated" .. tostring(state))
+    end
+})
