@@ -28,7 +28,7 @@ Window:EditOpenButton({
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
         Color3.fromHex("#FF0F7B"), 
-        Color3.fromHex("F89B29"))
+        Color3.fromHex("F89B29")
     ),
     OnlyMobile = false,
     Enabled = true,
