@@ -1,4 +1,3 @@
-
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -157,6 +156,37 @@ function interact()
         end
     end
 end
+
+
+-- hold key and ofuda
+local function holdKey()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Key"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
+local function holdOfuda()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Ofuda"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
 
 
 
