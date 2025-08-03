@@ -63,7 +63,7 @@ do
     Tabs.lvl4 = Tabs.main:Tab({ Title = "Level 4", Icon = "book-copy" })
     Tabs.lvl5 = Tabs.main:Tab({ Title = "Level 5", Icon = "book-copy" })
     Tabs.lvl6 = Tabs.main:Tab({ Title = "Level 6", Icon = "book-copy" })
-    Tabs.warning = Tabs.main:Tab({ Title = "Idk", Icon = "book-copy", Locked = "true" })
+    Tabs.autoplay = Tabs.main:Tab({ Title = "Full AutoPlay (W.I.P)", Icon = "book-copy", Locked = "true" })
     Tabs.stat = Tabs.misc:Tab({ Title = "Status", Icon = "server"})
     Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
