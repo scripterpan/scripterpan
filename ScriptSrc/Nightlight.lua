@@ -480,7 +480,7 @@ SpeedSlider = misc:Slider({
 -- SPEED INPUT
 SpeedInput = misc:Input({
     Title = "Set Walk Speed",
-    Desc = "Type your speed value here\nif you're lazy to use the slider (1–500)",
+    Desc = "Type your speed value here (1–500)",
     Placeholder = tostring(defaultSpeed),
     InputIcon = "chevrons-up",
     Type = "Input",
