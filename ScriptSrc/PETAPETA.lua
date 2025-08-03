@@ -1,7 +1,7 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "Raise A Floppa 2",
+    Title = "PETAPETA",
     Icon = "cat",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
@@ -21,7 +21,7 @@ local Window = WindUI:CreateWindow({
 })
 
 Window:EditOpenButton({
-    Title = "Pann Hub (Raise A Floppa 2)",
+    Title = "Pann Hub (PETAPETA)",
     Icon = "cat",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
