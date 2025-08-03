@@ -189,7 +189,7 @@ end
 
 
 
-Tabs.gemisc:Section({ Title = "Status", Icon = "chart-column-decreasing" })
+Tabs.stat:Section({ Title = "Status", Icon = "chart-column-decreasing" })
 
 
 
@@ -256,7 +256,7 @@ task.spawn(function()
 end)
 
 
-local paragraph = Tabs.StatServer:Paragraph({
+local paragraph = Tabs.stat:Paragraph({
     Title = "Server Ping",
     Desc = "Loading...",
     Locked = false,
@@ -272,7 +272,7 @@ end)
 
 
 
-local paragraph = Tabs.StatServer:Paragraph({
+local paragraph = Tabs.stat:Paragraph({
     Title = "Player Count",
     Desc = "Loading...",
     Locked = false,
