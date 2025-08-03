@@ -101,8 +101,7 @@ local vu = game:GetService("VirtualUser")
 -- lighting
 local lighting = game:GetService("Lighting")
 
--- unlock
-local unlocks = workspace:WaitForChild("Unlocks")
+
 
 
 
