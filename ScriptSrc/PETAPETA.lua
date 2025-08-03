@@ -287,7 +287,7 @@ end)
     
 
 
-Tabs.gemisc:Section({ Title = "code", Icon = "binoculars" })
+Tabs.gemisc:Section({ Title = "Useful Thing", Icon = "code" })
 
 
 
