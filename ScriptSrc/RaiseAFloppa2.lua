@@ -2031,6 +2031,14 @@ Tabs.src:Button({
     end
 })
 
+Tabs.src:Button({
+    Title = "Dex++",
+    Desc = "Since the original Dex is the last release and Moon have discontinued it, it still has some missing features",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+    end
+})
 
 Tabs.src:Button({
     Title = "Simple SPY",
