@@ -2036,7 +2036,7 @@ Tabs.src:Button({
     Desc = "Since the original Dex is the last release and Moon have discontinued it, it still has some missing features",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+        loadstring(game:HttpGet("https://github.com/AZYsGithub/DexPlusPlus/releases/latest/download/out.lua"))()
     end
 })
 
