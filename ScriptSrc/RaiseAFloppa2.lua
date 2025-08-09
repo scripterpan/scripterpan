@@ -764,6 +764,8 @@ local function getIngreForBG()
     clickBeef()
     task.wait(0.4)
     tpTomato()
+    task.wait(0.4)
+    interact()
 end
 
 -- stove setup for cooking
