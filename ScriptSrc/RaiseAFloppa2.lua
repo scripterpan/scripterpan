@@ -584,11 +584,11 @@ end
 -- moddified for cooking
 local function buyIngreForGC()
     tpBread()
-    task.wait(0.2)
+    task.wait(0.4)
     clickBread()
-    task.wait(0.2)
+    task.wait(0.4)
     tpCheese()
-    task.wait(0.2)
+    task.wait(0.4)
     clickCheese()
 end
 
