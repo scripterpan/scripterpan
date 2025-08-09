@@ -1,4 +1,21 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local url = "https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"
+local ok, body = pcall(function() return game:HttpGet(url) end)
+if not ok or not body or body == "" then
+    warn("HttpGet failed:", body)
+    return
+end
+
+local f, err = loadstring(body)
+if not f then
+    warn("loadstring failed:", err)
+    return
+end
+
+local WindUI = f()
+if type(WindUI) ~= "table" then
+    warn("WindUI loader returned nil or wrong type")
+    return
+end
 
 local Window = WindUI:CreateWindow({
     Title = "Raise A Floppa 2",
@@ -26,7 +43,7 @@ Window:EditOpenButton({
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
-        Color3.fromHex("#FF0F7B"), 
+        Color3.fromHex("FF0F7B"), 
         Color3.fromHex("F89B29")
     ),
     OnlyMobile = false,
@@ -1050,7 +1067,7 @@ Tabs.main1:Toggle({
 
 
 local recipeOptions = {
-    "Griiled Cheese",
+    "Grilled Cheese",
     "Vegetable Soup",
     "Burger",
     "Cake",
@@ -1059,7 +1076,7 @@ local recipeOptions = {
 }
 
 local recipeActions = {
-    ["Grilled Cheeese"] = cookGrilled,
+    ["Grilled Cheese"] = cookGrilled,
     ["Vegetable Soup"] = buyCheese,
     Burger = buyBeef,
     Cake = buyNoodles,
@@ -1070,7 +1087,7 @@ local recipeActions = {
 local selectedrecipe = nil
 
 Tabs.cook:Dropdown({
-    Title = "Select Food to ccok",
+    Title = "Select Food to cook",
     Values = recipeOptions,
     Callback = function(option)
         selectedrecipe = option
@@ -1090,8 +1107,16 @@ Tabs.cook:Button({
             })
             return
         end
-
-        recipeActions[selectedrecipe]()
+        local action = recipeActions[selectedrecipe]
+        if type(action) ~= "function" then
+            WindUI:Notify({
+                Title = "Error",
+                Content = "No action found for "..tostring(selectedrecipe),
+                Duration = 4,
+            })
+            return
+        end
+        action()
     end
 })
 
