@@ -191,17 +191,7 @@ function interact()
     end
 end
 
--- setup tp thing
-local function tpStove()
-    local stoveModel = workspace["Key Parts"]:FindFirstChild("Stove")
-    if stoveModel then
-        local primaryPart = stoveModel.PrimaryPart or stoveModel:FindFirstChildWhichIsA("BasePart")
-    if primaryPart then
-        local offset = Vector3.new(2, 0, 0)
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(primaryPart.Position + offset))
-        end
-    end
-end
+
 
 -- hold item
 local function holdCheese()
@@ -210,7 +200,7 @@ local function holdCheese()
     local backpack = player:WaitForChild("Backpack")
     local character = player.Character or player.CharacterAdded:Wait()
 
-    local toolName = "Key"
+    local toolName = "Cheese"
 
     local tool = backpack:FindFirstChild(toolName)
     if tool then
@@ -218,6 +208,20 @@ local function holdCheese()
     end
 end
 
+
+local function holdBread()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Bread"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
 
 
 -- for shop and cooking
@@ -571,11 +575,76 @@ local function buyIngreForGC()
 end
 
 
+-- stove setup for cooking
+
+local function tpStove()
+    local stoveModel = workspace["Key Parts"]:FindFirstChild("Stove")
+    if stoveModel then
+        local primaryPart = stoveModel.PrimaryPart or stoveModel:FindFirstChildWhichIsA("BasePart")
+    if primaryPart then
+        local offset = Vector3.new(2, 0, 0)
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(primaryPart.Position + offset))
+        end
+    end
+end
+
+local function TempLow()
+    local args = {
+        [1] = "Change Temperature",
+        [2] = 1
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function TempMedium()
+    local args = {
+        [1] = "Change Temperature",
+        [2] = 2
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+
+
+local function TempHigh()
+    local args = {
+        [1] = "Change Temperature",
+        [2] = 3
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function Cook()
+    local args = {
+        [1] = "Cook"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+`
+    
+
 -- cooking
 local function cookGrilled()
     buyIngreForGC()
     task.wait(0.2)
-    
+    tpStove()
+    task.wait(0.2)
+    holdCheese()
+    task.wait(0.2)
+    interact()
+    task.wait(0.2)
+    holdBrerad()
+    task.wait(0.2)
+    interact()
+    task.wait(0.2)
+    TempHigh()
+    task.wait(0.2)
+    Cook()
+end
     
     
 
