@@ -191,6 +191,35 @@ function interact()
     end
 end
 
+-- setup tp thing
+local function tpStove()
+    local stoveModel = workspace["Key Parts"]:FindFirstChild("Stove")
+    if stoveModel then
+        local primaryPart = stoveModel.PrimaryPart or stoveModel:FindFirstChildWhichIsA("BasePart")
+    if primaryPart then
+        local offset = Vector3.new(2, 0, 0)
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(primaryPart.Position + offset))
+        end
+    end
+end
+
+-- hold item
+local function holdCheese()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Key"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
+
+
 -- for shop and cooking
 local function tpSword()
     local target = workspace.Village.SwordStore.Sword
@@ -530,8 +559,25 @@ local function buyFishRod()
     teleportBack()
 end
 
+-- moddified for cooking
+local function buyIngreForGC()
+    tpBread()
+    task.wait(0.2)
+    clickBread()
+    task.wait(0.2)
+    tpCheese()
+    task.wait(0.2)
+    clickCheese()
+end
 
 
+-- cooking
+local function cookGrilled()
+    buyIngreForGC()
+    task.wait(0.2)
+    
+    
+    
 
 
 
