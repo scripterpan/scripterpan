@@ -284,6 +284,34 @@ local function holdNoodles()
     end
 end
 
+local function holdTomato()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Tomato"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
+local function holdBeef()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Beef"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
 -- for shop and cooking
 local function tpSword()
     local target = workspace.Village.SwordStore.Sword
@@ -469,7 +497,7 @@ local function tpLettuce()
         local plantModel = unlock:FindFirstChild("Plant Model")
         if plantModel then
             local lettuce = plantModel:FindFirstChild("Lettuce")
-            if lettuce then
+            if lette then
                 local target
                 if lettuce:IsA("BasePart") then
                     target = lettuce
@@ -479,6 +507,29 @@ local function tpLettuce()
 
                 if target then
                     local offset = Vector3.new(0, 5, 0)
+                    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+                    return
+                end
+            end
+        end
+    end
+end
+
+local function tpTomato()
+    for _, unlock in ipairs(workspace.Unlocks:GetChildren()) do
+        local plantModel = unlock:FindFirstChild("Plant Model")
+        if plantModel then
+            local lettuce = plantModel:FindFirstChild("Tomato")
+            if lettuce then
+                local target
+                if lettuce:IsA("BasePart") then
+                    target = lettuce
+                elseif lettuce:IsA("Model") then
+                    target = lettuce.PrimaryPart or lettuce:FindFirstChildWhichIsA("BasePart")
+                end
+
+                if target then
+                    local offset = Vector3.new(1, 0, 0)
                     game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
                     return
                 end
@@ -699,6 +750,22 @@ local function getIngreForVS()
     interact()
 end
 
+local function getIngreForBG()
+    tpBread()
+    task.wait(0.4)
+    clickBread()
+    task.wait(0.4)
+    tpLettuce()
+    task.wait(0.4)
+    interact()
+    task.wait(0.4)
+    tpBeef()
+    task.wait(0.4)
+    clickBeef()
+    task.wait(0.4)
+    tpTomato()
+end
+
 -- stove setup for cooking
 
 local function tpStove()
@@ -796,6 +863,30 @@ local function cookVS()
     clickStove()
     task.wait(0.3)
     TempLow()
+    task.wait(0.3)
+    Cook()
+end
+
+local function cookBG()
+    getIngreForBG()
+    task.wait(0.2)
+    tpStove()
+    task.wait(0.3)
+    holdBeef()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    holdLettuce()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    holdTomato()
+    task.wait(0.3)
+    holdBread()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    TempMedium()
     task.wait(0.3)
     Cook()
 end
@@ -1215,7 +1306,7 @@ local recipeOptions = {
 local recipeActions = {
     ["Grilled Cheese"] = cookGrilled,
     ["Vegetable Soup"] = cookVS,
-    Burger = buyBeef,
+    Burger = cookBG,
     Cake = buyNoodles,
     ["Space Soup"] = buyEggs,
     ["Mega Breakfast"] = buyFlour  
