@@ -606,6 +606,14 @@ local function tpStove()
     end
 end
 
+local function clickStove()
+    local prompt = workspace["Key Parts"].Stove.Parts.Primary:FindFirstChild("ProximityPrompt")
+    if prompt then
+        fireproximityprompt(prompt)
+    end
+end
+    
+
 local function TempLow()
     local args = {
         [1] = "Change Temperature",
@@ -653,11 +661,11 @@ local function cookGrilled()
     task.wait(0.2)
     holdCheese()
     task.wait(0.2)
-    interact()
+    clickstove()
     task.wait(0.2)
-    holdBrerad()
+    holdBread()
     task.wait(0.2)
-    interact()
+    clickStove
     task.wait(0.2)
     TempHigh()
     task.wait(0.2)
