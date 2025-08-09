@@ -65,7 +65,7 @@ Tabs.stat = Window:Section({
     Tabs.StatServer = Tabs.stat:Tab({ Title = "Server's Status", Icon = "server" })
     Tabs.StatOther = Tabs.stat:Tab({ Title = "Other's Status", Icon = "search" })
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
-    Tabs.cook = Tabs.main:Tab({ Title = "Cook", Icon = "cooking-pot" })
+    Tabs.cook = Tabs.main:Tab({ Title = "Cook (Still W.I.P)", Icon = "cooking-pot" })
     Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
@@ -1043,6 +1043,55 @@ Tabs.main1:Toggle({
                 task.wait()
             end
         end)
+    end
+})
+
+
+
+
+local recipeOptions = {
+    "Griiled Cheese",
+    "Vegetable Soup",
+    "Burger",
+    "Cake",
+    "Space Soup",
+    "Mega Breakfast",
+}
+
+local recipeActions = {
+    ["Grilled Cheeese"] = cookGrilled,
+    ["Vegetable Soup"] = buyCheese,
+    Burger = buyBeef,
+    Cake = buyNoodles,
+    ["Space Soup"] = buyEggs,
+    ["Mega Breakfast"] = buyFlour  
+}
+
+local selectedrecipe = nil
+
+Tabs.cook:Dropdown({
+    Title = "Select Food to ccok",
+    Values = recipeOptions,
+    Callback = function(option)
+        selectedrecipe = option
+    end
+})
+
+Tabs.cook:Button({
+    Title = "Cook Selected Food",
+    Desc = "Will buy the ingredients and cook for you",
+    Callback = function()
+        if not selectedrecipe then
+            WindUI:Notify({
+                Title = "No Food Selected",
+                Content = "Please select a food first.",
+                Icon = "circle-alert",
+                Duration = 5,
+            })
+            return
+        end
+
+        recipeActions[selectedrecipe]()
     end
 })
 
