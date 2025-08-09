@@ -665,7 +665,7 @@ local function cookGrilled()
     task.wait(0.2)
     holdBread()
     task.wait(0.2)
-    clickStove
+    clickStove()
     task.wait(0.2)
     TempHigh()
     task.wait(0.2)
