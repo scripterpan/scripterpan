@@ -1214,7 +1214,7 @@ local recipeOptions = {
 
 local recipeActions = {
     ["Grilled Cheese"] = cookGrilled,
-    ["Vegetable Soup"] = buyCheese,
+    ["Vegetable Soup"] = cookVS,
     Burger = buyBeef,
     Cake = buyNoodles,
     ["Space Soup"] = buyEggs,
