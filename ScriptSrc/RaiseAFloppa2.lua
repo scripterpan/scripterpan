@@ -227,6 +227,7 @@ local function holdCheese()
 end
 
 
+
 local function holdBread()
     local Players = game:GetService("Players")
     local player = Players.LocalPlayer
@@ -241,6 +242,47 @@ local function holdBread()
     end
 end
 
+local function holdLettuce()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Lettuce"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
+local function holdCarrot()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Carrot"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
+
+local function holdNoodles()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local toolName = "Noodles"
+
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        tool.Parent = character
+    end
+end
 
 -- for shop and cooking
 local function tpSword()
@@ -421,6 +463,56 @@ local function tpFish()
     end
 end
 
+-- tp planter
+local function tpLettuce()
+    for _, unlock in ipairs(workspace.Unlocks:GetChildren()) do
+        local plantModel = unlock:FindFirstChild("Plant Model")
+        if plantModel then
+            local lettuce = plantModel:FindFirstChild("Lettuce")
+            if lettuce then
+                local target
+                if lettuce:IsA("BasePart") then
+                    target = lettuce
+                elseif lettuce:IsA("Model") then
+                    target = lettuce.PrimaryPart or lettuce:FindFirstChildWhichIsA("BasePart")
+                end
+
+                if target then
+                    local offset = Vector3.new(0, 5, 0)
+                    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+                    return
+                end
+            end
+        end
+    end
+end
+
+
+local function tpCarrot()
+    for _, unlock in ipairs(workspace.Unlocks:GetChildren()) do
+        local plantModel = unlock:FindFirstChild("Plant Model")
+        if plantModel then
+            local carrot = plantModel:FindFirstChild("Carrot")
+            if carrot then
+                local target
+                if carrot:IsA("BasePart") then
+                    target = carrot
+                elseif carrot:IsA("Model") then
+                    target = carrot.PrimaryPart or carrot:FindFirstChildWhichIsA("BasePart")
+                end
+
+                if target then
+                    local offset = Vector3.new(0, 5, 0)
+                    game.Players.LocalPlayer.Character:PivotTo(CFrame.new(target.Position + offset))
+                    return
+                end
+            end
+        end
+    end
+end
+
+
+
 -- interact to buy these thing
 local function clickFlour()
     local prompt = workspace.Village.FoodMarket["Flour Crate"].Crate["Empty Display Crate"].Primary:FindFirstChild("ProximityPrompt")
@@ -489,6 +581,7 @@ local function buyChicken()
     task.wait(0.2)
     teleportBack()
 end
+
 
 local function buyCheese()
     saveOriginalPosition()
@@ -581,8 +674,8 @@ local function buyFishRod()
     teleportBack()
 end
 
--- moddified for cooking
-local function buyIngreForGC()
+-- modified for cooking
+local function getIngreForGC()
     tpBread()
     task.wait(0.4)
     clickBread()
@@ -592,6 +685,19 @@ local function buyIngreForGC()
     clickCheese()
 end
 
+local function getIngreForVS()
+    tpNoodles()
+    task.wait(0.4)
+    clickNoodles()
+    task.wait(0.4)
+    tpLettuce()
+    task.wait(0.4)
+    interact()
+    task.wait(0.4)
+    tpCarrot()
+    task.wait(0.4)
+    interact()
+end
 
 -- stove setup for cooking
 
@@ -655,7 +761,7 @@ end
 
 -- cooking
 local function cookGrilled()
-    buyIngreForGC()
+    getIngreForGC()
     task.wait(0.2)
     tpStove()
     task.wait(0.3)
@@ -668,6 +774,28 @@ local function cookGrilled()
     clickStove()
     task.wait(0.3)
     TempHigh()
+    task.wait(0.3)
+    Cook()
+end
+
+local function cookVS()
+    getIngreForVS()
+    task.wait(0.2)
+    tpStove()
+    task.wait(0.3)
+    holdNoodles()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    holdLettuce()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    holdCarrot()
+    task.wait(0.3)
+    clickStove()
+    task.wait(0.3)
+    TempLow()
     task.wait(0.3)
     Cook()
 end
