@@ -86,6 +86,7 @@ Tabs.stat = Window:Section({
     Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
+    Tabs.raid = Tabs.main:Tab({ Title = "Raid", Icon = "swords" })
     Tabs.shop = Tabs.main:Tab({ Title = "Market", Icon = "shopping-cart" })
     Tabs.glitch = Tabs.main:Tab({ Title = "Glitch Portal (W.I.P)", Icon = "bomb", Locked = "true" })
     Tabs.slot = Tabs.main:Tab({ Title = "Floppa Slot (W.I.P)", Icon = "bitcoin", Locked = "true" })
@@ -641,7 +642,7 @@ local function Cook()
 
     game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
 end
-`
+
     
 
 -- cooking
