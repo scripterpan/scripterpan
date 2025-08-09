@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 local Window = WindUI:CreateWindow({
     Title = "PETAPETA",
-    Icon = "cat",
+    Icon = "ghost",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
     Size = UDim2.fromOffset(520, 360),
@@ -22,11 +22,11 @@ local Window = WindUI:CreateWindow({
 
 Window:EditOpenButton({
     Title = "Pann Hub (PETAPETA)",
-    Icon = "cat",
+    Icon = "ghost",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
     Color = ColorSequence.new( -- gradient
-        Color3.fromHex("#FF0F7B"), 
+        Color3.fromHex("FF0F7B"), 
         Color3.fromHex("F89B29")
     ),
     OnlyMobile = false,
