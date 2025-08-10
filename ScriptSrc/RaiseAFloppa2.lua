@@ -725,6 +725,126 @@ local function buyFishRod()
     teleportBack()
 end
 
+--put ingredients for cooking
+
+local function putBread()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Bread"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putCheese()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "cheese"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putNoodles()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Noodles"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+
+local function putCarrot()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Carrot"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putLettuce()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Lettuce"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putTomato()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Tomato"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putBeef()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Beef"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+
+local function putEgg()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Egg"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putMilk()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Milk"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putFlour()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Flour"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putSugar()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Sugar"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+local function putDargonEgg()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Dragon Egg"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+
+
+
+
+
+
+
+
 -- modified for cooking
 local function getIngreForGC()
     tpBread()
@@ -832,15 +952,9 @@ end
 local function cookGrilled()
     getIngreForGC()
     task.wait(0.2)
-    tpStove()
+    putBread()
     task.wait(0.3)
-    holdCheese()
-    task.wait(0.3)
-    clickStove()
-    task.wait(0.3)
-    holdBread()
-    task.wait(0.3)
-    clickStove()
+    putCheese()
     task.wait(0.3)
     TempHigh()
     task.wait(0.3)
@@ -852,17 +966,11 @@ local function cookVS()
     task.wait(0.2)
     tpStove()
     task.wait(0.3)
-    holdNoodles()
+    putNoodles()
     task.wait(0.3)
-    clickStove()
+    putCarrot()
     task.wait(0.3)
-    holdLettuce()
-    task.wait(0.3)
-    clickStove()
-    task.wait(0.3)
-    holdCarrot()
-    task.wait(0.3)
-    clickStove()
+    putLettuce()
     task.wait(0.3)
     TempLow()
     task.wait(0.3)
@@ -874,19 +982,13 @@ local function cookBG()
     task.wait(0.2)
     tpStove()
     task.wait(0.3)
-    holdBeef()
+    putBread()
     task.wait(0.3)
-    clickStove()
+    putLettuce()
     task.wait(0.3)
-    holdLettuce()
+    putTomato()
     task.wait(0.3)
-    clickStove()
-    task.wait(0.3)
-    holdTomato()
-    task.wait(0.3)
-    holdBread()
-    task.wait(0.3)
-    clickStove()
+    putBeef()
     task.wait(0.3)
     TempMedium()
     task.wait(0.3)
