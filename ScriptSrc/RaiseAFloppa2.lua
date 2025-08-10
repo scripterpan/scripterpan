@@ -2803,9 +2803,3 @@ Tabs.src:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
     end
 })
-
-
-
-
-
---}
