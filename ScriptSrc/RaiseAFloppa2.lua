@@ -1985,8 +1985,8 @@ Tabs.plant:Toggle({
 Tabs.shop:Section({ Title = "Error Fixing", Icon = "hammer" })
 
 Tabs.shop:Paragraph({
-    Title = "Infomation",
-    Desc = "What should i do if it didn't purchase the selected item?\n- Just press it again until it purchase for you,
+    Title = "Bugs: Not purchase the selected item",
+    Desc = "Just press it again until it is purchased for you",
     Locked = false,
 })
 
