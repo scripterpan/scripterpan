@@ -1294,6 +1294,7 @@ Tabs.main1:Toggle({
 })
 
 
+Tabs.cook:Section({ Title = "Cooking", Icon = "cooking-pot" })
 
 
 local recipeOptions = {
@@ -1349,6 +1350,9 @@ Tabs.cook:Button({
         action()
     end
 })
+
+Tabs.cook:Section({ Title = "Settings", Icon = "settings" })
+
 
 
 
