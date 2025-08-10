@@ -2798,6 +2798,8 @@ Tabs.src:Button({
     Desc = "let you destroy, copy things in the game (Visual, only appear to yourself)",
     Locked = false,
     Callback = function()
+        backpack = game:GetService("Players").LocalPlayer.Backpack
+            
         hammer = Instance.new("HopperBin")
         hammer.Name = "Hammer"
         hammer.BinType = 4
