@@ -494,7 +494,7 @@ end
 -- tp planter
 local function tpLettuce()
     for _, unlock in ipairs(workspace.Unlocks:GetChildren()) do
-        local plantModel = unlock:FindFirstChild("Plant Model")
+        local plantModel =localagonEgg2agonEgg2ck:FindFirstChild("Plant Model")
         if plantModel then
             local lettuce = plantModel:FindFirstChild("Lettuce")
             if lette then
@@ -910,7 +910,7 @@ local function getDragonEgg1()
     game:GetService("ReplicatedStorage").Events:FindFirstChild("Small Vault"):FireServer(unpack(args))  
 end
 
-local function getdragonEgg2()
+local function getDragonEgg2()
     local args = {
         [1] = game:GetService("ReplicatedStorage"):FindFirstChild("Big Vault"):FindFirstChild("Dragon Egg")
     }
@@ -992,7 +992,7 @@ local function getIngreForSS()
 end
 
 local function getIngreForMB()
-    getDragonEgg2()
+    getDragonEgg1(); getDragonEgg2()
     task.wait(0.4)
     tpBeef()
     task.wait(0.4)
