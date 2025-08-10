@@ -83,7 +83,7 @@ Tabs.stat = Window:Section({
     Tabs.StatOther = Tabs.stat:Tab({ Title = "Other's Status", Icon = "search" })
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
     Tabs.cook = Tabs.main:Tab({ Title = "Cook (Still W.I.P)", Icon = "cooking-pot" })
-    Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "bolt" })
+    Tabs.manual = Tabs.main:Tab({ Title = "Manual", Icon = "table-of-contents" })
     Tabs.auto = Tabs.main:Tab({ Title = "Automatic", Icon = "code" })
     Tabs.plant = Tabs.main:Tab({ Title = "Plant Related", Icon = "sprout" })
     Tabs.raid = Tabs.main:Tab({ Title = "Raid", Icon = "swords" })
@@ -1455,6 +1455,9 @@ task.spawn(function()
 end)
 
 
+Tabs.main1:Section({ Title = "Floppa", Icon = "cat" })
+
+
 
 Tabs.main1:Toggle({
     Title = "Auto Click Floppa",
@@ -1502,6 +1505,9 @@ Tabs.main1:Toggle({
         end)
     end
 })
+
+Tabs.main1:Section({ Title = "Valueable Things", Icon = "banknote" })
+
 
 Tabs.main1:Toggle({
     Title = "Auto Collect Money",
@@ -1638,6 +1644,8 @@ Tabs.cook:Section({ Title = "Settings", Icon = "settings" })
 
 
 
+Tabs.manual:Section({ Title = "Manual", Icon = "table-of-contents" })
+
 
 
 
@@ -1743,6 +1751,8 @@ end
     end
 })
 
+
+Tabs.main1:Section({ Title = "Automatic", Icon = "code" })
 
 
 Tabs.auto:Toggle({
@@ -1882,7 +1892,7 @@ Tabs.auto:Toggle({
     end
 })
 
-
+Tabs.plant:Section({ Title = "Seeds and Plants", Icon = "sprout" })
 
 
 Tabs.plant:Toggle({
@@ -1981,6 +1991,7 @@ Tabs.plant:Toggle({
     end
 })
 
+Tabs.raid:Section({ Title = "Raids", Icon = "swords" })
 
 Tabs.shop:Section({ Title = "Error Fixing", Icon = "hammer" })
 
@@ -2090,7 +2101,7 @@ Tabs.shop:Button({
 
 
 
-
+Tabs.Tp:Section({ Title = "Teleport", Icon = "arrow-down-to-dot" })
 
 
 
@@ -2197,7 +2208,7 @@ Tabs.Tp:Button({
     end
 })
 
-
+Tabs.gemisc:Section({ Title = "Misc Things", Icon = "wrench" })
 
 local connection
 
@@ -2401,6 +2412,8 @@ Tabs.gemisc:Toggle({
     end
 })
 
+
+Tabs.plmisc:Section({ Title = "Players", Icon = "person-standing" })
 
 
 local infiniteJumpEnabled = false
@@ -2726,6 +2739,8 @@ Tabs.plmisc:Input({
 })
 
 
+Tabs.src:Section({ Title = "Universal Scripts", Icon = "usb" })
+
 
 Tabs.src:Button({
     Title = "Infinite Yield",
@@ -2769,6 +2784,8 @@ Tabs.src:Button({
     end
 })
 
+Tabs.src:Section({ Title = "Tools", Icon = "gavel" })
+
 Tabs.src:Button({
     Title = "Simple SPY",
     Desc = "Best script for logging remote that happened in game \nYour executor must support : \n- hookmetamethod\n- getnamecallmethod\n- setnamecallmethod\n- newcclosure\n- getrawmetatable\n- setreadonly",
@@ -2777,3 +2794,18 @@ Tabs.src:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
     end
 })
+
+Tabs.src:Button({
+    Title = "BTools",
+    Desc = "let you destroy, copy things in the game (Visual, only appear to yourself)",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
+    end
+})
+
+
+
+
+
+--}
