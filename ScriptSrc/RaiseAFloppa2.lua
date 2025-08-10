@@ -2282,6 +2282,19 @@ Tabs.gemisc:Toggle({
     end
 })
 
+Tabs.gemisc:Button({
+    Title = "Rejoin",
+    Desc = "Rejoin the same game, same server",
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end
+})
+
+
 Tabs.gemisc:Section({ Title = "Visual", Icon = "binoculars" })
 
 -- FullBright 
