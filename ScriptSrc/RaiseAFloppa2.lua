@@ -837,13 +837,86 @@ local function putDargonEgg()
     game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
 end
 
+local function putMeteorite()
+    local args = {
+        [1] = "Add Ingredient",
+        [2] = "Meteorite"
+    }
+
+    game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
+end
+
+
+-- im lazy to put the full notification code so i made it as function
+
+local function NotifyCook()
+    WindUI:Notify({
+        Title = "Cook",
+        Content = "Cooking, Please wait",
+        Icon = "cooking-pot",
+        Duration = 5,
+    })
+end
+
+local function NotifyIngredients()
+    WindUI:Notify({
+        Title = "Cook",
+        Content = "Getting Ingredients",
+        Icon = "beef",
+        Duration = 5,
+    })
+end
+
+
+-- vault
+
+local function getMilk()
+    local args = {
+        [1] = game:GetService("ReplicatedStorage"):FindFirstChild("Small Vault").Milk
+    }
+
+    game:GetService("ReplicatedStorage").Events:FindFirstChild("Small Vault"):FireServer(unpack(args))
+end
+
+local function getMeteorite1()
+    local args = {
+        [1] = game:GetService("ReplicatedStorage"):FindFirstChild("Small Vault").Meteorite
+    }
+
+    game:GetService("ReplicatedStorage").Events:FindFirstChild("Small Vault"):FireServer(unpack(args))
+end
 
 
 
+-- another method for meteorite
 
+local function getMeteorite2()
+    local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp and workspace:FindFirstChild("Meteorite") then
+            for _, v in pairs(workspace.Meteorite:GetChildren()) do
+                if v:IsA("BasePart") and v:FindFirstChildWhichIsA("TouchTransmitter") then
+                    firetouchinterest(hrp, v, 0)
+                    firetouchinterest(hrp, v, 1)
+            end
+        end
+    end
+end
 
+local function getDragonEgg1()
+    local args = {
+        [1] = game:GetService("ReplicatedStorage"):FindFirstChild("Small Vault"):FindFirstChild("Dragon Egg")
+    }
 
+    game:GetService("ReplicatedStorage").Events:FindFirstChild("Small Vault"):FireServer(unpack(args))  
+end
 
+local function getdragonEgg2()
+    local args = {
+        [1] = game:GetService("ReplicatedStorage"):FindFirstChild("Big Vault"):FindFirstChild("Dragon Egg")
+    }
+
+    game:GetService("ReplicatedStorage").Events:FindFirstChild("Big Vault"):FireServer(unpack(args))
+end
 
 -- modified for cooking
 local function getIngreForGC()
@@ -887,6 +960,51 @@ local function getIngreForBG()
     task.wait(0.4)
     interact()
 end
+
+local function getIngreforCake()
+    getMilk()
+    task.wait(0.4)
+    tpEggs()
+    task.wait(0.4)
+    clickEggs()
+    task.wait(0.4)
+    tpFlour()
+    task.wait(0.4)
+    clickFlour()
+    task.wait(0.4)
+    tpSugar()
+    task.wait(0.4)
+    clickSugar()
+end
+
+local function getIngreForSS()
+    getMeteorite1(); getMeteorite2()
+    task.wait(0.2)
+    getMeteorite1(); getMeteorite2()
+    task.wait(0.4)
+    tpNoodles()
+    task.wait(0.4)
+    clickNoodles()
+    task.wait(0.4)
+    tpCarrot()
+    task.wait(0.4)
+    interact()
+end
+
+local function getIngreForMB()
+    getDragonEgg1(); getDragonEgg2()
+    task.wait(0.2)
+    getDragonEgg1(); getDragonEgg2()
+    task.wait(0.4)
+    tpBeef()
+    task.wait(0.4)
+    clickBeef()
+    task.wait(0.3)
+    clickBeef()
+    task.wait(0.3)
+    clickBeef()
+end
+
 
 -- stove setup for cooking
 
@@ -950,8 +1068,11 @@ end
 
 -- cooking
 local function cookGrilled()
+    NotifyIngredients()
     getIngreForGC()
     task.wait(0.2)
+    tpStove()
+    task.wait(0.3)
     putBread()
     task.wait(0.3)
     putCheese()
@@ -959,9 +1080,11 @@ local function cookGrilled()
     TempHigh()
     task.wait(0.3)
     Cook()
+    NotifyCook()
 end
 
 local function cookVS()
+    NotifyIngredients()
     getIngreForVS()
     task.wait(0.2)
     tpStove()
@@ -975,9 +1098,11 @@ local function cookVS()
     TempLow()
     task.wait(0.3)
     Cook()
+    NotifyCook()
 end
 
 local function cookBG()
+    NotifyIngredients()
     getIngreForBG()
     task.wait(0.2)
     tpStove()
@@ -993,11 +1118,66 @@ local function cookBG()
     TempMedium()
     task.wait(0.3)
     Cook()
+    NotifyCook()
 end
     
-    
+local function cookCake()
+    NotifyIngredients()
+    getIngreForCake()
+    task.wait(0.2)
+    tpStove()
+    task.wait(0.3)
+    putEgg()
+    task.wait(0.3)
+    putMilk()
+    task.wait(0.3)
+    putFlour()
+    task.wait(0.3)
+    putSugar()
+    task.wait(0.3)
+    TempLow()
+    task.wait(0.3)
+    Cook()
+    NotifyCook()
+end
 
+local function cookSS()
+    NotifyIngredients()
+    getIngreForSS()
+    task.wait(0.2)
+    tpStove()
+    task.wait(0.3)
+    putMeteorite()
+    task.wait(0.3)
+    putMeteorite()
+    task.wait(0.3)
+    putCarrot()
+    task.wait(0.3)
+    putNoodles()
+    task.wait(0.3)
+    TempLow()
+    task.wait(0.3)
+    Cook()
+    NotifyCook()
+end
 
+local function cookMB()
+    NotifyIngredients()
+    getIngreForMB()
+    task.wait(0.2)
+    putDragonEgg()
+    task.wait(0.3)
+    putBeef()
+    task.wait(0.3)
+    putBeef()
+    task.wait(0.3)
+    putBeef()
+    task.wait(0.3)
+    TempHigh()
+    task.wait(0.3)
+    Cook()
+    NotifyCook()
+end
 
 
 Tabs.StatPlayer:Paragraph({
@@ -1412,9 +1592,9 @@ local recipeActions = {
     ["Grilled Cheese"] = cookGrilled,
     ["Vegetable Soup"] = cookVS,
     Burger = cookBG,
-    Cake = buyNoodles,
-    ["Space Soup"] = buyEggs,
-    ["Mega Breakfast"] = buyFlour  
+    Cake = cookCake,
+    ["Space Soup"] = cookSS,
+    ["Mega Breakfast"] = cookMB  
 }
 
 local selectedrecipe = nil
