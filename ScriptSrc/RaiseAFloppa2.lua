@@ -1984,7 +1984,7 @@ Tabs.plant:Toggle({
 
 Tabs.shop:Section({ Title = "Error Fixing", Icon = "hammer" })
 
-local paragraph = Tabs.shop:Paragraph({
+Tabs.shop:Paragraph({
     Title = "Infomation",
     Desc = "What should i do if it didn't purchase the selected item?\n- Just press it again until it purchase for you,
     Locked = false,
