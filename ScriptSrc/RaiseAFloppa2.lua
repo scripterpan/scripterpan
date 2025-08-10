@@ -1752,7 +1752,7 @@ end
 })
 
 
-Tabs.main1:Section({ Title = "Automatic", Icon = "code" })
+Tabs.auto:Section({ Title = "Automatic", Icon = "code" })
 
 
 Tabs.auto:Toggle({
