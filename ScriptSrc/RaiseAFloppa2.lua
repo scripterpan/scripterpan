@@ -739,7 +739,7 @@ end
 local function putCheese()
     local args = {
         [1] = "Add Ingredient",
-        [2] = "cheese"
+        [2] = "Cheese"
     }
 
     game:GetService("ReplicatedStorage").Events.Cooking:FireServer(unpack(args))
@@ -854,7 +854,7 @@ local function NotifyCook()
         Title = "Cook",
         Content = "Cooking, Please wait",
         Icon = "cooking-pot",
-        Duration = 5,
+        Duration = 3,
     })
 end
 
