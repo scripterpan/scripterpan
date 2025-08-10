@@ -2798,6 +2798,25 @@ Tabs.src:Button({
     Desc = "let you destroy, copy things in the game (Visual, only appear to yourself)",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/Tools/Mobile-Simple-Spy.lua"))()
-    end
+        hammer = Instance.new("HopperBin")
+        hammer.Name = "Hammer"
+        hammer.BinType = 4
+        hammer.Parent = backpack
+
+        cloneTool = Instance.new("HopperBin")
+        cloneTool.Name = "Clone"
+        cloneTool.BinType = 3
+        cloneTool.Parent = backpack
+
+        grabTool = Instance.new("HopperBin")
+        grabTool.Name = "Grab"
+        grabTool.BinType = 2
+        grabTool.Parent = backpack
+
+        WindUI:Notify({
+            Title = "Notification",
+            Content = "BTools has been added to your inventory, please check you inventory",
+            Icon = "circle-alert",
+            Duration = 5,
+        })
 })
