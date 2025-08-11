@@ -48,7 +48,7 @@ The list of the executor that (maybe) support the script :
   - [**Arceus X** 🟩🔐](https://spdmteam.com/)
   - [**Vega X** 🟩🔐](https://vegax.gg/)
   - [**Ronix** 🟩🔐](https://ronixstudios.com/)
-  - [**Delta**  🟩🔐](https://deltaexploits.gg/android_dl)
+  - [**Delta**  🟩🔐](https://deltaexploits.gg/delta-executor-android)
   - [**Cryptic** 🟦🔐](https://getcryptic.net/)
   - [**Trigon** 🟦🔐](https://trigonevo.com/android/)
  
