@@ -31,9 +31,9 @@
 
 ### Executor that (maybe) support the script, status
 - 🟩 = Fully Supported!
-- 🟨 = Might Support 🤔
-- 🟥 = Not Supported 😔 
-- 🟦 = idk, i haven't test it yet (Might support)🥀💔
+- 🟨 = Might Support
+- 🟥 = Not Supported
+- 🟦 = idk, i haven't test it yet (Might support)
 - 🔐 = Key System!
 - ❌🔐 = No Key system!
 
