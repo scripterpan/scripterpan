@@ -20,8 +20,6 @@
 - **Sol's RNG** 🟥
 - **Blox Fruit** 🟥
 - **The Rake Remastered** 🟥
-- **7 Days To Live** 🟦
-- **Own Blue Lock And Prove Ego Wrong** 🟦
 - **The Mimic** ⬛
 
 
