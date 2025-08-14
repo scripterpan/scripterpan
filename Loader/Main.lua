@@ -11,7 +11,7 @@ local games = {
     [33541525] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/7DTL.lua', -- 7 Days To Live
     [7314991]  = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Nightlight.lua', -- Nightlight (Horror)
     [5449496] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/FunkyFriday.lua', -- Funky Friday 
-    [16607943] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Factory-Tycoon.lua' -- Factory Tycoon
+    [16607943] = 'https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Create-A-Factory.lua' -- Create A Factory Tycoon
 }
 
 WindUI:Popup({
