@@ -12,6 +12,7 @@
 ## Supported Game List
 
 - **Survive Job Application** 🟩
+- **Factory Tycoon** 🟩
 - **Raise A Floppa 2**  🟩
 - **Nightlight (Horror)** 🟩
 - **Universal** 🟨
