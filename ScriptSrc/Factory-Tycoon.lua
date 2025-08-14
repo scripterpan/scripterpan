@@ -19,7 +19,7 @@ end
 
 
 local Window = WindUI:CreateWindow({
-    Title = "Raise A Floppa 2",
+    Title = "Create A Factory",
     Icon = "cat",
     Author = "Pann Hub",
     Folder = "PannHub-WindUi-RAF2",
@@ -39,7 +39,7 @@ local Window = WindUI:CreateWindow({
 })
 
 Window:EditOpenButton({
-    Title = "Pann Hub (Raise A Floppa 2)",
+    Title = "Pann Hub (Create A Factory)",
     Icon = "cat",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
