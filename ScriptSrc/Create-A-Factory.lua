@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     Title = "Create A Factory",
     Icon = "cat",
     Author = "Pann Hub",
-    Folder = "PannHub-WindUi-RAF2",
+    Folder = "PannHub-WindUi-CreateAFactory",
     Size = UDim2.fromOffset(520, 360),
     Transparent = true,
     Theme = "Dark",
@@ -245,17 +245,24 @@ Tabs.main1:Toggle({
             while _G.GetMoney do
                 local sellerBases = {"Base1", "Base2", "Base3"}
                 for _, baseName in ipairs(sellerBases) do
-                    local args = {
-                        workspace:WaitForChild(baseName):WaitForChild("PlacedPieces"):WaitForChild("Seller"),
-                        500000000000
-                    }
-                    game:GetService("ReplicatedStorage"):WaitForChild("SetupConveyorTouches"):FireServer(unpack(args))
+                    local base = workspace:FindFirstChild(baseName)
+                    if base and base:FindFirstChild("PlacedPieces") and base.PlacedPieces:FindFirstChild("Seller") then
+                        local args = {
+                            base.PlacedPieces.Seller,
+                            500000000000
+                        }
+                        local remote = game:GetService("ReplicatedStorage"):FindFirstChild("SetupConveyorTouches")
+                        if remote then
+                            remote:FireServer(unpack(args))
+                        end
+                    end
+                    task.wait(0.1) -- small delay so it keeps firing without being blocked
                 end
-                task.wait()
             end
         end)
     end
 })
+
 
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -283,7 +290,7 @@ local items = {
 
 local selectedItem = nil
 
--- Dropdown to select the conveyor
+
 Tabs.main1:Dropdown({
     Title = "Select Conveyor",
     Values = items,
@@ -294,7 +301,7 @@ Tabs.main1:Dropdown({
     end
 })
 
--- Button to buy the selected conveyor
+
 Tabs.main1:Button({
     Title = "Get Selected Conveyor",
     Desc = "Gets the conveyor you selected above",
@@ -331,15 +338,13 @@ Tabs.main1:Toggle({
         
         task.spawn(function()
             while _G.GetMoon do
-                for i = 1, 10000 do
-                    GiveMoonCoin:FireServer()
-                    task.wait(0.001)
-                end
+                game:GetService("ReplicatedStorage"):WaitForChild("GiveMoonCoin"):FireServer()
+                game:GetService("ReplicatedStorage"):WaitForChild("GiveMoonCoin"):FireServer()
+                task.wait()
             end
         end)
     end
 })
-
 
 Tabs.gemisc:Section({ Title = "Misc Things", Icon = "wrench" })
 
