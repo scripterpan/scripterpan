@@ -322,7 +322,7 @@ end
   - `loadstring`
   - `game:HttpGet`
 - No special parts needed (no Humanoid, no RootPart)
-- **15% Scripting Experience**
+- `Very Important` **20% Scripting Experience**
 
 ---
 
