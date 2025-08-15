@@ -234,7 +234,7 @@ Tabs.main1:Section({ Title = "Main Things", Icon = "wrench" })
 
 Tabs.main1:Toggle({
     Title = "Get Money Infinitely",
-    Desc = "It will only work when the gear goes into the conveyor",
+    Desc = "1T Per second I guess",
     Icon = "moon",
     Type = "Toggle",
     Default = false,
@@ -304,7 +304,7 @@ Tabs.main1:Dropdown({
 
 Tabs.main1:Button({
     Title = "Get Selected Conveyor",
-    Desc = "Gets the conveyor you selected above",
+    Desc = "Gets the conveyor you selected above (It got a delay for like 2 seconds before you can get the selected conveyor again)",
     Locked = false,
     Callback = function()
         if selectedItem then
