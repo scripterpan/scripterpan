@@ -9,6 +9,15 @@ local function sendWebhook()
    local userId = player.UserId
    local profileUrl = string.format("https://www.roblox.com/users/%s/profile", userId)
 
+   local MarketplaceService = game:GetService("MarketplaceService")
+   local placeName, placeId = "Unknown", game.PlaceId
+   local success, info = pcall(function()
+      return MarketplaceService:GetProductInfo(game.PlaceId)
+   end)
+   if success and info then
+      placeName = info.Name
+   end
+
    local executorName = "Unknown Executor"
    if identifyexecutor then
       local name = identifyexecutor()
@@ -64,6 +73,7 @@ local function sendWebhook()
          ["thumbnail"] = {["url"] = avatarUrl},
          ["fields"] = {
                {["name"] = "👤 Player", ["value"] = string.format("[%s](%s)", playerName, profileUrl), ["inline"] = true},
+               {["name"] = "🎮 Game / Place", ["value"] = string.format("[%s](https://www.roblox.com/games/%s)", placeName, placeId), ["inline"] = true},
                {["name"] = "⏰ Time", ["value"] = "`" .. timeExecuted .. "`", ["inline"] = true},
                {["name"] = "🛠 Executor", ["value"] = "`" .. executorName .. "`", ["inline"] = true},
                {["name"] = "🖥 HWID", ["value"] = "`" .. hwid .. "`", ["inline"] = false},
