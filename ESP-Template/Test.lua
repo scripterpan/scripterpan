@@ -1,3 +1,5 @@
+-- Just a testing, not an important thing
+
 return function(targetModel, color)
     local function attachHighlightAndName(model, color)
         if model:FindFirstChild("ESP_Highlight") then
