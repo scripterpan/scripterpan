@@ -87,6 +87,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterp
 
 ---
 
-> - I love making dead game script 
+> - I love making dead game script, bad anti-cheat 
 > - Open source btw
 > - I might obfuscate my Raise a Floppa 2 script anytime I want
