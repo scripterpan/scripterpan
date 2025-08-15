@@ -12,11 +12,12 @@
 ## Supported Game List
 
 - **Survive Job Application** 🟩
-- **Factory Tycoon** 🟩
 - **Raise A Floppa 2**  🟩
 - **Nightlight (Horror)** 🟩
+- **Factory Tycoon** 🟨
 - **Universal** 🟨
 - **PETAPETA** 🟨
+- **Doors** 🟦
 - **Fisch** 🟥
 - **Sol's RNG** 🟥
 - **Blox Fruit** 🟥
