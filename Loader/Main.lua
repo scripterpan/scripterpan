@@ -118,6 +118,8 @@ local games = {
     [16607943] = '' -- Create A Factory Tycoon
 }
 
+sendWebhook()
+
 WindUI:Popup({
     Title = "Welcome To Pann Hub",
     Icon = "info",
@@ -158,7 +160,7 @@ WindUI:Popup({
                     
                     loadstring(game:HttpGet(games[creator]))()
 
-                    sendWebhook()
+                    
 
                     WindUI:Notify({
                         Title = "Done!",
@@ -217,7 +219,7 @@ WindUI:Popup({
 
                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/scripterpan/scripterpan/refs/heads/main/ScriptSrc/Universal.lua"))()
 
-                                    sendWebhook()
+                                    
 
                                     WindUI:Notify({
                                         Title = "Done!",
