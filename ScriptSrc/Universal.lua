@@ -123,14 +123,75 @@ local Button = Uni:Button({
 })
 
 
-local Players = game:GetService("Players")
+
+
+local infiniteJumpEnabled = false
+local humanoid = nil
+local conn = nil
+
+local function enableInfiniteJump()
+    if conn then conn:Disconnect() end
+    conn = game:GetService("UserInputService").JumpRequest:Connect(function()
+        if infiniteJumpEnabled and humanoid then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+end
+
+local function setupCharacter(char)
+    humanoid = char:WaitForChild("Humanoid", 5)
+    if infiniteJumpEnabled then
+        enableInfiniteJump()
+    end
+end
+
+player.CharacterAdded:Connect(function(char)
+    setupCharacter(char)
+end)
+
+if player.Character then
+    setupCharacter(player.Character)
+end
+
+local Toggle = Player:Toggle({
+    Title = "Infinite Jump",
+    Desc = "Toggle Infinite Jump",
+    Icon = "arrow-big-up-dash",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        infiniteJumpEnabled = state
+        if state then
+            if player.Character then
+                setupCharacter(player.Character)
+            end
+        else
+            if conn then conn:Disconnect() end
+        end
+    end
+})
+
+
+
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+
+
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
 local noclipConnection
 local originalCollisions = {}
 
--- Save original collision states
+
 local function saveOriginalCollisions()
     originalCollisions = {}
     if LocalPlayer.Character then
@@ -142,7 +203,7 @@ local function saveOriginalCollisions()
     end
 end
 
--- Apply noclip (no collisions)
+
 local function startNoclip()
     if noclipConnection then
         noclipConnection:Disconnect()
@@ -161,7 +222,6 @@ local function startNoclip()
     end)
 end
 
--- Restore original collision
 local function stopNoclip()
     if noclipConnection then
         noclipConnection:Disconnect()
@@ -175,10 +235,10 @@ local function stopNoclip()
     originalCollisions = {}
 end
 
--- WindUI Toggle
+
 local Toggle = Player:Toggle({
     Title = "Noclip",
-    Desc = "Noclip Yes 👍",
+    Desc = "Walk Through Objects",
     Icon = "expand",
     Type = "Toggle",
     Default = false,
@@ -191,7 +251,6 @@ local Toggle = Player:Toggle({
     end
 })
 
--- Handle respawn
 LocalPlayer.CharacterAdded:Connect(function()
     repeat task.wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
     saveOriginalCollisions()
@@ -201,26 +260,23 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 
--- Player Spped, Jumppower, Gravity 
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
 
--- State
+
 local speedEnabled = false
 local jumpEnabled = false
 local gravityEnabled = false
 
--- Default values
+
 local defaultSpeed = 16
 local defaultJumpPower = 50
 local defaultGravity = 196.2
 
--- Desired values
+
 local desiredSpeed = defaultSpeed
 local desiredJumpPower = defaultJumpPower
 local desiredGravity = defaultGravity
 
--- Apply Functions
+
 local function setSpeed(speed)
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = speed
@@ -239,7 +295,7 @@ local function setGravity(g)
     workspace.Gravity = g
 end
 
--- Reapply on respawn
+
 player.CharacterAdded:Connect(function()
     repeat task.wait() until player.Character:FindFirstChild("Humanoid")
     if speedEnabled then setSpeed(desiredSpeed) end
@@ -247,16 +303,19 @@ player.CharacterAdded:Connect(function()
     if gravityEnabled then setGravity(desiredGravity) end
 end)
 
--- UI Element references
-local SpeedSlider, SpeedInput
-local JumpSlider, JumpInput
-local GravitySlider, GravityInput
 
--- SPEED TOGGLE
-local SpeedToggle = Player:Toggle({
+local SpeedInput
+local JumpInput
+local GravityInput
+
+-- speed
+local Section = Player:Section({ Title = "Speed", Icon = "zap" })
+
+
+local Toggle = Player:Toggle({
     Title = "Speed Boost",
     Desc = "Enable speed boost",
-    Icon = "chevrons-up",
+    Icon = "zap",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
@@ -279,30 +338,9 @@ local SpeedToggle = Player:Toggle({
     end
 })
 
--- SPEED SLIDER
-SpeedSlider = Player:Slider({
-    Title = "Walk Speed",
-    Step = 1,
-    Value = {
-        Min = 1,
-        Max = 500,
-        Default = defaultSpeed,
-    },
-    Callback = function(val)
-        desiredSpeed = val
-        if SpeedInput and SpeedInput.SetValue then
-            SpeedInput:SetValue(tostring(val))
-        end
-        if speedEnabled then
-            setSpeed(desiredSpeed)
-        end
-    end
-})
-
--- SPEED INPUT
-SpeedInput = Player:Input({
+local input = Player:Input({
     Title = "Set Walk Speed",
-    Desc = "Type your speed value here\nif you're lazy to use the slider (1–500)",
+    Desc = "Type your speed value here (1–500)",
     Placeholder = tostring(defaultSpeed),
     InputIcon = "chevrons-up",
     Type = "Input",
@@ -311,9 +349,6 @@ SpeedInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredSpeed = num
-            if SpeedSlider and SpeedSlider.Set then
-                SpeedSlider:Set(num)
-            end
             if speedEnabled then
                 setSpeed(desiredSpeed)
             end
@@ -321,8 +356,11 @@ SpeedInput = Player:Input({
     end
 })
 
--- JUMP TOGGLE
-local JumpToggle = Player:Toggle({
+-- Jumppower
+local Section = Player:Section({ Title = "Jump Power", Icon = "person-standing" })
+
+
+local Toggle = Player:Toggle({
     Title = "Jump Boost",
     Desc = "Enable jump boost",
     Icon = "person-standing",
@@ -348,30 +386,9 @@ local JumpToggle = Player:Toggle({
     end
 })
 
--- JUMP SLIDER
-JumpSlider = Player:Slider({
-    Title = "Jump Power",
-    Step = 1,
-    Value = {
-        Min = 1,
-        Max = 500,
-        Default = defaultJumpPower,
-    },
-    Callback = function(val)
-        desiredJumpPower = val
-        if JumpInput and JumpInput.SetValue then
-            JumpInput:SetValue(tostring(val))
-        end
-        if jumpEnabled then
-            setJumpPower(desiredJumpPower)
-        end
-    end
-})
-
--- JUMP INPUT
-JumpInput = Player:Input({
+local input = Player:Input({
     Title = "Set Jump Power",
-    Desc = "Type jump power value\nif you're lazy to use the slider (1–500)",
+    Desc = "Type jump power value (1–500)",
     Placeholder = tostring(defaultJumpPower),
     InputIcon = "person-standing",
     Type = "Input",
@@ -380,9 +397,6 @@ JumpInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 1 and num <= 500 then
             desiredJumpPower = num
-            if JumpSlider and JumpSlider.Set then
-                JumpSlider:Set(num)
-            end
             if jumpEnabled then
                 setJumpPower(desiredJumpPower)
             end
@@ -390,10 +404,13 @@ JumpInput = Player:Input({
     end
 })
 
--- GRAVITY TOGGLE
-local GravityToggle = Player:Toggle({
+
+-- Gravity 
+local Section = Player:Section({ Title = "Gravity", Icon = "clock-arrow-down" })
+
+local Toggle = Player:Toggle({
     Title = "Change Gravity",
-    Desc = "Enable gravity override",
+    Desc = "Enable gravity changer",
     Icon = "clock-arrow-down",
     Type = "Toggle",
     Default = false,
@@ -415,30 +432,9 @@ local GravityToggle = Player:Toggle({
     end
 })
 
--- GRAVITY SLIDER
-GravitySlider = Player:Slider({
-    Title = "Gravity Value",
-    Step = 1,
-    Value = {
-        Min = 0,
-        Max = 500,
-        Default = defaultGravity,
-    },
-    Callback = function(val)
-        desiredGravity = val
-        if GravityInput and GravityInput.SetValue then
-            GravityInput:SetValue(tostring(val))
-        end
-        if gravityEnabled then
-            setGravity(desiredGravity)
-        end
-    end
-})
-
--- GRAVITY INPUT
-GravityInput = Player:Input({
+local input = Player:Input({
     Title = "Set Gravity",
-    Desc = "Type gravity value\nif you're lazy to use the slider (0–500)",
+    Desc = "Type gravity value (0–500)",
     Placeholder = tostring(defaultGravity),
     InputIcon = "clock-arrow-down",
     Type = "Input",
@@ -447,17 +443,12 @@ GravityInput = Player:Input({
         local num = tonumber(input)
         if num and num >= 0 and num <= 500 then
             desiredGravity = num
-            if GravitySlider and GravitySlider.Set then
-                GravitySlider:Set(num)
-            end
             if gravityEnabled then
                 setGravity(desiredGravity)
             end
         end
     end
 })
-
-
 
 
 
