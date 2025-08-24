@@ -98,8 +98,8 @@ Tabs.stat = Window:Section({
     })
 
     Tabs.StatAll = Tabs.stat:Tab({ Title = "Server's Status", Icon = "server" })
-    Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
-    Tabs.visual = Tabs.main:Tab({ Title = "Visual", Icon = "album" })
+    Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "server" })
+    Tabs.visual = Tabs.main:Tab({ Title = "Visual", Icon = "eye" })
     Tabs.N1 = Tabs.main:Tab({ Title = "Night 1", Icon = "moon" })
     Tabs.N2 = Tabs.main:Tab({ Title = "Night 2", Icon = "moon" })
     Tabs.N3 = Tabs.main:Tab({ Title = "Night 3 (Soon)", Icon = "moon", Locked = true })
