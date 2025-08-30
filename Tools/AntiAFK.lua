@@ -1,6 +1,6 @@
 -- antiafk by luca5432 the goat
 
-task.wait(0.5)
+repeat wait() until game:Isloaded() and game:Players.LocalPlayer
 
 local gui = Instance.new("ScreenGui")
 local header = Instance.new("TextLabel")
