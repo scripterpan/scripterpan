@@ -79,9 +79,9 @@ Tabs.fish:Toggle({
             task.spawn(function()
                 while fishingEnabled do
                     startfishing()
-                    task.wait(0.6)
+                    task.wait(1)
                     endfishing()
-                    task.wait(0.6)
+                    task.wait(5)
                 end
             end)
         end
