@@ -66,6 +66,7 @@ function endfishing()
     VirtualInputManager:SendMouseButtonEvent(200, 300, 0, false, game, 1)
 end
 
+Tabs.fish:Section({ Title = "AutoFarm", Icon = "database-zap" })
 
 Tabs.fish:Toggle({
     Title = "Fish",
@@ -89,65 +90,48 @@ Tabs.fish:Toggle({
 })
 
 
+local function safeFire(args)
+    local repStorage = game:GetService("ReplicatedStorage")
+    local Knit = repStorage:WaitForChild("Packages"):WaitForChild("Knit")
+    local AbilityService = Knit.Services:WaitForChild("AbilityService")
+    local remote = AbilityService.RE:WaitForChild("remote")
+    remote:FireServer(unpack(args))
+end
+
 local function twobaits()
-    local args = {
-        [1] = {
-            ["what"] = "extraBait",
-            ["kind"] = "abilitySelect"
-        }
-    }
-    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+    safeFire({[1] = {what="extraBait", kind="abilitySelect"}})
 end
 
 local function luck()
-    local args = {
-        [1] = {
-            ["what"] = "luckBoost",
-            ["kind"] = "abilitySelect"
-        }
-    }
-    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+    safeFire({[1] = {what="luckBoost", kind="abilitySelect"}})
 end
 
 local function weightboost()
-    local args = {
-        [1] = {
-            ["what"] = "weightX",
-            ["kind"] = "abilitySelect"
-        }
-    }
-    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+    safeFire({[1] = {what="weightX", kind="abilitySelect"}})
 end
 
 local function gold()
-    local args = {
-        [1] = {
-            ["what"] = "fullGold",
-            ["kind"] = "abilitySelect"
-        }
-    }
-    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+    safeFire({[1] = {what="fullGold", kind="abilitySelect"}})
 end
-
-
 
 local selectedUltimate = nil
 local autoUltimate = false
 
+Tabs.fish:Section({ Title = "Ultimate", Icon = "smartphone-charging" })
+
 Tabs.fish:Dropdown({
     Title = "Select Ultimate",
     Values = { "2 Extra Baits", "15x Luck Boost", "10x Weight Boost", "100% Gold Fish Chance" },
-    Value = nil, -- no default
-    Callback = function(option) 
+    Value = nil,
+    Callback = function(option)
         selectedUltimate = option
     end
 })
 
-
 Tabs.fish:Toggle({
     Title = "Auto Use Selected Ultimate",
     Desc = "Will automatically use Ultimate after 10 casts",
-    Icon = "fish",
+    Icon = "power",
     Type = "Toggle",
     Default = false,
     Callback = function(state)
@@ -156,14 +140,15 @@ Tabs.fish:Toggle({
         if autoUltimate then
             task.spawn(function()
                 while autoUltimate do
-                    task.wait(10) -- adjust timing as needed
-                    if selectedUltimate == "2 Baits" then
+                    task.wait(0.1)
+
+                    if selectedUltimate == "2 Extra Baits" then
                         twobaits()
-                    elseif selectedUltimate == "Luck Boost" then
+                    elseif selectedUltimate == "15x Luck Boost" then
                         luck()
-                    elseif selectedUltimate == "Weight Boost" then
+                    elseif selectedUltimate == "10x Weight Boost" then
                         weightboost()
-                    elseif selectedUltimate == "Gold Boost" then
+                    elseif selectedUltimate == "100% Gold Fish Chance" then
                         gold()
                     end
                 end
@@ -171,6 +156,7 @@ Tabs.fish:Toggle({
         end
     end
 })
+
 
 
 
