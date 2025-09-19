@@ -134,7 +134,7 @@ end
 local selectedUltimate = nil
 local autoUltimate = false
 
-local Dropdown = Tab:Dropdown({
+Tabs.fish:Dropdown({
     Title = "Select Ultimate",
     Values = { "2 Extra Baits", "15x Luck Boost", "10x Weight Boost", "100% Gold Fish Chance" },
     Value = nil, -- no default
