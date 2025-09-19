@@ -81,7 +81,7 @@ Tabs.fish:Toggle({
                     startfishing()
                     task.wait(1)
                     endfishing()
-                    task.wait(5)
+                    task.wait(2.5)
                 end
             end)
         end
