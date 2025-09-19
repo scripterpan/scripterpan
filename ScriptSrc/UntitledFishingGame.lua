@@ -89,6 +89,89 @@ Tabs.fish:Toggle({
 })
 
 
+local function twobaits()
+    local args = {
+        [1] = {
+            ["what"] = "extraBait",
+            ["kind"] = "abilitySelect"
+        }
+    }
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+end
+
+local function luck()
+    local args = {
+        [1] = {
+            ["what"] = "luckBoost",
+            ["kind"] = "abilitySelect"
+        }
+    }
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+end
+
+local function weightboost()
+    local args = {
+        [1] = {
+            ["what"] = "weightX",
+            ["kind"] = "abilitySelect"
+        }
+    }
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+end
+
+local function gold()
+    local args = {
+        [1] = {
+            ["what"] = "fullGold",
+            ["kind"] = "abilitySelect"
+        }
+    }
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.AbilityService.RE.remote:FireServer(unpack(args))
+end
+
+
+
+local selectedUltimate = nil
+local autoUltimate = false
+
+local Dropdown = Tab:Dropdown({
+    Title = "Select Ultimate",
+    Values = { "2 Extra Baits", "15x Luck Boost", "10x Weight Boost", "100% Gold Fish Chance" },
+    Value = nil, -- no default
+    Callback = function(option) 
+        selectedUltimate = option
+    end
+})
+
+
+Tabs.fish:Toggle({
+    Title = "Auto Use Selected Ultimate",
+    Desc = "Will automatically use Ultimate after 10 casts",
+    Icon = "fish",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        autoUltimate = state
+
+        if autoUltimate then
+            task.spawn(function()
+                while autoUltimate do
+                    task.wait(10) -- adjust timing as needed
+                    if selectedUltimate == "2 Baits" then
+                        twobaits()
+                    elseif selectedUltimate == "Luck Boost" then
+                        luck()
+                    elseif selectedUltimate == "Weight Boost" then
+                        weightboost()
+                    elseif selectedUltimate == "Gold Boost" then
+                        gold()
+                    end
+                end
+            end)
+        end
+    end
+})
+
 
 
 
