@@ -44,8 +44,11 @@ do
         Opened = true,
     })
 
-  Tabs.fish = Tabs.main:Tab({ Title = "Fishing", Icon = "fish" })
+    Tabs.fish = Tabs.main:Tab({ Title = "Fishing", Icon = "fish" })
+    Tabs.upgrade = Tabs.main:Tab({ Title = "Upgrade", Icon = "square-plus" })
+    Tabs.egg = Tabs.main:Tab({ Title = "Egg", Icon = "egg" })
 
+    
 end
 
 local fishingEnabled = false
