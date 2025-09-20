@@ -52,6 +52,7 @@ do
     Tabs.fish = Tabs.main:Tab({ Title = "Fishing", Icon = "fish" })
     Tabs.upgrade = Tabs.main:Tab({ Title = "Upgrade", Icon = "square-plus" })
     Tabs.egg = Tabs.main:Tab({ Title = "Egg", Icon = "egg" })
+    Tabs.webhook = Tabs.main:Tab({ Title = "Webhook", Icon = "webhook" })
     Tabs.Misc = Tabs.misc:Tab({ Title = "Misc", Icon = "bell" })
     
 end
