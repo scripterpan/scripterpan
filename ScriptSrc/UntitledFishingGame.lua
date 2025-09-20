@@ -194,6 +194,20 @@ Tabs.upgrade:Dropdown({
     end
 })
 
+Tabs.upgrade:Button({
+    Title = "Upgrade Rod",
+    Desc = "Upgrade Rod Using Selected Value",
+    Callback = function()
+        if selectedRod == "1x" then
+            rodone()
+        elseif selectedRod == "10x" then
+            rodten()
+        elseif selectedRod == "100x" then
+            rodhundred()
+        end
+    end
+})
+
 Tabs.upgrade:Toggle({
     Title = "Auto Upgrade Rod",
     Desc = "Automatically Upgrades rod using selected value",
@@ -252,6 +266,20 @@ Tabs.upgrade:Dropdown({
     Value = nil,
     Callback = function(option)
         selectedPath = option
+    end
+})
+
+Tabs.upgrade:Button({
+    Title = "Upgrade Path",
+    Desc = "Upgrade Path Using Selected Value",
+    Callback = function()
+        if selectedPath == "1x" then
+            pathone()
+        elseif selectedPath == "10x" then
+            pathten()
+        elseif selectedPath == "100x" then
+            pathhundred()
+        end
     end
 })
 
