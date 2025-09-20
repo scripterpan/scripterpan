@@ -44,10 +44,15 @@ do
         Opened = true,
     })
 
+    Tabs.misc = Window:Secion({
+        Title = "Misc",
+        Opened = true,
+    })
+
     Tabs.fish = Tabs.main:Tab({ Title = "Fishing", Icon = "fish" })
     Tabs.upgrade = Tabs.main:Tab({ Title = "Upgrade", Icon = "square-plus" })
     Tabs.egg = Tabs.main:Tab({ Title = "Egg", Icon = "egg" })
-
+    Tabs.Misc = Tabs.misc:Tab({ Title = "Misc", Icon = "bell" })
     
 end
 
@@ -311,7 +316,29 @@ Tabs.upgrade:Toggle({
 })
 
 
+local vu = game:GetService("VirtualUser")
+local connection
 
+Tabs.Misc:Toggle({
+    Title = "AntiAFK",
+    Desc = "Prevents you from getting kicked for being idle",
+    Icon = "shield-ban",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+
+        if state then
+            connection = player.Idled:Connect(function()
+                vu:CaptureController()
+                vu:ClickButton2(Vector2.new())
+            end)
+        end
+    end
+})
 
 
 
