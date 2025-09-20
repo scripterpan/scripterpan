@@ -44,7 +44,7 @@ do
         Opened = true,
     })
 
-    Tabs.misc = Window:Secion({
+    TTabs.misc = Window:Section({
         Title = "Misc",
         Opened = true,
     })
