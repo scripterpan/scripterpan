@@ -160,7 +160,127 @@ Tabs.fish:Toggle({
     end
 })
 
+Tabs.upgrade:Section({ Title = "Rod Upgrade", Icon = "folder-kanban" })
 
+local function safeRodFire(args)
+    local repStorage = game:GetService("ReplicatedStorage")
+    local Knit = repStorage:WaitForChild("Packages"):WaitForChild("Knit")
+    local TowerService = Knit.Services:WaitForChild("TowerService")
+    local remote = TowerService.RE:WaitForChild("remote")
+    remote:FireServer(unpack(args))
+end
+
+local function rodone()
+    safeRodFire({[1] = {kind="purchase", kacliAlis=1, what="1LevelRod"}})
+end
+
+local function rodten()
+    safeRodFire({[1] = {kind="purchase", kacliAlis=2, what="1LevelRod"}})
+end
+
+local function rodhundred()
+    safeRodFire({[1] = {kind="purchase", kacliAlis=3, what="1LevelRod"}})
+end
+
+local selectedRod = nil
+local autoRod = false
+
+Tabs.upgrade:Dropdown({
+    Title = "Select Rod Value For Upgrade",
+    Values = { "1x", "10x", "100x" },
+    Value = nil,
+    Callback = function(option)
+        selectedRod = option
+    end
+})
+
+Tabs.upgrade:Toggle({
+    Title = "Auto Upgrade Rod",
+    Desc = "Automatically Upgrades rod using selected value",
+    Icon = "folder-kanban",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        autoRod = state
+
+        if autoRod then
+            task.spawn(function()
+                while autoRod do
+                    task.wait(0.1)
+
+                    if selectedRod == "1x" then
+                        rodone()
+                    elseif selectedRod == "10x" then
+                        rodten()
+                    elseif selectedRod == "100x" then
+                        rodhundred()
+                    end
+                end
+            end)
+        end
+    end
+})
+
+Tabs.upgrade:Section({ Title = "Path Upgrade", Icon = "route" })
+
+local function safePathFire(args)
+    local repStorage = game:GetService("ReplicatedStorage")
+    local Knit = repStorage:WaitForChild("Packages"):WaitForChild("Knit")
+    local TowerService = Knit.Services:WaitForChild("TowerService")
+    local remote = TowerService.RE:WaitForChild("remote")
+    remote:FireServer(unpack(args))
+end
+
+local function pathone()
+    safePathFire({[1] = {kind="purchase", kacliAlis=1, what="1LevelPath"}})
+end
+
+local function pathten()
+    safePathFire({[1] = {kind="purchase", kacliAlis=2, what="1LevelPath"}})
+end
+
+local function pathhundred()
+    safePathFire({[1] = {kind="purchase", kacliAlis=3, what="1LevelPath"}})
+end
+
+local selectedPath = nil
+local autoPath = false
+
+Tabs.upgrade:Dropdown({
+    Title = "Select Path Value For Upgrade",
+    Values = { "1x", "10x", "100x" },
+    Value = nil,
+    Callback = function(option)
+        selectedPath = option
+    end
+})
+
+Tabs.upgrade:Toggle({
+    Title = "Auto Upgrade Path",
+    Desc = "Automatically Upgrades path using selected value",
+    Icon = "route",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        autoPath = state
+
+        if autoPath then
+            task.spawn(function()
+                while autoPath do
+                    task.wait(0.1)
+
+                    if selectedPath == "1x" then
+                        pathone()
+                    elseif selectedPath == "10x" then
+                        pathten()
+                    elseif selectedPath == "100x" then
+                        pathhundred()
+                    end
+                end
+            end)
+        end
+    end
+})
 
 
 
