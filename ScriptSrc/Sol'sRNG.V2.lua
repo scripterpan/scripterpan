@@ -177,15 +177,83 @@ local webhookTimer = 7200
 local webhookEnabled = false
 local discordId = "" 
 
-
 Tabs.webhook:Input({
-    Title = "Input Your Webhook",
+    Title = "Webhook URL",
     Desc = "Put your webhook here",
-    Placeholder = "Your Webhook,
+    Placeholder = "Enter your webhook URL",
     InputIcon = "webhook",
     Type = "Input",
     Value = webhookUrl,
     Callback = function(input)
         webhookUrl = input
+    end
+})
+
+Tabs.webhook:Input({
+    Title = "Discord ID (Optional)",
+    Desc = "Enter your Discord ID (numbers only)",
+    Placeholder = "Your Discord ID",
+    InputIcon = "user",
+    Type = "Input",
+    Value = discordId,
+    Callback = function(input)
+        discordId = input
+    end
+})
+
+Tabs.webhook:Input({
+    Title = "Interval (Seconds)",
+    Desc = "Delay between each webhook",
+    Placeholder = "Enter interval in seconds",
+    InputIcon = "clock",
+    Type = "Input",
+    Value = tostring(webhookTimer),
+    Callback = function(input)
+        local numValue = tonumber(input)
+        if numValue and numValue > 0 then
+            webhookTimer = numValue
+        end
+    end
+})
+
+Tabs.webhook:Toggle({
+    Title = "Enable Webhook",
+    Desc = "Send webhook status",
+    Icon = "webhook",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state)
+        webhookEnabled = state
+        if webhookEnabled then
+            task.spawn(function()
+                while webhookEnabled do
+                    if webhookUrl ~= "" then
+                        local content = discordId ~= "" and ("<@" .. discordId .. ">") or "Webhook sent successfully!"
+                        local data = {
+                            ["content"] = content,
+                            ["embeds"] = {{
+                                ["title"] = "Sol's RNG Eon1",
+                                ["description"] = "Webhook activated!",
+                                ["color"] = 65280,
+                                ["fields"] = {
+                                    {
+                                        ["name"] = "⏰ Time:",
+                                        ["value"] = os.date("!%a %b %d %X %Y", os.time() + 7 * 3600) .. " GMT +7"
+                                    }
+                                }
+                            }}
+                        }
+                        local jsonData = game:GetService("HttpService"):JSONEncode(data)
+                        request({
+                            Url = webhookUrl,
+                            Method = "POST",
+                            Headers = { ["Content-Type"] = "application/json" },
+                            Body = jsonData
+                        })
+                    end
+                    task.wait(webhookTimer)
+                end
+            end)
+        end
     end
 })
