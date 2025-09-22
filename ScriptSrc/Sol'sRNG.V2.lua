@@ -62,8 +62,8 @@ Tabs.stat = Window:Section({
     
     Tabs.Stat = Tabs.stat:Tab({ Title = "Status", Icon = "speech" }
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
+    Tabs.craft = Tabs.main:Tab({ Title = "Crafting", Icon = "pickaxe" })
     Tabs.webhook = Tabs.main:Tab({ Title = "Webhook", Icon = "webhook" })
-    
     Tabs.gemisc = Tabs.misc:Tab({ Title = "Misc", Icon = "tv-minimal"})
     Tabs.plmisc = Tabs.misc:Tab({ Title = "Local Player", Icon = "person-standing"})
     Tabs.src = Tabs.Other:Tab({ Title = "Universal Script & Tools", Icon = "scroll-text" })
@@ -166,3 +166,26 @@ task.spawn(function()
         task.wait(0.25)
     end
 end)
+
+
+
+
+
+
+local webhookUrl = ""
+local webhookTimer = 7200 
+local webhookEnabled = false
+local discordId = "" 
+
+
+Tabs.webhook:Input({
+    Title = "Input Your Webhook",
+    Desc = "Put your webhook here",
+    Placeholder = "Your Webhook,
+    InputIcon = "webhook",
+    Type = "Input",
+    Value = webhookUrl,
+    Callback = function(input)
+        webhookUrl = input
+    end
+})
