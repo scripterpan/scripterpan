@@ -60,7 +60,7 @@ Tabs.stat = Window:Section({
     })
 
     
-    Tabs.Stat = Tabs.stat:Tab({ Title = "Status", Icon = "speech" }
+    Tabs.Stat = Tabs.stat:Tab({ Title = "Status", Icon = "speech" })
     Tabs.main1 = Tabs.main:Tab({ Title = "Main", Icon = "album" })
     Tabs.craft = Tabs.main:Tab({ Title = "Crafting", Icon = "pickaxe" })
     Tabs.webhook = Tabs.main:Tab({ Title = "Webhook", Icon = "webhook" })
