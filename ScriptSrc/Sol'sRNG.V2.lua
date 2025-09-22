@@ -138,7 +138,10 @@ task.spawn(function()
 end)
 
 
-  local paragraph = Tabs.Stat:Paragraph({
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local paragraph = Tabs.Stat:Paragraph({
     Title = "Server Ping",
     Desc = "Loading...",
     Locked = false,
