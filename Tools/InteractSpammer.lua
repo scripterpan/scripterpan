@@ -7,7 +7,7 @@ local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-
+-- Cleanup old GUI
 if playerGui:FindFirstChild("PromptTester") then
 	playerGui.PromptTester:Destroy()
 end
@@ -21,7 +21,7 @@ screenGui.Parent = playerGui
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 260, 0, 170)
-frame.Position = UDim2.new(0, -300, 0, 20) -- starts hidden (slide-in)
+frame.Position = UDim2.new(0, -300, 0, 20) -- slide-in start
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.Active = true
 frame.Draggable = true
@@ -106,20 +106,12 @@ boxCorner.Parent = delayBox
 
 -- Variables
 local running = false
-local isKeyInteractMode = false
+local modeIndex = 1 -- 1: Universal Spam, 2: Key Interact, 3: E Key Spamming
 local allPrompts = {}
 local spamTask = nil
 local guiVisible = true
 
-
-local function tweenColor(obj, color)
-	TweenService:Create(obj, TweenInfo.new(0.25), {BackgroundColor3 = color}):Play()
-end
-
-local function tweenPosition(obj, goal)
-	TweenService:Create(obj, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = goal}):Play()
-end
-
+-- Helpers
 local function safeTonumber(s, default)
 	local n = tonumber(s)
 	if not n or n <= 0 then return default end
@@ -158,69 +150,90 @@ ProximityPromptService.PromptShown:Connect(function(prompt)
 end)
 
 local function setMode(enable)
-	if spamTask then 
-		task.cancel(spamTask)
-		spamTask = nil
-	end
-
+	if spamTask then task.cancel(spamTask) spamTask = nil end
 	running = enable
 
 	if enable then
 		setupPrompts()
-		tweenColor(toggleBtn, Color3.fromRGB(0, 170, 80))
-		toggleBtn.Text = isKeyInteractMode and "Key Interact: ON" or "Universal Spam: ON"
+		toggleBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 80)
+		local delay = safeTonumber(delayBox.Text, 0.05)
 
-		for _, prompt in ipairs(allPrompts) do
-			prompt.MaxActivationDistance = math.huge
-			prompt.Enabled = true
-		end
+		if modeIndex == 1 then
+			-- Universal Spam
+			toggleBtn.Text = "Universal Spam: ON"
+			for _, p in ipairs(allPrompts) do p.MaxActivationDistance = math.huge end
+			spamTask = task.spawn(function()
+				while running do
+					for _, p in ipairs(allPrompts) do firePrompt(p) end
+					task.wait(delay)
+				end
+			end)
 
-		local spamDelay = safeTonumber(delayBox.Text, 0.05)
-
-		if isKeyInteractMode then
+		elseif modeIndex == 2 then
+			-- Key Interact (you hold E manually)
+			toggleBtn.Text = "Key Interact: ON"
+			for _, p in ipairs(allPrompts) do p.MaxActivationDistance = math.huge end
 			spamTask = task.spawn(function()
 				while running do
 					if UserInputService:IsKeyDown(Enum.KeyCode.E) then
-						for _, prompt in ipairs(allPrompts) do
-							firePrompt(prompt)
-						end
-						task.wait(spamDelay)
+						for _, p in ipairs(allPrompts) do firePrompt(p) end
+						task.wait(delay)
 					else
-						task.wait(0.1)
+						task.wait(0.12)
 					end
 				end
 			end)
-		else
+
+		elseif modeIndex == 3 then
+			-- E Key Spamming Mode (exploit-style keypress if available)
+			toggleBtn.Text = "E Key Spamming: ON"
+			for _, p in ipairs(allPrompts) do p.MaxActivationDistance = math.huge end
+
 			spamTask = task.spawn(function()
 				while running do
-					for _, prompt in ipairs(allPrompts) do
-						firePrompt(prompt)
+					-- If an exploit environment provides `keypress`, use it.
+					-- Otherwise fallback to the firePrompt method so functionality still works.
+					if type(keypress) == "function" then
+						-- call keypress(0x45) in a safe pcall
+						pcall(function()
+							keypress(0x45)
+						end)
+					else
+						-- Fallback: directly fire prompts (behaves like E press)
+						for _, p in ipairs(allPrompts) do
+							firePrompt(p)
+						end
 					end
-					task.wait(spamDelay)
+					task.wait(delay)
 				end
 			end)
 		end
 	else
 		toggleBtn.Text = "Auto Prompt: OFF"
-		tweenColor(toggleBtn, Color3.fromRGB(100, 100, 100))
+		toggleBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 	end
 end
 
+-- UI Slide In
+TweenService:Create(frame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0, 20)}):Play()
 
-tweenPosition(frame, UDim2.new(0, 20, 0, 20))
-
-
+-- Button interactions
 toggleBtn.MouseButton1Click:Connect(function()
 	setMode(not running)
 end)
 
 modeBtn.MouseButton1Click:Connect(function()
-	isKeyInteractMode = not isKeyInteractMode
-	if isKeyInteractMode then
+	modeIndex = modeIndex + 1
+	if modeIndex > 3 then modeIndex = 1 end
+
+	if modeIndex == 1 then
+		modeBtn.Text = "Mode: Universal Spam"
+	elseif modeIndex == 2 then
 		modeBtn.Text = "Mode: Interact with Key 'E'"
 	else
-		modeBtn.Text = "Mode: Universal Spam"
+		modeBtn.Text = "Mode: E Key Spamming Mode"
 	end
+
 	if running then
 		setMode(true)
 	end
@@ -229,9 +242,9 @@ end)
 -- Close button logic
 closeBtn.MouseButton1Click:Connect(function()
 	if guiVisible then
-		tweenPosition(frame, UDim2.new(0, -300, 0, 20))
+		TweenService:Create(frame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, -300, 0, 20)}):Play()
 	else
-		tweenPosition(frame, UDim2.new(0, 20, 0, 20))
+		TweenService:Create(frame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0, 20)}):Play()
 	end
 	guiVisible = not guiVisible
 end)
